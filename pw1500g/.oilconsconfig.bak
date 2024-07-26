@@ -1,0 +1,7 @@
+$CALC
+oilconsfuelon: EngineRunning
+currentoilqty: QOilQtyS
+oilqtyunitmode: 2
+currentoiltmp: MOTDegC
+oiltempunitmode: 1
+$END-CALC

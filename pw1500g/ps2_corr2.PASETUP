@@ -1,0 +1,5 @@
+* /cust/delta3/pw1500g/ps2_corr2.PASETUP
+$CRSPARAM "PS2_BA" min=12.160000 max=12.320000 linetype=
+$CRSPARAM "PS2_WA" min=12.160000 max=12.320000 linetype=
+$CRSPARAM "PS2_NA" min=12.160000 max=12.320000 linetype=
+$CRSPARAM "PS2_HA" min=12.160000 max=12.320000 linetype=

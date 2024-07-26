@@ -1,0 +1,42 @@
+$GROUP "startstopdata" 
+#if	(IGN1Cmd_F & IGN2Cmd_F)
+IgnSystem:	concat ("" "IGN Both")
+#elseif	IGN1Cmd_F
+IgnSystem:	concat ("" "IGN 1(A)")
+#elseif	IGN2Cmd_F
+IgnSystem:	concat ("" "IGN 2(B)")
+#endif	
+#if	(StoreStartData > StoreStartPrev)
+StrStartData0:	concat ("[Date:" DateAtStart)
+StrStartData0:	concat (StrStartData0 "][Time:")
+StrStartData0:	concat (StrStartData0 TimeAtStart)
+StrStartData0:	concat (StrStartData0 "][Ign:")
+StrStartData0:	concat (StrStartData0 IgnSystem)
+StrStartData0:	concat (StrStartData0 "][Peak ITT:")
+StrStartData0:	concat (StrStartData0 StartPeakITT)
+StrStartData0:	concat (StrStartData0 "][Peak Wf:")
+StrStartData0:	concat (StrStartData0 StartPeakWf)
+StrStartData0:	concat (StrStartData0 "][Time To Idle:")
+StrStartData0:	concat (StrStartData0 StrtOnToIdleTmr)
+StrStartData0:	concat (StrStartData0 "][Motor Time:")
+StrStartData0:	concat (StrStartData0 MotorTmr)
+StrStartData0:	concat (StrStartData0 "]")
+dummy:	startautotest (StartData_ATP)
+StoreStartPrev:	StoreStartData
+#endif	
+#C ******************** Stop Data *******************************************
+#if	(StoreStopData > StoreStopPrev)
+StrStopData0:	concat ("[Date:" DateAtStop)
+StrStopData0:	concat (StrStopData0 "][Time:")
+StrStopData0:	concat (StrStopData0 TimeAtStop)
+StrStopData0:	concat (StrStopData0 "][Peak ITT:")
+StrStopData0:	concat (StrStopData0 EGTAtStop)
+StrStopData0:	concat (StrStopData0 "][CDT N1:")
+StrStopData0:	concat (StrStopData0 N1RnDnTmr)
+StrStopData0:	concat (StrStopData0 "][N2:")
+StrStopData0:	concat (StrStopData0 N2RnDnTmr)
+StrStopData0:	concat (StrStopData0 "]")
+dummy:	startautotest (StopData_ATP)
+StoreStopPrev:	StoreStopData
+#endif	
+$END-GROUP

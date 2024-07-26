@@ -1,0 +1,472 @@
+$DISPLAY "MOP Test" background=LightGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$INITCALC
+#if	~Freeze13EPR_S
+POil13:PSIG	BigNumber
+MaxPOilDiff13PSI:PSI	BigNumber
+MaxPOilDiff13:PSI	BigNumber
+POilDiff13:PSIG	BigNumber
+MinPOilDiff13PSI:PSI	BigNumber
+MinPOilDiff13:PSI	BigNumber
+MrgPOilDiff13:PSIG	BigNumber
+N2O13:RPM	BigNumber
+#endif	
+#if	~Freeze14EPR_S
+POil14:PSIG	BigNumber
+MaxPOilDiff14PSI:PSI	BigNumber
+MaxPOilDiff14:PSI	BigNumber
+POilDiff14:PSIG	BigNumber
+MinPOilDiff14PSI:PSI	BigNumber
+MinPOilDiff14:PSI	BigNumber
+MrgPOilDiff14:PSIG	BigNumber
+N2O14:RPM	BigNumber
+#endif	
+$END-CALC
+$CALC
+MOPTstStage_F:	inrange (1 MOPTstStage 70)
+#if     (ArmMOPTst_TB & MOPTstStage_F & MOPTstPause_F)
+dummy:  StoreEvent ("MOP Test (Resumed)")
+StageTmr_F:     MOPTstTmrState_F
+MOPTstStageTxt:  concat (StageTxt "")
+MOPTstStage:     Stage
+MOPTstPause_F:   OFF
+MOPTstState:     4
+#elseif (ArmMOPTst_TB & (MOPTstStage > 0))
+dummy:  startautotest (MOPTst_ATP)
+#elseif (ArmMOPTst_TB & (MOPTstStage = 0))
+MOPTstStage:     1
+dummy:  StoreEvent ("MOP Test (Started)")
+StepTxt:        concat ("" "Table 7 ")
+MOPTstStageTxt:  concat (StepTxt "MOP Test Started...")
+MOPTstState:     1
+#elseif (~ArmMOPTst_TB & MOPTstStage_F & ~MOPTstPause_F)
+dummy:  StoreEvent ("MOP Test (PAUSED)")
+StageTxt:       concat (MOPTstStageTxt "")
+MOPTstTmrState_F:        StageTmr_F
+Stage:  MOPTstStage
+MOPTstPause_F:   ON
+MOPTstState:     2
+MOPTstStageTxt:  concat (StepTxt "MOP Test Paused at Stage: ")
+MOPTstStageTxt:  concat (MOPTstStageTxt MOPTstStage)
+StageTmr_F:     OFF
+#endif
+#if	(~Freeze13EPR_S)
+POil13:PSIG	MOPCor
+MaxPOilDiff13:PSI	lookup (MOPCorMx_T)
+POilDiff13:PSIG	MOPCor
+MinPOilDiff13:PSI	lookup (MOPCorMn_T)
+N2O13:RPM	N2PctS
+#endif	
+#if	(TOilAC < 93.3)
+POilDiff13DeltaSign:	2
+POilDiff13MxDelta:PSIG	BigNumber
+POilDiff13MnDelta:PSIG	BigNumber
+#elseif	(Freeze13EPR_S) & (POilDiff13 > MaxPOilDiff13)
+#C Decrease in Oil Pressure > Increase in Trim Orfice.
+POilDiff13DeltaSign:	1
+POilDiff13MnDelta:PSIG	(POilDiff13 - MaxPOilDiff13)
+POilDiff13MxDelta:PSIG	(POilDiff13 - MinPOilDiff13)
+#elseif	(Freeze13EPR_S) & (POilDiff13 < MinPOilDiff13)
+#C Increase in Oil Pressure > Decrease in Trim Orfice.
+POilDiff13DeltaSign:	-1
+POilDiff13MxDelta:PSIG	(MaxPOilDiff13 - POilDiff13)
+POilDiff13MnDelta:PSIG	(MinPOilDiff13 - POilDiff13)
+#elseif	(Freeze13EPR_S)
+POilDiff13DeltaSign:	0
+POilDiff13MxDelta:PSIG	0
+POilDiff13MnDelta:PSIG	0
+#else	
+POilDiff13DeltaSign:	-2
+POilDiff13MxDelta:PSIG	BigNumber
+POilDiff13MnDelta:PSIG	BigNumber
+#endif	
+#if	((Freeze13EPR_S) & ((POilDiff13DeltaSign = -1) | (POilDiff13DeltaSign = 1)))
+TrimChgInput:PSIG	POilDiff13MxDelta
+POilDiff13MxDeltaDiam:In	lookup(TrimDiameterChg_T)
+TrimChgInput:PSIG	POilDiff13MnDelta
+POilDiff13MnDeltaDiam:In	lookup(TrimDiameterChg_T)
+#else	
+POilDiff13MxDeltaDiam:In	BigNumber
+POilDiff13MnDeltaDiam:In	BigNumber
+#endif	
+#if	(~Freeze14EPR_S)
+POil14:PSIG	MOPCor
+MaxPOilDiff14:PSI	lookup (MOPCorMx_T)
+POilDiff14:PSIG	MOPCor
+MinPOilDiff14:PSI	lookup (MOPCorMn_T)
+N2O14:RPM	N2PctS
+#endif	
+#if	(TOilAC < 93.3)
+POilDiff14DeltaSign:	2
+POilDiff14MxDelta:PSIG	BigNumber
+POilDiff14MnDelta:PSIG	BigNumber
+#elseif	(Freeze14EPR_S) & (POilDiff14 > MaxPOilDiff14)
+#C Decrease in Oil Pressure > Increase in Trim Orfice.
+POilDiff14DeltaSign:	1
+POilDiff14MnDelta:PSIG	(POilDiff14 - MaxPOilDiff14)
+POilDiff14MxDelta:PSIG	(POilDiff14 - MinPOilDiff14)
+#elseif	(Freeze14EPR_S) & (POilDiff14 < MinPOilDiff14)
+#C Increase in Oil Pressure > Decrease in Trim Orfice.
+POilDiff14DeltaSign:	-1
+POilDiff14MxDelta:PSIG	(MaxPOilDiff14 - POilDiff14)
+POilDiff14MnDelta:PSIG	(MinPOilDiff14 - POilDiff14)
+#elseif	(Freeze14EPR_S)
+POilDiff14DeltaSign:	0
+POilDiff14MxDelta:PSIG	0
+POilDiff14MnDelta:PSIG	0
+#else	
+POilDiff14DeltaSign:	-2
+POilDiff14MxDelta:PSIG	BigNumber
+POilDiff14MnDelta:PSIG	BigNumber
+#endif	
+#if	((Freeze14EPR_S) & ((POilDiff14DeltaSign = -1) | (POilDiff14DeltaSign = 1)))
+TrimChgInput:PSIG	POilDiff14MxDelta
+POilDiff14MxDeltaDiam:In	lookup(TrimDiameterChg_T)
+TrimChgInput:PSIG	POilDiff14MnDelta
+POilDiff14MnDeltaDiam:In	lookup(TrimDiameterChg_T)
+#else	
+POilDiff14MxDeltaDiam:In	BigNumber
+POilDiff14MnDeltaDiam:In	BigNumber
+#endif	
+$END-CALC
+$STOREDISPLAY Append
+$OBJECT Box font=1 startx=20 starty=640 endx=1164 endy=835
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=1 startx=40 starty=660 endx=160 endy=683
+Black direction=1 alignment=0
+"1.3 EPR:"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=40 starty=688 endx=85 endy=711
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = -2 "==>"
+Black = 1 "==>"
+Black = -1 "==>"
+DarkGray = 0 "==>"
+$END-OBJECT
+***********
+$OBJECT Text font=1 startx=40 starty=750 endx=160 endy=773
+Black direction=1 alignment=0
+"1.4 EPR:"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=40 starty=778 endx=85 endy=801
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = -2 "==>"
+Black = 1 "==>"
+Black = -1 "==>"
+DarkGray = 0 "==>"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=45 starty=23 endx=198 endy=69
+Blue direction=1 alignment=1
+"Select Installed"
+"Metering Plug"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=55 starty=695 endx=550 endy=718
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+Red = -2 "Not Frozen, Orfice Trim invalid"
+Yellow = -1 "Decrease in trim orifice diam. of"
+Blue = 0 "Data OK, No orifice trim required"
+Yellow = 1 "Increase in trim orifice diam. of"
+Red = 2 "MOT is below 93.3 Deg C"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=55 starty=785 endx=550 endy=808
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+Red = -2 "Not Frozen, Orfice Trim invalid"
+Yellow = -1 "Decrease in trim orifice diam. of"
+Blue = 0 "Data OK, No orifice trim required"
+Yellow = 1 "Increase in trim orifice diam. of"
+Red = 2 "MOT is below 93.3 Deg C"
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=80 endx=180 endy=125
+RADIO InstalledMOPOrfice setvalue=10 onlabel="0.010 IN" offlabel="0.010 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=125 endx=180 endy=170
+RADIO InstalledMOPOrfice setvalue=36 onlabel="0.036 IN" offlabel="0.036 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=170 endx=180 endy=220
+RADIO InstalledMOPOrfice setvalue=50 onlabel="0.050 IN" offlabel="0.050 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=220 endx=180 endy=270
+RADIO InstalledMOPOrfice setvalue=64 onlabel="0.064 IN" offlabel="0.064 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=270 endx=180 endy=315
+RADIO InstalledMOPOrfice setvalue=79 onlabel="0.079 IN" offlabel="0.079 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=315 endx=180 endy=360
+RADIO InstalledMOPOrfice setvalue=93 onlabel="0.093 IN" offlabel="0.093 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=360 endx=180 endy=400
+RADIO InstalledMOPOrfice setvalue=107 onlabel="0.107 IN" offlabel="0.107 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=400 endx=180 endy=445
+RADIO InstalledMOPOrfice setvalue=122 onlabel="0.122 IN" offlabel="0.122 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=445 endx=180 endy=490
+RADIO InstalledMOPOrfice setvalue=136 onlabel="0.136 IN" offlabel="0.136 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=490 endx=180 endy=535
+RADIO InstalledMOPOrfice setvalue=150 onlabel="0.150 IN" offlabel="0.150 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=535 endx=180 endy=580
+RADIO InstalledMOPOrfice setvalue=165 onlabel="0.165 IN" offlabel="0.165 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=60 starty=580 endx=180 endy=625
+RADIO InstalledMOPOrfice setvalue=179 onlabel="0.179 IN" offlabel="0.179 IN" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=160 starty=660 endx=610 endy=683
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=Black parambox=0 paramboxcolor=Black shading=0
+Black = -2 "Ready."
+Black = -1 "Increase in oil pressure of"
+Black = 0 "Oil pressure is within limits."
+Black = 1 "Decrease in oil pressure of"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=165 starty=750 endx=615 endy=773
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=Black parambox=0 paramboxcolor=Black shading=0
+Black = -2 "Ready."
+Black = -1 "Increase in oil pressure of"
+Black = 0 "Oil pressure is within limits."
+Black = 1 "Decrease in oil pressure of"
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=250 starty=110 endx=881 endy=625
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=186 endx=876 endy=186
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=256 endx=876 endy=256
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=326 endx=876 endy=326
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=394 endx=876 endy=394
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=464 endx=876 endy=464
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=256 starty=534 endx=876 endy=534
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=22 startx=276 starty=206 endx=615 endy=620
+labelspace=6 unitspace=1 spacing=30 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+N2O13 type="FLOAT" width=6 prec=0 label="N2" units="" 
+POil13 type="FLOAT" width=6 prec=1 label="POil" units="" 
+MaxPOilDiff13 type="FLOAT" width=6 prec=1 label="MOP Max" units="" 
+POilDiff13 type="FLOAT" width=6 prec=1 label="MOP Obs" units="" 
+MinPOilDiff13 type="FLOAT" width=6 prec=1 label="MOP Min" units="" 
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=443 starty=111 endx=443 endy=620
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Switch font=1 startx=450 starty=20 endx=599 endy=95
+TOGGLE Freeze13EPR_S onlabel="Release\n1.3 EPR" offlabel="Freeze\n1.3 EPR" offcolor=LightGray oncolor=Green 
+$END-OBJECT
+***********
+$OBJECT Text font=22 startx=464 starty=144 endx=586 endy=179
+Black direction=1 alignment=0
+"1.3 EPR"
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=570 starty=695 endx=660 endy=721
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff13MnDeltaDiam type="FLOAT" width=6 prec=4 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=574 starty=785 endx=664 endy=811
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff14MnDeltaDiam type="FLOAT" width=6 prec=4 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=600 starty=661 endx=660 endy=687
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff13MnDelta type="FLOAT" width=4 prec=1 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=602 starty=749 endx=662 endy=775
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff14MnDelta type="FLOAT" width=4 prec=1 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=604 starty=110 endx=604 endy=619
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=22 startx=642 starty=206 endx=915 endy=620
+labelspace=0 unitspace=1 spacing=30 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+N2O14 type="FLOAT" width=6 prec=0 label="" units="default" 
+POil14 type="FLOAT" width=6 prec=1 label="" units="default" 
+MaxPOilDiff14 type="FLOAT" width=6 prec=1 label="" units="default" 
+POilDiff14 type="FLOAT" width=6 prec=1 label="" units="default" 
+MinPOilDiff14 type="FLOAT" width=6 prec=1 label="" units="default" 
+$END-OBJECT
+***********
+$OBJECT Switch font=1 startx=656 starty=20 endx=805 endy=95
+TOGGLE Freeze14EPR_S onlabel="Release\n1.4 EPR" offlabel="Freeze\n1.4 EPR" offcolor=LightGray oncolor=Green 
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=674 starty=657 endx=704 endy=680
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "to"
+Black = -1 "to"
+LightGray = 0 "to"
+Black = 1 "to"
+LightGray = 2 "to"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=675 starty=695 endx=705 endy=718
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "to"
+Black = -1 "to"
+LightGray = 0 "to"
+Black = 1 "to"
+LightGray = 2 "to"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=675 starty=750 endx=705 endy=773
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "to"
+Black = -1 "to"
+LightGray = 0 "to"
+Black = 1 "to"
+LightGray = 2 "to"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=675 starty=785 endx=705 endy=808
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "to"
+Black = -1 "to"
+LightGray = 0 "to"
+Black = 1 "to"
+LightGray = 2 "to"
+$END-OBJECT
+***********
+$OBJECT Text font=22 startx=676 starty=144 endx=798 endy=179
+Black direction=1 alignment=0
+"1.4 EPR"
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=714 starty=695 endx=804 endy=721
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff13MxDeltaDiam type="FLOAT" width=6 prec=4 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=715 starty=657 endx=775 endy=683
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff13MxDelta type="FLOAT" width=4 prec=1 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=715 starty=750 endx=775 endy=776
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff14MxDelta type="FLOAT" width=4 prec=1 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=715 starty=786 endx=805 endy=812
+labelspace=0 unitspace=0 spacing=1 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+POilDiff14MxDeltaDiam type="FLOAT" width=6 prec=4 label="" units="" 
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=800 starty=657 endx=1055 endy=680
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "PSIG is invalid."
+Black = -1 "PSIG is required."
+LightGray = 0 "PSIG is required."
+Black = 1 "PSIG is required."
+LightGray = 2 "PSIG is invalid."
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=800 starty=750 endx=1055 endy=773
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "PSIG is required."
+Black = -1 "PSIG is required."
+LightGray = 0 "PSIG is required."
+Black = 1 "PSIG is required."
+LightGray = 2 "PSIG is invalid."
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=830 starty=695 endx=1085 endy=718
+POilDiff13DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "In. is invalid."
+Black = -1 "In. is required."
+LightGray = 0 "In. NOT required."
+Black = 1 "In. is required."
+LightGray = 2 "In. is invalid."
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=830 starty=785 endx=1070 endy=808
+POilDiff14DeltaSign labelspace=0 label="" labelcolor=White stringcolor=LightGray parambox=0 paramboxcolor=Black shading=0
+LightGray = -2 "In. is invalid."
+Black = -1 "In. is required."
+LightGray = 0 "In. NOT Required"
+Black = 1 "In. is required."
+LightGray = 2 "In. is invalid."
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=923 starty=66 endx=1178 endy=89
+Blue direction=1 alignment=0
+"OBSERVED PARAMETERS"
+$END-OBJECT
+***********
+$OBJECT Digital font=97 startx=928 starty=99 endx=1170 endy=211
+labelspace=6 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EEC_N2Pct type="FLOAT" width=6 prec=2 label="N2" units="default" 
+TOILAC type="FLOAT" width=6 prec=1 label="MOT" units="default" 
+POILAC type="FLOAT" width=6 prec=1 label="MOP" units="default" 
+MOPCor type="FLOAT" width=6 prec=1 label="MOP Corr" units="default" 
+$END-OBJECT
+***********
+$END-DISPLAY
+

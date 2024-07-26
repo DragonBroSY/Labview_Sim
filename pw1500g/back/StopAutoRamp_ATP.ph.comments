@@ -1,0 +1,47 @@
+$PHASE StopAutoRamp_ATP length=2        level=0
+*
+* This Phase is used for error handling, such as emergancy idle and
+*  operator override.
+*
+#if  ~AutoThrottle_F                   <- If auto throttle is not active
+0 EXIT                                 <- exit
+#endif
+*
+#if OperatorOverride                   <- If operator override detected
+0 MESSAGE "Operator Override Detected" <- Send message to message queue
+0 SET OperatorOverride OFF
+#endif
+*
+0 SET AutoTSet OFF                     <- Auto Throttle Active Flag
+#if AutoThrottle_F
+0 EXECUTE StopAutoTPhase_ATP           <- Shut down auto throttle
+0 SET AutoTSet ON
+#endif
+*
+#if ~RestartAuto                       <- If Restart test flag not set
+0 SET RestartAuto OFF                  <- Just exit.  Nothing to do
+0 EXIT
+#endif
+*
+0 SUSPEND "Continue Auto Test?" "Continue" "Cancel"  <- Prompt operator
+#if ~OpResponse                        <- Cancel pressed
+0 PREEMPT 1                            <- Stop all auto test phases
+0 EXIT                                 <- and exit
+#else
+0 MESSAGE "Restarting Test"            <- Continue pressed
+#endif
+*
+#if ~AutoTSET                          <- If no auto throttle just exit
+0 EXIT
+#endif
+*
+#if AutoThrottle_F                     <- If currently in auto throttle
+0 EXIT                                 <- just exit
+#else
+0 MESSAGE "Must be in Auto Throttle to continue"  <- Error message
+0 SET AutoTSET OFF                     <- Reset flag.
+0 PREEMPT 1                            <- Stop all auto test phases
+0 EXIT                                 <- And exit
+#endif
+$END-PHASE
+**********

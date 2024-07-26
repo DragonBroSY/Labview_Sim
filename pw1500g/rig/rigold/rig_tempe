@@ -1,0 +1,19 @@
+# Rig file for Engine Start display
+#
+echo "ECM display must be up -- touchscreen buttons are used by engine start"
+rig sig EGTHarnessDegC 93.2
+#C old value-degF rig sig T4_9 200
+rig sig N1i 350
+rig sig N2i 650
+# rig sig Start_Air_S   1
+echo "Use 'Open Start Valve' button on ecm display to turn air on"
+sleep 10
+rig sig start_vlv_open_i 1
+# rig sig Fuel_Control_S 1
+rig sig EmergFuelSO_I 0
+rig sig FuelArm_I 1
+echo "Use 'Run Fuel Control' button on ecm display to turn fuel on"
+sleep 10
+rig sig Fuel_Vlv_Clsd_I 0
+rig sig Fuel_Vlv_Open_I 1
+sleep 5

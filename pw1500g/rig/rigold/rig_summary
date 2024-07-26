@@ -1,0 +1,95 @@
+# Rig file for testing new vs. old output in summary file
+echo "need to rig_critical, rig_aux, too"
+#
+# point A
+rig sig A_270B20 TRUE
+rig sig PBarInHg 28.73
+rig sig N1i 4168
+rig sig N2i 11943
+rig sig VIBFBB 3.2
+# rig sig VIBFN1 0 5.5 0.02
+# rig sig VIBFN2 0 3.5 0.02
+rig sig VIBTBB 2.59
+# rig sig VIBTN1 0 4.0 0.02
+# rig sig VIBTN2 0 3.0 0.02
+# rig sig T4_9 1024.7
+rig sig EGTHarnessDegC 551.5
+rig sig Fni 35196.
+# does it make sense to rig FnS?  Is it calc'd from FnI?
+# yes, it's calc'd. rig sig FnS 35196.
+rig sig WfiHz 533.4
+echo " rig sig T2_5 252.7"
+rig sig T25DegC 122.61
+echo " rig sig T3_5 1035.9"
+rig sig T35aDegC 557.72
+# warn rig sig Ps3_1 354.83
+rig sig Ps31PSIG 354.83
+# warn rig sig Ps3i 236.37
+rig sig Ps3iPSIG 236.37
+# warn rig sig P4_5ab 0.15
+rig sig Pt45PSIG 0.15
+# warn rig sig P4_9InHg 12.14
+rig sig Pt49PSIG 5.965
+rig sig PCellFPSIG .131
+rig sig PCellRPSIG  .124
+rig sig Ps25PSIG -.12
+rig sig Pt25PSIG 17.26
+rig sig CITDegC_A 29.22
+rig sig CITDegC_B 29.22
+rig sig CITDegC_C 29.22
+rig sig CITDegC_D 29.22
+rig sig MOTDegC 133.89
+rig sig ScavOilDegC 151.72
+rig sig TBld14DegC 213.72
+rig sig RelHum 60.1
+rig sig A_N1 92.
+rig sig A_N2 97.
+rig sig A_EPR_Act 1.417
+rig sig A_EPR_Com 1.418
+rig sig A_TFuel 74.8
+rig sig A_EGT 594.0
+rig sig A_P2 13.941
+rig sig A_T2A 27.19
+rig sig A_PBurner 337.69
+rig sig A_FnLRA 77.7
+rig sig A_SVAP 2.5
+rig sig A_EPR_Max 1.449
+rig sig A_EPR_Idl .994
+rig sig A_FnRevPF .3
+rig sig A_HCCPF .7
+rig sig A_LCCPF 100.0
+rig sig A_AOXPF 1.0
+rig sig A_AccWf 14496.0
+rig sig A_Wf_Com 12832.0
+rig sig A_EPR_Clm 1.314
+rig sig A_25Bld 1.0
+rig sig A_N2C_25 100.3
+rig sig A_PresAlt 1283.73
+rig sig A_TotalPr 964.70
+rig sig A_TotAT 27.19
+#
+rig sig B_N1 92.
+rig sig B_N2 98.
+rig sig B_EPR_Act 1.418
+rig sig B_EPR_Com 1.418
+rig sig B_TFuel 74.0
+rig sig B_EGT 594.0
+rig sig B_T2A 27.06
+rig sig B_PBurner 338.16
+rig sig B_Pamb 13.943
+rig sig B_FnLRA 77.7
+rig sig B_SVAP 2.5
+rig sig B_EPR_Max 1.449
+rig sig B_EPR_Idl .994
+rig sig B_FnRevPF .5
+rig sig B_HCCPF 1.0
+rig sig B_LCCPF 100.1
+rig sig B_AOXPF 1.8
+rig sig B_AccWf 14520.0
+rig sig B_Wf_Com 12800.0
+rig sig B_EPR_Clm 1.314
+rig sig B_25Bld 2.0
+rig sig B_N2C_25 100.4
+rig sig B_PresAlt 1283.73
+rig sig B_TotalPr 964.70
+rig sig B_TotAT 27.06

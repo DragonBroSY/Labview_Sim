@@ -1,0 +1,349 @@
+$PHASE Acceptance_ATP length=-1       level=0 controlrelay=None common=0
+#if (ECM_IdleCtrl_TB)
++0 SET ECM_IdleCtrl_TB OFF
+#elseif ((AcceptStage = 1) & (TRA_Actual <= 40.0))
++0 SET AcceptStage 10
++0 SET AcceptStep 1
++0 SET StageTmrLim 5
++0 SET StageTmr_F ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Initiated, Waiting for TRA > 40 Deg...")
+#elseif ((AcceptStage = 1) & (TRA_Actual > 40.0))
++0 SET AcceptStage 25
++0 EXECUTE StageClear_ATP
+#elseif ((AcceptStage = 10) & StageTmrLim_F)
++0 SET AcceptStage 12
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 12)
++0 SET AcceptStage 15
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ TRAMxPwrStop
++0 SET TLA_Targ (TRA_Targ + 14.0)
++0 SET TRA_TargMx (TRA_Targ + TRATargBand)
++0 SET TRA_TargMn (TRA_Targ - 0.3)
++0 SET TRAAccelTarg TRA_TargMn
+*+0 SET TRA_Rate ((TRA_Targ - TRA_Actual) / StageTmrLim)
++0 SET TRA_Rate 0.7
++0 SET Accel_F	ON
++0 SET StageTmr_F ON
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Accel to 33.0 Deg TRA (46.0 Deg TLA)...")
+#elseif ((AcceptStage = 15) & (TRA_Actual >= TRA_TargMn))
++0 SET AcceptStage 30
++0 EXECUTE StageClear_ATP
++0 SET TRAAccelTarg 0.0
++0 SET StageTmr_F ON
++0 SET StageTmrLim 5
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif (AcceptStage = 25)
++0 SET AcceptStage 30
++0 SET StageTmrLim 5
++0 SET StageTmr_F ON
++0 SET AcceptStep 1
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Initiated, Dwell 5 sec...")
+*--------------------------------------------------------------------------------------
+************* Acceptance **************************************************************
+*--------------------------------------------------------------------------------------
+#elseif ((AcceptStage = 30) & StageTmrLim_F)
++0 SET AcceptStage 42
++0 EXECUTE StageClear_ATP
+*#elseif (AcceptStage = 32)
+*+0 SET AcceptStage 40
+*+0 SET TRAStart TRA_Actual
+*+0 SET StageTmrLim 30
+*+0 SET TRA_Targ 30.0
+*+0 SET TRA_TargMx (TRA_Targ + TRATargBand)
+*+0 SET TRA_TargMn (TRA_Targ - TRATargBand)
+*+0 SET TRADecelTarg TRA_TargMx
+*+0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
+*+0 SET Decel_F	ON
+*+0 SET AcceptStageTxt concat (StepTxt "Acceptance, (Fast) Decel to Band A...")
+*+0 SET StageTmr_F ON
+*#elseif ((AcceptStage = 40) & (TRA_Actual <= TRA_TargMx))
+*+0 SET AcceptStage 42
+*+0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 42)
++0 SET AcceptStage 45
++0 SET AcceptStep 2
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 60
++0 SET TRA_Targ 28.0
++0 SET TRA_TargMx (TRA_Targ + 0.3)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET Decel_F	ON
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, (Slow) Decel to Band A...")
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 45) & (FNTR2 <= FnAMax))
++0 SET AcceptStage 47
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 47)
++0 SET AcceptStage 50
++0 SET AcceptStep 3
++0 SET StageTmrLim 300
++0 SET StageTmr_F ON
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell at Band A for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 50) & BandA_F & (StageTmr > 120.0))
++0 SET AcceptStage 55
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Stablized, Dwell at Band A for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 55) & ~BandA_F)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Band A, OUT OF RANGE...")
+#elseif ((AcceptStage = 55) & BandA_F & (StageTmr > 278.0))
++0 SET AcceptStage 57
++0 EXECUTE storePerformance_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Storing Acceptance Point Band A, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 57) & StageTmrLim_F)
++0 SET AcceptStage 62
++0 EXECUTE StageClear_ATP
+*#elseif (AcceptStage = 58)
+*+0 SET AcceptStage 60
+*+0 SET AcceptStep 4
+*+0 SET TRAStart TRA_Actual
+*+0 SET StageTmrLim 90
+*+0 SET TRA_Targ 26.0
+*+0 SET TRA_TargMx (TRA_Targ + 0.2)
+*+0 SET TRA_TargMn (TRA_Targ - TRATargBand)
+*+0 SET TRADecelTarg TRA_TargMx
+*+0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
+*+0 SET AcceptStep 2
+*+0 SET StepTxt concat ("Step " AcceptStep)
+*+0 SET StepTxt concat (StepTxt ": ")
+*+0 SET AcceptStageTxt concat (StepTxt "Acceptance, Fast Decel to Band B...")
+*+0 SET Decel_F	ON
+*+0 SET StageTmr_F ON
+*#elseif ((AcceptStage = 60) & (FNTR2 < (FnBMax + 1000.0)))
+*+0 SET AcceptStage 62
+*+0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 62)
++0 SET AcceptStage 65
++0 SET AcceptStep 5
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ 26.0
++0 SET TLA_Targ 40.6
++0 SET TRA_TargMx (TRA_Targ + 0.2)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Slow Decel to Band B...")
++0 SET Decel_F	ON
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 65) & (FNTR2 < FnBMax))
++0 SET AcceptStage 67
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 67)
++0 SET AcceptStage 70
++0 SET AcceptStep 6
++0 SET StageTmrLim 180
++0 SET StageTmr_F ON
++0 SET AcceptStep 6
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell at Band B for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 70) & BandB_F & (StageTmr > 60.0))
++0 SET AcceptStage 75
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Stablized, Dwell at Band B for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 75) & ~BandB_F)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Band B, OUT OF RANGE...")
+#elseif ((AcceptStage = 75) & BandB_F & (StageTmr > 158.0))
++0 SET AcceptStage 80
++0 EXECUTE storePerformance_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Storing Acceptance Point Band B, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 80) & StageTmrLim_F)
++0 SET AcceptStage 85
++0 EXECUTE StageClear_ATP
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ 22.0
++0 SET TRA_TargMx (TRA_Targ + 0.2)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET Decel_F	ON
++0 SET StageTmr_F ON
++0 SET AcceptStep 7
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Decel to Band C...")
+#elseif ((AcceptStage = 85) & BandC_F & (FNTR2 < FnCMax))
++0 SET AcceptStage 88
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 88)
++0 SET AcceptStage 90
++0 SET StageTmrLim 180
++0 SET StageTmr_F ON
++0 SET AcceptStep 8
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell at Band C for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 90) & BandC_F & (StageTmr > 60.0))
++0 SET AcceptStage 95
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Stablized, Dwell at Band C for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 95) & ~BandC_F)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Band C, OUT OF RANGE...")
+#elseif ((AcceptStage = 95) & BandC_F & (StageTmr > 158.0))
++0 SET AcceptStage 100
++0 EXECUTE storePerformance_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Storing Acceptance Point Band C, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 100) & StageTmrLim_F)
++0 SET AcceptStage 105
++0 EXECUTE StageClear_ATP
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ 13.0
++0 SET TRA_TargMx (TRA_Targ + 0.2)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET Decel_F	ON
++0 SET StageTmr_F ON
++0 SET AcceptStep 9
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Decel to Band D...")
+#elseif ((AcceptStage = 105) & BandD_F & (FNTR2 < FnDMax))
++0 SET AcceptStage 110
++0 EXECUTE StageClear_ATP
++0 SET StageTmrLim 180
++0 SET StageTmr_F ON
++0 SET AcceptStep 10
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell at Band D for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 110) & BandD_F & (StageTmr > 60.0))
++0 SET AcceptStage 115
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Stablized, Dwell at Band D for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 115) & ~BandD_F)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Band D, OUT OF RANGE...")
+#elseif ((AcceptStage = 115) & BandD_F & (StageTmr > 158.0))
++0 SET AcceptStage 117
++0 EXECUTE storePerformance_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Storing Acceptance Point Band D, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 117) & StageTmrLim_F & ~CowlAICk_F)
++0 SET AcceptStage 130
++0 EXECUTE StageClear_ATP
+#elseif ((AcceptStage = 117) & StageTmrLim_F & CowlAICk_F)
++0 SET AcceptStage 120
++0 EXECUTE StageClear_ATP
++0 SET AcceptStep 11
++0 SET StageTmrLim 30
++0 SET ECM_CowlAI_TB ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec. Switch ON")
+#elseif ((AcceptStage = 121) & CAISWON)
++0 SET AcceptStage 122
++0 SET StageTmr	0.0
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 122) & (StageTmr <= 3) & CAIPOS)
++0 SET AcceptStage 123
++0 SET CAIOp_Stat 1
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Open Passed...")
+#elseif ((AcceptStage = 122) & (StageTmr > 3) & ~CAIPOS)
++0 SET AcceptStage 123
++0 SET CAIOp_Stat 2
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Open Failed...")
+#elseif ((AcceptStage = 122) & (StageTmr > 3) & CAIPOS)
++0 SET AcceptStage 123
++0 SET CAIOp_Stat 3
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Open Failed...")
+#elseif (AcceptStage = 123)
++0 SET AcceptStage 124
++0 SET ECM_CowlAI_TB OFF
++0 SET StageTmrLim (StageTmrLim - StageTmr)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec. Switch OFF")
+#elseif ((AcceptStage = 124) & CAISWOFF)
++0 SET AcceptStage 125
++0 SET StageTmr	0.0
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 125) & (StageTmr <= 3) & ~CAIPOS)
++0 SET AcceptStage 128
++0 SET CAICl_Stat 1
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Passed...")
+#elseif ((AcceptStage = 125) & (StageTmr > 3) & CAIPOS)
++0 SET AcceptStage 128
++0 SET CAICl_Stat 2
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Failed...")
+#elseif ((AcceptStage = 125) & (StageTmr > 3) & ~CAIPOS)
++0 SET AcceptStage 128
++0 SET CAICl_Stat 3
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Failed...")
+#elseif ((AcceptStage = 128) & StageTmrLim_F)
++0 SET AcceptStage 130
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 130)
++0 SET AcceptStage 135
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ -14.0
++0 SET TRA_TargMx (TRA_Targ + 0.2)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET Decel_F	ON
++0 SET StageTmr_F ON
++0 SET AcceptStep 12
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Decel to Ground Idle...")
+#elseif ((AcceptStage = 135) & StageTmrLim_F)
++0 SET AcceptStage 140
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Waiting for Ground Idle...")
+#elseif (((AcceptStage = 135) | (AcceptStage = 140)) & TRAGIdle_F)
++0 SET AcceptStage 145
++0 EXECUTE StageClear_ATP
++0 SET StageTmrLim 300
++0 SET StageTmr_F ON
++0 SET AcceptStep 13
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Complete, Dwell at Ground Idle for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 145) & (StageTmr > 239.0))
++0 SET AcceptStage 148
++0 EXECUTE storeMIdle_ATP
+#elseif ((AcceptStage = 148) & StageTmrLim_F)
++0 SET AcceptStage 150
++0 EXECUTE StageClear_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Complete...")
++0 SET ArmAcceptance_TB OFF
++0 SET AcceptT9_TS OFF
+#endif
+$END-PHASE
+**********
+

@@ -1,0 +1,345 @@
+$GROUP "autothrottle" 
+#C ****** TRA Throttle Resolver Angle FSID 4.1.1.1 ********
+#C ****** TRA_Actual **************************************
+#C TRA_Actual (PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+TRA_Actual:Deg	TLAPriCHResolver
+#C ********************************************************
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Logic ************
+#C ------------------------------------------
+#C * TRA AutoThrottle Trim Increment ********
+#C ------------------------------------------
+#if	((TRA_SpeedCtrl_RB = 3) & ~(Trim_Inc = FastSpeed))
+Trim_Inc:	FastSpeed
+#elseif	((TRA_SpeedCtrl_RB = 2) & ~(Trim_Inc = MedSpeed))
+Trim_Inc:	MedSpeed
+#elseif	((TRA_SpeedCtrl_RB = 1) & ~(Trim_Inc = SlowSpeed))
+Trim_Inc:	SlowSpeed
+#elseif	((TRA_SpeedCtrl_RB = 0) & ~(Trim_Inc = FineSpeed))
+Trim_Inc:	FineSpeed
+#endif	
+#C --------------------------------------------------------
+#C * Check TRA_Actual, Are we at the Idle or Max Power Stop?
+#C --------------------------------------------------------
+TRAatMxPwrStop_F:	(inrange (TRAMxPwrStopMn TRA_Actual TRAMxPwrStopMx) & TRAMxPwrStopSet_F)
+TRAatMnIdleStop_F:	(inrange (TRAMnIdleStopMn TRA_Actual TRAMnIdleStopMx) & TRAMnIdleStopSet_F)
+#C #if	TRAMxPwrStopSet_F
+#C TRAatMxPwrStop_F:	inrange (TRAMxPwrStopMn TRA_Actual TRAMxPwrStopMx)
+#C #else	
+#C TRAatMxPwrStop_F:	OFF
+#C #endif	
+#C #if	TRAMnIdleStopSet_F
+#C TRAatMnIdleStop_F:	inrange (TRAMnIdleStopMn TRA_Actual TRAMnIdleStopMx)
+#C #else	
+#C TRAatMnIdleStop_F:	OFF
+#C #endif	
+#C TRAatMxPwrStop_F: inrange (TRAMxPwrStopMn TRA_Cmd TRAMxPwrStopMx)
+#C TRAatMnIdleStop_F: inrange (TRAMnIdleStopMn TRA_Cmd TRAMnIdleStopMx)
+#C TRAatMxPwrStop_F: ((TRACmdLastScan <= TRAMxPwrStop) & (TRA_Cmd >= TRAMxPwrStop))
+#C TRAatMnIdleStop_F: ((TRACmdLastScan >= TRAMnIdleStop) & (TRA_Cmd <= TRAMnIdleStop))
+#C --------------------------------------------------------
+#C ****** Calculate/SET TRA_CMD Here **********************
+#C ****** Must be before Check TRA_CMD ********************
+#C --------------------------------------------------------
+#if	(AutoThrottle_F & (TRAatMxPwrStop_F | TRAatMnIdleStop_F) & ~TRAOverRide_F)
+AutoThrottle_F:	OFF
+#elseif	(AutoThrottle_F & StageTmr_F & Accel_F)
+#C ***** This is for Automated Accel/RunIn/BrkIn procedures...
+TRA_Cmd:Deg	(TRAStart + (TRA_Rate * StageTmr))
+#elseif	(AutoThrottle_F & StageTmr_F & Decel_F)
+#C ***** This is for Automated Decel/RunIn/BrkIn procedures...
+TRA_Cmd:Deg	(TRAStart - (TRA_Rate * StageTmr))
+#elseif	(AutoThrottle_F & (IncreaseTRA_F | GoingToMxPwr_F))
+#C ***** This is for IncreaseTRA Button press...
+#C TRA_Cmd:Deg	(TRAStart + (TRA_Rate * StageTmr))
+TRA_Cmd:Deg	(TRAStart + (Trim_Inc * StageTmr))
+#elseif	(AutoThrottle_F & (DecreaseTRA_F | GoingToMnIdle_F))
+#C ***** This is for DecreaseTRA Button press...
+TRA_Cmd:Deg	(TRAStart - (Trim_Inc * StageTmr))
+#C TRA_Cmd:Deg	(TRAStart - (TRA_Rate * StageTmr))
+#endif	
+#C --------------------------------------------------------
+#C * Check TRA_Actual, Are we at the Idle or Max Power Stop?
+#C --------------------------------------------------------
+TRAatMxPwrStop_F:	(inrange (TRAMxPwrStopMn TRA_Actual TRAMxPwrStopMx) & TRAMxPwrStopSet_F)
+TRAatMnIdleStop_F:	(inrange (TRAMnIdleStopMn TRA_Actual TRAMnIdleStopMx) & TRAMnIdleStopSet_F)
+#C -------------!!!! At Max Power Stop !!!!----------------
+#if	(~TRAOverRide_F & TRAatMxPwrStop_F)
+TRA_Cmd:Deg	TRAMxPwrStop
+#endif	
+#C ------------!!!! At Min Idle Stop !!!!------------------
+#if	(~TRAOverRide_F & TRAatMnIdleStop_F)
+TRA_Cmd:Deg	TRAMnIdleStop
+#endif	
+#C --------------------------------------------------------
+#C * Compute difference between TRA_Cmd and TRA_Actual...
+#C --------------------------------------------------------
+TRA_Diff:Deg	(TRA_Cmd - TRA_Actual)
+TRA_Diff:Deg	abs(TRA_Diff)
+#C ********************************************************
+#C * Check for Operator OverRide (TRAOverRide_F),
+#C * A difference of > TRAOverRideLim degrees
+#C * between commanded and actual Power Lever Position...
+#C ********************************************************
+#if	(AutoThrottle_F & (TRA_Diff > TRAOverRideLim))
+OperatorOverride_F:	ON
+#endif	
+#C vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+#C #if	(AutoTRequest_F & ~AutoThrottle_F)
+#C * Check for an auto throttle request from autotest...
+#C AutoTRequest_F:	OFF
+#C #goto	CHECK_TRA_Cmd
+#C #elseif	(AutoPL_I & ~LastAUTOPLReq & ~AutoThrottle_F)
+#C * P/L toggle request just made with auto throttle not engaged...
+#C #goto	CHECK_TRA_Cmd
+#C #elseif	(AutoPL_I & ~LastAUTOPLReq & AutoThrottle_F)
+#C * P/L toggle request just made with auto throttle engaged...
+#C dummy:	storeevent("Test Mode Revision to Manual")
+#C AutoPLEnable_O:	OFF
+#C AutoThrottle_F:	OFF
+#C AutoThrottleEngaged:	OFF
+#C PLA_DAC_Tmr_F:	ON
+#C DAC_PLA_Voltage:	0.0
+#C #goto	NO_CHECK_TRA
+#C #elseif	(~AutoPL_I & AutoThrottle_F)
+#C OperatorOverride:	ON
+#C #elseif	((TRA_Diff > TRAOverRideLim) & AutoThrottle_F)
+#C OperatorOverride:	ON
+#C #elseif	(TRAMxPwrStopSet_F & (TRA_Actual > TRAMxPwrStop) & AutoThrottle_F)
+#C OperatorOverride:	ON
+#C #endif	
+#C ******************************************************
+#C * Set the Initial MAX/MIN/REV TRA limits if TRA Rigged...
+#C ******************************************************
+#if	((~(TRAMxPwrStop = TLA_Takeoff) | ~(TRAMnIdleStop = 0.0)) & ~TRAMxPwrStopSet_F & AutoPL_I)
+TRAMxPwrStop:deg	TLA_Takeoff
+TRAMxPwrStopMx:deg	(TRAMxPwrStop + TRATargBand)
+TRAMxPwrStopMn:deg	(TRAMxPwrStop - TRATargBand)
+TRAMxPwrStopSet_F:	ON
+#C TRAMnIdleStop:deg	TLA_Idle
+TRAMnIdleStop:deg	0.0
+TRAMnIdleStopMx:deg	(TRAMnIdleStop + TRATargBand)
+TRAMnIdleStopMn:deg	(TRAMnIdleStop - TRATargBand)
+TRAMnIdleStopSet_F:	ON
+#endif	
+#C ******************************************************
+#C * Perform MAX limits checking for Commanded TRA...
+#C ******************************************************
+#if	((TRA_Cmd > TRAMxPwrStop) & AutoThrottle_F)
+TRA_Cmd:Deg	TRAMxPwrStop
+#elseif	((TRA_Cmd < TRAMnIdleStop) & AutoThrottle_F)
+TRA_Cmd:Deg	TRAMnIdleStop
+#elseif	LimitEventLogged
+LimitEventLogged:	OFF
+#endif	
+#C ------------------------------------------------------
+#if	((TRA_Cmd > TRAMxPwrStop) & ~LimitEventLogged & AutoThrottle_F)
+dummy:	storeevent("TRA Upper Limit Exceeded")
+LimitEventLogged:	ON
+#elseif	((TRA_Cmd < TRAMnIdleStop) & ~LimitEventLogged & AutoThrottle_F)
+dummy:	storeevent("TRA Lower Limit Exceeded")
+LimitEventLogged:	ON
+#endif	
+#C ******************************************************
+#C ------------------------------------------------------
+#C * End of Code Checked...
+#C ------------------------------------------------------
+#C ******************************************************
+#C * Check for an auto throttle request from autotest
+#C ********************************************************
+#C #if (AutoTRequest_F & ~AutoThrottle_F)
+#C AutoTRequest_F: OFF
+#C #goto CHECK_TRA_Cmd
+#C #endif
+#C ********************************************************
+#C * Check for a test mode revision request
+#C ********************************************************
+#C EidleStillSet:	OFF
+#C #if (AutoPL_I & ~LastAUTOPLReq & ~AutoThrottle_F)
+#C * P/L toggle request just made with auto throttle not engaged
+#C #goto CHECK_TRA_Cmd
+#C #elseif (AutoPL_I & ~LastAUTOPLReq & AutoThrottle_F)
+#C * P/L toggle request just made with auto throttle engaged
+#C dummy: storeevent("Test Mode Revision to Manual")
+#C AutoPLEnable_O: OFF
+#C AutoThrottle_F: OFF
+#C AutoThrottleEngaged: OFF
+#C PLA_DAC_Tmr_F: ON
+#C DAC_PLA_Voltage: 0.0
+#C #goto NO_CHECK_TRA
+#C #else
+#C #goto NO_CHECK_TRA
+#C #endif
+#C *
+#C CHECK_TRA_Cmd	
+#C ********************************************************
+#C * Check for Emergancy Idle
+#C ********************************************************
+#C *#if (FCSEmrgIdle2_I)
+#C * EidleStillSet 1
+#C * #goto NO_CHECK_TRA
+#C *#endif
+#C *
+#C * Check if TRA Target is defined
+#C * Set Target to current value...
+#C * Set the Targets in SetTargs_ATP. (DJR 12/11/19)...
+#C #if ((CtrlMode = EPRCtrlMode) & (EPR_Targ = 0.0))
+#C EPR_Targ: EPR
+#C #if ((CtrlMode = FNCtrlMode) & (FN_Targ = 0.0))
+#C FN_Targ: FNTR2
+#C #elseif ((CtrlMode = N1CtrlMode) & (N1_Targ = 0.0))
+#C N1_Targ: N1S
+#C #elseif ((CtrlMode = TRACtrlMode) & (TRA_Cmd = 0.0))
+#C TRA_Cmd:Deg	TRA_Actual
+#C #endif
+#C *
+#C * Perform TRA Target Lookup
+#C * Sets the Initial TRA_Cmd
+#C *
+#C #if (CtrlMode = EPRCtrlMode)
+#C TRA_Cmd:Deg	lookup (EPRControl_T)
+#C #if (CtrlMode = FNCtrlMode)
+#C TRA_Cmd:Deg	lookup (FNControl_T)
+#C #elseif (CtrlMode = N1CtrlMode)
+#C TRA_Cmd:Deg	lookup (N1Control_T)
+#C #elseif (CtrlMode = TRACtrlMode)
+#C TRA_Cmd:Deg	lookup (TRAControl_T)
+#C TRA_Cmd:Deg	TRA_Actual
+#C #elseif
+#C TRA_Cmd:Deg	RMISS
+#C BadCtrlMode ON
+#C #endif
+#C *****************************************************
+#C #if	(TRA_Diff > TRA_Diff_Limit)
+#C TRA_Diff_Msg:	ON
+#C #elseif	((TRA_Cmd > TRAMxPwrStop) | (TRA_Cmd < TRAMnIdleStop))
+#C BadTRAMsg:	ON
+#C #else	
+#C dummy:	storeevent("Test Mode Revision to Auto")
+#C PLA_Command:VDC	(TLA_PLA_mcoeff * TRA_Actual + TLA_PLA_bcoeff)
+#C DAC_PLA_Voltage:	-(DACSlope * PLA_Handle + DACOffset)
+#C PLA_DAC_Tmr_F:	ON
+#C AutoThrottleEngaged: ON
+#C #endif	
+#C *****************************************************
+#C NO_CHECK_TRA	
+#C ********************************************************
+#C * Check for timer to start or stop auto throttle
+#C ********************************************************
+#C #if	~PLA_DAC_Tmr_F
+#C #goto	NO_TIMER_CHECK
+#C #endif	
+#C *
+#C #if	(AutoThrottleEngaged & (PLA_DAC_Tmr > 1.5))
+#C AutoPLEnable_O: ON
+#C PLA_DAC_Tmr_F:	OFF
+#C PLA_DAC_Tmr:Sec	0.0
+#C AutoThrottle_F: ON
+#C #elseif	(~AutoThrottleEngaged & (PLA_DAC_Tmr > 1.0))
+#C AutoPLEnable_O:	OFF
+#C PLA_DAC_Tmr_F:	OFF
+#C PLA_DAC_Tmr:Sec	0.0
+#C #endif	
+#C ********************************************************
+#C NO_TIMER_CHECK	
+#C ********************************************************
+#C * Check for control mode revision
+#C ********************************************************
+#C #if	(CtrlMode = LastCtrlMode)
+#C #goto	NO_CONTROL_CHANGE
+#C #else	
+#C CtrlModeRevision:	storeevent("Control Mode Revision")
+#C #endif	
+#C ********************************************************
+#C * Check for new operating point if in auto throttle
+#C ********************************************************
+#C #if ~AutoThrottle_F
+#C #goto NEW_LIMITS
+#C #endif
+#C *
+#C #if ((CtrlMode = EPRCtrlMode) & (EPR_Targ = 0.0))
+#C BadOperatingPoint ON
+#C #if ((CtrlMode = FNCtrlMode) & (FN_Targ = 0.0))
+#C BadOperatingPoint ON
+#C #elseif ((CtrlMode = N1CtrlMode) & (N1_Targ = 0.0))
+#C BadOperatingPoint ON
+#C #elseif ((CtrlMode = TRACtrlMode) & (TRA_Cmd = 0.0))
+#C BadOperatingPoint ON
+#C #endif
+#C *
+#C NEW_LIMITS
+#C *
+#C NO_CONTROL_CHANGE	
+#C ******************************************************
+#C * Check for operator override A difference of > X degrees
+#C * between commanded and actual Power Lever Position
+#C ********************************************************
+#C #if (AutoThrottle_F & (TRA_Diff > TRA_OverRide))
+#C OperatorOverride ON
+#C #else
+#C OperatorOverride OFF
+#C #endif
+#C ******************************************************
+#C * Perform TRA Target Lookup and Add Trim Value...
+#C ******************************************************
+#C #if (CtrlMode = EPRCtrlMode)
+#C EPR_Targ: (EPR_Targ + (EPR_Targ * Trim_Value / 100.0))
+#C TRA_Cmd:Deg	lookup (EPRControl_T)
+#C #if (CtrlMode = FNCtrlMode)
+#C FN_Targ: (FN_Targ + (FN_Targ * Trim_Value / 100.0))
+#C TRA_Cmd:Deg	lookup (FNControl_T)
+#C #elseif (CtrlMode = N1CtrlMode)
+#C N1_Targ: (N1_Targ + (N1_Targ * Trim_Value / 100.0))
+#C TRA_Cmd:Deg	lookup (N1Control_T)
+#C #elseif (CtrlMode = TRACtrlMode)
+#C TRA_Cmd:Deg	(TRA_Cmd + (TRA_Cmd * Trim_Value / 100.0))
+#C TRA_Cmd:Deg	lookup (TRAControl_T)
+#C #else
+#C TRA_Cmd:Deg	RMISS
+#C #endif
+#C ******************************************************
+#C * If in Auto throttle mode Perform Conv
+#C ******************************************************
+#C #if	~AutoThrottle_F
+#C #goto	NO_AUTO_THROTTLE
+#C #endif	
+#C ******************************************************
+#C * Compute DAC value
+#C ******************************************************
+#C DAC_PLA_Voltage:	-(DACSlope * PLA_Handle + DACOffset)
+#C *
+#C NO_AUTO_THROTTLE	
+#C *
+#C #if	CalibratingDAC
+#C PLALow:	((PLA1 + PLA2) / 2.0)
+#C PLAHigh:	((PLA3 + PLA4) / 2.0)
+#C DACSlope:	(2.0 / (PLAHigh - PLALow))
+#C DACOffset:	(1.5 - (PLALow * DACSlope))
+#C CalibratingDAC:	OFF
+#C #endif	
+#C vvvvvvvvvvvvvvvvvvvv Code Checked OK Below vvvvvvvvvvvvvvvvv
+#C ------------------------------------------------------------
+#if	(EmergIdle_F & AutoThrottle_F)
+EidleStillSet_F:	ON
+AutoThrottle_F:	OFF
+#elseif	(~EmergIdle_F & EidleStillSet_F)
+EidleStillSet_F:	OFF
+#endif
+#C ************************************************************
+#C * Enable/Disable AutoThrottle...
+#C * To Enable AutoThrottle,
+#C * Power Lever Mode [Auto] (Red) Must be selected (AutoPL_I = ON)...
+#C ************************************************************
+AutoPLEnable_O:	(AutoThrottle_F & AutoPL_I)
+#C ************************************************************
+#C * Set the actual Ramping TLA Voltage (PLA_Command) here...
+#C * Must send a nagitive value for the PLA_Command (-VDC)...
+#C ************************************************************
+#if	(AutoPLEnable_O & AutoPL_I)
+PLA_Command:VDC	((TLA_PLA_mcoeff * TRA_Cmd + TLA_PLA_bcoeff) * -1.0)
+#endif	
+#C LastCtrlMode: CtrlMode
+LastAUTOPLReq:	AutoPL_I
+TRACmdLastScan:Deg	TRA_Cmd
+#C ------------------------------------------------------------
+$END-GROUP

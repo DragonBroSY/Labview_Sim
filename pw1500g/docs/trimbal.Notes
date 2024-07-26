@@ -1,0 +1,9 @@
+Fan plane has a weight tang every 2 blades, i.e. 18 weight locations for 36 blades.
+
+Turbine weights are installed by referencing the Fan (rather than have to count a 
+	zillion turbine blades)
+	
+So, this is why the turbine weight locations are the same number of fan BLADES, not
+	fan weight locations.
+	
+	GRB	101907

@@ -1,0 +1,21 @@
+                         vibration_peaks.dsp file
+===========================================================================================
+(DJR 6/8/07)
+	Trouble: Pressing the [Store Vibration Peaks] or [Store As Received Vibration Peaks]
+		 will overwrite the data without warning.
+
+	Correction: Moved the calc that stores the vibration parameters into the stored
+		    vibration parameters to the autotest phase from the button on the display.
+		    Added the logic to pop up a window with SUSPEND to prompt for Overwriteing
+		    the data after the initial data is stored.
+===========================================================================================
+(DJR 8/6/07)
+	Trouble: Vibration peak limits do not hold with limits that vary with N1/N2 speeds.
+		 The Limit needs to use the peak N1/N2 RPM associated with the vib peak parameter.
+
+	Correction: Added an identical table to tables that vary with N1/N2 and changed the
+		    input parameter to the N1/N2 RPM Peak variable. New Table Name sample:
+		    VibTN2PkMx_T Parameter Name: VibTN2PkMx 
+		    This will maintain the limit for the N1/N2 RPM Used even when you restore
+		    the As Received or Final Peaks stored.
+===========================================================================================

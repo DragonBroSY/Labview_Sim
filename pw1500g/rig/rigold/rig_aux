@@ -1,0 +1,35 @@
+# rig the auxiliary display
+echo "first run rig_critical"
+#rig the pressures that come from /hardware and pressures.cal
+#Pt2 is not measured; comes from N1
+rig sig Pt49PSIG 5.96
+rig sig Pt25PSIG 17.26
+rig sig Ps25PSIG -.12 
+rig sig Pt45PSIG .15
+rig sig Ps31PSIG 354.83
+rig sig Ps3iPSIG 236.37
+#rig the pressures that come from vxicalcs and QEC.cal
+rig sig QMOPSig     0.74
+rig sig QEC_Pressure_Ref   1
+rig sig MOPSig  	.00203815
+echo "It takes a while for MOPS to get back in range"
+rig sig PressureExcit	1
+rig sig OilBreathSig 	.000191
+rig sig QBearScavPSig .1889
+rig sig Brg4ScavSig 0.0016133
+rig sig DiffSig .0002045
+rig sig HPFuelTestSig .002
+rig sig QECWf 8037.58
+rig sig QFuelPSig .10365
+rig sig IDGOilIn 58
+rig sig IDGOilOut 67
+rig sig PFuelDis 41.3
+rig sig SAP .19
+rig sig StoredAir 102.29
+rig sig A_270B20 1
+rig sig A_TFuel 74.8
+rig sig PCellFPSIG .131
+rig sig PCellRPSIG  .124
+rig sig relhum      60.1
+rig sig pbarinhg    28.73
+rig sig OATDegC    23.

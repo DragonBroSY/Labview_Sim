@@ -1,0 +1,440 @@
+$GROUP "ecm" 
+SWActiveAdpt:	(AdaptcountTotal = 5.0)
+#C =====================================================================================
+#C ------------------------- Start of DC Power Test UPS Logic --------------------------
+#C In common/dcpowertst.cal (DJR 07/16/19)...
+#C NOTE: SETS parameter (SWActive: TRUE/FALSE)...
+#C ----------------------------- END DC Power Test UPS l
+#if	ECM_OpTimer_TS
+OpTimer_F:	ON
+#else	
+OpTimer_F:	OFF
+#endif	
+#C------------------------ PL Amp Manual Control to External
+#if	(SWActive & EFSO_I & ~EFSOActivated)
+EFSOActivated:	ON
+#elseif	(EFSOActivated & ~EFSO_I)
+EFSOActivated:	OFF
+#endif	
+#C --------------Ignition Power Enable Logic-------------
+#C With Cell not ready if you arm Air or Fuel and attempt to ignite, that won't work.
+IgnPwrDisable:	(~SWActive | (CellNotReady_I & (FuelArm_I | AirArm_I)))
+#if	(EECEngRunning & ~ECM_IgnPwr_TB)
+#C Ignition Power must stay on during Engine Running to avoid Bits.
+ECM_IgnPwr_TB:	ON
+#endif	
+#C -------------------- Start Mode -----------------------
+#C ---- Mode 0 = UNK Start
+#C ---- Mode 1 = Auto Start
+#C ---- Mode 2 = Manual Start
+#C ---- Mode 3 = Dry Crank
+#if	AUTSTA
+ECM_StartMode_Stat:	1
+#elseif	MANSTA
+ECM_StartMode_Stat:	2
+#elseif	DRYCKA
+ECM_StartMode_Stat:	3
+#else	
+ECM_StartMode_Stat:	0
+#endif	
+#C -------------------- Engine Running Logic -------------
+#C #if ((A2_270B18 | B2_270B18) & (A2_066B27 | B2_066B27))
+#C EECEngRunning: ON
+#C #else
+#C EECEngRunning: OFF
+#C #endif
+#C -------------------- Start Logic ----------------------
+#C ---- Mode 1 = Crank (wet motor)
+#C ---- Mode 2 = Ignition/Start
+#C ---- Mode 3 = Normal (off)
+#C ---
+#if	(~StartOS_TS & ~SAP_ON_TS & (ECM_ModeSel_RB = 0) & StartAir_O)
+StartAir_O:	OFF
+dummy:	stopcontrolloop ("StartAir_PID")
+dummy:	stopcontrolloop ("PAIRsN2_PID")
+PAIRs_Cmd:ma	0.0
+#endif	
+#C -------------- Master Lever Logic ---------------
+#C ***** Master Lever ON/OFF *****
+MstrLvrOFFCHA_O:	~ECM_MstrLvr_TB
+MstrLvrOFFCHB_O:	~ECM_MstrLvr_TB
+ECM_FuelCtrl_TB:	ECM_MstrLvr_TB
+#C -------------- QLOP Switch Logic ----------------
+#if	~SWActive
+#C Low Oil Pressure Indication UNK.
+EECLOP_Stat:	0
+#elseif	((~LowOilPress_I & (EEC_N2Pct < 10.0)) | (EECLOP_Stat = 4))
+#C Low Oil Pressure Indication InValid (Latch State).
+EECLOP_Stat:	4
+#elseif	(LowOilPress_I & (POILAC > 55.0))
+#C Low Oil Pressure Indication BAD
+EECLOP_Stat:	3
+#elseif	(~LowOilPress_I & (POILAC < 32.5))
+#C Low Oil Pressure Indication BAD
+EECLOP_Stat:	3
+#elseif	~LowOilPress_I
+#C Low Oil Pressure Indication NOT LOW
+EECLOP_Stat:	2
+#elseif	LowOilPress_I
+#C Low Oil Pressure Indication LOW L032B11 = 1
+EECLOP_Stat:	1
+#endif	
+#C -------- HPSOV Fuel ShutOff Valve --------------
+#if	~SWActive
+#C *** Software Not Active...
+HPSOV_Stat:	0
+#elseif	HPSOVCl
+#C *** HPSOV (Fuel Valve) Closed...
+HPSOV_Stat:	1
+#elseif	~HPSOVCl
+#C *** HPSOV (Fuel Valve) Open...
+HPSOV_Stat:	2
+#endif	
+#C -------- Approach/Minimum Idle Logic ------------
+#if	(ECM_IdleCtrl_TB & RunMode)
+#C **** Approach Idle Selected ****
+MIdleON_CHA_O:	OFF
+MIdleON_CHB_O:	OFF
+AIdleON_CHA_O:	ON
+AIdleON_CHB_O:	ON
+#else	
+#C **** Minimum Idle Selected *****
+MIdleON_CHA_O:	ON
+MIdleON_CHB_O:	ON
+AIdleON_CHA_O:	OFF
+AIdleON_CHB_O:	OFF
+#endif	
+#C -------- Oil Filter By-Pass Logic --------------
+#if	~SWActive
+OilFBP_Stat:	0
+#elseif	OilFByPass_F
+OilFBP_Stat:	3
+#elseif	~OilFImpByPass_F
+OilFBP_Stat:	2
+#else	
+OilFBP_Stat:	1
+#endif	
+#C -------- Fuel Filter By-Pass Logic -------------
+#if	~SWActive
+FuelFBP_Stat:	0
+#elseif	FuelFByPass_F
+FuelFBP_Stat:	3
+#elseif	~FuelFImpByPass_F
+FuelFBP_Stat:	2
+#else	
+FuelFBP_Stat:	1
+#endif	
+#C --------- Oil Temp Status Logic -------------------
+#if	~SWActive
+TOilAC_Stat:	0
+#elseif	TOILCLD
+#C *** Low Oil Temp No Accel (41 DegC)...
+TOilAC_Stat:	4
+#elseif	OTLim2_F
+#C *** High Oil Temp 2 Red Limit...
+TOilAC_Stat:	3
+#elseif	OTLim1_F
+#C *** High Oil Temp 1 Amber Limit...
+TOilAC_Stat:	2
+#else	
+#C *** Oil Temp OK...
+TOilAC_Stat:	1
+#endif	
+#C ---------------------------
+#C EGT Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECEGT_Stat:	0.0
+#elseif	EGTRL_F
+EECEGT_Stat:	3.0
+#elseif	EGTAL_F
+EECEGT_Stat:	2.0
+#else	
+EECEGT_Stat:	1.0
+#endif	
+#C ---------------------------
+#C N1 Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECN1_Stat:	0.0
+#elseif	N1RL_F
+EECN1_Stat:	2.0
+#else	
+EECN1_Stat:	1.0
+#endif	
+#C ---------------------------
+#C N2 Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECN2_Stat:	0.0
+#elseif	N2RL_F
+EECN2_Stat:	2.0
+#else	
+EECN2_Stat:	1.0
+#endif	
+#C ---------------------------
+#C * Under Cowl Temp Logic ***
+#C * UCTs Names are TNACS??? *
+#C * FSL = FWD S Left * FGR = FWD G Right
+#C * MPL = MID P Left * MDR = FWD D Right
+#C * MVL = MID V Left * MJR = FWD J Right
+#C * APL = AFT P Left * ADR = AFT D Right
+#C * AVL = AFT V Left * AJR = AFT J Right
+#C * FWD = FWD * AFT = AFT
+#C -------
+#if	TNACSFSL_F
+TNACSFSL:DegC	0.0
+#endif	
+#if	TNACSMPL_F
+TNACSMPL:DegC	0.0
+#endif	
+#if	TNACSMVL_F
+TNACSMVL:DegC	0.0
+#endif	
+#if	TNACSFGR_F
+TNACSFGR:DegC	0.0
+#endif	
+#if	TNACSMDR_F
+TNACSMDR:DegC	0.0
+#endif	
+#if	TNACSMJR_F
+TNACSMJR:DegC	0.0
+#endif	
+#C ---- AFT ------------------
+#if	TNACSAPL_F
+TNACSAPL:DegC	0.0
+#endif	
+#if	TNACSAVL_F
+TNACSAVL:DegC	0.0
+#endif	
+#if	TNACSFWD_F
+TNACSFWD:DegC	0.0
+#endif	
+#if	TNACSADR_F
+TNACSADR:DegC	0.0
+#endif	
+#if	TNACSAJR_F
+TNACSAJR:DegC	0.0
+#endif	
+#if	TNACSAFT_F
+TNACSAFT:DegC	0.0
+#endif	
+#C *** FWD ***
+TNACSFSLPct:%	value2pct (TNACSFSL TNACSFWDLim)
+TNACSMPLPct:%	value2pct (TNACSMPL TNACSFWDLim)
+TNACSMVLPct:%	value2pct (TNACSMVL TNACSFWDLim)
+TNACSFGRPct:%	value2pct (TNACSFGR TNACSFWDLim)
+TNACSMDRPct:%	value2pct (TNACSMDR TNACSFWDLim)
+TNACSMJRPct:%	value2pct (TNACSMJR TNACSFWDLim)
+#C *** AFT ***
+TNACSAPLPct:%	value2pct (TNACSAPL TNACSAFTLim)
+TNACSAVLPct:%	value2pct (TNACSAVL TNACSAFTLim)
+TNACSFWDPct:%	value2pct (TNACSFWD TNACSAFTLim)
+TNACSADRPct:%	value2pct (TNACSADR TNACSAFTLim)
+TNACSAJRPct:%	value2pct (TNACSAJR TNACSAFTLim)
+TNACSAFTPct:%	value2pct (TNACSAFT TNACSAFTLim)
+#C ---- Get the Max Values --------
+TNACSF_LPct:%	max (TNACSFSLPct TNACSMPLPct TNACSMVLPct)
+TNACSF_RPct:%	max (TNACSFGRPct TNACSMDRPct TNACSMJRPct)
+TNACSA_LPct:%	max (TNACSAPLPct TNACSAVLPct TNACSFWDPct)
+TNACSA_RPct:%	max (TNACSADRPct TNACSAJRPct TNACSAFTPct)
+TNACSFWDPct:%	max (TNACSF_LPct TNACSF_RPct)
+TNACSAFTPct:%	max (TNACSA_LPct TNACSA_RPct)
+TNACSPct:%	max (TNACSFWDPct TNACSAFTPct)
+#C ---- Check the limits ----------
+#if	(TNACSPct > 100.0)
+UnderCowl_Stat:	2
+#C ----- Yellow Limits ------------
+#elseif	(TNACSPct > TNACSFWDYPct)
+UnderCowl_Stat:	1
+TNACSPct:%	TNACSFWDPct
+#elseif	(TNACSPct > TNACSAFTYPct)
+UnderCowl_Stat:	1
+TNACSPct:%	TNACSAFTPct
+#else	
+UnderCowl_Stat:	0
+#endif	
+#if	(TNACSPct = TNACSFSLPct)
+TNACSMx:DegC	TNACSFSL
+TNACSMsg:	concat ("UCT FWD SL:" TNACSMx)
+#elseif	(TNACSPct = TNACSMPLPct)
+TNACSMx:DegC	TNACSMPL
+TNACSMsg:	concat ("UCT MID PL:" TNACSMx)
+#elseif	(TNACSPct = TNACSMVLPct)
+TNACSMx:DegC	TNACSMVL
+TNACSMsg:	concat ("UCT FWD LL:" TNACSMx)
+#elseif	(TNACSPct = TNACSFGRPct)
+TNACSMx:DegC	TNACSFGR
+TNACSMsg:	concat ("UCT FWD GR:" TNACSMx)
+#elseif	(TNACSPct = TNACSMDRPct)
+TNACSMx:DegC	TNACSMDR
+TNACSMsg:	concat ("UCT MID DR:" TNACSMx)
+#elseif	(TNACSPct = TNACSMJRPct)
+TNACSMx:DegC	TNACSMJR
+TNACSMsg:	concat ("UCT MID JR:" TNACSMx)
+#elseif	(TNACSPct = TNACSAPLPct)
+TNACSMx:DegC	TNACSAPL
+TNACSMsg:	concat ("UCT AFT PL:" TNACSMx)
+#elseif	(TNACSPct = TNACSAVLPct)
+TNACSMx:DegC	TNACSAVL
+TNACSMsg:	concat ("UCT AFT VL:" TNACSMx)
+#elseif	(TNACSPct = TNACSFWDPct)
+TNACSMx:DegC	TNACSFWD
+TNACSMsg:	concat ("UCT FWD:" TNACSMx)
+#elseif	(TNACSPct = TNACSADRPct)
+TNACSMx:DegC	TNACSADR
+TNACSMsg:	concat ("UCT AFT DR:" TNACSMx)
+#elseif	(TNACSPct = TNACSAJRPct)
+TNACSMx:DegC	TNACSAJR
+TNACSMsg:	concat ("UCT AFT JR:" TNACSMx)
+#elseif	(TNACSPct = TNACSAFTPct)
+TNACSMx:DegC	TNACSAFT
+TNACSMsg:	concat ("UCT AFT:" TNACSMx)
+#endif	
+TNACSMsg:	concat (TNACSMsg "DegC")
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Logic ************
+#C ****** See autothrottle.cal **************
+#C ------------------------------------------
+#if	(SWActive & AutoThrottle_F & AutoPL_I)
+#C * Automatic...
+AutoThrottle_Stat:	3
+#elseif	(SWActive & ~AutoThrottle_F & AutoPL_I)
+#C * Active...
+AutoThrottle_Stat:	2
+#elseif	(SWActive & ~AutoThrottle_F & ~AutoPL_I)
+#C * OFF...
+AutoThrottle_Stat:	1
+#elseif	~SWActive
+#C * Not Active...
+AutoThrottle_Stat:	0
+#endif	
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Switch Logic *****
+#C ------------------------------------------
+#C #if	(GoToMxPwrStop_TS | GoToMnIdleStop_TS | RunInT4_HPC_TS | BrkInT5_HPT_TS | VibSurvey_TS | AcceptT9_TS)
+#C ButtonPushed_F:	ON
+#C #else
+#C ButtonPushed_F:	OFF
+#C #endif
+#C ------------------------------------------
+#C ****** TRA Going To Max Power Stop *******
+#C ------------------------------------------
+#C #if	((~GoToMxPwrStop_TS | TRAatMxPwrStop_F) & GoingToMxPwr_F & (AutoTRASw = 3))
+#if	(~GoToMxPwrStop_TS & GoingToMxPwr_F & (AutoTRASw = 3))
+GoingToMxPwr_F:	OFF
+#C #elseif	(GoToMxPwrStop_TS & ~TRAatMxPwrStop_F & ~GoingToMxPwr_F & AutoPL_I)
+#elseif	(GoToMxPwrStop_TS & ~GoingToMxPwr_F)
+GoToMnIdleStop_TS:	OFF
+AutoTRASw:	3
+AutoTRequest_F:	ON
+GoingToMxPwr_F:	ON
+TRA_TargMx:	TRAMxPwrStopMn
+TRA_TargMn:	TRA_Actual
+#endif	
+#C ------------------------------------------
+#C ****** TRA Going To Min Idle Stop ********
+#C ------------------------------------------
+#C #if	((~GoToMnIdleStop_TS | TRAatMnIdleStop_F) & GoingToMnIdle_F & (AutoTRASw = 3))
+#if	(~GoToMnIdleStop_TS & GoingToMnIdle_F & (AutoTRASw = 3))
+GoingToMnIdle_F:	OFF
+#C #elseif	(GoToMnIdleStop_TS & ~TRAatMnIdleStop_F & ~GoingToMnIdle_F & AutoPL_I)
+#elseif	(GoToMnIdleStop_TS & ~GoingToMnIdle_F)
+GoToMxPwrStop_TS:	OFF
+AutoTRASw:	3
+AutoTRequest_F:	ON
+GoingToMnIdle_F:	ON
+TRA_TargMx:	TRA_Actual
+TRA_TargMn:	TRAMnIdleStopMx
+#endif	
+#C ------------------------------------------
+#C ****** IncreaseTRA Switch ****************
+#C ------------------------------------------
+#if	((~IncreaseTRA_MS | TRAatMxPwrStop_F) & IncreaseTRA_F & (AutoTRASw = 1))
+IncreaseTRA_F:	OFF
+#C #elseif	(IncreaseTRA_MS & ~IncreaseTRA_F & ~TRAatMxPwrStop_F & AutoPL_I)
+#elseif	(IncreaseTRA_MS & ~IncreaseTRA_F)
+AutoTRASw:	1
+AutoTRequest_F:	ON
+IncreaseTRA_F:	ON
+#endif	
+#C ------------------------------------------
+#C ****** DecreaseTRA Switch ****************
+#C ------------------------------------------
+#if	((~DecreaseTRA_MS | TRAatMnIdleStop_F) & DecreaseTRA_F & (AutoTRASw = 2))
+DecreaseTRA_F:	OFF
+#C #elseif	(DecreaseTRA_MS & ~DecreaseTRA_F & ~TRAatMnIdleStop_F & AutoPL_I)
+#elseif	(DecreaseTRA_MS & ~DecreaseTRA_F)
+AutoTRASw:	2
+AutoTRequest_F:	ON
+DecreaseTRA_F:	ON
+#endif	
+#C ------------------------------------------
+#C ****** Run-In HPC Test 4 *****************
+#C ------------------------------------------
+#if	(RunInT4_HPC_TS & ~ArmRunInHPC_TB & ~AutoThrottle_F & AutoPL_I)
+AutoTRASw:	4
+ArmRunInHPC_TB:	ON
+AutoTRequest_F:	ON
+#elseif	(RunInT4_HPC_TS & ArmRunInHPC_TB & ~AutoThrottle_F & AutoPL_I)
+AutoTRASw:	4
+AutoTRequest_F:	ON
+#C #elseif	(~RunInT4_HPC_TS & AutoThrottle_F & (AutoTRASw = 4))
+#C AutoThrottle_F:	OFF
+#endif	
+#C ------------------------------------------
+#C ****** Break-In HPT Test 5 ***************
+#C ------------------------------------------
+#if	(BrkInT5_HPT_TS & ~ArmBrkInHPT_TB & ~AutoThrottle_F & AutoPL_I)
+AutoTRASw:	5
+ArmBrkInHPT_TB:	ON
+AutoTRequest_F:	ON
+#elseif	(BrkInT5_HPT_TS & ArmBrkInHPT_TB & ~AutoThrottle_F & AutoPL_I)
+AutoTRASw:	5
+AutoTRequest_F:	ON
+#C #elseif	(~BrkInT5_HPT_TS & AutoThrottle_F & (AutoTRASw = 5))
+#C AutoThrottle_F:	OFF
+#C AutoTRequest_F:	OFF
+#endif	
+#C -------------------------------------------------
+#C ****** Shutdown AutoThrottle ******************
+#C -------------------------------------------------
+#if	(~DecreaseTRA_MS & ~IncreaseTRA_MS & ~GoToMnIdleStop_TS & ~GoToMxPwrStop_TS & ~BrkInT5_HPT_TS & ~RunInT4_HPC_TS & ~AcceptT9_TS & AutoThrottle_F & ~TRAInc_F & ~TRADec_F)
+AutoThrottle_F:	OFF
+TRATmr_F:	OFF
+#endif
+#C -------------------------------------------------
+#C ****** Turn AutoThrottle_F Switch Functions OFF *
+#C -------------------------------------------------
+#if	(~AutoPLEnable_O & ButtonPushed_F)
+GoToMxPwrStop_TS:	OFF
+GoToMnIdleStop_TS:	OFF
+TRAOverRide_TS:	OFF
+RunInT4_HPC_TS:	OFF
+BrkInT5_HPT_TS:	OFF
+VibSurvey_TS:	OFF
+AcceptT9_TS:	OFF
+ButtonPushed_F:	OFF
+#endif	
+#C ******************************************************
+#C * Set the Initial MAX/MIN/REV TRA limits if TRA Rigged...
+#C ******************************************************
+#C #if	((~(TRAMxPwrStop = TLA_Takeoff) | ~(TRAMnIdleStop = 0.0)) & ~TRAMxPwrStopSet_F & AutoPL_I)
+#C #if	((~(TRAMxPwrStop = TLA_Takeoff) | ~(TRAMnIdleStop = 0.0)) & (~TRAMxPwrStopSet_F | ~TRAMnIdleStopSet_F))
+#if	(~(TRAMxPwrStop = TLA_Takeoff) & ~TRAMxPwrStopSet_F)
+TRAMxPwrStop:deg	TLA_Takeoff
+TRAMxPwrStopMx:deg	(TRAMxPwrStop + TRATargBand)
+TRAMxPwrStopMn:deg	(TRAMxPwrStop - TRATargBand)
+TRAMxPwrStopSet_F:	ON
+#endif	
+#if	(~(TRAMnIdleStop = 0.0) & ~TRAMnIdleStopSet_F)
+#C TRAMnIdleStop:deg TLA_Idle
+TRAMnIdleStop:deg	0.0
+TRAMnIdleStopMx:deg	(TRAMnIdleStop + TRATargBand)
+TRAMnIdleStopMn:deg	(TRAMnIdleStop - TRATargBand)
+TRAMnIdleStopSet_F:	ON
+#endif	
+#C -------------------------------------------------
+LastAutoTRASw:	AutoTRASw
+#C -------------------------------------------------
+$END-GROUP

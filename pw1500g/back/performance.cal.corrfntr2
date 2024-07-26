@@ -1,0 +1,179 @@
+$GROUP "performance" 
+#if	BandA_F
+FnMax:Lbs	FnAMax
+FnMin:Lbs	FnAMin
+TCDn_F:	(-0.00038515 * (FNTR2 - FNTR2GRat_A) + TCD_F)
+TCDn_R:	(-0.00038515 * (FNTR2 - FNTR2GRat_A) + TCD_R)
+DeltaPCell:	(2 * (TCDn_F - TCDn_R) * 100 / (TCDn_F + TCDn_R))
+N1C2IGMax:RPM	N1C2IGMax_A
+FnTR2GRat:Lbs	FNTR2GRat_A
+#elseif	BandB_F
+FnMax:Lbs	FnBMax
+FnMin:Lbs	FnBMin
+TCDn_F:	0.0
+TCDn_R:	0.0
+DeltaPCell:	0.0
+N1C2IGMax:RPM	N1C2IGMax_B
+FnTR2GRat:Lbs	FNTR2GRat_B
+#elseif	BandC_F
+FnMax:Lbs	FnCMax
+FnMin:Lbs	FnCMin
+TCDn_F:	0.0
+TCDn_R:	0.0
+DeltaPCell:	0.0
+N1C2IGMax:RPM	N1C2IGMax_C
+FnTR2GRat:Lbs	FNTR2GRat_C
+#elseif	BandD_F
+FnMax:Lbs	FnDMax
+FnMin:Lbs	FnDMin
+TCDn_F:	0.0
+TCDn_R:	0.0
+DeltaPCell:	0.0
+N1C2IGMax:RPM	N1C2IGMax_D
+FnTR2GRat:Lbs	FNTR2GRat_D
+#elseif	D1_F
+FnMax:Lbs       D1Mx
+FnMin:Lbs       D1Mn
+#elseif D2_F
+FnMax:Lbs       D2Mx
+FnMin:Lbs       D2Mn
+#elseif D3_F
+FnMax:Lbs       D3Mx
+FnMin:Lbs       D3Mn
+#elseif D4_F
+FnMax:Lbs       D4Mx
+FnMin:Lbs       D4Mn
+#elseif C1_F
+FnMax:Lbs       C1Mx
+FnMin:Lbs       C1Mn
+#elseif C2_F
+FnMax:Lbs       C2Mx
+FnMin:Lbs       C2Mn
+#elseif C3_F
+FnMax:Lbs       C3Mx
+FnMin:Lbs       C3Mn
+#elseif C4_F
+FnMax:Lbs       C4Mx
+FnMin:Lbs       C4Mn
+#elseif C5_F
+FnMax:Lbs       C5Mx
+FnMin:Lbs       C5Mn
+#elseif C6_F
+FnMax:Lbs       C6Mx
+FnMin:Lbs       C6Mn
+#elseif C7_F
+FnMax:Lbs       C7Mx
+FnMin:Lbs       C7Mn
+#elseif C8_F
+FnMax:Lbs       C8Mx
+FnMin:Lbs       C8Mn
+#elseif C9_F
+FnMax:Lbs       C9Mx
+FnMin:Lbs       C9Mn
+#elseif C10_F
+FnMax:Lbs       C10Mx
+FnMin:Lbs       C10Mn
+#elseif C11_F
+FnMax:Lbs       C11Mx
+FnMin:Lbs       C11Mn
+#elseif C12_F
+FnMax:Lbs       C12Mx
+FnMin:Lbs       C12Mn
+#else	
+FnMax:Lbs	RMISS
+FnMin:Lbs	RMISS
+TCDn_F:	0.0
+TCDn_R:	0.0
+DeltaPCell:	0.0
+#endif	
+#C **** Delta for Thrust Targets ******
+#if	(FNTR2 < FnMin)
+FNTR2Delta:Lbs	(FNTR2 - FnMin)
+#elseif	(FNTR2 > FnMax)
+FNTR2Delta:Lbs	(FNTR2 - FnMax)
+#else	
+FNTR2Delta:Lbs	0.0
+#endif	
+#C **** Delta's for Guaranteed Thrust ******
+FNTR2GDelta:Lbs	(FNTR2 - FNTR2GRat)
+N1C2GDelta:RPM	(N1C2IGMax - N1C2D)
+N2C2Delta:RPM	(N2C2DMax - N2C2D)
+#C **** Delta's for Gas Generator Check Curves (GGCC) ****
+#if	(N1C2D < GGCCN1C2DMn)
+GGCCN1C2Delta:RPM	(N1C2D - GGCCN1C2DMn)
+#elseif	(N1C2D > GGCCN1C2DMx)
+GGCCN1C2Delta:RPM	(N1C2D - GGCCN1C2DMx)
+#else	
+GGCCN1C2Delta:RPM	0.0
+#endif	
+#if	(N2C2D < GGCCN2C2DMn)
+GGCCN2C2Delta:RPM	(N2C2D - GGCCN2C2DMn)
+#elseif	(N2C2D > GGCCN2C2DMx)
+GGCCN2C2Delta:RPM	(N2C2D - GGCCN2C2DMx)
+#else	
+GGCCN2C2Delta:RPM	0.0
+#endif	
+#if	(TSFCPLHC < GGCCTSFCPLHCMn)
+GGCCTSFCDelta:PPH/Lbf	(TSFCPLHC - GGCCTSFCPLHCMn)
+#elseif	(TSFCPLHC > GGCCTSFCPLHCMx)
+GGCCTSFCDelta:PPH/Lbf	(TSFCPLHC - GGCCTSFCPLHCMx)
+#else	
+GGCCTSFCDelta:PPH/Lbf	0.0
+#endif	
+#if	(WFPLHCR2 < GGCCWFPLHCR2Mn)
+GGCCWFDelta:PPH	(WFPLHCR2 - GGCCWFPLHCR2Mn)
+#elseif	(WFPLHCR2 > GGCCWFPLHCR2Mx)
+GGCCWFDelta:PPH	(WFPLHCR2 - GGCCWFPLHCR2Mx)
+#else	
+GGCCWFDelta:PPH	0.0
+#endif	
+#if	(P25Q2 < GGCCP25Q2Mn)
+GGCCP25Q2Delta:	(P25Q2 - GGCCP25Q2Mn)
+#elseif	(P25Q2 > GGCCP25Q2Mx)
+GGCCP25Q2Delta:	(P25Q2 - GGCCP25Q2Mx)
+#else	
+GGCCP25Q2Delta:	0.0
+#endif	
+#if	(PS3Q2 < GGCCPS3Q2Mn)
+GGCCPS3Q2Delta:	(PS3Q2 - GGCCPS3Q2Mn)
+#elseif	(PS3Q2 > GGCCPS3Q2Mx)
+GGCCPS3Q2Delta:	(PS3Q2 - GGCCPS3Q2Mx)
+#else	
+GGCCPS3Q2Delta:	0.0
+#endif	
+#C #if (PS3Q25 < GGCCPS3Q25Mn)
+#C GGCCPS3Q25Delta: (PS3Q25 - GGCCPS3Q25Mn)
+#C #elseif (PS3Q25 > GGCCPS3Q25Mx)
+#C GGCCPS3Q25Delta: (PS3Q25 - GGCCPS3Q25Mx)
+#C #else
+#C GGCCPS3Q25Delta: 0.0
+#C #endif
+#if	(T25OP25C < GGCCT25OP25Mn)
+GGCCT25Delta:DegC	(T25OP25C - GGCCT25OP25Mn)
+#elseif	(T25OP25C > GGCCT25OP25Mx)
+GGCCT25Delta:DegC	(T25OP25C - GGCCT25OP25Mx)
+#else	
+GGCCT25Delta:DegC	0.0
+#endif	
+#if	(T3OP3C < GGCCT3OP3Mn)
+GGCCT3Delta:DegC	(T3OP3C - GGCCT3OP3Mn)
+#elseif	(T3OP3C > GGCCT3OP3Mx)
+GGCCT3Delta:DegC	(T3OP3C - GGCCT3OP3Mx)
+#else	
+GGCCT3Delta:DegC	0.0
+#endif	
+#if	(T45OP45C < GGCCT45OP45Mn)
+GGCCT45Delta:DegC	(T45OP45C - GGCCT45OP45Mn)
+#elseif	(T45OP45C > GGCCT45OP45Mx)
+GGCCT45Delta:DegC	(T45OP45C - GGCCT45OP45Mx)
+#else	
+GGCCT45Delta:DegC	0.0
+#endif	
+#if	(T49OP49C < GGCCT49OP49Mn)
+GGCCT49Delta:DegC	(T49OP49C - GGCCT49OP49Mn)
+#elseif	(T49OP49C > GGCCT49OP49Mx)
+GGCCT49Delta:DegC	(T49OP49C - GGCCT49OP49Mx)
+#else	
+GGCCT49Delta:DegC	0.0
+#endif	
+$END-GROUP

@@ -1,0 +1,6 @@
+*
+* TRANSMITTER Channel: 3   EEC: PW1100G   Speed: SLOW   Parity: ODD   ACTIVE NONE
+*
+$SIGNAL-LIST
+*
+$END-SIGNAL-LIST

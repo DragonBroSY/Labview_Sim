@@ -1,0 +1,18 @@
+# Rig file for POilDiff Test Display
+#
+# N2 used in tablelookup
+rig sig N2i 6000
+#
+rig sig PBreath 5
+rig sig EPR0 1.3
+rig sig ManOil 78
+echo "Capture 1.3 EPR Now"
+sleep 5
+rig sig EPR0 1.4
+rig sig ManOil 90
+echo "Capture 1.4 EPR Now"
+sleep 5
+rig sig ManOil 50
+echo "recapture 1.4 EPR Now, force Trim Dia Chng"
+sleep 5
+rig stop all

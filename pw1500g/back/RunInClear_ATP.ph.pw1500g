@@ -1,0 +1,18 @@
+$PHASE RunInClear_ATP length=-1       level=0 controlrelay=None common=0
++0 SET StageTmr 0.0
++0 SET StageTmr_F OFF
++0 SET RunInStage1 0
++0 SET GoToHold_F OFF
++0 SET GoToGI_F OFF
++0 SET GoToAI_F OFF
++0 SET GoTo4000_F OFF
++0 SET GoTo5000_F OFF
++0 SET GoTo6000_F OFF
++0 SET GoTo7000_F OFF
++0 SET GoTo8000_F OFF
++0 SET GoTo8500_F OFF
++0 SET GoTo9000_F OFF
++0 SET GoToTO_F OFF
+$END-PHASE
+**********
+

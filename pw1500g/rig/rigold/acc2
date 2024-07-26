@@ -1,0 +1,29 @@
+# Rig file for Acceleration Check Display
+# ***Performs successful run***
+#
+# Initialize, enables Fnk calc.
+rig sig PBar 14
+rig sig Pt2 10
+#
+echo "Arm Timer Now"
+sleep 4
+echo ""
+echo "Test Begun - accel"
+rig sig tt495 150 850 10  
+rig sig THRUSTMEASURE 0 110000 1200  
+rig sig A_TRASL 20
+rig sig B_TRASL 20
+sleep 7
+rig sig THRUSTMEASURE 110000
+echo "Accel complete"
+echo ""
+sleep 5
+echo "Test Begun - decel"
+rig sig A_TRASL 0
+rig sig B_TRASL
+rig sig THRUSTMEASURE 110000 0 1571
+sleep 7
+echo "Decel complete"
+echo ""
+rig sig THRUSTMEASURE 0
+rig stop all

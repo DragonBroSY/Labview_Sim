@@ -1,0 +1,10 @@
+#  Rig file to initialize ecm.dsp
+#  (at least the Fuel_Control_S )
+#
+echo "rig EmergFuelShutOff to 0"
+rig sig EmergFuelSO_I 0
+echo "rig Fuel_Control_S to cutoff"
+rig sig Fuel_Vlv_Clsd_I   1
+rig sig Fuel_Vlv_Open_I   0
+echo "rig start valve closed"
+rig sig start_vlv_open_i 0

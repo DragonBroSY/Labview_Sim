@@ -1,0 +1,40 @@
+# Rig file for Engine Start display
+#
+#C old value-degF rig sig T4_9 200
+rig sig T4_9C 90
+rig sig N1i 350
+rig sig N2i 350
+rig sig StartValve_TB 1
+#rig sig StartVlv_O   1
+sleep 5
+echo  "turning fuel on"
+rig sig FuelOn_TB 1
+#rig sig QECfuelCutoff_O   0
+sleep 5
+
+#rig sig N2i 350 5900  20
+rig sig N2i 350 490  2
+rig sig N1i 350 699  15
+rig sig VibTBB .1 1.5  .01
+rig sig VibFBB .25 1.8  .01
+rig sig MOP 1040 1070  1
+rig sig MOT 100 200  2
+
+echo "Watch for lightoff"
+#C old value - degF  rig sig T4_9 250
+rig sig T4_9C 120
+rig sig T4_9C 130
+rig sig T4_9C 150
+rig sig T4_9C 160
+#C old value - degF  rig sig T4_9 350
+sleep 5
+
+echo "Watch for Fuel cutout when N2 > 6000"
+rig stop all
+
+echo "Watch for stable idle"
+#rig sig N2i 6001 
+#sleep 15
+
+#rig stop all
+

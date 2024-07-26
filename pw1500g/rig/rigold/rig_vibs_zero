@@ -1,0 +1,12 @@
+# Rig file for Vibration Survey Displays
+#
+rig sig A_EPRI 1.4
+rig sig B_EPRI 1.4
+rig sig N1i 000.0
+rig sig N2i 000.0
+rig sig VIBFBB 0
+rig sig VIBFN1 0
+rig sig VIBFN2 0
+rig sig VIBTBB 0
+rig sig VIBTN1 0
+rig sig VIBTN2 0

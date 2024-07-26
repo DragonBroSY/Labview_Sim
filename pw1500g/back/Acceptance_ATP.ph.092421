@@ -1,0 +1,238 @@
+$PHASE Acceptance_ATP length=-1       level=0 controlrelay=None common=0
+***** PW1500G Acceptance Procedure Table 10 (DJR 09/01/21)...
+#if (ECM_IdleCtrl_TB)
++0 SET ECM_IdleCtrl_TB OFF
+#elseif ((AcceptStage = 1) & (TRA_Actual <= 25.0))
++0 SET AcceptStage 10
++0 SET AcceptStep 1
++0 SET StageTmrLim 5
++0 SET StageTmr_F ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Initiated, Waiting for TRA > 25 Deg...")
+#elseif ((AcceptStage = 1) & (TRA_Actual > 25.0))
++0 SET AcceptStage 25
++0 EXECUTE StageClear_ATP
+#elseif ((AcceptStage = 10) & StageTmrLim_F)
++0 SET AcceptStage 12
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 12)
++0 SET AcceptStage 15
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ TRAMxPwrStop
++0 SET TLA_Targ (TRA_Targ + 14.0)
++0 SET TRA_TargMx (TRA_Targ + TRATargBand)
++0 SET TRA_TargMn (TRA_Targ - 0.2)
++0 SET TRAAccelTarg TRA_TargMn
+*+0 SET TRA_Rate ((TRA_Targ - TRA_Actual) / StageTmrLim)
++0 SET TRA_Rate 0.7
++0 SET Accel_F	ON
++0 SET StageTmr_F ON
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Accel to 33.5 Deg TRA (47.5 Deg TLA)...")
+#elseif ((AcceptStage = 15) & (TRA_Actual >= TRA_TargMn))
++0 SET AcceptStage 30
++0 EXECUTE StageClear_ATP
++0 SET TRAAccelTarg 0.0
++0 SET StageTmr_F ON
++0 SET StageTmrLim 5
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Dwell ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif (AcceptStage = 25)
++0 SET AcceptStage 30
++0 SET StageTmrLim 5
++0 SET StageTmr_F ON
++0 SET AcceptStep 1
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Initiated, Dwell 5 sec...")
+*--------------------------------------------------------------------------------------
+************* Acceptance **************************************************************
+*--------------------------------------------------------------------------------------
+#elseif ((AcceptStage = 30) & StageTmrLim_F)
++0 SET AcceptStage 42
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 42)
+**** Decel to Band A ****
++0 SET AcceptStage 45
++0 SET AcceptStep 2
++0 SET TargBandTxt concat ("" "Band A")
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 45)
++0 EXECUTE AcceptDecel_ATP
+#elseif (AcceptStage = 50)
++0 SET AcceptStage 52
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 52)
+**** Hold at Band A ****
++0 SET AcceptStage 55
++0 SET AcceptStep 3
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 55)
++0 EXECUTE AcceptHold_ATP
+#elseif (AcceptStage = 60)
++0 SET AcceptStage 65
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 65)
+**** Decel to Band B ****
++0 SET AcceptStage 70
++0 SET AcceptStep 4
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 70)
++0 EXECUTE AcceptDecel_ATP
+#elseif (AcceptStage = 75)
++0 SET AcceptStage 80
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 80)
+**** Hold at Band B ****
++0 SET AcceptStage 85
++0 SET AcceptStep 5
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 85)
++0 EXECUTE AcceptHold_ATP
+#elseif (AcceptStage = 90)
++0 SET AcceptStage 95
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 95)
+**** Decel to Band C ****
++0 SET AcceptStage 100
++0 SET AcceptStep 6
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 100)
++0 EXECUTE AcceptDecel_ATP
+#elseif (AcceptStage = 105)
++0 SET AcceptStage 110
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 110)
+**** Hold at Band C ****
++0 SET AcceptStage 115
++0 SET AcceptStep 7
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 115)
++0 EXECUTE AcceptHold_ATP
+#elseif (AcceptStage = 120)
++0 SET AcceptStage 125
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 125)
+**** Decel to Band D ****
++0 SET AcceptStage 130
++0 SET AcceptStep 8
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 130)
++0 EXECUTE AcceptDecel_ATP
+#elseif (AcceptStage = 135)
++0 SET AcceptStage 140
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 140)
+**** Hold at Band D ****
++0 SET AcceptStage 145
++0 SET AcceptStep 9
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (AcceptStage = 145)
++0 EXECUTE AcceptHold_ATP
+#elseif (AcceptStage = 150)
++0 SET AcceptStage 155
++0 EXECUTE StageClear_ATP
+#elseif ((AcceptStage = 155) & ~CowlAICk_F)
++0 SET AcceptStage 190
++0 EXECUTE StageClear_ATP
+#elseif ((AcceptStage = 155) & CowlAICk_F)
++0 SET AcceptStage 160
++0 SET AcceptStep 10
++0 SET StageTmrLim 30
++0 SET ECM_CowlAI_TB ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec. Switch ON")
+#elseif ((AcceptStage = 160) & CAISWON)
++0 SET AcceptStage 165
++0 SET StageTmr	0.0
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 165) & (StageTmr <= 3) & CAIPOS)
++0 SET AcceptStage 170
++0 SET CAIOp_Stat 1
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Open Passed...")
+#elseif ((AcceptStage = 165) & (StageTmr > 3) & ~CAIPOS)
++0 SET AcceptStage 170
++0 SET CAIOp_Stat 2
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Open Failed...")
+#elseif ((AcceptStage = 165) & (StageTmr > 3) & CAIPOS)
++0 SET AcceptStage 170
++0 SET CAIOp_Stat 3
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Time Open Failed...")
+#elseif (AcceptStage = 170)
++0 SET AcceptStage 175
++0 SET ECM_CowlAI_TB OFF
++0 SET StageTmrLim (StageTmrLim - StageTmr)
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec. Switch OFF")
+#elseif ((AcceptStage = 175) & CAISWOFF)
++0 SET AcceptStage 180
++0 SET StageTmr	0.0
++0 SET StageTmr_F ON
+#elseif ((AcceptStage = 180) & (StageTmr <= 3) & ~CAIPOS)
++0 SET AcceptStage 185
++0 SET CAICl_Stat 1
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Passed...")
+#elseif ((AcceptStage = 180) & (StageTmr > 3) & CAIPOS)
++0 SET AcceptStage 185
++0 SET CAICl_Stat 2
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Failed...")
+#elseif ((AcceptStage = 180) & (StageTmr > 3) & ~CAIPOS)
++0 SET AcceptStage 185
++0 SET CAICl_Stat 3
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Performing CTAI Valve Function Check, Close Failed...")
+#elseif ((AcceptStage = 185) & StageTmrLim_F)
++0 SET AcceptStage 190
++0 EXECUTE StageClear_ATP
+#elseif (AcceptStage = 190)
++0 SET AcceptStage 195
++0 SET AcceptStep 11
++0 SET TRAStart TRA_Actual
++0 SET StageTmrLim 120
++0 SET TRA_Targ -14.0
++0 SET TLA_Targ (TRA_Targ + 14.0)
++0 SET TRA_TargMx (TRA_Targ + 0.2)
++0 SET TRA_TargMn (TRA_Targ - TRATargBand)
++0 SET TRADecelTarg TRA_TargMx
++0 SET TRA_Rate ((TRA_Actual - TRA_Targ) / StageTmrLim)
++0 SET Decel_F	ON
++0 SET StageTmr_F ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Decel to Ground Idle...")
+#elseif ((AcceptStage = 195) & StageTmrLim_F)
++0 SET AcceptStage 200
++0 SET AcceptStageTxt concat (StepTxt "Acceptance, Waiting for Ground Idle...")
+#elseif (((AcceptStage = 195) | (AcceptStage = 200)) & TRAGIdle_F)
++0 SET AcceptStage 205
++0 SET AcceptStep 12
++0 EXECUTE StageClear_ATP
++0 SET StageTmrLim 300
++0 SET StageTmr_F ON
++0 SET StepTxt concat ("Step " AcceptStep)
++0 SET StepTxt concat (StepTxt ": ")
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Complete, Dwell at Ground Idle for ")
++0 SET AcceptStageTxt concat (AcceptStageTxt StageTmrLim)
++0 SET AcceptStageTxt concat (AcceptStageTxt " sec.")
+#elseif ((AcceptStage = 205) & (StageTmr > 239.0))
++0 SET AcceptStage 210
++0 EXECUTE storeMIdle_ATP
+#elseif ((AcceptStage = 210) & StageTmrLim_F)
++0 SET AcceptStage 215
++0 EXECUTE StageClear_ATP
++0 SET AcceptStageTxt concat (StepTxt "Acceptance Complete...")
++0 SET ArmAcceptance_TB OFF
++0 SET AcceptT9_TS OFF
+#endif
+$END-PHASE
+**********
+

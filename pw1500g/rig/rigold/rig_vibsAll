@@ -1,0 +1,13 @@
+# Rig file for Vibration Survey Displays
+#
+rig sig A_270B20    TRUE
+rig sig A_EPR_Act 1.0 1.6 0.005
+rig sig B_EPR_Act 1.0 1.6 0.005
+rig sig N1i 1000.0 3900.0 30.0
+rig sig N2i 4000.0 10000.0 30.0
+rig sig VIBFBB 0 4.5 0.04
+rig sig VIBFN1 0 5.5 0.02
+rig sig VIBFN2 0 3.5 0.02
+rig sig VIBTBB 0 5.0 0.04
+rig sig VIBTN1 0 4.0 0.02
+rig sig VIBTN2 0 3.0 0.02

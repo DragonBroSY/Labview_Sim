@@ -1,0 +1,32 @@
+$TIMERS
+OpTimer:Sec NORESET OpTimer_F
+PAIRsTmr:Sec RESET PAIRsTmr_F
+StrtOnToIdleTmr:Sec RESET StrtOnToIdleTmr_F
+FuelOnToIdleTmr:Sec RESET FuelOnToIdleTmr_F
+StableEngTmr:Sec RESET StableEng_F
+MOTTmr:Sec NORESET MOTTrans_F
+TotalTestTime:Sec NORESET EngineRunning
+N1RUNDWNTM:Sec RESET N1RnDnTmrMan_F
+N2RUNDWNTM:Sec RESET N2RnDnTmrMan_F
+N1RnDnTmr:Sec RESET N1RnDnTmr_F
+N2RnDnTmr:Sec RESET N2RnDnTmr_F
+AccelTmr:Sec RESET AccelTmr_F
+DecelTmr:Sec RESET DecelTmr_F
+DCPwrTstTmr:Sec RESET DCPwrTstTmr_F
+ITTStrtTrigTmr:Sec RESET ITTStrtTrigTmr_F
+ITTStrtMxTmr:Sec NORESET ITTStrtMxTmr_F
+ITTRunTrigTmr:Sec RESET ITTRunTrigTmr_F
+ITTRunMxTmr:Sec NORESET ITTRunMxTmr_F
+ITTStopTmr:Sec NORESET ITTStopTmr_F
+PointTimer:Sec RESET PointTimer_F
+MotorTmr:Sec NORESET StartAir_O
+StageTmr:Sec NORESET StageTmr_F
+ElapsedTmTmr:Sec NORESET StageTmr_F
+idgsettletime:Sec RESET idgtimer
+StorePlotTmr:Sec RESET StorePlotTmr_F
+MsgTmr:Sec RESET MsgTmr_F
+TRAOverRideTmr:Sec NORESET TRAOverRide_F
+TRATmr:Sec NORESET TRATmr_F
+GTBandBTmr:Sec NORESET GTBandBTmr_F
+StartDspOpTmr:Sec NORESET StartDspOp_F
+$END-TIMERS

@@ -1,0 +1,29 @@
+# Rig file for Engine Start display
+#
+rig sig EGT  200
+rig sig N2i 350
+rig sig StartAir_O   1
+echo  "turning fuel on"
+rig sig QECfueloff_O   0
+sleep 5
+
+rig sig N2i 350 6000  20
+rig sig N1i 350 3000  15
+
+echo "Watch for lightoff"
+rig sig EGT 250
+rig sig EGT 300
+rig sig EGT 325
+rig sig EGT 350
+sleep 5
+
+echo "Watch for Fuel cutout"
+rig sig StartAir_O 0
+sleep 5
+
+echo "Watch for stable idle"
+rig sig N2i 6000 
+sleep 5
+
+
+rig stop all

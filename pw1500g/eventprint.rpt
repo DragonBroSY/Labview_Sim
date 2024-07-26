@@ -1,0 +1,117 @@
+%-12345X@PJL COMMENT * /cust/delta3/pw1500g/eventprint.rpt * 
+@PJL ENTER LANGUAGE = PCL
+E(10U(s0P(s3T(s10H&l8C(s1P(s4101T(s0B(s24V(s1SDelta Air Lines, Inc.
+(s0S
+Data Print: Approach Idle 
+(s12V(s0P(s3TДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+(s3B  Engine Type: PW1521GA &a060CTime: 16:09:30 
+Serial Number: 736363 &a060CDate: 04/28/2022 
+    Test Cell: 3 &a060CPage: 1
+PW1500G DL-15 Adapter 18 Installed 
+(s0BДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+(s16H(s3B&d0DCORRECTED DATA&a120C_
+&d@(s0BFN&a020C  1987.9 Lbs&a040CWF&a060C   708.8 PPH&a080C&a100C
+N1 Corr (N1C2D)&a020C  2973.8 RPM&a040CN2 Corr (N2C2D)&a060C 18101.7 RPM&a080C&a100C
+ITT corr. &a020C   543.2 DegC&a040CT49 Corr&a060C   481.3 DegC&a080CT3&a100C   314.7 DegC
+T2.5 Corr.&a020C    21.1 DegC&a040CPT2 Corr (PBar)&a060C 14.2826 PSIA&a080C&a100C
+
+(s3B&d0DOBSERVED DATA&a120C_
+&d@(s0BFN&a020C  1763.5 lbs&a040CWFI&a060C   698.1 PPH&a080CWFV&a100C   698.2 PPH
+NF&a020C   986.8 RPM&a040CN1&a060C  3022.2 RPM&a080CN2&a100C 18389.3 RPM
+
+(s3B&d0DTEMPERATURES&a120C_
+&d@(s0BITT&a020C   570.4 DegC&a040CT2.5&a060C    30.0 DegC&a080CT3&a100C   330.5 DegC
+IP&a020C   155.2 DegC&a040CHP&a060C   310.8 DegC&a080CEEC MOT&a100C   105.9 DegC
+
+(s3B&d0DRATIOS&a120C_
+&d@(s0BLPCR&a020C   1.041 &a040CHPCR&a060C   5.614 &a080COPCR&a100C   5.844 
+TSFC&a020C   0.357 &a040C&a060C&a080C&a100C
+
+(s3B&d0DPRESSURES&a120C_
+&d@(s0BPB&a020C    83.5 PSIA&a040CLP&a060C    17.8 PSIG&a080CHP&a100C    74.3 PSIG
+Pt2.5&a020C    14.9 PSIA&a040CP2&a060C 14.2820 PSIA&a080CPS2&a100C 14.1333 PSIA
+Pt2&a020C 14.2826 PSIA&a040CP2 Spread&a060C  0.0020 PSI&a080CPS2 Spread&a100C  0.0078 PSI
+
+(s3B&d0DVIBRATION&a120C_
+&d@(s0BE-Flange NF&a020C    0.01 IPS&a040CE-Flange N1&a060C    0.04 IPS&a080CE-Flange N2&a100C    0.03 IPS
+P-Flange NF&a020C    0.02 IPS&a040CP-Flange N1&a060C    0.02 IPS&a080CP-Flange N2&a100C    0.01 IPS
+
+(s3B&d0DFACILITY&a120C_
+&d@(s0BPCell Front&a020C 14.2800 PSIA&a040CPBar&a060C  14.289 PSIA&a080CDelta&a100C 0.97187 
+PCell Rear&a020C 14.2801 PSIA&a040CRel. Humidity&a060C   23.28 %&a080CTheta&a100C 1.03190 
+CIT F&a020C    75.5 DegF&a040CCIT C&a060C    24.2 DegC&a080CFuel Used&a100C   292.7 Gal
+OAT F&a020C    74.8 DegF&a040COAT C&a060C    23.8 DegC&a080CFuel Temp Meter&a100C    32.9 DegC
+Fuel Filter Diff&a020C    -0.0 PSID&a040CSpec. Humidity&a060C0.004485 Lb/Lb&a080CFuel Inlet&a100C    35.5 PSIG
+Wind Speed&a020C***** MPH&a040CWind Direction&a060C  &a080CDew Point DegF&a100C   33.31 DegF
+
+(s3B&d0DQEC DATA&a120C_
+&d@(s0BOil Press&a020C   100.7 PSIG&a040COil Temp&a060C   105.9 DegC&a080COil Quantity&a100C    16.6 Qts
+Fuel Flow&a020C   707.8 PPH&a040CFuel Temp&a060C    86.9 DegC&a080CTRA Actual&a102C-13.86 Deg
+(s3B&d0DREALTIME FUEL DATA&a040CPOLLUTANT EMISSIONS&a120C_
+&d@(s0B  Fuel Used:    292.7 Gal&a035C(s3BCO           NOx            PM            SO2           VOC           THC
+(s0BFuel Burned:    292.7 Gal&a032C 4.87 Lbs&a046C34.77 Lbs&a060C 0.34 Lbs&a074C 6.00 Lbs&a088C 0.17 Lbs&a102C 0.15 Lbs
+
+(s3B&d0DSTORED FINAL VIBRATION PEAKS&a120C_
+&d@(s0BInlet NF&a020C    0.20 IPS&a040CInlet N1&a060C    0.11 IPS&a080CInlet N2&a100C    0.25 IPS
+Turbine NF&a020C    0.07 IPS&a040CTurbine N1&a060C    0.31 IPS&a080CTurbine N2&a100C    0.31 IPS
+Inlet NF RPM&a020C 3216.74 RPM&a040CInlet N1 RPM&a060C 4016.45 RPM&a080CInlet N2 RPM&a100C23245.17 RPM
+(s10H&l8CДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+(s3B  Engine Type: PW1521GA &a060CTime: 16:09:30 
+Serial Number: 736363 &a060CDate: 04/28/2022 
+    Test Cell: 3 &a060CPage: 2
+(s0BДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+(s16H(s3BEEC DATA&a020CChannel A&a040CChannel B&a060CEEC DATA&a080CChannel A&a100CChannel B
+(s0B&d0D(s3BSPEEDS&a120C_
+&d@(s0BChannel in CTRL&a025C0 &a045C1 &a060CChannel in CTRL&a085C0 &a105C1 
+NF&a020C  986.52 RPM&a040C  986.52 RPM&a060CStarter Speed&a080C    4.94 %&a100C    4.94 %
+N1&a020C   28.50 %&a040C   28.50 %&a060CN2&a080C   75.14 %&a100C   75.14 %
+
+(s3B&d0DTEMPERATURES&a120C_
+&d@(s0BITT&a020C   570.4 DegC&a040C   570.4 DegC&a060CT5&a080C  507.14 DegC&a100C  507.14 DegC
+TT2 SEL&a020C  24.158 DegC&a040C  24.158 DegC&a060CT2E&a080C   23.71 DegC&a100C   23.71 DegC
+&a020C&a040C&a060COAT&a080C   24.03 DegC&a100C   24.03 DegC
+T25&a020C   30.03 DegC&a040C   30.03 DegC&a060CIPC Temp&a080C  155.23 DegC&a100C  155.23 DegC
+T3&a020C  330.50 DegC&a040C  330.50 DegC&a060CHPC Temp&a080C  310.81 DegC&a100C  310.81 DegC
+FLEX Temp&a020C  -99.00 DegC&a040C  -99.00 DegC&a060CEEC Temp&a080C   34.61 DegC&a100C   34.45 DegC
+OIL Temp&a020C  105.93 DegC&a040C  105.93 DegC&a060CFMU Fuel&a080C   86.86 DegC&a100C   86.86 DegC
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+Fuel Flow&a020C  707.73 pph&a040C  707.75 pph&a060CTLA&a080C    0.14 Deg&a100C    0.14 Deg
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+P2 ENG&a020C  14.297 PSIA&a040C  14.297 PSIA&a060CPAMB&a080C  14.297 PSIA&a100C  14.297 PSIA
+P25&a020C   14.87 PSIA&a040C   14.87 PSIA&a060CIPC&a080C    17.8 PSIA&a100C    17.8 PSIA
+PB&a020C   83.47 PSIA&a040C   83.47 PSIA&a060CHPC&a080C    74.3 PSIA&a100C    74.3 PSIA
+Oil Qty&a020C    16.6 Qts&a040C    16.6 Qts&a060CFuel Fltr&a080C   10.49 PSID&a100C   10.49 PSID
+POil&a020C  100.68 PSIG&a040C  100.68 PSIG&a060COil Diff&a080C     7.6 PSID&a100C     7.6 PSID
+COWL AI&a020C&a040C&a060CHPC Bld&a080C   14.53 PSIA&a100C   14.53 PSIA
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+TRL Deployed&a020C    0.02 %&a040C    0.02 %&a060CTRR Deployed&a080C    0.01 %&a100C    0.01 %
+Ferrous Detected&a020C       0 Nbp&a040C       0 Nbp&a060CNON-Ferrous Det&a080C       0 Nbp&a100C       0 Nbp
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+VORV&a020C   94.84 %&a040C   94.84 %&a060CB2.5 Pos&a080C    4.34 %&a100C    4.34 %
+LPC SVA&a020C   11.27 %&a040C   11.27 %&a060CHPC SVA&a080C   27.10 %&a100C   27.10 %
+ACC POS&a020C    0.00 %&a040C    0.00 %&a060CFMV POS&a080C  759.95 pph&a100C  759.95 pph
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+VORV POS REQ&a020C   94.80 %&a040C   94.80 %&a060CFOC Req&a080C  100.00 %&a100C  100.00 %
+LPC SVA REQ&a020C   11.27 %&a040C   11.27 %&a060CHPC SVA REQ&a080C   27.07 %&a100C   27.08 %
+B2.5 POS REQ&a020C    4.37 %&a040C    4.34 %&a060CACC POS REQ&a080C    0.00 %&a100C    0.00 %
+FMV POS REQ&a020C  760.07 pph&a040C  767.64 pph&a060C&a080C&a100C
+ДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДДД
+N1 MAX AV&a020C  100.00 %&a040C  100.00 %&a060CN1 SET&a080C   28.50 %&a100C   28.50 %
+ITT Red Lim&a020C  1033.3 DegC&a040C  1033.3 DegC&a060CITT Amb Lim&a080C  1016.0 DegC&a100C  1016.0 DegC
+N1 Red Lim&a020C  100.00 %&a040C  100.00 %&a060CN2 Red Lim&a080C  100.00 %&a100C  100.00 %
+
+(s16H(s3B&d0DVIBRATION INFORMATION&a120C_
+&d@(s0BFront NF&a020C    0.01 ips&a040C    0.01 ips&a060CRear NF&a080C    0.02 ips&a100C    0.02 ips
+Front N1&a020C    0.04 ips&a040C    0.04 ips&a060CRear N1&a080C    0.02 ips&a100C    0.02 ips
+Front N2&a020C    0.03 ips&a040C    0.03 ips&a060CRear N2&a080C    0.01 ips&a100C    0.01 ips
+N1 PHS&a020C  -80.36 Deg&a040C  -80.36 Deg&a060CNF PHS&a080C  -44.87 Deg&a100C  -44.87 Deg
+(s3B&d0DTRIM BALANCE INFORMATION&a120C_
+&d@(s0BNF Vib&a020C  0.01 ips&a040CMagnitude&a060C     6 oz-in&a080CAngle&a100C    90 Deg
+LPT Vib&a020C  0.02 ips&a040CMagnitude&a060C     1 oz-in&a080CAngle&a100C   -15 deg
+
+(s3B&d0DPerf Trim Balance&a025CBand A&a045CBand B&a065CBand C&a085CBand D
+(s0B&d@FAN Magnitude&a020C     5 OZ-IN&a040C     5 OZ-IN&a060C     6 OZ-IN&a080C     0 OZ-IN
+FAN Angle&a020C    82 Deg&a040C    84 Deg&a060C    85 Deg&a080C     0 Deg
+LPT Magnitude&a020C     2 OZ-IN&a040C     2 OZ-IN&a060C     2 OZ-IN&a080C     0 OZ-IN
+LPT Angle&a020C  -162 Deg&a040C  -162 Deg&a060C  -162 Deg&a080C     0 Deg
+(s10H&l8CE%-12345X

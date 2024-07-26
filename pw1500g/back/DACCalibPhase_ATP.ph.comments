@@ -1,0 +1,33 @@
+$PHASE DACCalibPhase_ATP length=34       level=0
+*
+* Phase to determine relationship between DAC voltage and PL voltage
+* Use one each time Power Lever is trimmed.
+* NOTE: Do not run this when the engine is running.
+*
+#if EngineRunning
++0 MESSAGE "Can't Calibrate with Engine Running..."
+   +0 EXIT
+#endif
+0 MESSAGE "Starting DAC Calibrate"             <- Starting message
+0 SUSPEND "Place Power Lever at input of 2.5 volts" "Continue" "Cancel"
+#if (~OpResponse)                              <- If Cancel pressed
+   0 EXIT                                      <- just exit
+#endif
+1 SET DAC_PLA_Voltage - PLA_Handle             <- Set DAC to current PL
+4 SET AutoPLEnable_O 1                         <- Enable clutch
+5 RAMP DAC_PLA_Voltage -0.5 2                  <- Ramp to bottom
+8 RAMP DAC_PLA_Voltage -1.5 2                  <- Ramp to p1 from bottom
+11 SET PLA1 PLA_Handle                         <- Read Power Lever
+14 RAMP DAC_PLA_Voltage -3.5 2                 <- Ramp to p2 from bottom
+17 SET PLA3 PLA_Handle                         <- Read Power Lever
+20 RAMP DAC_PLA_Voltage -4.5 2                 <- Ramp to top
+23 RAMP DAC_PLA_Voltage -3.5 2                 <- Ramp to p2 from top
+26 SET PLA4 PLA_Handle                         <- Read Power Lever
+29 RAMP DAC_PLA_Voltage -1.5 2                 <- Ramp to p1 from top
+32 SET PLA2 PLA_Handle                         <- Read Power Lever
+33 SET AutoPLEnable_O 0                        <- Disengage clutch
+33 SET CalibratingDAC 1                        <- Set flag to run calcs
+34 SET DAC_PLA_Voltage 0.0                     <- Set DAC to 0.0
+END MESSAGE "DAC Calibrate Complete"
+$END-PHASE
+**********

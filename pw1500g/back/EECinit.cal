@@ -1,0 +1,24 @@
+$GROUP "EECinit"  when=4
+EECSecPwr1_O:	ON
+EECSecPwr2_O:	ON
+EECPriPwr2_O:	ON
+EECPriPwr1_O:	ON
+EIU_PDIUStatus:	OFF
+EIU_P2T2probeHt:	OFF
+EIU_IdleSel:	OFF
+EIU_OpEngStat:	OFF
+EIU_WDTIFM:	OFF
+EIU_DisOp1IFM:	OFF
+EIU_DisOp2IFM:	OFF
+EIU_ArincPri:	OFF
+EIU_ArincSec:	OFF
+EIU_DisInp1IFM:	OFF
+EIU_PowerUpRam:	OFF
+EIU_BitRam1:	OFF
+EIU_BitRam2:	OFF
+EIU_BitDisOp1:	OFF
+EIU_BitDisOp2:	OFF
+EIU_BitDisInput:	OFF
+EIU_BitArinc:	OFF
+EIU_BitWDT:	OFF
+$END-GROUP

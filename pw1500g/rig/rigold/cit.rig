@@ -1,0 +1,7 @@
+# File rigs CIT
+# Takes numerical argument
+#
+rig sig CIT_A $argv
+rig sig CIT_B $argv
+rig sig CIT_C $argv
+rig sig CIT_D $argv

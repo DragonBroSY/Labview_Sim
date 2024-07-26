@@ -1,0 +1,148 @@
+$GROUP "eecreceiver" 
+#C ------- EEC Receiver Calcs --------
+EEC_NF:RPM	pct2value (EEC_NFPct NF100)
+#C EEC_NF:RPM (EEC_NFPct * 32.81)
+EEC_N1:RPM	pct2value (EEC_N1Pct N1100)
+#C EEC_N1:RPM (EEC_N1Pct * 100.47)
+EEC_N2:RPM	pct2value (EEC_N2Pct N2100)
+#C EEC_N2:RPM (EEC_N2Pct * 223.0)
+EEC_N2C25:RPM	pct2value (EEC_N2C25Pct N2100)
+#C EEC_N2C25:RPM (EEC_N2C25Pct * 223.0)
+EEC_N1C2:RPM	pct2value (EEC_N1C2Pct N1100)
+#C EEC_N1C2:RPM (EEC_N1C2Pct * 100.47)
+EEC_N2RL:RPM	pct2value (N2RL N2100)
+EEC_N1RL:RPM	pct2value (N1RL N1100)
+EEC_NSA:RPM	pct2value (NSA NSA100)
+TT2SELF:DegF	temp_c2f (TT2SEL)
+#C ---------------------------------------
+#if	EECN1ClassNeg
+N1ClassTxt:	concat ("-" EECN1Class)
+#else	
+N1ClassTxt:	concat ("" EECN1Class)
+#endif	
+#C ---------------------------------------
+GPSDate:MMDDYY	concat (GPSDateMM10 GPSDateMM1)
+GPSDate:MMDDYY	concat (GPSDate GPSDateDD10)
+GPSDate:MMDDYY	concat (GPSDate GPSDateDD1)
+GPSDate:MMDDYY	concat (GPSDate GPSDateYY10)
+GPSDate:MMDDYY	concat (GPSDate GPSDateYY1)
+#C ---------------------------------------
+dummy:	startautotest (SetCtrlLoop_ATP)
+dummy:	startautotest (EECACType_ATP)
+dummy:	startautotest (EECEngRating_ATP)
+#C ---------------------------------------
+#C -------- ISO5_356 Code ----------------
+#C ---------------------------------------
+ISO5_356Ready_F:	((ECM_EECGndTstPwr_TB | EECEngRunning) & compare (ISO5_L227Cmd "DC1"))
+#if             ISO5_356FCls
+ISO5_356FCls_N: 2
+#else
+ISO5_356FCls_N: 1
+#endif
+#C ---------------------------------------
+#C ACode1Diff_F:	compare (ISO5ACode1 LastACode1)
+#C ACode2Diff_F:	compare (ISO5ACode2 LastACode2)
+#C ACode3Diff_F:	compare (ISO5ACode3 LastACode3)
+ACode1Diff_F:	(ISO5_356BC1 = Last_356BC1)
+ACode2Diff_F:	(ISO5_356BC2 = Last_356BC2)
+ACode3Diff_F:	(ISO5_356BC3 = Last_356BC3)
+#C ---------------------------------------
+#if		(ISO5_356Ready_F & (~ACode1Diff_F | ~ACode2Diff_F | ~ACode3Diff_F))
+#C --- Pacing logic for Label 356 New Data...
+dummy3:	startautotest (ISO5_AlphaCode3_ATP)
+dummy2:	startautotest (ISO5_AlphaCode2_ATP)
+dummy1:	startautotest (ISO5_AlphaCode1_ATP)
+ISO5_356Data_F:	ON
+#endif
+#C ---------------------------------------
+#C dummy:	startautotest (ISO5_L356DeCoded_ATP)
+#C **** Get the Alpha Code in ACode3 **********
+#C #if		(ACode1Diff_F & ACode2Diff_F & ACode3Diff_F & ISO5_356Ready_F)
+#C just exit the #if...
+#if (compare(ISO5ACode3 "NUL") & ~ISO5_356NUL_F & ISO5_356Data_F)
+#C **** Transition to NUL [NUL] ***************
+ISO5_356NUL_F:  ON
+ISO5_356STX_F:  OFF
+ISO5_356ETX_F:  OFF
+ISO5_356EOT_F:  OFF
+ISO5_3561st_F:  OFF
+ISO5_356BWC_N:  0
+#elseif		(compare(ISO5ACode3 "STX") & (ISO5_356BWC = 1) & ~(ISO5_356BWC_N = 1) & ISO5_356Data_F)
+#C **** Good Health No Codes ******************
+#C **** Continous STX and BWC = 1 if no Faults *****
+ISO5_356NUL_F:  OFF
+ISO5_356STX_F:  OFF
+ISO5_356ETX_F:  OFF
+ISO5_356EOT_F:  OFF
+ISO5_3561st_F:  OFF
+ISO5_356BWC_N:  ISO5_356BWC
+#elseif		(compare(ISO5ACode3 "EOT") & ~ISO5_356EOT_F & ISO5_3561st_F & ISO5_356Data_F)
+#C **** End Of Transmission [EOT] *****
+#C **** End of the Block **************
+ISO5_356EOT_F:	ON
+ISO5_356STX_F:	OFF
+ISO5_356ETX_F:	OFF
+ISO5_3561st_F:	OFF
+ISO5_356BHist_F:	OFF
+#C **** Put the CLM in the Display Parameters...
+dummy:		startautotest(ISO5_DisplayStrings_ATP)
+#elseif		(compare(ISO5ACode3 "ETX") & ~ISO5_356ETX_F & ISO5_3561st_F & ISO5_356Data_F)
+#C **** End of TeXt [ETX] *****
+ISO5_356ETX_F:	ON
+ISO5_356STX_F:	OFF
+#C **** Put the CLM in the Display Parameters...
+dummy:		startautotest(ISO5_DisplayStrings_ATP)
+#elseif		(compare(ISO5ACode3 "STX") & ~ISO5_3561st_F & (ISO5_356BWC > 1) & ISO5_356BHist & ISO5_356Data_F)
+#C **** First STX Word of the Frame Block ***
+#C **** Capture the BWC and All the other ***
+#C **** Data now 0 in all other STX Words ***
+#C **** Bite History (ISO5_356BHist) = 1 for the first STX ONLY...
+#C **** Start of TeXt [STX] ****
+ISO5_3561st_F:		ON
+ISO5_356BHist_F:	ON
+ISO5_356STX_F:		ON
+ISO5_356NUL_F:		OFF
+ISO5_356FOrg_F:		ISO5_356FOrg
+ISO5_356FCls_F:		ISO5_356FCls
+ISO5_356FStat_F:	ISO5_356FStat
+ISO5_356CFCls_F:	ISO5_356CFCls
+ISO5_356FMsg_N:		ISO5_356FMsg
+ISO5_356BWC_N:		ISO5_356BWC
+ISO5_MsgCnt:		1
+ISO5_CharCnt:		0
+#elseif		(compare(ISO5ACode3 "STX") & ISO5_3561st_F & (ISO5_356BWC = 0) & ~ISO5_356BHist & ~ISO5_356STX_F & ISO5_356Data_F)
+#C **** Subsequent STX Words of the Frame Block ***
+#C **** But the First STX of the Fault Code *******
+#C **** Bits 9-15, 20-22 will be coded 0 here *****
+#C **** Start of TeXt [STX] ****
+ISO5_356STX_F:	ON
+ISO5_356ETX_F:	OFF
+ISO5_356EOT_F:	OFF
+ISO5_356NUL_F:	OFF
+ISO5_MsgCnt:	(ISO5_MsgCnt + 1)
+ISO5_CharCnt:	0
+#elseif		(ISO5_356STX_F & ISO5_3561st_F & ISO5_356Data_F)
+#C ***** Put the Data in a String Parameter ********
+dummy:		startautotest(ISO5_BuildStrings_ATP)
+#endif
+#C ---------------------------------------
+ISO5_356Data_F:	OFF
+#C ---------------------------------------
+#C LastACode1:	concat ("" ISO5ACode1)
+#C LastACode2:	concat ("" ISO5ACode2)
+#C LastACode3:	concat ("" ISO5ACode3)
+Last_356BC1:	ISO5_356BC1
+Last_356BC2:	ISO5_356BC2
+Last_356BC3:	ISO5_356BC3
+#C ---------------------------------------
+#C --- End ISO5_356 Data -----------------
+#C ---------------------------------------
+EECEngSN:	concat (EECEngSN6 EECEngSN5)
+EECEngSN:	concat (EECEngSN EECEngSN4)
+EECEngSN:	concat (EECEngSN EECEngSN3)
+EECEngSN:	concat (EECEngSN EECEngSN2)
+EECEngSN:	concat (EECEngSN EECEngSN1)
+#C ---------------------------------------
+EECSWVer1:	ASSWDEF
+#C ---------------------------------------
+$END-GROUP

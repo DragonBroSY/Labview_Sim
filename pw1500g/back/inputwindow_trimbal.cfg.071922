@@ -1,0 +1,421 @@
+$START-QUESTION
+ES   TBruns
+     prompt="Number of trial weight runs"
+     $START-ENUM-LIST
+     "NONE"
+     "1"
+     "2"
+     "3"
+     "4"
+     "5"
+     "6"
+     "7"
+     "8"
+     "9"
+     "10"
+     $END-ENUM-LIST
+$END-QUESTION
+*
+$START-QUESTION
+LB   tbLabel1
+     prompt="FAN TRIM BALANCE WEIGHTS"
+$END-QUESTION
+*
+$START-QUESTION
+LB   tbLabel2
+     prompt="Leave NONE answer to end weight list"
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator0
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight1
+    prompt="Select 1st Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc1
+    prompt="Enter 1st Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+*    prevparam="FanWeight1"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator1
+   prevparam="FanWeight1"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight2
+    prompt="Select 2nd Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight1"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc2
+    prompt="Enter 2nd Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight1"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator2
+   prevparam="FanWeight2"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight3
+    prompt="Select 3rd Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight2"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc3
+    prompt="Enter 3rd Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight2"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator3
+   prevparam="FanWeight3"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight4
+    prompt="Select 4th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight3"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc4
+    prompt="Enter 4th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight3"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator4
+   prevparam="FanWeight4"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight5
+    prompt="Select 5th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight4"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc5
+    prompt="Enter 5th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight4"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator5
+   prevparam="FanWeight5"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight6
+    prompt="Select 6th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight5"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc6
+    prompt="Enter 6th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight5"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator6
+   prevparam="FanWeight6"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight7
+    prompt="Select 7th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight6"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc7
+    prompt="Enter 7th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight6"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator7
+   prevparam="FanWeight7"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight8
+    prompt="Select 8th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight7"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc8
+    prompt="Enter 8th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight7"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator8
+   prevparam="FanWeight8"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight9
+    prompt="Select 9th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight8"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc9
+    prompt="Enter 9th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight8"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator9
+   prevparam="FanWeight9"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+ES  FanWeight10
+    prompt="Select 10th Fan Weight"
+    $START-ENUM-LIST
+    "NONE"
+    "93CL1"
+    "93CL2"
+    "93CL3"
+    "95CL1"
+    "95CL2"
+    "95CL3"
+    "95CL4"
+    "95CL5"
+    "2x95CL1"
+    "2x95CL2"
+    "2x95CL3"
+    "2x95CL4"
+    "2x95CL5"
+    "1B4294"
+    "2x1B4294"
+    $END-ENUM-LIST
+    prevparam="FanWeight9"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+I  FanWeightLoc10
+    prompt="Enter 10th Fan Weight Location:"
+    min="0" max="20" format="20" answer="0"
+    prevparam="FanWeight9"  operator="~="  answerset={"NONE"}
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator10
+$END-QUESTION
+*
+$START-QUESTION
+LB   tbLabel3
+     prompt="TURBINE TRIM BALANCE WEIGHTS"
+$END-QUESTION
+*
+$START-QUESTION
+LB   tbLabel4
+     prompt="*** example values in brackets [example] ***"
+$END-QUESTION
+*
+$START-QUESTION
+S  Separator11
+$END-QUESTION
+*
+$START-QUESTION
+T  TurbineWeightsUsed
+   prompt="Enter TOTAL number of clips used for all runs [30]:"
+   answer="0"
+$END-QUESTION
+*
+$START-QUESTION
+T  TurbineWeightsInst
+   prompt="Enter FINAL number of clips installed [10]:"
+   min="0" max="10" format="20" answer="0"
+$END-QUESTION
+*
+$START-QUESTION
+T  TurbineWeightsLoc
+   prompt="Enter FINAL weights location [14-24]:"
+   answer="0"
+$END-QUESTION

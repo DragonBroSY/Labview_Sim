@@ -1,0 +1,5 @@
+<StudyManager>
+ <Study File="/cust/delta3/pw1500g/AirFlowStudy.xml"/>
+ <Study File="/cust/delta3/pw1500g/Stability_TestA.xml"/>
+ <Study File="/cust/delta3/pw1500g/Stability_TestB.xml"/>
+</StudyManager>

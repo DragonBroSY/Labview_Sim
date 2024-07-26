@@ -1,0 +1,125 @@
+$GROUP "eecreceiver" 
+#C ------- EEC Receiver Calcs --------
+EEC_NFPct:%	value2pct (EEC_NF NF100)
+NCFANPct:%	value2pct (NCFAN NF100)
+EEC_N1:RPM	pct2value (EEC_N1Pct N1100)
+EEC_N2:RPM	pct2value (EEC_N2Pct N2100)
+#C EEC_N1C2:RPM pct2value (EEC_N1C2Pct N1100)
+#if	(N1IDLREF < 17.4)
+N1GIdle:RPM	2045.0
+#else	
+N1GIdle:RPM	pct2value (N1IDLREF N1100)
+#endif	
+N1GIdleMn:RPM	(N1GIdle - 200.0)
+N1GIdleMx:RPM	(N1GIdle + 200.0)
+EEC_N2RL:RPM	pct2value (N2RLPct N2100)
+EEC_N1RL:RPM	pct2value (N1RLPct N1100)
+EEC_NSA:RPM	pct2value (EEC_NSAPct NSA100)
+TT2SELF:DegF	temp_c2f (TT2SEL)
+EATHPTDisk:DegC	TECSH
+EATHPTDiskF:DegF	temp_c2f(TECSH)
+THPTDiskT2F:DegF	(EATHPTDiskF - TT2SELF)
+ChipDetected_F:	OILDLIM
+#C ---------------------------------------
+#C #if EECN1ClassNeg
+#C N1ClassTxt: concat ("-" EECN1Class)
+#C #else
+#C N1ClassTxt: concat ("" EECN1Class)
+#C #endif
+#C ---------------------------------------
+#C GPSDate:MMDDYY concat (GPSDateMM10 GPSDateMM1)
+#C GPSDate:MMDDYY concat (GPSDate GPSDateDD10)
+#C GPSDate:MMDDYY concat (GPSDate GPSDat
+dummy:	startautotest (SetCtrlLoop_ATP)
+#C ---------------------------------------
+#C EECENGSN: concat (EECENGSN2 EECENGSN1)
+EECEngSN:	concat (EECEngSN6 EECEngSN5)
+EECEngSN:	concat (EECEngSN EECEngSN4)
+EECEngSN:	concat (EECEngSN EECEngSN3)
+EECEngSN:	concat (EECEngSN EECEngSN2)
+EECEngSN:	concat (EECEngSN EECEngSN1)
+TestDSUInst_F:	compare (EECEngSN "999999")
+CustDSUInst_F:	~TestDSUInst_F
+#C ---------------------------------------
+#C ***** Hardware Configuration logic ****
+#C #if     (ChAInCtrl_F & SWVerGT63_F)
+#C EngHwCfg:       decodebits (A2_DWord355 10 8)
+#C #elseif (ChBInCtrl_F & SWVerGT63_F)
+#C EngHwCfg:       decodebits (B2_DWord355 10 8)
+#C #elseif CHAInCtrl_F
+#C EngHwCfg:       decodebits (A2_DWord355 14 6)
+#C #elseif CHBInCtrl_F
+#C EngHwCfg:       decodebits (B2_DWord355 14 6)
+#C #endif
+#C ---------------------------------------
+HwCfgDSU:	concat ("" TestDSUDN)
+#C ---------------------------------------
+#if     (CkEngHwCfgOnce_F)
+CkEngHwCfgOnce_F:       OFF
+dummy:	startautotest (EECEngRating_ATP)
+#endif
+#C ---------------------------------------
+#if     TestDSUInst_F
+#C **** Set TestACID to 38 for Test DSU transmit label 167. (DJR 5/23/24)...
+TestACID:	38
+EECDSUPN:       concat (TestDSUBasePN HwCfgDSU)
+DSUPNCk_F:      compare (EECDSUPN TestDSUPN)
+#else
+TestACID:	EECACID
+EECDSUPN:       concat (EECDSUBasePN HwCfgDSU)
+DSUPNCk_F:      compare (EECDSUPN CustDSUPN)
+#endif
+#C ---------------------------------------
+#if     (~SWActive)
+#C ***** Software NOT Active
+DSUFault_Stat:  0
+#elseif (~(EECPwr_Stat = 2) & EngineNotRunning)
+#C ***** GND PWR OFF
+DSUFault_Stat:  1
+#C #elseif (DSUFault_F & CustDSUInst_F)
+#elseif DSUFault_F
+#C ***** DSU FAULT
+DSUFault_Stat:  2
+#elseif TestDSUInst_F
+#C ***** Test DSU Installed
+DSUFault_Stat:  3
+#elseif CustDSUInst_F
+#C ***** Customer DSU Installed
+DSUFault_Stat:  4
+#else
+#C ***** DSU UNK
+DSUFault_Stat:  5
+#endif
+#C ---------------------------------------
+#if     (~SWActive)
+DSUPNCk_Stat:   0
+#elseif (SWActive & ~ECM_EECGndTstPwr_TB & EngineNotRunning)
+DSUPNCk_Stat:   1
+#elseif (TestDSUInst_F & DSUPNCk_F)
+#C #elseif      (TestDSUInst_F & TestDSUPNCk_F)
+#C Test DSU Installed and hwCfg check OK.)
+DSUPNCk_Stat:   2
+#elseif (TestDSUInst_F & ~DSUPNCk_F)
+#C #elseif      (TestDSUInst_F & ~TestDSUPNCk_F)
+#C Test DSU Installed and hwCfg check ERROR.)
+DSUPNCk_Stat:   3
+#elseif (CustDSUInst_F & DSUPNCk_F)
+#C Customer DSU Installed and hwCfg check OK.)
+DSUPNCk_Stat:   4
+#elseif (CustDSUInst_F & ~DSUPNCk_F)
+#C Customer DSU Installed and hwCfg check ERROR.)
+DSUPNCk_Stat:   5
+#else
+#C Test DSU UNK...
+DSUPNCk_Stat:	6
+#endif
+#C ---------------------------------------
+#C EECSWVer1: ASSWDEF
+#if	EECSWv2_11_08_F
+A1_AOP:	10.0
+A2_AOP:	10.0
+B1_AOP:	10.0
+B2_AOP:	10.0
+#endif
+#C ---------------------------------------
+$END-GROUP

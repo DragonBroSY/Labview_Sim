@@ -1,0 +1,272 @@
+$GROUP "configini"  when=4
+#C **********************************************************
+#C ** Version Information **
+#C ** see ./docs/configini.Notes for More Info **
+#C **********************************************************
+Version:	concat ("" "1.00.8")
+DuctSet:	concat("" "DL15")
+#C **********************************************************
+#if		UseOEMManual_L
+EngineManPN:	concat ("" "5305815-OEM")
+EngineManRev:	concat ("" "11/15/23")
+ManualRelease:	concat ("" "37.00")
+#else
+EngineManPN:	concat ("" "5305815")
+EngineManRev:	concat ("" "02/14/24")
+ManualRelease:	concat ("" "37.00")
+#endif	
+#C Info1:	concat ("" "Version 1.00.3, Cell 4 Preliminary Facility Modifiers installed. (DJR 02/15/22)")
+#C Info1:	concat ("" "Cell 3 FINAL Correlation Coeff (dtd 2/10/22), PW email 2/10/22. (SAD 2/18/22)")
+#C Info1:	concat ("" "PW1500G OEM Manual Revision 31.00 - No Changes. (SAD 5/20/22)")
+#C Info1:	concat ("" "PW1500G DAL Manual Revision 30.00 - No Changes. (DJR 5/20/22)")
+#C Info1:	concat ("" "PW1500G OEM and DAL Manual Revision 32.00 - No Changes. (HK 09/15/22)")
+Info1:	concat ("" "SWV 1.00.5 Added TRA2VoltsCoeff to mapsignals.cal. (DJR 10/12/22)")
+Info2:	concat ("" "PW1500G OEM Manual Revision 33.00 - No Changes. (HK 01/23/23)")
+Info3:	concat ("" "SWV 1.00.6 Cell 4 Preliminary Facility Modifiers installed. (DJR 04/12/23)")
+Info4:	concat ("" "SWV 1.00.7 Cell 3 Preliminary Facility Modifiers installed. (DJR 05/25/23)")
+Info5:	concat ("" "PW1500G OEM and DAL Manual Revision 35.00 and 33.01, respectively - No Changes. (HK 07/24/23)")
+Info6:	concat ("" "PW1500G OEM Manual Revision 36.00 - No Changes. (HK 11/70/23)")
+Info7:	concat ("" "SWV 1.00.8 Cell 3 Preliminary Facility Modifiers installed. (DJR 11/15/23)")
+Info8:	concat ("" "Pw1500G OEM and DAL Manual Revision 37.00 - No Changes. (HK 04/10/24)")
+#C ==========================================================
+#C ------ DashModifier Logic --------------------------------
+#C DashModifier:	concat ("" "None")
+#C ==========================================================
+DM_None:        compare (DashModifier, "None")
+DM_3:		compare (DashModifier, "-3")
+#C ----------------------------------------------------------
+#if     DM_None
+EngNameNew:     concat (DashNumber "")
+#else
+EngNameNew:     concat (DashNumber DashModifier)
+#endif
+#C ==========================================================
+DN_1519G:	compare (DashNumber, "PW1519G")
+DN_1521G:	compare (DashNumber, "PW1521G")
+DN_1521GA:	compare (DashNumber, "PW1521GA")
+DN_1524G:	compare (DashNumber, "PW1524G")
+DN_1525G:	compare (DashNumber, "PW1525G")
+PW1519G:	(DN_1519G & DM_None)
+PW1521G:	(DN_1521G & DM_None)
+PW1521G3:	(DN_1521G & DM_3)
+PW1521GA:	(DN_1521GA & DM_None)
+PW1524G:	(DN_1524G & DM_None)
+PW1524G3:	(DN_1524G & DM_3)
+PW1525G:	(DN_1525G & DM_None)
+PW1525G3:	(DN_1525G & DM_3)
+PW1519:		PW1519G
+PW1521:		(PW1521G | PW1521G3 | PW1521GA)
+PW1524:		(PW1524G | PW1524G3)
+PW1525:		(PW1525G | PW1525G3)
+PW1500:		(PW1519 | PW1521 | PW1524 | PW1525)
+#C ==========================================================
+EECSWVer:	concat("" EECName)
+EECSWv2_11_08_F:	compare (EECName "v2.11.8")
+EECSWv2_11_10_F:	compare (EECName "v2.11.10")
+EECSWv2_11_12_F:	compare (EECName "v2.11.12")
+EECSWv2_11_14_F:	compare (EECName "v2.11.14")
+EECSWv2_11_15_F:	compare (EECName "v2.11.15.10")
+#C ==========================================================
+#C **********************************************************
+#C Initialize DSU Parameters for the AutoTestPhase...
+EngModel:	concat ("" "PW1500G")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "UNK")
+ACTypeTxt:	concat ("" "UNK")
+DSUBasePN:	concat ("" "UNK")
+TestDSUBasePN:	concat ("" "5327260-")
+CustDSUDN:	concat ("" TestDSUDN)
+#C For backward compatability...
+DSUDataPN:	concat (TestDSUBasePN TestDSUDN)
+TestDSUDataPN:	concat (TestDSUBasePN TestDSUDN)
+#C ----------------------------------------------
+MapNetBaseName: concat ("" "PW1500G")
+ACID:	0
+TestACID:	38
+ACTORat:Lbf	0.0
+GTTORat:Lbf	0.0
+#C Initialize EEC Parameters for the AutoTestPhase...
+EECEngModel:	concat ("" "PW1500G")
+EECModelSeqNo:	concat ("" "UNK")
+EECEngSpecNo:	concat ("" "UNK")
+EECACTypeTxt:	concat ("" "UNK")
+EECDSUBasePN:	concat ("" "UNK")
+EECACID:	0
+EECACTORat:Lbf	0.0
+EECGTTORat:Lbf	0.0
+#C -----------------------------------------------------
+dummy:		startautotest (TestEngRating_ATP)
+#C -----------------------------------------------------
+#C ****** DSU Stuff See TestEngRating_ATP ******
+#C TestDSUBasePN: concat("" "5327260-")
+#C CustDSUDN:	concat (TestDSUDN "")
+#C CustDSUPN:	concat (DSUBasePN CustDSUDN)
+#C TestDSUPN:	concat (TestDSUBasePN TestDSUDN)
+#C ======================================================
+#C Set per the Workscope.cfg parameters. 
+WSLookup:	concat ("" WSHCM)
+dummy:		startautotest(WSLookup_ATP)
+Mapnet_HPCSTD:	WSLookupVal
+WSLookup:	concat ("" WSHTCM)
+dummy:		startautotest(WSLookup_ATP)
+Mapnet_HPTSTD:	WSLookupVal
+#C -----------------------------------------------------------------------------------
+#C Compressor Intermediate Case...
+WSCICM_HM:	(compare (WSCICM,"Level 3 (L3)") | compare (WSCICM,"Level 2.9 (L2.9)"))
+WSCICG_HM:	(compare (WSCICG,"Level 3 (L3)") | compare (WSCICG,"Level 2.9 (L2.9)"))
+WSCIC_HM:	(WSCICM_HM & WSCICG_HM)
+WSCICM_LM:	compare (WSCICM,"Level 0 (L0)")
+WSCICG_LM:	compare (WSCICG,"Level 0 (L0)")
+WSCIC_LM:	(WSCICM_LM & WSCICG_LM)
+#C -----------------------------------------------------------------------------------
+#C High Compressor...
+WSHCM_HM:	(compare (WSHCM,"Level 3 (L3)") | compare (WSHCM,"Level 2.9 (L2.9)"))
+WSHCRSG_HM:	(compare (WSHCRSG,"Level 3 (L3)") | compare (WSHCRSG,"Level 2.9 (L2.9)"))
+WSHCRG_HM:	(compare (WSHCRG,"Level 3 (L3)") | compare (WSHCRG,"Level 2.9 (L2.9)"))
+WSHPC_HM:	(WSHCM_HM & WSHCRSG_HM & WSHCRG_HM)
+WSHCM_LM:	(compare (WSHCM,"Level 0 (L0)") | compare (WSHCM,"Level 1 (L1)") | compare (WSHCM,"Level 1.3 (L1.3)"))
+WSHCRSG_LM:	(compare (WSHCRSG,"Level 0 (L0)") | compare (WSHCRSG,"Level 1.3 (L1.3)"))
+WSHCFCG_LM:	(compare (WSHCFCG,"Level 0 (L0)") | compare (WSHCFCG,"Level 1.3 (L1.3)"))
+WSHCRG_LM:	(compare (WSHCRG,"Level 0 (L0)") | compare (WSHCRG,"Level 1.3 (L1.3)"))
+WSHPC_LM:	(WSHCM_LM & WSHCRSG_LM & WSHCFCG_LM & WSHCRG_LM)
+#C -----------------------------------------------------------------------------------
+#C High Turbine...
+WSHTCM_HM:	(compare (WSHTCM,"Level 3 (L3)") | compare (WSHTCM,"Level 2.9 (L2.9)"))
+WSHTSG_HM:	(compare (WSHTSG,"Level 3 (L3)") | compare (WSHTSG,"Level 2.9 (L2.9)"))
+WSHTRG_HM:	(compare (WSHTRG,"Level 3 (L3)") | compare (WSHTRG,"Level 2.9 (L2.9)"))
+WSHPT_HM:	(WSHTCM_HM & WSHTSG_HM & WSHTRG_HM)
+WSHTCM_LM:	(compare (WSHTCM,"Level 0 (L0)") | compare (WSHTCM,"Level 1.3 (L1.3)"))
+WSHTSG_LM:	(compare (WSHTSG,"Level 0 (L0)") | compare (WSHTSG,"Level 1.3 (L1.3)"))
+WSHTRG_LM:	(compare (WSHTRG,"Level 0 (L0)") | compare (WSHTRG,"Level 1.3 (L1.3)"))
+WSHPT_LM:	(WSHTCM_LM & WSHTSG_LM & WSHTRG_LM)
+#C -----------------------------------------------------------------------------------
+WSDCM_HM:	(compare (WSDCM,"Level 3 (L3)") | compare (WSDCM,"Level 2.9 (L2.9)"))
+Workscope_HM:	compare (Workscope, "Full Interval Visit (FIV)")
+Workscope_MM:	compare (Workscope, "Repair Visit (RPR)")
+Workscope_LM:	compare (workscope, "Project Visit (PV)")
+Workscope_MLI:	compare (workscope, "Serviceability Check (SC)")
+Workscope_COR:	compare (Workscope, "Correlation")
+#C -----------------------------------------------------------------------------------
+#C WSPSRVibLim_F:	(WSHPCTieShaft & WSPSRIBR6 & WSIBR6)
+WSN2LMVibLim_F:	(WSHPC_LM & WSHPT_LM)
+#C *** Used for Full Refurbishment Ref. EA???????.
+Refurb:		(WSHCM_HM & WSHTCM_HM)
+#C HotSectionRefurb:	(WSHTCM_HM & ~WSHCM_HM)
+HotSectionRefurb:	WSHTCM_HM
+#C ===================================================================================
+#C *** Workscope parameters...
+#C ********************************
+#if	WorkScope_COR
+#C *** Test Cell Correlation
+MapNetSTD:	8
+#elseif	((Mapnet_HPTSTD < 2.9) & (Mapnet_HPCSTD < 2.9) & WorkScope_MM)
+#C *** Repair As Necessary
+MapNetSTD:	1
+#elseif	((Mapnet_HPTSTD < 2.9) & Workscope_MM)
+#C *** Hot Section Repair
+MapNetSTD:	2
+#elseif	(Refurb & Workscope_HM)
+#C *** Full Engine Refurbished
+MapNetSTD:	4
+#elseif	(HotSectionRefurb & Workscope_MM)
+#C *** Hot Section Refurbished
+MapNetSTD:	3
+#elseif	WorkScope_LM
+#C *** Modification Upgrades Only
+MapNetSTD:	5
+#elseif	WorkScope_LM
+#C *** Engine Model Conversion
+MapNetSTD:	6
+#elseif	WorkScope_MLI
+#C *** Test "As Received" (No previous repairs)
+MapNetSTD:	7
+#else	
+#C *** Unknown
+MapNetSTD:	0
+#endif
+#C ****************************
+#C MapNetDate:	concat ("" SYSDATE) ! See initsaveparams.cal
+#C ********* Moved starting on Line 85 *********
+#C #if PW1525G
+#C MapNetBaseName:	concat ("" "PW1525G")
+#C #elseif PW1525G3
+#C MapNetBaseName:	concat ("" "PW1525G-3")
+#C #elseif PW1524G
+#C MapNetBaseName:	concat ("" "PW1524G")
+#C #elseif PW1524G3
+#C MapNetBaseName:	concat ("" "PW1524G-3")
+#C #elseif PW1521G
+#C MapNetBaseName:	concat ("" "PW1521G")
+#C #elseif PW1521G3
+#C MapNetBaseName:	concat ("" "PW1521G-3")
+#C #elseif PW1521GA
+#C MapNetBaseName:	concat ("" "PW1521GA")
+#C #elseif PW1519G
+#C MapNetBaseName:	concat ("" "PW1519G")
+#C #else
+#C MapNetBaseName:	concat ("" "PW1525G")
+#C #endif
+#C ****** PW Location Parameters *******
+#if	compare (CustomerName "Delta3")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL3")
+#C #elseif	compare (CustomerName "Delta3")
+#C ***** Alternate Delta3 Loc and ID...
+#C TestBedLoc:	concat("" "DAL-ATL")
+#C TestBedID:	concat("" "ATL3")
+#elseif	compare (CustomerName "Delta4")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL4")
+#elseif	compare (CustomerName "Delta5")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL5")
+#elseif	compare (CustomerName "DeltaMSP")
+TestBedLoc:	concat("" "DAL-MINN")
+TestBedID:	concat("" "AC1")
+#endif
+MapNetGroup:	concat ("" "PW1500G")
+MapNetTSTYPE:	3
+MapNetDS:	15
+MapNetEECVer:	concat ("" EECNAME)
+#C MapNetCONF:	concat ("" "PSTN")
+MapNetCONF:	concat ("" "BARE")
+MapNetPNOZ:	concat ("" ACTypeTxt)
+MapNetTitle:	concat ("" "Acceptance Testing")
+#C NOTE: TSO is named wrong, it's Total Time in commonopen.cal.
+#C Added New parameter TTSN for better parameter naming.
+TTSN:		concat ("" TSO)
+MapnetTT:	concat ("" TTSN)
+MapnetTC:	concat ("" TCSN)
+MapnetTSO:	concat ("" TSLV)
+MapnetCSO:	concat ("" CSLV)
+#C FANTEST: 0=Own Fan, 1=Gold STD.
+#C MapnetFANTEST:	0
+MapNetFanGoldSet:	MapNetFANTEST
+#if	Compare (CompWash, "YES")
+MapNetWWASH:	concat ("" "Y")
+#elseif	Compare (CompWash, "NO")
+MapNetWWASH:	concat ("" "N")
+#else	
+MapNetWWASH:	concat ("" "U")
+#endif	
+#C ********** Mapnet Workscope Lookups **************
+#C ********* Moved to SetMapnetWS_ATP.ph ************
+dummy:		startautotest (SetMapnetWS_ATP)
+#C See Final.cal for MapNetVibXXXXX Info...
+#C ========================================================================
+#C EFlange_F:	compare (FwdBOMSensor "E-Flange")
+#C AP21_F:		compare (FwdBOMSensor "AP21")
+CowlAICk_F:	OFF
+#C ========================================================================
+DisableFireLoops:	concat ("" "ALL")
+FireLoopType:		concat ("" "Systron Donner/Meggitt")
+#C ********************** Disable Fire Loops above ************************
+DisableFanLoops_L:	compare (DisableFireLoops "Fan Loops Only")
+DisableCoreLoops_L:	compare (DisableFireLoops "Core Loops Only")
+#C DisableOvhtLoops_L:	compare (DisableFireLoops "Ovht Loops Only")
+DisableOvhtLoops_L:	ON
+DisableFireLoops_L:	compare (DisableFireLoops "ALL")
+Kidde:			compare (FireLoopType "Kidde")
+SystronDonner:		compare (FireLoopType "Systron Donner/Meggitt")
+#C ========================================================================
+$END-GROUP

@@ -1,0 +1,25 @@
+Fuel_Control_S
+depends on:
+to open:
+~EmergFuelSO_I & FuelArm_I
+and
+Fuel_Vlv_Open_I
+
+and, to cutoff:
+$Wait-FOR
+~Fuel_Vlv_Open_I & Fuel_Vlv_Clsd_I
+
+Start_Air_S
+depends on:
+to open:
+N2 > 6125
+and
+$WAIT-FOR
+Start_Vlv_Open_I
+
+
+and, to close:
+$WAIT-FOR
+~Start_Vlv_Open_I
+
+

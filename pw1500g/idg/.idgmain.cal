@@ -1,0 +1,50 @@
+
+$GROUP idgcalcs
+* 
+* Engine Input Signals and Input Relays
+* *** The calculation vars listed in the left column must not be changed
+* *** as they are hard coded in a parsing routine, rdidgmain() used by BUILDER
+* ALSO, the following $TIMER must be added to the timers config. file
+* for this logic to work properly.
+*    $TIMERS
+*    idgsettletime:secs   RESET   idgtimer
+*    $END-TIMERS
+*
+* Calc vars      User defined params names
+* ------------   -------------------------
+*  Set these accordingly unless they are already set to these names in CST
+*  Relay names must also be set up the same as used in this file.
+* GENFREQ          ???
+* GENVOLT          ???
+* PMGVOLT          ???
+* CTCUR            ???
+
+* Update the Gen Volt section
+GENFREQ          GenHz
+GENVOLT          Gen_Voltage
+PMGVOLT          PMG_Voltage
+CTCUR            Gen_Current
+ROTATE_I         GenPhaseRot_I
+IDGPhaseCTOA_I   GenPhaseACorr_I
+IDGPhaseCTOB_I   GenPhaseBCorr_I
+IDGPhaseCTOC_I   GenPhaseCCorr_I
+
+* Output Relays Equivalence to user defined parameters
+* User defined     Calculation vars
+* params names       
+*-------------    -----------------
+goofy:                       9999
+Gen_Control_Pw_O               GenPwr_O
+Gen_Load_Slct_PhA_O            LoadA_O
+Gen_Load_Slct_PhB_O            LoadB_O
+Gen_Load_Slct_PhC_O            LoadC_O
+Gen_Volt_Slct_PhBtoC_O         GenVoltBC_O
+Gen_Volt_Slct_PhCtoA_O         GenVoltCA_O
+PMG_Volt_Slct_Ph2to3           PMGVolt23_O
+PMG_Volt_Slct_Ph3to1           PMGVolt31_O
+Gen_Curr_Trans_Test_O          CTPhase_O
+Gen_Curr_Trans_B_O             CTBCurrent_O
+Gen_Curr_Trans_C_O             CTCCurrent_O
+Gen_Mag_Trim_Test_O            MagTrim_O
+
+$END-GROUP

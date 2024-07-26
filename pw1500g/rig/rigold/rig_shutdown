@@ -1,0 +1,28 @@
+rig sig QECFuelOff_O 0
+rig sig EGTHarnessDegC 20
+rig sig MOP 14
+rig sig N1I 0
+rig sig N2I 0
+rig sig WfIHz 0
+rig sig thrustmeasure 0
+rig sig a_epr_act   1
+rig sig VibFBB 0
+rig sig a_fnlra     80
+rig sig T35aDegC    20
+rig sig T25DegC     20
+rig sig Ps31PSIG    14.3
+rig sig Pt45PSIG    14.5
+rig sig Ps3iPSIG    14.5
+rig sig Ps25PSIG        14.5
+rig sig Pt25PSIG    14.5
+rig sig Pt49PSIG    14.5
+rig sig VibTBB 0
+rig sig VibFN1 0
+rig sig VibTN1 0
+rig sig VibFN2 0
+rig sig VibTN2 0
+rig sig A_FnLRA 0
+rig sig B_FnLRA 0
+rig stop all
+
+

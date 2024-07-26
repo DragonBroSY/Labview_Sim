@@ -1,0 +1,5 @@
+* /cust/delta3/pw1500g/n1c2d_checkout.PASETUP
+$CRSPARAM "shum" min=0.000000 max=0.003000 linetype=
+$CRSPARAM "n1c2d" min=9580.000000 max=9660.000000 linetype=
+$CRSPARAM "rtheta" min=0.980000 max=0.990000 linetype=
+$CRSPARAM "khnl" min=1.000200 max=1.000300 linetype=

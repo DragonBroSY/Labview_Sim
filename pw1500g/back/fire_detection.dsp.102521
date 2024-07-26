@@ -1,0 +1,410 @@
+$DISPLAY "Fire Detection" background=DarkGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$STOREDISPLAY Append
+$OBJECT Box font=101 startx=96 starty=261 endx=617 endy=786
+style=2
+boxcolor=DarkGray
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=1 displayflag=Kidde startx=97 starty=794 endx=390 endy=853
+parameter=FireDetCont_S type=MOMENTARY
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="Continuity Test"
+oncolor=Green
+$CALC
+FireDetCont_O:	ON
+$END-CALC
+$END-STATE
+$STATE 0
+label="Continuity Test"
+oncolor=LightGray
+$CALC
+FireDetCont_O:	OFF
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=Kidde startx=122 starty=95 endx=371 endy=175
+FanLoopA_Stat textcolor=Black
+Yellow = -1 "AGB/FAN Loop A\nFAULT"
+Green = 0 "AGB/FAN Loop A\nOK"
+Red = 1 "AGB/FAN Loop A\n>>FIRE<<"
+Green = 2 "AGB/FAN Loop A\nContinuity Test PASSED"
+Yellow = 3 "AGB/FAN Loop A\nContinuity Test FAULT"
+Green = 4 "AGB/FAN Loop A\nGround Test PASSED"
+Yellow = 5 "AGB/FAN Loop A\nGround Test FAULT"
+BurntOrange = 6 "AGB/FAN Loop A\nUNKNOWN"
+Magenta = 7 "AGB/FAN Loop A\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=Kidde startx=122 starty=178 endx=371 endy=255
+FanLoopB_Stat textcolor=Black
+Yellow = -1 "AGB/FAN Loop B\nFAULT"
+Green = 0 "AGB/FAN Loop B\nOK"
+Red = 1 "AGB/FAN Loop B\n>>FIRE<<"
+Green = 2 "AGB/FAN Loop B\nContinuity Test PASSED"
+Yellow = 3 "AGB/FAN Loop B\nContinuity Test FAULT"
+Green = 4 "AGB/FAN Loop B\nGround Test PASSED"
+Yellow = 5 "AGB/FAN Loop B\nGround Test FAULT"
+BurntOrange = 6 "AGB/FAN Loop B\nUNKNOWN"
+Magenta = 7 "AGB/FAN Loop B\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=SystronDonner startx=126 starty=92 endx=371 endy=171
+FanLoopA_Stat textcolor=Black
+Yellow = -1 "AGB/FAN Loop A\nFAULT"
+Green = 0 "AGB/FAN Loop A\nOK"
+Red = 1 "AGB/FAN Loop A\n>>FIRE<<"
+BurntOrange = 6 "AGB/FAN Loop A\nUNKNOWN"
+Magenta = 7 "AGB/FAN Loop A\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=SystronDonner startx=126 starty=173 endx=371 endy=255
+FanLoopB_Stat textcolor=Black
+Yellow = -1 "AGB/FAN Loop B\nFAULT"
+Green = 0 "AGB/FAN Loop B\nOK"
+Red = 1 "AGB/FAN Loop B\n>>FIRE<<"
+BurntOrange = 6 "AGB/FAN Loop B\nUNKNOWN"
+Magenta = 7 "AGB/FAN Loop B\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=136 starty=330 endx=376 endy=790
+labelspace=12 unitspace=0 spacing=19 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+TNFDLFUL03 type="FLOAT" width=4 prec=0 label="FWD U (3)" 
+TNFDLFML02 type="FLOAT" width=4 prec=0 label="FWD M (2)" 
+TNFDLFLL01 type="FLOAT" width=4 prec=0 label="FWD L (1)" 
+TNFDLMUL04 type="FLOAT" width=4 prec=0 label="MID U (4)" 
+TNFDLMLL09 type="FLOAT" width=4 prec=0 label="MID L (9)" 
+TNFDLAUL05 type="FLOAT" width=4 prec=0 label="AFT U (5)" 
+TNFDLALL08 type="FLOAT" width=4 prec=0 label="AFT L (8)" 
+TNFDLBUL06 type="FLOAT" width=4 prec=0 label="BAC U (6)" 
+TNFDLBLL07 type="FLOAT" width=4 prec=0 label="BAC L (7)" 
+TNFDLFUT10 type="FLOAT" width=4 prec=0 label="TOP F/A (10)" 
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=243 starty=267 endx=500 endy=294
+Blue direction=1 alignment=1
+"UNDER COWL TEMPS"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=307 starty=300 endx=458 endy=323
+Blue direction=1 alignment=0
+"LEFT     RIGHT"
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=385 starty=110 endx=595 endy=165
+style=3
+linewidth=2 linecolor=DarkGray
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Digital font=1 startx=385 starty=329 endx=505 endy=789
+labelspace=0 unitspace=0 spacing=19 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+TNFDLFUR07 type="FLOAT" width=4 prec=0 label="FWD U" units="default" 
+TNFDLFMR06 type="FLOAT" width=4 prec=0 label="FWD M" units="default" 
+TNFDLFLR01 type="FLOAT" width=4 prec=0 label="FWD L" units="default" 
+TNFDLMUR08 type="FLOAT" width=4 prec=0 label="MID U" units="default" 
+TNFDLMLR02 type="FLOAT" width=4 prec=0 label="MID L" units="default" 
+TNFDLAUR09 type="FLOAT" width=4 prec=0 label="MID U" units="default" 
+TNFDLALR03 type="FLOAT" width=4 prec=0 label="MID L" units="default" 
+TNFDLBUR05 type="FLOAT" width=4 prec=0 label="BAC U" units="default" 
+TNFDLBLR04 type="FLOAT" width=4 prec=0 label="BAC L" units="default" 
+TNFDLAUT11 type="FLOAT" width=4 prec=0 label="TOP A" units="default" 
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=387 starty=189 endx=597 endy=244
+style=3
+linewidth=2 linecolor=DarkGray
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Digital font=68 startx=400 starty=125 endx=560 endy=153
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+FanLoopARes type="FLOAT" width=10 prec=0 label=" " units=" " 
+$END-OBJECT
+***********
+$OBJECT Digital font=68 startx=402 starty=204 endx=562 endy=232
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+FanLoopBRes type="FLOAT" width=10 prec=0 label=" " units=" " 
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 startx=456 starty=794 endx=796 endy=854
+FireDetection_Stat textcolor=Black
+Yellow = -1 "Fire Detection FAULT"
+Green = 0 "Fire Detection NORMAL"
+Red = 1 "<< FIRE >>"
+Green = 2 "Loop Continuity Check PASSED"
+Yellow = 3 "Loop Continuity Check FAULT"
+Green = 4 "Loop Ground Check PASSED"
+Yellow = 5 "Loop Ground Check FAULT"
+BurntOrange = 6 "Fire Detection UNKNOWN"
+Magenta = 7 "Fire Detection DISABLED"
+Yellow = 8 "Under Cowl Temp WARNING"
+Red = 9 "Under Cowl Temp FIRE"
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=462 starty=7 endx=807 endy=86
+style=1
+linewidth=4 linecolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=102 displayflag=SystronDonner startx=487 starty=20 endx=764 endy=78
+Blue direction=1 alignment=1
+"Fire Detection"
+"TYPE: Systron Donner"
+$END-OBJECT
+***********
+$OBJECT Text font=102 displayflag=Kidde startx=536 starty=18 endx=714 endy=76
+Blue direction=1 alignment=1
+"Fire Detection"
+"TYPE: Kidde"
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=547 starty=130 endx=583 endy=146
+Black direction=1 alignment=0
+"OHMS"
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=549 starty=209 endx=585 endy=225
+Black direction=1 alignment=0
+"OHMS"
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=639 starty=261 endx=1152 endy=786
+style=2
+boxcolor=DarkGray
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Text font=1 startx=647 starty=327 endx=827 endy=764
+Black direction=1 alignment=2
+"FWD UPPER:"
+""
+"FWD MID  :"
+""
+"FWD LOWER:"
+""
+"MID UPPER:"
+""
+"MID LOWER:"
+""
+"AFT UPPER:"
+""
+"AFT LOWER:"
+""
+"BAC UPPER:"
+""
+"BAC LOWER:"
+""
+"TOP FWD AFT:"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=SystronDonner startx=668 starty=92 endx=913 endy=169
+CoreLoopA_Stat textcolor=Black
+Yellow = -1 "Core Loop A\nFAULT"
+Green = 0 "Core Loop A\nOK"
+Red = 1 "Core Loop A\n>>FIRE<<"
+BurntOrange = 6 "Core Loop A\nUNKNOWN"
+Magenta = 7 "Core Loop A\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=SystronDonner startx=668 starty=171 endx=913 endy=253
+CoreLoopB_Stat textcolor=Black
+Yellow = -1 "Core Loop B\nFAULT"
+Green = 0 "Core Loop B\nOK"
+Red = 1 "Core Loop B\n>>FIRE<<"
+BurntOrange = 6 "Core Loop B\nUNKNOWN"
+Magenta = 7 "Core Loop B\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=Kidde startx=669 starty=93 endx=918 endy=171
+CoreLoopA_Stat textcolor=Black
+Yellow = -1 "Core Loop A\nFAULT"
+Green = 0 "Core Loop A\nOK"
+Red = 1 "Core Loop A\n>>FIRE<<"
+Green = 2 "Core Loop A\nContinuity Test PASSED"
+Yellow = 3 "Core Loop A\nContinuity Test FAULT"
+Green = 4 "Core Loop A\nGround Test PASSED"
+Yellow = 5 "Core Loop A\nGround Test FAULT"
+BurntOrange = 6 "Core Loop A\nUNKNOWN"
+Magenta = 7 "Core Loop A\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=98 displayflag=Kidde startx=669 starty=172 endx=918 endy=253
+CoreLoopB_Stat textcolor=Black
+Yellow = -1 "Core Loop B\nFAULT"
+Green = 0 "Core Loop B\nOK"
+Red = 1 "Core Loop B\n>>FIRE<<"
+Green = 2 "Core Loop B\nContinuity Test PASSED"
+Yellow = 3 "Core Loop B\nContinuity Test FAULT"
+Green = 4 "Core Loop B\nGround Test PASSED"
+Yellow = 5 "Core Loop B\nGround Test FAULT"
+BurntOrange = 6 "Core Loop B\nUNKNOWN"
+Magenta = 7 "Core Loop B\nDISABLED"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=728 starty=266 endx=1095 endy=293
+Blue direction=1 alignment=1
+"DISABLE UNDER COWL TEMPS"
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=323 endx=931 endy=368
+TOGGLE TNFDLFUL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=368 endx=931 endy=413
+TOGGLE TNFDLFML_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=413 endx=931 endy=458
+TOGGLE TNFDLFLL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=458 endx=931 endy=503
+TOGGLE TNFDLMUL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=503 endx=931 endy=548
+TOGGLE TNFDLMLL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=548 endx=931 endy=593
+TOGGLE TNFDLAUL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=593 endx=931 endy=638
+TOGGLE TNFDLALL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=638 endx=931 endy=683
+TOGGLE TNFDLBUL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=683 endx=931 endy=728
+TOGGLE TNFDLBLL_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=826 starty=728 endx=931 endy=773
+TOGGLE TNFDLFUT_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=843 starty=297 endx=1085 endy=320
+Blue direction=1 alignment=0
+"LEFT                  RIGHT"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=1 displayflag=Kidde startx=844 starty=793 endx=1137 endy=852
+parameter=FLGroundTest_S type=MOMENTARY
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="Ground Test"
+oncolor=Green
+$END-STATE
+$STATE 0
+label="Ground Test"
+oncolor=LightGray
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=927 starty=108 endx=1137 endy=163
+style=3
+linewidth=2 linecolor=DarkGray
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=927 starty=192 endx=1137 endy=247
+style=3
+linewidth=2 linecolor=DarkGray
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Digital font=68 startx=942 starty=123 endx=1082 endy=151
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+CoreLoopARes type="FLOAT" width=10 prec=0 label=" " 
+$END-OBJECT
+***********
+$OBJECT Digital font=68 startx=942 starty=207 endx=1102 endy=235
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+CoreLoopBRes type="FLOAT" width=10 prec=0 label=" " units=" " 
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=323 endx=1113 endy=368
+TOGGLE TNFDLFUR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=368 endx=1113 endy=413
+TOGGLE TNFDLFMR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=413 endx=1113 endy=458
+TOGGLE TNFDLFLR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=458 endx=1113 endy=503
+TOGGLE TNFDLMUR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=503 endx=1113 endy=548
+TOGGLE TNFDLMLR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=548 endx=1113 endy=593
+TOGGLE TNFDLAUR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=593 endx=1113 endy=638
+TOGGLE TNFDLALR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=638 endx=1113 endy=683
+TOGGLE TNFDLBUR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=683 endx=1113 endy=728
+TOGGLE TNFDLBLR_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=97 startx=1008 starty=728 endx=1113 endy=773
+TOGGLE TNFDLAUT_F setvalue=-1 onlabel="Disabled" offlabel="Enabled" \
+labelcolor=Black oncolor=Magenta offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=1089 starty=128 endx=1125 endy=144
+Black direction=1 alignment=0
+"OHMS"
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=1089 starty=212 endx=1125 endy=228
+Black direction=1 alignment=0
+"OHMS"
+$END-OBJECT
+***********
+$END-DISPLAY
+

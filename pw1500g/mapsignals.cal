@@ -1,0 +1,82 @@
+$GROUP "mapsignals" 
+#C __________
+FnI:Lbs	FnMeasure
+NFI:RPM	(NFHz * NFTimeBase)
+NFPct:%	value2pct (NFI NF100)
+#if	(((N1Hz * N1TimeBase) < 20.0) & (EEC_N1 >= 20))
+#C We have a glitch in N1Hz...
+N1I:RPM	EEC_N1
+#else	
+N1I:RPM	(N1Hz * N1TimeBase)
+#endif	
+N1Pct:%	value2pct (N1I N1100)
+#C ========================================================
+N2I:RPM	(N2Hz * N2TimeBase)
+#if	((N2I < 7300.0) & (EEC_N2 > (N2I + 100.0)))
+#C We have a glitch in N2Hz...
+N2I:RPM	EEC_N2
+#endif	
+N2Pct:%	value2pct (N2I N2100)
+PAIRsN2:RPM	N2I
+ShutDownEGT:DegC	EEC_ITT
+#C ========================================================
+#if	(WfI < 20000)
+WfS:PPH	Wf_Avg
+#else	
+WfS:PPH	EEC_WF
+#endif	
+OilQtyGal:Gal	qts2gals (OilQ)
+TDEWPT:DegF	DewPtF
+#C =========================================================
+#C Replace OLD TLA_UNIQUE Parameter.
+#C Added for Ceres 7. DJR 9/24/12
+#C Added PLA_Handle Smoothing, (DJR 6/3/20)...
+PLA_Handle_s:VDC	smoothsignal(PLA_Handle PLA_Handle_s WeightFac)
+#C PLA_OffSet for PLA_Command to equal PLA_Handle...
+#C See AutoThrottle Check.xlsx...
+#C ****************************************************************
+PLA_Actual:Deg	(PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+#C ****************************************************************
+#C **** See initlookups.cal for Coeff's, (DJR 12/3/21)
+#C PLA_Corr:Deg	((TRA_Cor_Coeff1 * PLA_Actual) + TRA_Cor_Coeff2)
+#C TRA_Cmd_Corr:Deg	((TRA_Cor_Coeff1 * TRA_Cmd) + TRA_Cor_Coeff2)
+#C ****************************************************************
+#if	(AutoTLAEnable_F)
+#C Auto Throttle without the PLA_Handle...
+#C ****** UEI Resolver/RVDT Calc for TRA_Cmd (DJR 02/24/22) *******
+#C ****** See initlookups.cal for TLA_VRatio values ***************
+TLAPriUEI:Deg		(TRA_Cmd / Volts2TRACoeff)
+#C ****************************************************************
+#else	
+#C ****** UEI Resolver/RVDT Calc for PLA_Handle (DJR 02/22/22) ****
+TLAPriUEI:Deg		(PLA_Actual / Volts2TRACoeff)
+#endif	
+#C ****************************************************************
+#C ---------------------------------------------
+TLASecUEI:Deg	TLAPriUEI
+TRA_Actual:Deg	(TLAPriUEI * Volts2TRACoeff)
+#C ---------------------------------------------
+#C ****************************************************************
+#C **** TRA_Actual Calc for TLAPriCHResolver (DJR 02/22/22) ****
+#C **** See initlookups.cal for Coeff's, (DJR 12/3/21)
+#C ****************************************************************
+#C ---------------------------------------------
+#C #if	(TRA_Actual <= -13.0)
+#C PLA_TargMx:Deg	-13.5
+#C PLA_TargMn:Deg	-15.5
+#C #else	
+PLA_TargMx:Deg	(TRA_Actual + 1.5)
+PLA_TargMn:Deg	(TRA_Actual - 1.5)
+#C #endif	
+#C **********************************************************
+#C * Added AutoThrottle capabilities...
+#C * Set the actual Ramping TLA Voltage (PLA_Command) here...
+#C * PLA_Command MUST be nagitive (-VDC)(Ref Drawing B5730704)...
+#if	(AutoThrottle_F & AutoPL_I & ~AutoTLAEnable_F)
+#C ****************************************************************
+#C ****** UEI PLA_Command Calc for TRA_Cmd (DJR 02/22/22) *********
+PLA_Command:VDC		-(TLA_PLA_mcoeff * TRA_Cmd + TLA_PLA_bcoeff)
+#C ****************************************************************
+#endif	
+#C =========================================================
+$END-GROUP

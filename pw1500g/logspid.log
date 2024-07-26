@@ -1,0 +1,16 @@
+Assigning input param SAP_Cmd to input 0
+D StartAir_CLID1 START type 2 rate 10 feedback SAP_Cmd output SAP_CmdPct
+D    kd 10.000000 manual_out 2.000000 propband 38.099998
+D    resettime 0.100000 ratetime 0.010000 hold 0
+D    reverse_acting 1 automode 1 setpoint SAPTargPct
+D    SP_from_cvt NO feedforward DONOTUSE debug OFF
+D    minscale 0.000000 maxscale 0.000000
+D StartAir_CLID1 LOOPSTOP
+Assigning input param SAP_Cmd to input 0
+D StartAir_CLID1 START type 2 rate 10 feedback SAP_Cmd output SAP_CmdPct
+D    kd 10.000000 manual_out 2.000000 propband 38.099998
+D    resettime 0.100000 ratetime 0.010000 hold 0
+D    reverse_acting 1 automode 1 setpoint SAPTargPct
+D    SP_from_cvt NO feedforward DONOTUSE debug OFF
+D    minscale 0.000000 maxscale 0.000000
+D StartAir_CLID1 LOOPSTOP

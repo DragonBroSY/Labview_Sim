@@ -1,0 +1,34 @@
+$SCANRATE 20
+#include sharedmem.cfg
+#include scannames.cfg
+#include crscalcs.cfg
+#include controlloop.cfg
+#include open.cfg
+#include tables.cfg
+#include inputwindow.cfg
+#include close.cfg
+#include ../calibrate/vxicalcs.cfg
+#include calcsinit.cfg
+#include calcsmain.cfg
+#include calcsfinal.cfg
+#include timers.cfg
+#include wetcal.cfg
+#include declare.cfg
+#include plotrec.cfg
+#include devinfo.cfg
+#include scananalysis.cfg
+#include displays.cfg
+#include goodness.cfg
+#include eventprint.cfg
+#include attribs.cfg
+#include crts.cfg
+#include autotest.cfg
+#include limits.cfg
+#include commentset.cfg
+#include eventnames.cfg
+#include reportdest.cfg
+$RIGPARAM PLA_Handle
+$RIGIDLE=-33.500000
+$RIGTAKEOFF=33.500000
+$ENGINEON EngineRunning
+$TOGGLELIMIT RunMode

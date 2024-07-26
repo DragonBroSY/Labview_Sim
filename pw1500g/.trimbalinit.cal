@@ -1,0 +1,11 @@
+$GROUP "generic"
+rotorspeed:RPM    N1S
+vib1amp:IPS      VibFAmp  
+vib2amp:IPS      None
+vib3amp:IPS      VibRAmp
+vib4amp:IPS      None
+vib1phase:Deg     VibFPhs
+vib2phase:Deg     None
+vib3phase:Deg     VibRPhs
+vib4phase:Deg     None
+$END-GROUP

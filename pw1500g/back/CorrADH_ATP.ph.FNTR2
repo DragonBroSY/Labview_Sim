@@ -1,0 +1,107 @@
+$PHASE CorrADH_ATP length=-1       level=0 controlrelay=None common=0
+****************************************************
+**** Correlation Accel Decel and Hold functions...
+****************************************************
+*******************************************
+***** Accel Functions
+*******************************************
+#if ((CorrStage1 = 0) & AutoThrottle_F & Accel_F)
++0 SET CorrStage1 10
++0 SET CorrStageTxt concat (StepTxt "Correlation, Auto Accel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs, for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
++0 SET StageTmr_F ON
+#elseif ((CorrStage1 = 0) & ~AutoThrottle_F & Accel_F)
++0 SET CorrStage1 5
++0 SET CorrStageTxt concat (StepTxt "Correlation, Waiting for Accel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs, for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
+#elseif ((CorrStage1 = 5) & ~AutoThrottle_F & TRAAccel_F)
++0 SET CorrStage1 10
++0 SET CorrStageTxt concat (StepTxt "Correlation, Accel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
++0 SET StageTmr_F ON
+*******************************************
+***** Decel Functions
+*******************************************
+#elseif ((CorrStage1 = 0) & AutoThrottle_F & Decel_F)
++0 SET CorrStage1 10
++0 SET CorrStageTxt concat (StepTxt "Correlation, Auto Decel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
++0 SET StageTmr_F ON
+#elseif ((CorrStage1 = 0) & ~AutoThrottle_F & Decel_F)
++0 SET CorrStage1 5
++0 SET CorrStageTxt concat (StepTxt "Correlation, Waiting for Decel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs, for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
+#elseif ((CorrStage1 = 5) & ~AutoThrottle_F & TRADecel_F)
++0 SET CorrStage1 10
++0 SET CorrStageTxt concat (StepTxt "Correlation, Decel to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
++0 SET StageTmr_F ON
+#elseif ((CorrStage1 = 10) & StageTmrLim_F & (Accel_F | Decel_F))
++0 SET CorrStage1 15
++0 SET CorrStageTxt concat (StepTxt "Correlation, Waiting for ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
+*******************************************
+***** GoTo Hold Functions
+*******************************************
+#elseif ((CorrStage1 = 0) & GoToHold_F)
++0 SET CorrStage1 10
++0 SET CorrStageTxt concat (StepTxt "Correlation, Hold at ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMn)
++0 SET CorrStageTxt concat (CorrStageTxt " to ")
++0 SET CorrStageTxt concat (CorrStageTxt FNTR2_TargMx)
++0 SET CorrStageTxt concat (CorrStageTxt " FNTR2 Lbs, for ")
++0 SET CorrStageTxt concat (CorrStageTxt StageTmrLim)
++0 SET CorrStageTxt concat (CorrStageTxt " Sec.")
++0 SET StageTmr_F ON
+#elseif ((CorrStage1 = 10) & (StageTmr >= (StageTmrLim - 63)) & GoToHold_F)
++0 SET CorrStage1 15
++0 EXECUTE storeCorrelation_ATP
+#elseif (((CorrStage1 = 10)|(CorrStage1 = 15)) & StageTmrLim_F & GoToHold_F)
++0 SET CorrStage1 20
+#elseif (((CorrStage1 = 10)|(CorrStage1 = 15)) & (FNTR2 > FNTR2_TargMn) & Accel_F)
++0 SET CorrStage1 20
+#elseif (((CorrStage1 = 10)|(CorrStage1 = 15)) & (FNTR2 < FNTR2_TargMx) & Decel_F)
++0 SET CorrStage1 20
+#elseif	(CorrStage1 = 20)
++0 SET CorrStage1 0
++0 SET CorrStage (CorrStage + 5)
++0 SET StageTmr_F OFF
+#endif
+$END-PHASE
+**********
+

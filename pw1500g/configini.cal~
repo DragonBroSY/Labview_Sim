@@ -1,0 +1,304 @@
+$GROUP "configini"  when=4
+#C **********************************************************
+#C ** Version Information **
+#C ** see ./docs/configini.Notes for More Info **
+#C **********************************************************
+Version:	concat ("" "1.00.3")
+DuctSet:	concat("" "DL15")
+#C **********************************************************
+#if		UseOEMManual_L
+EngineManPN:	concat ("" "5305815-OEM")
+EngineManRev:	concat ("" "03/12/21")
+ManualRelease:	concat ("" "27.00")
+#else
+EngineManPN:	concat ("" "5305815")
+EngineManRev:	concat ("" "04/14/21")
+ManualRelease:	concat ("" "27.01")
+#endif	
+Info1:	concat ("" "PW1500G Manual Revision 25.00 - New Engine Configuration. (DJR 03/08/21)")
+Info2:	concat ("" "PW1500G Manual Revision 27.01 - New Engine Configuration. (DJR 06/10/21)")
+Info3:	concat ("" "Version 1.00.2, Cell 3 Preliminary Facility Modifiers installed. (DJR 12/17/21)")
+Info4:	concat ("" "Version 1.00.3, Cell 4 Preliminary Facility Modifiers installed. (DJR 02/15/22)")
+Info5:	concat ("" "")
+Info6:	concat ("" "")
+Info7:	concat ("" "")
+Info8:	concat ("" "")
+#C ==========================================================
+#C ------ DashModifier Logic --------------------------------
+#C DashModifier:	concat ("" "None")
+#C ==========================================================
+DM_None:        compare (DashModifier, "None")
+DM_3:		compare (DashModifier, "-3")
+#C ----------------------------------------------------------
+#if     DM_None
+EngNameNew:     concat (EngName "")
+#else
+EngNameNew:     concat (EngName DashModifier)
+#endif
+#C ==========================================================
+DN_1519G:	compare (DashNumber, "PW1519G")
+DN_1521G:	compare (DashNumber, "PW1521G")
+DN_1521GA:	compare (DashNumber, "PW1521GA")
+DN_1524G:	compare (DashNumber, "PW1524G")
+DN_1525G:	compare (DashNumber, "PW1525G")
+PW1519G:	(DN_1519G & DM_None)
+PW1521G:	(DN_1521G & DM_None)
+PW1521GA:	(DN_1521GA & DM_None)
+PW1521G3:	(DN_1521G & DM_3)
+PW1524G:	(DN_1524G & DM_None)
+PW1524G3:	(DN_1524G & DM_3)
+PW1525G:	(DN_1525G & DM_None)
+PW1525G3:	(DN_1525G & DM_3)
+PW1519:		PW1519G
+PW1521:		(PW1521G | PW1521G3 | PW1521GA)
+PW1524:		(PW1524G | PW1524G3)
+PW1525:		(PW1525G | PW1525G3)
+PW1500:		(PW1519 | PW1521 | PW1524 | PW1525)
+#C ==========================================================
+#C **********************************************************
+#if		PW1525G3
+EngModel:	concat ("" "PW1525G-3")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6510")
+ACTypeTxt:	concat ("" "CS300")
+DSUDataPN:	concat ("" "5325212")
+MapNetBaseName:	concat ("" "PW1525G-3")
+#C *** NOTE: ACID = Aircraft Type ID (ACType)...
+ACID:		39
+ACTORat:Lbf	23300.0
+GTTORat:Lbf	24400.0
+#elseif		PW1524G3
+EngModel:	concat ("" "PW1524G-3")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6511")
+ACTypeTxt:	concat ("" "CS300")
+DSUDataPN:	concat ("" "5325205")
+MapNetBaseName:	concat ("" "PW1524G-3")
+ACID:		39
+ACTORat:Lbf	23300.0
+GTTORat:Lbf	24400.0
+#elseif		PW1521G3
+EngModel:	concat ("" "PW1521G-3")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6512")
+ACTypeTxt:	concat ("" "CS300")
+DSUDataPN:	concat ("" "5325207")
+MapNetBaseName:	concat ("" "PW1521G-3")
+ACID:		39
+ACTORat:Lbf	20975.0
+GTTORat:Lbf	21970.0
+#elseif		PW1525G
+EngModel:	concat ("" "PW1525G")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6506")
+ACTypeTxt:	concat ("" "CS100")
+DSUDataPN:	concat ("" "5325209")
+MapNetBaseName:	concat ("" "PW1525G")
+ACID:		38
+ACTORat:Lbf	23300.0
+GTTORat:Lbf	24400.0
+#elseif		PW1524G
+EngModel:	concat ("" "PW1524G")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6504")
+ACTypeTxt:	concat ("" "CS100")
+DSUDataPN:	concat ("" "5325211")
+MapNetBaseName:	concat ("" "PW1524G")
+ACID:		38
+ACTORat:Lbf	23300.0
+GTTORat:Lbf	24400.0
+#elseif		PW1521G
+EngModel:	concat ("" "PW1521G")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6505")
+ACTypeTxt:	concat ("" "CS100")
+DSUDataPN:	concat ("" "5325206")
+MapNetBaseName:	concat ("" "PW1521G")
+ACID:		38
+ACTORat:Lbf	20975.0
+GTTORat:Lbf	21970.0
+#elseif		PW1521GA
+EngModel:	concat ("" "PW1521GA")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6507")
+ACTypeTxt:	concat ("" "CS100")
+DSUDataPN:	concat ("" "5325781")
+MapNetBaseName:	concat ("" "PW1521GA")
+ACID:		38
+ACTORat:Lbf	20975.0
+GTTORat:Lbf	21970.0
+#elseif		PW1519G
+EngModel:	concat ("" "PW1519G")
+ModelSeqNo:	concat ("" "UNK")
+EngSpecNo:	concat ("" "6514")
+ACTypeTxt:	concat ("" "CS100")
+DSUDataPN:	concat ("" "5325208")
+MapNetBaseName:	concat ("" "PW1519G")
+ACID:		38
+ACTORat:Lbf	18875.0
+GTTORat:Lbf	19775.0
+#endif
+#C ====================================================================================
+#C Set per the Workscope.cfg parameters. 
+WSLookup:	concat ("" WSHCM)
+dummy:		startautotest(WSLookup_ATP)
+Mapnet_HPCSTD:	WSLookupVal
+WSLookup:	concat ("" WSHTCM)
+dummy:		startautotest(WSLookup_ATP)
+Mapnet_HPTSTD:	WSLookupVal
+#C -----------------------------------------------------------------------------------
+#C Compressor Intermediate Case...
+WSCICM_HM:	(compare (WSCICM,"Level 3 (L3)") | compare (WSCICM,"Level 2.9 (L2.9)"))
+WSCICG_HM:	(compare (WSCICG,"Level 3 (L3)") | compare (WSCICG,"Level 2.9 (L2.9)"))
+WSCIC_HM:	(WSCICM_HM & WSCICG_HM)
+WSCICM_LM:	compare (WSCICM,"Level 0 (L0)")
+WSCICG_LM:	compare (WSCICG,"Level 0 (L0)")
+WSCIC_LM:	(WSCICM_LM & WSCICG_LM)
+#C -----------------------------------------------------------------------------------
+#C High Compressor...
+WSHCM_HM:	(compare (WSHCM,"Level 3 (L3)") | compare (WSHCM,"Level 2.9 (L2.9)"))
+WSHCRSG_HM:	(compare (WSHCRSG,"Level 3 (L3)") | compare (WSHCRSG,"Level 2.9 (L2.9)"))
+WSHCRG_HM:	(compare (WSHCRG,"Level 3 (L3)") | compare (WSHCRG,"Level 2.9 (L2.9)"))
+WSHPC_HM:	(WSHCM_HM & WSHCRSG_HM & WSHCRG_HM)
+WSHCM_LM:	(compare (WSHCM,"Level 0 (L0)") | compare (WSHCM,"Level 1 (L1)") | compare (WSHCM,"Level 1.3 (L1.3)"))
+WSHCRSG_LM:	(compare (WSHCRSG,"Level 0 (L0)") | compare (WSHCRSG,"Level 1.3 (L1.3)"))
+WSHCFCG_LM:	(compare (WSHCFCG,"Level 0 (L0)") | compare (WSHCFCG,"Level 1.3 (L1.3)"))
+WSHCRG_LM:	(compare (WSHCRG,"Level 0 (L0)") | compare (WSHCRG,"Level 1.3 (L1.3)"))
+WSHPC_LM:	(WSHCM_LM & WSHCRSG_LM & WSHCFCG_LM & WSHCRG_LM)
+#C -----------------------------------------------------------------------------------
+#C High Turbine...
+WSHTCM_HM:	(compare (WSHTCM,"Level 3 (L3)") | compare (WSHTCM,"Level 2.9 (L2.9)"))
+WSHTSG_HM:	(compare (WSHTSG,"Level 3 (L3)") | compare (WSHTSG,"Level 2.9 (L2.9)"))
+WSHTRG_HM:	(compare (WSHTRG,"Level 3 (L3)") | compare (WSHTRG,"Level 2.9 (L2.9)"))
+WSHPT_HM:	(WSHTCM_HM & WSHTSG_HM & WSHTRG_HM)
+WSHTCM_LM:	(compare (WSHTCM,"Level 0 (L0)") | compare (WSHTCM,"Level 1.3 (L1.3)"))
+WSHTSG_LM:	(compare (WSHTSG,"Level 0 (L0)") | compare (WSHTSG,"Level 1.3 (L1.3)"))
+WSHTRG_LM:	(compare (WSHTRG,"Level 0 (L0)") | compare (WSHTRG,"Level 1.3 (L1.3)"))
+WSHPT_LM:	(WSHTCM_LM & WSHTSG_LM & WSHTRG_LM)
+#C -----------------------------------------------------------------------------------
+WSDCM_HM:	(compare (WSDCM,"Level 3 (L3)") | compare (WSDCM,"Level 2.9 (L2.9)"))
+Workscope_HM:	compare (Workscope, "Full Interval Visit (FIV)")
+Workscope_MM:	compare (Workscope, "Repair Visit (RPR)")
+Workscope_LM:	compare (workscope, "Project Visit (PV)")
+Workscope_MLI:	compare (workscope, "Serviceability Check (SC)")
+Workscope_COR:	compare (Workscope, "Correlation")
+#C -----------------------------------------------------------------------------------
+#C WSPSRVibLim_F:	(WSHPCTieShaft & WSPSRIBR6 & WSIBR6)
+WSN2LMVibLim_F:	(WSHPC_LM & WSHPT_LM)
+#C *** Used for Full Refurbishment Ref. EA???????.
+Refurb:		(WSHCM_HM & WSHTCM_HM)
+#C HotSectionRefurb:	(WSHTCM_HM & ~WSHCM_HM)
+HotSectionRefurb:	WSHTCM_HM
+#C ===================================================================================
+#C *** Workscope parameters...
+#C ********************************
+#if	WorkScope_COR
+#C *** Test Cell Correlation
+MapNetSTD:	8
+#elseif	((Mapnet_HPTSTD < 2.9) & (Mapnet_HPCSTD < 2.9) & WorkScope_MM)
+#C *** Repair As Necessary
+MapNetSTD:	1
+#elseif	((Mapnet_HPTSTD < 2.9) & Workscope_MM)
+#C *** Hot Section Repair
+MapNetSTD:	2
+#elseif	(Refurb & Workscope_HM)
+#C *** Full Engine Refurbished
+MapNetSTD:	4
+#elseif	(HotSectionRefurb & Workscope_MM)
+#C *** Hot Section Refurbished
+MapNetSTD:	3
+#elseif	WorkScope_LM
+#C *** Modification Upgrades Only
+MapNetSTD:	5
+#elseif	WorkScope_LM
+#C *** Engine Model Conversion
+MapNetSTD:	6
+#elseif	WorkScope_MLI
+#C *** Test "As Received" (No previous repairs)
+MapNetSTD:	7
+#else	
+#C *** Unknown
+MapNetSTD:	0
+#endif
+#C ****************************
+#C MapNetDate:	concat ("" SYSDATE) ! See initsaveparams.cal
+#C ********* Moved starting on Line 85 *********
+#C #if PW1525G
+#C MapNetBaseName:	concat ("" "PW1525G")
+#C #elseif PW1525G3
+#C MapNetBaseName:	concat ("" "PW1525G-3")
+#C #elseif PW1524G
+#C MapNetBaseName:	concat ("" "PW1524G")
+#C #elseif PW1524G3
+#C MapNetBaseName:	concat ("" "PW1524G-3")
+#C #elseif PW1521G
+#C MapNetBaseName:	concat ("" "PW1521G")
+#C #elseif PW1521G3
+#C MapNetBaseName:	concat ("" "PW1521G-3")
+#C #elseif PW1521GA
+#C MapNetBaseName:	concat ("" "PW1521GA")
+#C #elseif PW1519G
+#C MapNetBaseName:	concat ("" "PW1519G")
+#C #else
+#C MapNetBaseName:	concat ("" "PW1525G")
+#C #endif
+#C ****** PW Location Parameters *******
+#if	compare (CustomerName "Delta3")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL3")
+#C #elseif	compare (CustomerName "Delta3")
+#C ***** Alternate Delta3 Loc and ID...
+#C TestBedLoc:	concat("" "DAL-ATL")
+#C TestBedID:	concat("" "ATL3")
+#elseif	compare (CustomerName "Delta4")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL4")
+#elseif	compare (CustomerName "Delta5")
+TestBedLoc:	concat("" "DAL")
+TestBedID:	concat("" "DAL5")
+#elseif	compare (CustomerName "DeltaMSP")
+TestBedLoc:	concat("" "DAL-MINN")
+TestBedID:	concat("" "AC1")
+#endif
+MapNetGroup:	concat ("" "PW1500G")
+MapNetTSTYPE:	3
+MapNetDS:	15
+MapNetEECVer:	concat ("" EECNAME)
+#C MapNetCONF:	concat ("" "PSTN")
+MapNetCONF:	concat ("" "BARE")
+MapNetPNOZ:	concat ("" ACTypeTxt)
+MapNetTitle:	concat ("" "Acceptance Testing")
+MapnetTT:	concat ("" TSO)
+MapnetTC:	concat ("" TCSN)
+#C FANTEST: 0=Own Fan, 1=Gold STD.
+#C MapnetFANTEST:	0
+MapNetFanGoldSet:	MapNetFANTEST
+#if	Compare (CompWash, "YES")
+MapNetWWASH:	concat ("" "Y")
+#elseif	Compare (CompWash, "NO")
+MapNetWWASH:	concat ("" "N")
+#else	
+MapNetWWASH:	concat ("" "U")
+#endif	
+#C ********** Mapnet Workscope Lookups **************
+#C ********* Moved to SetMapnetWS_ATP.ph ************
+dummy:		startautotest (SetMapnetWS_ATP)
+#C See Final.cal for MapNetVibXXXXX Info...
+#C ========================================================================
+#C EFlange_F:	compare (FwdBOMSensor "E-Flange")
+#C AP21_F:		compare (FwdBOMSensor "AP21")
+EECSWVer:	concat("" EECName)
+CowlAICk_F:	OFF
+#C ========================================================================
+DisableFireLoops:	concat ("" "ALL")
+FireLoopType:		concat ("" "Systron Donner/Meggitt")
+#C ********************** Disable Fire Loops above ************************
+DisableFanLoops_L:	compare (DisableFireLoops "Fan Loops Only")
+DisableCoreLoops_L:	compare (DisableFireLoops "Core Loops Only")
+#C DisableOvhtLoops_L:	compare (DisableFireLoops "Ovht Loops Only")
+DisableOvhtLoops_L:	ON
+DisableFireLoops_L:	compare (DisableFireLoops "ALL")
+Kidde:			compare (FireLoopType "Kidde")
+SystronDonner:		compare (FireLoopType "Systron Donner/Meggitt")
+#C ========================================================================
+$END-GROUP

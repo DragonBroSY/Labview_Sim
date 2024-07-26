@@ -1,0 +1,195 @@
+$DISPLAY "Throttle Control1" background=Black 
+$STOREDISPLAY Append
+$OBJECT Switch doublehite=0 box=0 startx=134 starty=348 endx=210 endy=396
+TOGGLE fast_S onlabel="Fast" offlabel="Fast"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (Fast_S | (~Med_S & ~Slow_S))
+Slow_S:      OFF
+Med_S:      OFF
+speed:      fastspeed
+#endif
+#if  (~Fast_S)
+Fast_S:     ON
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=134 starty=432 endx=210 endy=480
+TOGGLE Med_S onlabel="Medium" offlabel="Medium"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if     (Med_S | (~Fast_S & ~Slow_S))
+Slow_S: OFF
+Fast_S: OFF
+speed:	medspeed
+#endif      
+#if	(~Med_S)
+Med_S:  ON
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=134 starty=516 endx=210 endy=564
+TOGGLE Slow_S onlabel="Slow" offlabel="Slow"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (Slow_S | (~Fast_S & ~Med_S))
+Med_S:   OFF
+Fast_S:  OFF
+speed:   slowspeed
+#endif      
+#if   (~Slow_S)
+Slow_S:  ON
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=10 starty=332 endx=90 endy=372
+TOGGLE MaxPower_S onlabel="Max\nPower" offlabel="Max\nPower"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (Idle_S)
+MaxPower_S:      OFF
+#elseif      (MaxPower_S)
+increaseTLA:      ON
+GoingToMaxPower:  ON
+AutoThrottle_F:   ON
+#else      
+GoingToMaxPower:  OFF
+increaseTLA:      OFF
+AutoThrottle_F:   OFF
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=10 starty=402 endx=90 endy=442
+TOGGLE Idle_S onlabel="Low\nIdle" offlabel="Low\nIdle"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (MaxPower_S)
+Idle_S:      	OFF
+#elseif      	Idle_S
+decreaseTLA:      ON
+GoingToIdle:      ON
+AutoThrottle_F:   ON
+#else      
+GoingToIdle:      OFF
+decreaseTLA:      OFF
+AutoThrottle_F:   OFF
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=10 starty=472 endx=115 endy=532
+MOMENTARY Increase_S onlabel="Increase" offlabel="Increase"offcolor=LightGray oncolor=Green 
+$RELEASE
+increaseTLA:      OFF
+$END-RELEASE
+$PUSH
+increaseTLA:      ON
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=10 starty=542 endx=115 endy=602
+MOMENTARY Decrease_S onlabel="Decrease" offlabel="Decrease"offcolor=LightGray oncolor=Green 
+$RELEASE
+decreaseTLA:      OFF
+$END-RELEASE
+$PUSH
+decreaseTLA:      ON
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=400 starty=526 endx=480 endy=576
+TOGGLE OverRide_S onlabel="Override\nMax\nStop" offlabel="Override\nMax\nStop"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (OverRide_S)
+OverRide:      ON
+OverRideTime:sec      0
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=520 starty=526 endx=600 endy=576
+TOGGLE SetMaxPower_S onlabel="Set Max\nStop" offlabel="Set Max\nStop"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if      (~MaxPowerSet)
+MaxStop:deg      TLAOutput1
+MaxPowerSet:     ON
+#else      
+MaxStop:deg      TLAOutput1
+MaxPowerSet:     ON
+#endif      
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=288 starty=526 endx=368 endy=576
+TOGGLE ReverseEnable_S onlabel="Reverse\nEnable" offlabel="Reverse\nEnable"offcolor=LightGray oncolor=Green 
+$RELEASE
+#if (~ReverseEnableSet)
+ReverseEnableSet:  ON
+#else
+ReverseEnableSet:  OFF
+#endif
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=150 starty=600 endx=240 endy=640
+TOGGLE TC_Auto_1 onlabel="Auto 1" offlabel="VIB SURVEY"offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=270 starty=600 endx=360 endy=640
+TOGGLE TC_Auto_2 onlabel="Auto 2" offlabel="Auto 2"offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=390 starty=600 endx=480 endy=640
+TOGGLE TC_Auto_3 onlabel="Auto 3" offlabel="Auto 3"offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Switch doublehite=0 box=0 startx=510 starty=600 endx=600 endy=640
+TOGGLE TC_Auto_4 onlabel="Auto 4" offlabel="Auto 4"offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Box doublehite=0 box=0 startx=336 starty=420 endx=572 endy=514
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT Text doublehite=0 box=0 startx=408 starty=424 endx=480 endy=440
+White direction=1
+"STATUS"
+$END-OBJECT
+***********
+$OBJECT Line doublehite=0 box=0 startx=336 starty=448 endx=572 endy=448
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT Bar doublehite=0 box=0 startx=268 starty=356 endx=724 endy=404
+labelspace=13 unitspace=1 labelcolor=White length=16 height=2 format=5.1
+TLA_Actual label="TLA Actual" units="Deg" min=-25 max=45 ticinter=10
+TLAOutput1 label="TRA Command" units="Deg" min=-25 max=45 ticinter=10
+$END-OBJECT
+***********
+$OBJECT Line doublehite=0 box=0 startx=0 starty=320 endx=714 endy=320
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT Line doublehite=0 box=0 startx=714 starty=0 endx=714 endy=680
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT Line doublehite=0 box=0 startx=716 starty=92 endx=962 endy=92
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT Line doublehite=0 box=0 startx=370 starty=0 endx=370 endy=320
+Cyan style=0
+$END-OBJECT
+***********
+$OBJECT String doublehite=1 box=0 startx=350 starty=450 endx=566 endy=482
+ AutoThrottle_F labelspace=9 label="State:" labelcolor=White stringcolor=White
+White = TRUE "Automatic"
+Green = FALSE "Manual   "
+$END-OBJECT
+***********
+$OBJECT Text doublehite=0 box=0 startx=262 starty=326 endx=454 endy=342
+White direction=1
+"THROTTLE CONTROL"
+$END-OBJECT
+$END-DISPLAY
+

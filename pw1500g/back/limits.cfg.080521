@@ -1,0 +1,1188 @@
+$LIMITS
+$PARAMETER BRPart1Tm1
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn1  Green  "" ""
+BRTmrLimMx1  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn1  Green  "" ""
+BRTmrLimMx1  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER BRPart2Tm1
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn2  Green  "" ""
+BRTmrLimMx2  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn2  Green  "" ""
+BRTmrLimMx2  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER BRPart2Tm2
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn2  Green  "" ""
+BRTmrLimMx2  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn2  Green  "" ""
+BRTmrLimMx2  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER BRPart3Tm1
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER BRPart3Tm2
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER BRPart3Tm3
+$START
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$RUN
+$LOWER  Yellow  "" ""
+BRTmrLimMn3  Green  "" ""
+BRTmrLimMx3  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER RunInT2_Diff
+$START
+$LOWER  Green  "" ""
+RunInT2_DiffLim  Red  "" ""
+$RUN
+$LOWER  Green  "" ""
+RunInT2_DiffLim  Red  "Run-In Min N2, T2 Limit of %vRunInT2_DiffLim Exceeded..." ""
+$END-PARAMETER
+
+$PARAMETER RunInHPC_N2
+$START
+$LOWER  Red  "" ""
+RunInHPC_N2Lim  Green  "" ""
+$RUN
+$LOWER  Red  "" ""
+RunInHPC_N2Lim  Green  "" ""
+$END-PARAMETER
+
+$PARAMETER ShapedPart10_N2
+$START
+$LOWER  Red  "" ""
+20750.0  Green  "" ""
+$RUN
+$LOWER  Red  "" ""
+20750.0  Green  "" ""
+$END-PARAMETER
+
+$PARAMETER ShapedPart15_N2
+$START
+$LOWER  Red  "" ""
+20750.0  Green  "" ""
+$RUN
+$LOWER  Red  "" ""
+20750.0  Green  "" ""
+$END-PARAMETER
+
+$PARAMETER WFDiff
+$RUN
+$LOWER  Green  "" ""
+WF_MxSpd  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER MOT2Low_F
+$RUN
+$LOWER  Green  "" "MOT > %vMOTWarmTH DegC, OK to Accel Above Ground Idle..."
+ON  Red  "MOT BELOW %vMOTWarmTH DegC HOLD AT Ground IDLE..." ""
+$END-PARAMETER
+
+$PARAMETER PAIRsN2Pk
+$START
+$LOWER  Yellow  "" ""
+PAIRsN2Mn  Green  "" ""
+PAIRsN2Mx  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER PAIRsN2
+$START
+$LOWER  Yellow  "" ""
+PAIRsN2Mn  Green  "" ""
+PAIRsN2Mx  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER PAIRs
+$START
+$LOWER  Yellow  "" ""
+PAIRsMn  Green  "" ""
+PAIRsMx  Red  "" ""
+$RUN
+$LOWER  Green  "" ""
+50.2  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER StageTmr
+$START
+$LOWER  Green  "" ""
+StageTmrLim  Red  "" ""
+$RUN
+$LOWER  Green  "" ""
+StageTmrLim  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER TDEWPT
+$START
+$LOWER  Green  "" ""
+TDEWPTLim  Red  "" ""
+$RUN
+$LOWER  Green  "" ""
+TDEWPTLim  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER FuelTempMeter
+$START
+$LOWER  Yellow  "" ""
+-40.0  Green  "" ""
+55.0  Red  "Check Test Cell Fuel Temp bulb, Out of Limits." ""
+$RUN
+$LOWER  Yellow  "" ""
+-40.0  Green  "" ""
+55.0  Red  "Check Test Cell Fuel Temp bulb, Out of Limits." ""
+$END-PARAMETER
+
+$PARAMETER VXI_Chassis
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VXIChassisLim  Red  "VXI Chassis OVER TEMP, Please investigate VXI." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VXIChassisLim  Red  "VXI Chassis OVER TEMP, Please investigate VXI." ""      
+$END-PARAMETER
+
+$PARAMETER FuelSuppReg_O
+$START
+$LOWER  Red  "" "INLET Fuel Pressure LOW"     NORMAL=1 
+TRUE  Green  "INLET Fuel Pressure OK" ""      
+$RUN
+$LOWER  Red  "" "INLET Fuel Pressure LOW"     NORMAL=1 
+TRUE  Green  "INLET Fuel Pressure OK" ""      
+$END-PARAMETER
+
+$PARAMETER OFDP
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+-0.50  Green  "" ""      
+OilFiltDiffMx  Red  "Oil Filter Differential Pressure above Max Limit of %vOilFiltDiffMx " ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+-0.50  Green  "" ""      
+OilFiltDiffMx  Red  "Oil Filter Differential Pressure above Max Limit of %vOilFiltDiffMx " ""      
+$END-PARAMETER
+
+$PARAMETER WfLtOff
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+WfLtOffMn  Green  "" ""      
+WfLtOffMx  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+WfLtOffMn  Green  "" ""      
+WfLtOffMx  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER FFDP
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+FFDiffMaxLim  Red  "Fuel House Fuel Filter above Max Limit of %vFFDiffMaxLim Replace Filter." ""      
+$END-PARAMETER
+
+$PARAMETER FIP_PSIG
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+FIPMn  Green  "" ""      
+FIPMx  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+FIPMn  Green  "" ""      
+FIPMx  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER PAIRStart
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+SAPMn  Green  "" ""      
+SAPMx  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+SAPMn  Green  "" ""      
+SAPMx  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER SAP
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+SAPMn  Green  "" ""      
+SAPMx  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+SAPMn  Green  "" ""      
+SAPMx  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER UPSVolt_Stat
+$START
+$LOWER  Green  "" "DC UPS Battery Backup Now Available..."     NORMAL=1 
+1.00  Black  "DC UPS Battery Voltage Normal %vUPSBatCap " "DC UPS Battery Voltage Normal %vUPSBatCap "      
+2.00  Red  "DC UPS Battery Voltage LOW %vUPSBatCap Min 23.0 VDC..." "DC UPS Battery Voltage LOW %vUPSBatCap Min 23.0 VDC..."      
+3.00  Red  "DC UPS System Failed..." ""      
+4.00  Red  "DC UPS System TESTING..." ""      
+$RUN
+$LOWER  Green  "" "DC UPS Battery Backup Now Available..."     NORMAL=1 
+1.00  Black  "DC UPS Battery Voltage Normal %vUPSBatCap " "DC UPS Battery Voltage Normal %vUPSBatCap "      
+2.00  Red  "DC UPS Battery Voltage LOW %vUPSBatCap Min 23.0 VDC..." "DC UPS Battery Voltage LOW %vUPSBatCap Min 23.0 VDC..."      
+3.00  Red  "DC UPS System Failed..." ""      
+$END-PARAMETER
+
+$PARAMETER PLAmp_Stat
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+1.00  Red  "Set PL Amp Manual Control to EXTERNAL" "Set PL Amp Manual Control to EXTERNAL"      
+2.00  Red  "Set Power Lever Amplifier Current Switch to REMOTE" "Set Power Lever Amplifier Current Switch to REMOTE"      
+3.00  Red  "Set Power Lever Amplifier Channel Switch to REMOTE" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+1.00  Red  "Set PL Amp Manual Control to EXTERNAL" "Set PL Amp Manual Control to EXTERNAL"      
+2.00  Red  "Set Power Lever Amplifier Current Switch to REMOTE" "Set Power Lever Amplifier Current Switch to REMOTE"      
+3.00  Red  "Set Power Lever Amplifier Channel Switch to REMOTE" ""      
+$END-PARAMETER
+
+$PARAMETER SHum
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+SpHumCorrLim  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+SpHumCorrLim  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER EFSO_I
+$START
+$LOWER  Black  "" "EFSO Deactivated"     NORMAL=1 
+1.00  Red  "EFSO Activated" ""      storeevent=ON
+$RUN
+$LOWER  Black  "" "EFSO Deactivated"     NORMAL=1 
+1.00  Red  "EFSO Activated" ""      storeevent=ON
+$END-PARAMETER
+
+$PARAMETER PBarMessFlag
+$START
+$LOWER  Black  "" "Pbar is using the Mensor PBar1 Transducer."     NORMAL=1
+1.00  Yellow  "Pbar is using the Met4 PBar2 Transducer." "Pbar is using the Met4 PBar2 Transducer."
+2.00  Red  "Pbar OUT OF LIMITS..." ""
+$RUN
+$LOWER  Black  "" "Pbar is using the Mensor PBar1 Transducer."     NORMAL=1
+1.00  Yellow  "Pbar is using the Met4 PBar2 Transducer." "Pbar is using the Met4 PBar2 Transducer."
+2.00  Red  "Pbar OUT OF LIMITS..." ""
+$END-PARAMETER
+
+$PARAMETER IDGOilIn
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+127.00  Red  "IDG Oil In Temp Exceeds the limit of %f ." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+127.00  Red  "IDG Oil In Temp Exceeds the limit of %f ." ""      
+$END-PARAMETER
+
+$PARAMETER IDGOilOut
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+140.00  Red  "IDG Oil Out Temp Exceeds the limit of %f ." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+140.00  Red  "IDG Oil Out Temp Exceeds the limit of %f ." ""      
+$END-PARAMETER
+
+$PARAMETER OilQ
+$START
+$LOWER  Red  "" ""
+5.0  Green  "" ""
+$RUN
+$LOWER  Red  "" "Oil Quantity of %vOilQ is below the safe limit of 2 Qts."     NORMAL=1 storeevent=ON
+2.0  Yellow  "" "Oil Quantity of %vOilQ is below the Yellow limit of 5 Qts."
+5.0  Green  "" ""
+$END-PARAMETER
+
+$PARAMETER POILAC
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+MOPMn  Yellow  "" ""      
+MOPSafeMn  Green  "" ""      
+MOPSafeMx  Yellow  "" ""      
+MOPMx  Red  "" ""      
+$RUN
+$LOWER  Red  "" "MOP below Min limit of %vMOPMn ."     NORMAL=1 
+MOPMn  BurntOrange  "" ""      
+MOPSafeMn  Yellow  "" ""      
+MOPExpMn  Green  "" ""
+MOPExpMx  Yellow  "" ""
+MOPSafeMx  BurntOrange  "" ""      
+MOPMx  Red  "MOP Above Max Limit of %vMOPMx ." ""      
+$END-PARAMETER
+
+$PARAMETER TOILAC
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+MOTMn  Green  "" ""      
+MOTMx  Red  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+MOTMn  Green  "" ""      
+MOTMx  Red  "Main Oil Temp Over Max Limit of %vMOTMx " ""      
+$END-PARAMETER
+
+$PARAMETER N1C2R
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N1C2_TargMn  White  "" ""      
+N1C2_TargMx  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER N2C2D
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N2C2_TargMn  White  "" ""      
+N2C2_TargMx  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCN1C2Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCN2C2Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCWFDelta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCP25Q2Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCPS3Q2Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCT25Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCT3Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCT45Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER GGCCT49Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.001  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER FNTR2Delta
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+0.0  Green  "" ""      
+0.01  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER FNTR2_AC
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+FNTR2_DECMx  White  "" ""      
+FNTR2_DEC  Green  "" ""      
+FNTR2_ACC  White  "" ""      
+FNTR2_ACCMx  Green  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+FNTR2_DECMx  White  "" ""      
+FNTR2_DEC  Green  "" ""      
+FNTR2_ACC  White  "" ""      
+FNTR2_ACCMx  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER FNTR2
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+FnDMin  White  "" ""      
+FnDMax  Green  "" ""      
+FnCMin  White  "" ""      
+FnCMax  Green  "" ""      
+FnBMin  White  "" ""      
+FnBMax  Green  "" ""      
+FnAMin  White  "" ""      
+FnAMax  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER StartPeakITT
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+ITTStrtMxYLim  Yellow  "" ""      
+ITTStrtMxRLim  Red  "ITT Start Max Limit of %f Exceeded." ""      storeevent=ON
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+ITTStrtMxYLim  Yellow  "" ""      
+ITTStrtMxRLim  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER StrtOnToIdleTmr
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+StrtOnToIdleMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+StrtOnToIdleMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER FuelontoLtOff
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+FuelOnToLOMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+FuelOnToLOMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER EEC_ITT
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+ITTStrtMxYLim  Yellow  "" ""      
+ITTStrtMxRLim  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+ITTRunMxRLim  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER GTBandBTmr
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+GTBandBTmrLim  Red  "FNTR2 has Been Over Band B for more than %vGTBandBTmrLim " ""      
+$END-PARAMETER
+
+$PARAMETER ShapedPart10_N2
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+10000.0  Red  "" ""
+20750.0  Green  "" ""   
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+10000.0  Red  "" ""
+20750.0  Green  "" ""  
+$END-PARAMETER
+
+$PARAMETER ShapedPart15_N2
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+10000.0  Red  "" ""
+20750.0  Green  "" ""   
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+10000.0  Red  "" ""
+20750.0  Green  "" ""  
+$END-PARAMETER
+
+$PARAMETER EEC_N2
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+200.0  Yellow  "" ""   
+N2Red  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N2Red  Red  "N2 RPM Above the Max RedLine Limit..." ""      storeevent=ON
+$END-PARAMETER
+
+$PARAMETER N1S
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+100.0  Yellow  "" ""    
+N1Red  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N1Red  Red  "N1 RPM Above the Max RedLine Limit..." ""      storeevent=ON
+$END-PARAMETER
+
+$PARAMETER N1PctS
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+5.0  Yellow  "" ""   
+N1RPct  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N1RPct  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER N2S
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+200.0  Yellow  "" ""   
+N2Red  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N2Red  Red  "N2 RPM Above the Max RedLine Limit..." ""      storeevent=ON
+$END-PARAMETER
+
+$PARAMETER N2PctS
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+5.0  Yellow  "" ""   
+N2RPct  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+N2RPct  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER EEC_NSA
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+NSA100  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibFBB
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBMx  Yellow  "" ""      
+VibFBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibFNF
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFRMx  Red  "Vib Interm Case Tracked NF Above Max Safe Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFMx  Yellow  "Vib Interm Case Tracked NF Above Max Acceptance Limit..." ""      
+VibFNFRMx  Red  "Vib Interm Case Tracked NF Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibFN1
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1RMx  Red  "Vib Interm Case Tracked N1 Above Max Safe Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1Mx  Yellow  "Vib Interm Case Tracked N1 Above Max Acceptance Limit..." ""      
+VibFN1RMx  Red  "Vib Interm Case Tracked N1 Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibFN2
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2RMx  Red  "Vib Interm Case Tracked N2 Above Max Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2Mx  Yellow  "Vib Interm Case Tracked N2 Above Max Acceptance Limit..." ""      
+VibFN2RMx  Red  "Vib Interm Case Tracked N2 Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibRBB
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBMx  Yellow  "" ""     
+VibRBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibRNF
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFRMx  Red  "Vib P-Flange Tracked NF Above Max Safe Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFMx  Yellow  "Vib P-Flange Tracked NF Above Max Acceptance Limit..." ""      
+VibRNFRMx  Red  "Vib P-Flange Tracked NF Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibRN1
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1RMx  Red  "Vib P-Flange Tracked N1 Above Max Safe Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1Mx  Yellow  "Vib P-Flange Tracked N1 Above Max Acceptance Limit..." ""      
+VibRN1RMx  Red  "Vib P-Flange Tracked N1 Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibRN2
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Red  "Vib P-Flange Tracked N2 Above Max Safe Limit..." ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Yellow  "Vib P-Flange Tracked N2 Above Max Acceptance Limit..." ""      
+VibRN2RMx  Red  "Vib P-Flange Tracked N2 Above Max Safe Limit..." ""      
+$END-PARAMETER
+
+$PARAMETER VibFBBPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBMx  Yellow  "" ""      
+VibFBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBMx  Yellow  "" ""      
+VibFBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibFBBPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBMx  Yellow  "" ""      
+VibFBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFBBMx  Yellow  "" ""      
+VibFBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibFNFPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFMx  Yellow  "" ""      
+VibFNFRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFMx  Yellow  "" ""      
+VibFNFRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibFNFPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFMx  Yellow  "" ""      
+VibFNFRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFNFMx  Yellow  "" ""      
+VibFNFRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibFN1Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1Mx  Yellow  "" ""      
+VibFN1RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1Mx  Yellow  "" ""      
+VibFN1RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibFN1Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1Mx  Yellow  "" ""      
+VibFN1RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN1Mx  Yellow  "" ""      
+VibFN1RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibFN2Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2Mx  Yellow  "" ""      
+VibFN2RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2Mx  Yellow  "" ""      
+VibFN2RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibFN2Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2Mx  Yellow  "" ""      
+VibFN2RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibFN2Mx  Yellow  "" ""      
+VibFN2RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibRBBPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBMx  Yellow  "" ""      
+VibRBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBMx  Yellow  "" ""      
+VibRBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibRBBPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBMx  Yellow  "" ""      
+VibRBBRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRBBMx  Yellow  "" ""      
+VibRBBRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibRNFPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFMx  Yellow  "" ""      
+VibRNFRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFMx  Yellow  "" ""      
+VibRNFRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibRNFPk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFMx  Yellow  "" ""      
+VibRNFRMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRNFMx  Yellow  "" ""      
+VibRNFRMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibRN1Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1Mx  Yellow  "" ""      
+VibRN1RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1Mx  Yellow  "" ""      
+VibRN1RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibRN1Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1Mx  Yellow  "" ""      
+VibRN1RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN1Mx  Yellow  "" ""      
+VibRN1RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER VibRN2Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Yellow  "" ""      
+VibRN2RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Yellow  "" ""      
+VibRN2RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER DVibRN2Pk
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Yellow  "" ""      
+VibRN2RMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+VibRN2Mx  Yellow  "" ""      
+VibRN2RMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER OilCons
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+OilConsMn  Green  "" ""
+OilConsMx  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+OilConsMn  Green  "" ""
+OilConsMx  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER SigOilConsRate
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+-0.03125  Green  "" ""
+0.0125  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+-0.03125  Green  "" ""
+0.0125  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER NeckOilConsRate
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+-0.03125  Green  "" ""
+0.0125  Yellow  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+-0.03125  Green  "" ""
+0.0125  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER strAccelTm
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+AccelTmMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+AccelTmMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER strDecelTm
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+DecelTmMx  Red  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+DecelTmMx  Red  "" ""      
+$END-PARAMETER
+
+$PARAMETER FanLoopA_Stat
+$START
+$LOWER  Yellow  "" "Fan Fire Loop A FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Fan Fire Loop A Ok" "Fan Fire Loop A Ok"      
+1.0  Red  "Fan Fire Loop A <<FIRE>>" "Fan Fire Loop A <<FIRE>>"      
+2.0  Black  "Fan Fire Loop A Continuity Check PASSED" "Fan Fire Loop A Continuity Check PASSED"      
+3.0  Red  "Fan Fire Loop A Continuity Check FAULT" "Fan Fire Loop A Continuity Check FAULT"      
+4.0  Black  "Fan Fire Loop A Ground Check PASSED" "Fan Fire Loop A Ground Check PASSED"      
+5.0  Red  "Fan Fire Loop A Ground Check FAULT" "Fan Fire Loop A Ground Check FAULT"      
+6.0  BurntOrange  "Fan Fire Loop A UNKNOWN" "Fan Fire Loop A UNKNOWN"      
+7.0  Magenta  "Fan Fire Loop A DISABLED" ""      
+$RUN
+$LOWER  Yellow  "" "Fan Fire Loop A FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Fan Fire Loop A Ok" "Fan Fire Loop A Ok"      
+1.0  Red  "Fan Fire Loop A <<FIRE>>" "Fan Fire Loop A <<FIRE>>"      
+2.0  Black  "Fan Fire Loop A Continuity Check PASSED" "Fan Fire Loop A Continuity Check PASSED"      
+3.0  Red  "Fan Fire Loop A Continuity Check FAULT" "Fan Fire Loop A Continuity Check FAULT"      
+4.0  Black  "Fan Fire Loop A Ground Check PASSED" "Fan Fire Loop A Ground Check PASSED"      
+5.0  Red  "Fan Fire Loop A Ground Check FAULT" "Fan Fire Loop A Ground Check FAULT"      
+6.0  BurntOrange  "Fan Fire Loop A UNKNOWN" "Fan Fire Loop A UNKNOWN"      
+7.0  Magenta  "Fan Fire Loop A DISABLED" ""      
+$END-PARAMETER
+
+$PARAMETER FanLoopB_Stat
+$START
+$LOWER  Yellow  "" "Fan Fire Loop B FAULT"  GRACE=2.00   NORMAL=1 
+0.0 Black  "Fan Fire Loop B Ok" "Fan Fire Loop B Ok"      
+1.0  Red  "Fan Fire Loop B <<FIRE>>" "Fan Fire Loop B <<FIRE>>"      
+2.0  Black  "Fan Fire Loop B Continuity Check PASSED" "Fan Fire Loop B Continuity Check PASSED"      
+3.0  Red  "Fan Fire Loop B Continuity Check FAULT" "Fan Fire Loop B Continuity Check FAULT"      
+4.0  Black  "Fan Fire Loop B Ground Check PASSED" "Fan Fire Loop B Ground Check PASSED"      
+5.0  Red  "Fan Fire Loop B Ground Check FAULT" "Fan Fire Loop B Ground Check FAULT"      
+6.0  BurntOrange  "Fan Fire Loop B UNKNOWN" "Fan Fire Loop B UNKNOWN"      
+7.0  Magenta  "Fan Fire Loop B DISABLED" ""      
+$RUN
+$LOWER  Yellow  "" "Fan Fire Loop B FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Fan Fire Loop B Ok" "Fan Fire Loop B Ok"      
+1.0  Red  "Fan Fire Loop B <<FIRE>>" "Fan Fire Loop B <<FIRE>>"      
+2.0  Black  "Fan Fire Loop B Continuity Check PASSED" "Fan Fire Loop B Continuity Check PASSED"      
+3.0  Red  "Fan Fire Loop B Continuity Check FAULT" "Fan Fire Loop B Continuity Check FAULT"      
+4.0  Black  "Fan Fire Loop B Ground Check PASSED" "Fan Fire Loop B Ground Check PASSED"      
+5.0  Red  "Fan Fire Loop B Ground Check FAULT" "Fan Fire Loop B Ground Check FAULT"      
+6.0  BurntOrange  "Fan Fire Loop B UNKNOWN" "Fan Fire Loop B UNKNOWN"      
+7.0  Magenta  "Fan Fire Loop B DISABLED" ""      
+$END-PARAMETER
+
+$PARAMETER CoreLoopA_Stat
+$START
+$LOWER  Yellow  "" "Core Fire Loop A FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Core Fire Loop A Ok" "Core Fire Loop A Ok"      
+1.0  Red  "Core Fire Loop A <<FIRE>>" "Core Fire Loop A <<FIRE>>"      
+2.0  Black  "Core Fire Loop A Continuity Check PASSED" "Core Fire Loop A Continuity Check PASSED"      
+3.0  Red  "Core Fire Loop A Continuity Check FAULT" "Core Fire Loop A Continuity Check FAULT"      
+4.0  Black  "Core Fire Loop A Ground Check PASSED" "Core Fire Loop A Ground Check PASSED"      
+5.0  Red  "Core Fire Loop A Ground Check FAULT" "Core Fire Loop A Ground Check FAULT"      
+6.0  BurntOrange  "Core Fire Loop A UNKNOWN" "Core Fire Loop A UNKNOWN"      
+7.0  Magenta  "Core Fire Loop A DISABLED" ""      
+$RUN
+$LOWER  Yellow  "" "Core Fire Loop A FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Core Fire Loop A Ok" "Core Fire Loop A Ok"      
+1.0  Red  "Core Fire Loop A <<FIRE>>" "Core Fire Loop A <<FIRE>>"      
+2.0  Black  "Core Fire Loop A Continuity Check PASSED" "Core Fire Loop A Continuity Check PASSED"      
+3.0  Red  "Core Fire Loop A Continuity Check FAULT" "Core Fire Loop A Continuity Check FAULT"      
+4.0  Black  "Core Fire Loop A Ground Check PASSED" "Core Fire Loop A Ground Check PASSED"      
+5.0  Red  "Core Fire Loop A Ground Check FAULT" "Core Fire Loop A Ground Check FAULT"      
+6.0  BurntOrange  "Core Fire Loop A UNKNOWN" "Core Fire Loop A UNKNOWN"      
+7.0  Magenta  "Core Fire Loop A DISABLED" ""      
+$END-PARAMETER
+
+$PARAMETER CoreLoopB_Stat
+$START
+$LOWER  Yellow  "" "Core Fire Loop B FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Core Fire Loop B Ok" "Core Fire Loop B Ok"      
+1.0  Red  "Core Fire Loop B <<FIRE>>" "Core Fire Loop B <<FIRE>>"      
+2.0  Black  "Core Fire Loop B Continuity Check PASSED" "Core Fire Loop B Continuity Check PASSED"      
+3.0  Red  "Core Fire Loop B Continuity Check FAULT" "Core Fire Loop B Continuity Check FAULT"      
+4.0  Black  "Core Fire Loop B Ground Check PASSED" "Core Fire Loop B Ground Check PASSED"      
+5.0  Red  "Core Fire Loop B Ground Check FAULT" "Core Fire Loop B Ground Check FAULT"      
+6.0  BurntOrange  "Core Fire Loop B UNKNOWN" "Core Fire Loop B UNKNOWN"      
+7.0  Magenta  "Core Fire Loop B DISABLED" ""      
+$RUN
+$LOWER  Yellow  "" "Core Fire Loop B FAULT"  GRACE=2.00   NORMAL=1 
+0.0  Black  "Core Fire Loop B Ok" "Core Fire Loop B Ok"      
+1.0  Red  "Core Fire Loop B <<FIRE>>" "Core Fire Loop B <<FIRE>>"      
+2.0  Black  "Core Fire Loop B Continuity Check PASSED" "Core Fire Loop B Continuity Check PASSED"      
+3.0  Red  "Core Fire Loop B Continuity Check FAULT" "Core Fire Loop B Continuity Check FAULT"      
+4.0  Black  "Core Fire Loop B Ground Check PASSED" "Core Fire Loop B Ground Check PASSED"      
+5.0  Red  "Core Fire Loop B Ground Check FAULT" "Core Fire Loop B Ground Check FAULT"      
+6.0  BurntOrange  "Core Fire Loop B UNKNOWN" "Core Fire Loop B UNKNOWN"      
+7.0  Magenta  "Core Fire Loop B DISABLED" ""      
+$END-PARAMETER
+
+$PARAMETER FanLoopARes
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+FanLoopFire  Green  "" ""      
+FanLoopFault  Yellow  "" ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+FanLoopFire  Green  "" ""      
+FanLoopFault  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER FanLoopBRes
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+FanLoopFire  Green  "" ""      
+FanLoopFault  Yellow  "" ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+FanLoopFire  Green  "" ""      
+FanLoopFault  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER CoreLoopARes
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+FireLoopFire  Green  "" ""      
+FireLoopFault  Yellow  "" ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+FireLoopFire  Green  "" ""      
+FireLoopFault  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER CoreLoopBRes
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+FireLoopFire  Green  "" ""      
+FireLoopFault  Yellow  "" ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+FireLoopFire  Green  "" ""      
+FireLoopFault  Yellow  "" ""      
+$END-PARAMETER
+
+$PARAMETER UnderCowl_Stat
+$START
+$LOWER  Green  "" "Under Cowl Temp OK"     NORMAL=1 
+1  Yellow  "Under Cowl Temp WARNING..." ""      
+2  Red  "Under Cowl Temp FIRE..." ""      
+$RUN
+$LOWER  Green  "" "Under Cowl Temp OK"     NORMAL=1 
+1  Yellow  "Under Cowl Temp WARNING..." ""      
+2  Red  "Under Cowl Temp FIRE..." ""      
+$END-PARAMETER
+
+$PARAMETER AdaptcountTotal
+$START
+$LOWER  Red  "" "No Adapter Coupled"     NORMAL=1 
+1.0  Blue  "Adapter 1 CF6-80C2 DL7 Boeing Fadec" "Adapter 1 CF6-80C2 DL7 Boeing Fadec"      
+2.0  Blue  "Adapter 2 CF6-80C2 DL7 Boeing PMC" "Adapter 2 CF6-80C2 DL7 Boeing PMC"      
+3.0  Blue  "Adapter 3 PW2000 DL2" "Adapter 3 PW2000 DL2"      
+4.0  Blue  "Adapter 4 PW2000 DL1" "Adapter 4 PW2000 DL1"      
+5.0  Blue  "Adapter 5 PW1100G DL11" "Adapter 5 PW1100G DL11"      
+6.0  Blue  "Adapter 6 PW4000 DL40 Auto-Air" "Adapter 6 PW4000 DL40 Auto-Air"      
+7.0  Blue  "Adapter 7 PW4400 DL44 Auto-Air" "Adapter 7 PW4400 DL44 Auto-Air"      
+8.0  Blue  "Adapter 8 PW4000 DL41 Universal" "Adapter 8 PW4000 DL41 Universal"      
+9.0  Blue  "Adapter 9 BR715 DL5" "Adapter 9 BR715 DL5"
+10.0  Blue  "Adapter 10 CF6-80A DL6" "Adapter 10 CF6-80A DL6"      
+11.0  Blue  "Adapter 11 CFM56-7B DL3" "Adapter 11 CFM56-7B DL3"      
+12.0  Blue  "Adapter 12 CF6-80C2 DL7 MD FADEC" "Adapter 12 CF6-80C2 DL7 MD FADEC"      
+13.0  Blue  "Adapter 13 CFM56-5B DL8" "Adapter 13 CFM56-5B DL8"      
+14.0  Blue  "Adapter 14 CF34-8C DL12" "Adapter 14 CF34-8C DL12"      
+15.0  Blue  "Adapter 15 CF34-8E DL12" "Adapter 15 CF34-8E DL12"      
+$RUN
+$LOWER  Red  "" "No Adapter Coupled"     NORMAL=1 
+1.0  Blue  "Adapter 1 CF6-80C2 DL7 Boeing Fadec" "Adapter 1 CF6-80C2 DL7 Boeing Fadec"      
+2.0  Blue  "Adapter 2 CF6-80C2 DL7 Boeing PMC" "Adapter 2 CF6-80C2 DL7 Boeing PMC"      
+3.0  Blue  "Adapter 3 PW2000 DL2" "Adapter 3 PW2000 DL2"      
+4.0  Blue  "Adapter 4 PW2000 DL1" "Adapter 4 PW2000 DL1"      
+5.0  Blue  "Adapter 5 PW1100G DL11" "Adapter 5 PW1100G DL11"      
+6.0  Blue  "Adapter 6 PW4000 DL40 Auto-Air" "Adapter 6 PW4000 DL40 Auto-Air"      
+7.0  Blue  "Adapter 7 PW4400 DL44 Auto-Air" "Adapter 7 PW4400 DL44 Auto-Air"      
+8.0  Blue  "Adapter 8 PW4000 DL41 Universal" "Adapter 8 PW4000 DL41 Universal"      
+9.0  Blue  "Adapter 9 BR715 DL5" "Adapter 9 BR715 DL5"
+10.0  Blue  "Adapter 10 CF6-80A DL6" "Adapter 10 CF6-80A DL6"      
+11.0  Blue  "Adapter 11 CFM56-7B DL3" "Adapter 11 CFM56-7B DL3"      
+12.0  Blue  "Adapter 12 CF6-80C2 DL7 MD FADEC" "Adapter 12 CF6-80C2 DL7 MD FADEC"      
+13.0  Blue  "Adapter 13 CFM56-5B DL8" "Adapter 13 CFM56-5B DL8"      
+14.0  Blue  "Adapter 14 CF34-8C DL12" "Adapter 14 CF34-8C DL12"      
+15.0  Blue  "Adapter 15 CF34-8E DL12" "Adapter 15 CF34-8E DL12"      
+$END-PARAMETER
+
+$PARAMETER CIT_ValidProbes
+$START
+$LOWER  Red  "" ""     NORMAL=1 
+2.0  Red  "" ""      
+3.0  Yellow  "" ""      
+4.0  Green  "" ""      
+$RUN
+$LOWER  Red  "" ""     NORMAL=1 
+2.0  Red  "" ""      
+3.0  Yellow  "" ""      
+4.0  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER RelHum
+$START
+$LOWER  Yellow  "" ""     NORMAL=1 
+10.0  Green  "" ""      
+$RUN
+$LOWER  Yellow  "" ""     NORMAL=1 
+10.0  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER WindDirY
+$START
+$LOWER  Green  "" ""     NORMAL=1 
+0.0  White  "" ""      
+WindDirX  Green  "" ""      
+$RUN
+$LOWER  Green  "" ""     NORMAL=1 
+0.0  White  "" ""      
+WindDirX  Green  "" ""      
+$END-PARAMETER
+
+$PARAMETER EmergIdle_F
+$START
+$LOWER  Green  "" "EMERGENCY IDLE RESET"
+0.9  Red  "EMERGENCY IDLE DETECTED" ""  phase=StopAutoTPhase_ATP
+$RUN
+$LOWER  Green  "" "EMERGENCY IDLE RESET"
+0.9  Red  "EMERGENCY IDLE DETECTED" ""  phase=StopAutoTPhase_ATP
+$END-PARAMETER
+
+$PARAMETER OperatorOverride_F
+$START
+$LOWER  White  "" ""
+0.9  Red  "" ""  phase=StopAutoTPhase_ATP
+$RUN
+$LOWER  White  "" ""
+0.9  Red  "" ""  phase=StopAutoTPhase_ATP
+$END-PARAMETER
+
+$PARAMETER TRA_Diff_Msg
+$START
+$LOWER  Green  "" ""
+1.0  Red  "Power Lever is not in proper position for Auto Throttle" ""
+$RUN
+$LOWER  Green  "" ""
+1.0  Red  "Power Lever is not in proper position for Auto Throttle" ""
+$END-PARAMETER
+
+$PARAMETER AutoThrottle_F
+$START
+$LOWER  Green  "" "Auto Throttle Inactive"
+1.0  Green  "Auto Throttle Active" ""
+$RUN
+$LOWER  Green  "" "Auto Throttle Inactive"
+1.0  Green  "Auto Throttle Active" ""
+$END-PARAMETER
+
+$PARAMETER TRA_Diff
+$START
+$LOWER  Green  "" ""
+TRA_Diff_Limit  Red  "" ""
+$RUN
+$LOWER  Green  "" ""
+TRA_Diff_Limit  Red  "" ""
+$END-PARAMETER
+
+$PARAMETER EidleStillSet_F
+$START
+$LOWER  Green  "" ""
+1.0  Red  "Emergancy Idle Still Set.  Cannot Goto Auto throttle" ""
+$RUN
+$LOWER  Green  "" ""
+1.0  Red  "Emergancy Idle Still Set.  Cannot Goto Auto throttle" ""
+$END-PARAMETER
+
+$PARAMETER TRA_Actual
+$START
+$LOWER  Red  "" "Actual TRA below minimum Idle Stop"
+TRAMnIdleStopMn  Green  "" ""
+TRA_TargMn  White  "" ""
+TRA_TargMx  Green  "" ""
+TRAMxPwrStop  Red  "" "Actual TRA above maximum Power Stop"
+$RUN
+$LOWER  Red  "" "Actual TRA below minimum Idle Stop"
+TRAMnIdleStopMn  Green  "" ""
+TRA_TargMn  White  "" ""
+TRA_TargMx  Green  "" ""
+TRAMxPwrStop  Red  "" "Actual TRA above maximum Power Stop"
+$END-PARAMETER
+
+$END-LIMITS

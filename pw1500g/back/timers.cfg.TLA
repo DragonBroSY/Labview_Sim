@@ -1,0 +1,31 @@
+$TIMERS
+OpTimer:Sec NORESET OpTimer_F
+PAIRsTmr:Sec RESET PAIRsTmr_F
+StrtOnToIdleTmr:Sec RESET StrtOnToIdleTmr_F
+FuelOnToIdleTmr:Sec RESET FuelOnToIdleTmr_F
+StableEngTmr:Sec RESET StableEng_F
+TotalTestTime:Sec NORESET EngineRunning
+N1RUNDWNTM:Sec RESET N1RnDnTmrMan_F
+N2RUNDWNTM:Sec RESET N2RnDnTmrMan_F
+N1RnDnTmr:Sec RESET N1RnDnTmr_F
+N2RnDnTmr:Sec RESET N2RnDnTmr_F
+AccelTmr:Sec RESET AccelTmr_F
+DecelTmr:Sec RESET DecelTmr_F
+DCPwrTstTmr:Sec RESET DCPwrTstTmr_F
+EGTStrtTrigTmr:Sec RESET EGTStrtTrigTmr_F
+EGTStrtMxTmr:Sec NORESET EGTStrtMxTmr_F
+EGTRunTrigTmr:Sec RESET EGTRunTrigTmr_F
+EGTRunMxTmr:Sec NORESET EGTRunMxTmr_F
+PointTmr:Sec RESET PointTmr_F
+MotorTmr:Sec NORESET StartAir_O
+StageTmr:Sec NORESET StageTmr_F
+ElapsedTmTmr:Sec NORESET StageTmr_F
+idgsettletime:Sec RESET idgtimer
+StorePlotTmr:Sec RESET StorePlotTmr_F
+MsgTmr:Sec RESET MsgTmr_F
+PLA_DAC_Tmr:Sec RESET PLA_DAC_Tmr_F
+RampTmr:Sec NORESET RampTmr_F
+TLAOverRideTmr:Sec NORESET TLAOverRide_F
+L253_SDTmr:Sec NORESET L253_SDTmr_F
+L227_Tmr:Sec NORESET L227_Tmr_F
+$END-TIMERS

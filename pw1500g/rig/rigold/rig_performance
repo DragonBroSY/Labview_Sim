@@ -1,0 +1,25 @@
+rig sig A_270B20    TRUE
+rig sig relhum      60.1
+rig sig pbarinhg    28.73
+rig sig CITDegC_A   27.06
+rig sig CITDegC_B   27.06
+rig sig CITDegC_C   27.06
+rig sig CITDegC_D   27.06
+rig sig ScavOilDegC 100 200 1
+rig sig MOTDegC     200 100 1
+rig sig N1          3600 4100 02
+rig sig N2          9500 11000 03
+rig sig thrustmeasure   30000 39000 5
+rig sig EGTHarnessDegC  500 600 1
+rig sig MOP         200 300 1
+rig sig WfIHz       528.98
+rig sig a_epr_act   1.2 1.44 .002
+rig sig a_lccpf     100
+rig sig T35aDegC    557.7
+rig sig T25DegC     122.6
+rig sig Ps31PSIG    150 354.83 1
+rig sig Pt45PSIG    .15
+rig sig Ps3iPSIG    160 236.37 1
+rig sig Ps25PSIG        -.12
+rig sig Pt25PSIG    5 17.26 .4
+rig sig Pt49PSIG    5.96

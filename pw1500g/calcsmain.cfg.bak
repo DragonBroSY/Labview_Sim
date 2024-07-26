@@ -1,0 +1,33 @@
+$CALC
+#include ../common/commonCIT.cal
+#include ../common/commonPCELL.cal
+#include ../common/commonPBAR.cal
+#include ../common/Adaptercalc.cal
+#include ../common/calcwfnew.cal
+#include ../common/emissions.cal
+#include ../common/datetimecalc.cal
+#include ../common/dcpowertst.cal
+#include ../common/weather.cal
+#include eecreceiverCHA.cal
+#include eecreceiverCHB.cal
+#include eecreceiver.cal
+#include mapsignals.cal
+#include ecm.cal
+#include ecm_uctl.cal
+#include ecm_atl.cal
+#include autothrottle.cal
+#include eectransmitdata.cal
+#include smooth.cal
+#include firewarning.cal
+#include loopcalc.cal
+#include corrections.cal
+#include lookups.cal
+#include performance.cal
+#include overlimits.cal
+#include vibanalysis.cal
+#include startstopdata.cal
+#include equivalent.cal
+#include Correlationcalc.cal
+#include setSounds.cal
+#include ../common/setAudio.cal
+$END-CALC

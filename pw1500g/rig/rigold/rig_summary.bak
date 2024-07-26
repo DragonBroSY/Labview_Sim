@@ -1,0 +1,37 @@
+# Rig file for testing new vs. old output in summary file
+#
+# point A
+# EPR-0 was 1.417, but P4.9/P2 was 1.435
+rig sig A_EPRI 1.417
+rig sig B_EPRI 1.417
+rig sig N1i 4168
+rig sig N2i 11943
+rig sig VIBFBB 3.2
+# rig sig VIBFN1 0 5.5 0.02
+# rig sig VIBFN2 0 3.5 0.02
+rig sig VIBTBB 2.59
+# rig sig VIBTN1 0 4.0 0.02
+# rig sig VIBTN2 0 3.0 0.02
+rig sig T4_9 1024.7
+rig sig Fni 35135.
+# does it make sense to rig FnS?  Is it calc'd from FnI?
+rig sig FnS 35196.
+# rig sig WfiHz ?
+rig sig WfiHz 20000
+rig sig T2_5 252.7
+rig sig T3_5 1035.9
+rig sig PBar 28.73
+rig sig Ps3_1 354.83
+rig sig Ps3i 236.37
+rig sig P4_5ab 0.15
+rig sig P4_9InHg 12.14
+rig sig PCellF .27
+rig sig PCellR .25
+rig sig Ps2_5 -.12
+rig sig Pt2_5 17.26
+rig sig CIT_AC 29.22
+rig sig CIT_BC 29.22
+rig sig CIT_CC 29.22
+rig sig CIT_DC 29.22
+rig sig RelHum 60.1
+

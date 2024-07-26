@@ -1,0 +1,150 @@
+$DISPLAY "Test Trimbal Phase" background=Black editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$STOREDISPLAY Append
+$OBJECT Text font=101 startx=0 starty=102 endx=154 endy=210
+White direction=1 alignment=1
+"VibFAmp"
+"Tracking"
+"Filter #4"
+"(Channel 14)"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=3 starty=405 endx=142 endy=513
+White direction=1 alignment=1
+"VibFN1"
+"Tracking"
+"Filter #1"
+"(Channel 5)"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=7 starty=589 endx=146 endy=697
+White direction=1 alignment=1
+"VibFBB"
+"Broad"
+"Band #1"
+"(Channel 1)"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=36 starty=520 endx=117 endy=547
+Magenta direction=1 alignment=0
+"ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=37 starty=701 endx=118 endy=728
+Red direction=1 alignment=0
+"ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=38 starty=546 endx=116 endy=573
+Blue direction=1 alignment=0
+"DECEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=40 starty=217 endx=121 endy=244
+Magenta direction=1 alignment=0
+"ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=41 starty=247 endx=119 endy=274
+Cyan direction=1 alignment=0
+"DECEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=41 starty=728 endx=119 endy=755
+White direction=1 alignment=0
+"DECEL"
+$END-OBJECT
+***********
+$OBJECT Plot font=101 startx=145 starty=401 endx=1043 endy=728
+$TYPE VIBSURVEY
+$LINE_WIDTH 1
+$XAXIS N1S 327 40 868 200 2 ABOVE BELOW 500 4500 White 0.000000
+$YAXIS VibFN1 40 0 327 0.2 1 RIGHT LEFT 0 2 White 0 500.000000
+$COLOR
+Magenta
+Blue
+$END-COLOR
+$HC-LINETYPE "" 0 0 1 8
+$END-YAXIS
+$YAXIS VibFBB 40 0 327 0.2 1 RIGHT LEFT 0 2 White 0 500.000000
+$COLOR
+Red
+White
+$END-COLOR
+$HC-LINETYPE "" 0 0 1 8
+$END-YAXIS
+$YAXIS N1PBS 868 0 327 500 1 RIGHT LEFT 0 5000 White 0 4500.000000
+$COLOR
+Green
+Yellow
+$END-COLOR
+$HC-LINETYPE "" 0 0 1 8
+$END-YAXIS
+$HARDCOPYPLOT 1 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Plot font=101 startx=150 starty=13 endx=1039 endy=392
+$TYPE VIBSURVEY
+$LINE_WIDTH 1
+$XAXIS N1S 349 40 859 200 2 ABOVE BELOW 500 4500 White 0.000000
+$YAXIS VibFAmp 40 20 349 0.2 1 RIGHT LEFT 0 2 White 0 500.000000
+$COLOR
+Magenta
+Cyan
+$END-COLOR
+$HC-LINETYPE "" 0 0 1 8
+$END-YAXIS
+$YAXIS VibFPhs 859 20 349 20 1 RIGHT LEFT 0 360 White 0 4500.000000
+$COLOR
+Green
+Yellow
+$END-COLOR
+$HC-LINETYPE "" 0 0 1 8
+$END-YAXIS
+$HARDCOPYPLOT 1 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=560 starty=752 endx=656 endy=779
+Cyan direction=1 alignment=1
+"N1 RPM"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1036 starty=106 endx=1190 endy=214
+White direction=1 alignment=1
+"VibFPhs"
+"Tracking"
+"Filter #4"
+"(Channel 16)"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1037 starty=464 endx=1191 endy=572
+White direction=1 alignment=1
+"VibFFreq"
+"Tracking"
+"Filter #4"
+"(Channel 15)"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1071 starty=579 endx=1152 endy=606
+Green direction=1 alignment=0
+"ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1073 starty=217 endx=1154 endy=244
+Green direction=1 alignment=0
+"ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1075 starty=247 endx=1153 endy=274
+Yellow direction=1 alignment=0
+"DECEL"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=1075 starty=611 endx=1153 endy=638
+Yellow direction=1 alignment=0
+"DECEL"
+$END-OBJECT
+***********
+$END-DISPLAY
+

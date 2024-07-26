@@ -1,0 +1,318 @@
+$GROUP "eectransmitdata" 
+#C ***************************************************************
+#C The following Parametric and Discrete parameters are transmitted
+#C to the EEC via a Condor_429 card.
+#C ***** ADIRU Parametric Parameters *********
+A_ALT1I:Ft	((1 - ((A_P2ENG / 1013.25)^0.190284)) * 145366.45)
+A_MN1I:		0.0
+A_CAS1I:kt	0.0
+A_TTAT1I:DegC	CITDegC
+A_TPRS1I:hPa	psi2mbar (P2_Avg)
+#C -------------------------------------
+B_ALT2I:Ft	((1 - ((B_P2ENG / 1013.25)^0.190284)) * 145366.45)
+B_MN2I:		A_MN1I
+B_CAS2I:kt	A_CAS1I
+B_TTAT2I:DegC	A_TTAT1I
+B_TPRS2I:hPa	A_TPRS1I
+#C ***** Label 270 Bits ****************
+#C ***** Channel A **********
+A_PT1BDI:	ON
+A_ADR1BDI:	ON
+A_ALTR1BDI:	ON
+A_ALTL1BDI:	ON
+A_TATHT1I:	ON
+#C ***** Channel B **********
+B_PT2BDI:	A_PT1BDI
+B_ADR2BDI:	A_ADR1BDI
+B_ALTR2BDI:	A_ALTR1BDI
+B_ALTL2BDI:	A_ALTL1BDI
+B_TATHT2I:	A_TATHT1I
+EIU_SDI:	0
+#C ***** EIU Descrete Parameters ***********
+#C ***** Engine Interface Unit (EIU) *******
+#C ***** SET the SDI's Here ****************
+#if	(EIU_SDI = 0)
+EIU_002:	setarincsdi(0)
+EIU_003:	setarincsdi(0)
+EIU_003:	setarincsdi(0)
+#endif
+#C ***** Label 002 Bits ****************
+EIU_ICUPwrSwAON_00:	OFF
+EIU_ICUPwrSwAON_01:	OFF
+EIU_ICUPwrSwAON_10:	OFF
+EIU_ICUPwrSwAON_11:	OFF
+EIU_ICUPwrSwBON_00:	OFF
+EIU_ICUPwrSwBON_01:	OFF
+EIU_ICUPwrSwBON_10:	OFF
+EIU_ICUPwrSwBON_11:	OFF
+EIU_DCVPwrSwAON_00:	OFF
+EIU_DCVPwrSwAON_01:	OFF
+EIU_DCVPwrSwAON_10:	OFF
+EIU_DCVPwrSwAON_11:	OFF
+EIU_DCVPwrSwBON_00:	OFF
+EIU_DCVPwrSwBON_01:	OFF
+EIU_DCVPwrSwBON_10:	OFF
+EIU_DCVPwrSwBON_11:	OFF
+EIU_WdnP2Tol_00:	OFF
+EIU_WdnP2Tol_01:	OFF
+EIU_WdnP2Tol_10:	OFF
+EIU_WdnP2Tol_11:	OFF
+EIU_VibTesting_00:	OverRideLPCBld_F
+EIU_VibTesting_01:	OverRideLPCBld_F
+EIU_VibTesting_10:	OverRideLPCBld_F
+EIU_VibTesting_11:	OverRideLPCBld_F
+#C See SetReducedIdleRate_ATP.ph
+EIU_LoPwrStabTst_1_00:	EIU_LoPwrStabTst_1
+EIU_LoPwrStabTst_1_01:	EIU_LoPwrStabTst_1
+EIU_LoPwrStabTst_1_10:	EIU_LoPwrStabTst_1
+EIU_LoPwrStabTst_1_11:	EIU_LoPwrStabTst_1
+EIU_LoPwrStabTst_2_00:	EIU_LoPwrStabTst_2
+EIU_LoPwrStabTst_2_01:	EIU_LoPwrStabTst_2
+EIU_LoPwrStabTst_2_10:	EIU_LoPwrStabTst_2
+EIU_LoPwrStabTst_2_11:	EIU_LoPwrStabTst_2
+EIU_LoPwrStabTst_3_00:	EIU_LoPwrStabTst_3
+EIU_LoPwrStabTst_3_01:	EIU_LoPwrStabTst_3
+EIU_LoPwrStabTst_3_10:	EIU_LoPwrStabTst_3
+EIU_LoPwrStabTst_3_11:	EIU_LoPwrStabTst_3
+#C ***** Label 003 Bits ****************
+EIU_IsoVlv_00:		OFF
+EIU_IsoVlv_01:		OFF
+EIU_IsoVlv_10:		OFF
+EIU_IsoVlv_11:		OFF
+#C ***** Label 005 Bits ****************
+EIU_DisOp1IFM_00:	OFF
+EIU_DisOp1IFM_01:	OFF
+EIU_DisOp1IFM_10:	OFF
+EIU_DisOp1IFM_11:	OFF
+EIU_DisOp2IFM_00:	OFF
+EIU_DisOp2IFM_01:	OFF
+EIU_DisOp2IFM_10:	OFF
+EIU_DisOp2IFM_11:	OFF
+#C ***** Label 010 Bits ****************
+EIU_010B11_00:		OFF
+EIU_010B11_01:		OFF
+EIU_010B11_10:		OFF
+EIU_010B11_11:		OFF
+EIU_010B12_00:		OFF
+EIU_010B12_01:		OFF
+EIU_010B12_10:		OFF
+EIU_010B12_11:		OFF
+EIU_010B13_00:		OFF
+EIU_010B13_01:		OFF
+EIU_010B13_10:		OFF
+EIU_010B13_11:		OFF
+EIU_010B14_00:		OFF
+EIU_010B14_01:		OFF
+EIU_010B14_10:		OFF
+EIU_010B14_11:		OFF
+EIU_010B15_00:		OFF
+EIU_010B15_01:		OFF
+EIU_010B15_10:		OFF
+EIU_010B15_11:		OFF
+EIU_010B16_00:		OFF
+EIU_010B16_01:		OFF
+EIU_010B16_10:		OFF
+EIU_010B16_11:		OFF
+EIU_010B17_00:		OFF
+EIU_010B17_01:		OFF
+EIU_010B17_10:		OFF
+EIU_010B17_11:		OFF
+EIU_010B18_00:		OFF
+EIU_010B18_01:		OFF
+EIU_010B18_10:		OFF
+EIU_010B18_11:		OFF
+EIU_010B19_00:		OFF
+EIU_010B19_01:		OFF
+EIU_010B19_10:		OFF
+EIU_010B19_11:		OFF
+EIU_010B20_00:		OFF
+EIU_010B20_01:		OFF
+EIU_010B20_10:		OFF
+EIU_010B20_11:		OFF
+EIU_010B21_00:		OFF
+EIU_010B21_01:		OFF
+EIU_010B21_10:		OFF
+EIU_010B21_11:		OFF
+EIU_010B22_00:		OFF
+EIU_010B22_01:		OFF
+EIU_010B22_10:		OFF
+EIU_010B22_11:		OFF
+#C Set L010B23/24/25 All to 0 = Use DSU Selection.
+EIU_010B23_00:		OFF
+EIU_010B23_01:		OFF
+EIU_010B23_10:		OFF
+EIU_010B23_11:		OFF
+EIU_010B24_00:		OFF
+EIU_010B24_01:		OFF
+EIU_010B24_10:		OFF
+EIU_010B24_11:		OFF
+EIU_010B25_00:		OFF
+EIU_010B25_01:		OFF
+EIU_010B25_10:		OFF
+EIU_010B25_11:		OFF
+#C *******************************
+EIU_010B26_00:		OFF
+EIU_010B26_01:		OFF
+EIU_010B26_10:		OFF
+EIU_010B26_11:		OFF
+EIU_010B29_00:		OFF
+EIU_010B29_01:		OFF
+EIU_010B29_10:		OFF
+EIU_010B29_11:		OFF
+#C ***** Label 015 Bits ****************
+EIU_ReqMTS_00:		OFF
+EIU_ReqMTS_01:		OFF
+EIU_ReqMTS_10:		OFF
+EIU_ReqMTS_11:		OFF
+EIU_DualMTS_00:		OFF
+EIU_DualMTS_01:		OFF
+EIU_DualMTS_10:		OFF
+EIU_DualMTS_11:		OFF
+EIU_ReqFullStart_00:	OFF
+EIU_ReqFullStart_01:	OFF
+EIU_ReqFullStart_10:	OFF
+EIU_ReqFullStart_11:	OFF
+#C ***** Label 031 Bits ****************
+#C Minimum/Approach Idle Ref. Table 9 step 2 page 16,
+#C PW1100G-C-71-00-03-03A-320A-B.
+EIU_IGNStart_00:	(ECM_ModeSel_RB = 2.0)
+EIU_NORM_00:		(ECM_ModeSel_RB = 0.0)
+EIU_CRANK_00:		(ECM_ModeSel_RB = 1.0)
+EIU_MstrLvrON_00:	ECM_FuelCtrl_TB
+EIU_MstrLvrOFF_00:	~ECM_FuelCtrl_TB
+EIU_ManStart_00:	ECM_ManStart_TB
+EIU_SlatFlapStod_00:	~ECM_IdleCtrl_TB
+EIU_MinIdleReq_00:	~ECM_IdleCtrl_TB
+EIU_FailSafe_00:	OFF
+EIU_FuelRTTinhib_00:	ON
+EIU_BumpHardwird_00:	OFF
+EIU_BumpSelOFF_00:	OFF
+EIU_BumpSelON_00:	OFF
+EIU_SEL_AC_Gnd_00:	ON
+EIU_IGNStart_01:	(ECM_ModeSel_RB = 2.0)
+EIU_NORM_01:		(ECM_ModeSel_RB = 0.0)
+EIU_CRANK_01:		(ECM_ModeSel_RB = 1.0)
+EIU_MstrLvrON_01:	ECM_FuelCtrl_TB
+EIU_MstrLvrOFF_01:	~ECM_FuelCtrl_TB
+EIU_ManStart_01:	ECM_ManStart_TB
+EIU_SlatFlapStod_01:	~ECM_IdleCtrl_TB
+EIU_MinIdleReq_01:	~ECM_IdleCtrl_TB
+EIU_FailSafe_01:	OFF
+EIU_FuelRTTinhib_01:	ON
+EIU_BumpHardwird_01:	OFF
+EIU_BumpSelOFF_01:	OFF
+EIU_BumpSelON_01:	OFF
+EIU_SEL_AC_Gnd_01:	ON
+EIU_IGNStart_10:	(ECM_ModeSel_RB = 2.0)
+EIU_NORM_10:		(ECM_ModeSel_RB = 0.0)
+EIU_CRANK_10:		(ECM_ModeSel_RB = 1.0)
+EIU_MstrLvrON_10:	ECM_FuelCtrl_TB
+EIU_MstrLvrOFF_10:	~ECM_FuelCtrl_TB
+EIU_ManStart_10:	ECM_ManStart_TB
+EIU_SlatFlapStod_10:	~ECM_IdleCtrl_TB
+EIU_MinIdleReq_10:	~ECM_IdleCtrl_TB
+EIU_FailSafe_10:	OFF
+EIU_FuelRTTinhib_10:	ON
+EIU_BumpHardwird_10:	OFF
+EIU_BumpSelOFF_10:	OFF
+EIU_BumpSelON_10:	OFF
+EIU_SEL_AC_Gnd_10:	ON
+EIU_IGNStart_11:	(ECM_ModeSel_RB = 2.0)
+EIU_NORM_11:		(ECM_ModeSel_RB = 0.0)
+EIU_CRANK_11:		(ECM_ModeSel_RB = 1.0)
+EIU_MstrLvrON_11:	ECM_FuelCtrl_TB
+EIU_MstrLvrOFF_11:	~ECM_FuelCtrl_TB
+EIU_ManStart_11:	ECM_ManStart_TB
+EIU_SlatFlapStod_11:	~ECM_IdleCtrl_TB
+EIU_MinIdleReq_11:	~ECM_IdleCtrl_TB
+EIU_FailSafe_11:	OFF
+EIU_FuelRTTinhib_11:	ON
+EIU_BumpHardwird_11:	OFF
+EIU_BumpSelOFF_11:	OFF
+EIU_BumpSelON_11:	OFF
+EIU_SEL_AC_Gnd_11:	ON
+#C ***** Label 032 Bits ****************
+EIU_LOPSW_00:		L032B11
+EIU_EngLoc1_00:		ON
+EIU_EngLoc2_00:		OFF
+EIU_DataLoadAllow_00:	OFF
+EIU_FireHandlePull_00:	OFF
+EIU_ICUSuppldByAC_00:	OFF
+EIU_LOPSW_01:		L032B11
+EIU_EngLoc1_01:		ON
+EIU_EngLoc2_01:		OFF
+EIU_DataLoadAllow_01:	OFF
+EIU_FireHandlePull_01:	OFF
+EIU_ICUSuppldByAC_01:	OFF
+EIU_LOPSW_10:		L032B11
+EIU_EngLoc1_10:		ON
+EIU_EngLoc2_10:		OFF
+EIU_DataLoadAllow_10:	OFF
+EIU_FireHandlePull_10:	OFF
+EIU_ICUSuppldByAC_10:	OFF
+EIU_LOPSW_11:		L032B11
+EIU_EngLoc1_11:		ON
+EIU_EngLoc2_11:		OFF
+EIU_DataLoadAllow_11:	OFF
+EIU_FireHandlePull_11:	OFF
+EIU_ICUSuppldByAC_11:	OFF
+#C ***** Label 034 Bits ****************
+EIU_034B13:		setarincsdi(0)
+EIU_034B13:		OFF
+EIU_034B13:		setarincsdi(1)
+EIU_034B13:		OFF
+EIU_034B13:		setarincsdi(2)
+EIU_034B13:		OFF
+EIU_034B13:		setarincsdi(3)
+EIU_034B13:		OFF
+EIU_034B14_00:		OFF
+EIU_034B15_00:		OFF
+EIU_034B16_00:		OFF
+EIU_034B23_00:		OFF
+EIU_034B26_00:		OFF
+EIU_034B13_01:		OFF
+EIU_034B14_01:		OFF
+EIU_034B15_01:		OFF
+EIU_034B16_01:		OFF
+EIU_034B23_01:		OFF
+EIU_034B26_01:		OFF
+EIU_034B13_10:		OFF
+EIU_034B14_10:		OFF
+EIU_034B15_10:		OFF
+EIU_034B16_10:		OFF
+EIU_034B23_10:		OFF
+EIU_034B26_10:		OFF
+EIU_034B13_11:		OFF
+EIU_034B14_11:		OFF
+EIU_034B15_11:		OFF
+EIU_034B16_11:		OFF
+EIU_034B23_11:		OFF
+EIU_034B26_11:		OFF
+#C ***** Label 050 Bits ****************
+EIU_IDGStatus_00:	ON
+EIU_IDGStatus_01:	ON
+EIU_IDGStatus_10:	ON
+EIU_IDGStatus_11:	ON
+#C ***** Label 056 Bits ****************
+EIU_056B22_01:		OFF
+EIU_056B23_01:		OFF
+EIU_056B24_01:		OFF
+EIU_056B25_01:		OFF
+EIU_056B22_10:		OFF
+EIU_056B23_10:		OFF
+EIU_056B24_10:		OFF
+EIU_056B25_10:		OFF
+#C ***** Label 125 Bits ****************
+EIU_L125_00:		1
+#C ***** EIU BNR Data ******************
+#C ***** BNR Label 077 *****************
+EIU_IDGLoad_00:%	0.0
+EIU_IDGLoad_01:%	0.0
+EIU_IDGLoad_10:%	0.0
+EIU_IDGLoad_11:%	0.0
+EIU_Eng2SAVP_01:PSIG	SAP
+EIU_Eng2SAVP_10:PSIG	SAP
+EIU_Eng1SAVP_01:PSIG	SAP
+EIU_Eng1SAVP_10:PSIG	SAP
+#C ***** END EIU Bits ******************
+$END-GROUP

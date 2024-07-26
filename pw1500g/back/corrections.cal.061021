@@ -1,0 +1,295 @@
+$GROUP "corrections" 
+#C *************** PW1100G *********************************
+#C ----- PT2 Correction -------
+#C ----- N1C2_SLS below has a cyclical redundancy issue with KNLC_Trise and PT2...
+N1C2_SLS:RPM	(EEC_N1 / (ThetaT2^N1EXP * KHNL))
+#if	(N1C2_SLS > 1500.0)
+P2QPBar_Cell:	lookup (P2QPBar_Cell_T)
+#else	
+P2QPBar_Cell:	1.0
+#endif	
+#C ----- Humidity Correction -----------------------------------
+#C ***** Specific Humidity /Inlet Condensation Correction Factors ******
+KHWF:	lookup (KHWF_T)
+KHNL:	lookup (KHNL_T)
+KHNH:	lookup (KHNH_T)
+KHT49:	lookup (KHT49_T)
+KHT3:	lookup (KHT3_T)
+KHT25:	lookup (KHT25_T)
+KHT45:	lookup (KHT45_T)
+KHW2R:	lookup (KHW2R_T)
+KHW25R:	lookup (KHW25R_T)
+KHW2AR:	lookup (KHW2AR_T)
+#C ****** 2.Q.(1)(b)6) Correlation Inlet Pressure Ratio ***********
+#C ***** Figure 1, Sheet 1, Equation 1.
+Pt2:PSIA	(P2QPBar_Cell * PBarPSIA)
+#C ***** Figure 1, Sheet 4, Equation 30. NOT USED...
+#C P2ENG_Ratio: (P2_Avg / PBarPSIA)
+#C ------ Delta/Theta ------------------------------------------
+#C ****** 2.Q.(1)(a)1) Equation 2. Testing-09 Engine Acceptance.
+DeltaP2:	(Pt2 / 14.696)
+#C DeltaP2: (P2_Avg / 14.696) (DJR 10/20/20)
+#C DeltaP2: (P2ENG / 14.696)
+#C ****** 2.Q.(1)(a)2) Equation 3, Figure 1, Sheet 1, Testing-09 Engine Acceptance.
+#C ThetaT2 Calculated in commonCIT.cal...
+#C ------ TRISE ----------------------------------------------
+#C ****** 2.Q.(1)(b) Temperature Rise Due to Condensation...
+#C ****** 
+TRISE_Count:	0.0
+#C TRISE:DegF 0.0
+TSAT0_:	10.0
+TSAT1_:	20.0
+#C ********** TRISE While Loop Begins Here *******************
+TRISEwhileLoop	
+#C ***********************************************************
+TRISE_Count:	(TRISE_Count + 1.0)
+#C ****** 2.Q.(1)(b)1)b) *************************************
+#C **** Equation 20, Figure 1, Sheet 1.
+#C **** N1C2 Used for input into P2QPS2_T Table...
+#C **** N1C2 Calc with no Condensation or Test Cell Corrections. See NOTE: @ 2.Q.(1)(b)...
+#C N1C2:RPM ((N1S / (RTheta * Kuntwist)) * (1.0 - (KNLC * TRISE))
+N1C2:RPM	((EEC_N1 / (RTheta * Kuntwist)) * (1.0 - (KNLC * TRISE)))
+#C **** Equation 4, Figure 1, Sheet 1, Figure 11
+#if	(inrange (1694.0 N1C2 8950.0) & StableN1_F)
+P2QPS2:	lookup (P2QPS2_T)
+#else	
+P2QPS2:	1.0
+#endif	
+#C **** Equation 5, Figure 1, Sheet 1.
+#C ****** 2.Q.(1)(b)1)c) *************************************
+PS2:	(Pt2 / P2QPS2)
+#C PS2: (P2_Avg / P2QPS2)
+#C PS2: (P2ENG / P2QPS2)
+#C ****** 2.Q.(1)(b)1)d) *************************************
+#C **** Equation 6, Figure 1, Sheet 1.
+TS2:DegF	((CITDegR / (P2QPS2^0.28571)) - 459.67)
+#C ------ TSAT Correction ------------------------------------
+#C ****** 2.Q.(1)(b)1)e) *************************************
+#C **** Equation 7, Figure 1, Sheet 1.
+TSAT:DegF	TSAT0_
+E1_TSAT0:	lookup (E1_TSAT_T)
+#C **** Equation 8, Figure 1, Sheet 1.
+TSAT:DegF	(TS2 + 4083.0 * (SHum - ((0.6212 * E1_TSAT0) / (PS2 - E1_TSAT0))))
+#C ****** 2.Q.(1)(b)1)f) *************************************
+#C **** Equation 9, Figure 1, Sheet 1.
+TSAT0:	(TSAT - TSAT0_)
+#C ****** 2.Q.(1)(b)1)g) *************************************
+#C ---- Equation 10, Figure 1, Sheet 1.
+TSAT:DegF	TSAT1_
+E1_TSAT1:	lookup (E1_TSAT_T)
+#C ---- Equation 8, Figure 1, Sheet 1.
+TSAT:DegF	(TS2 + 4083.0 * (SHum - ((0.6212 * E1_TSAT1) / (PS2 - E1_TSAT1))))
+#C **** Equation 9, Figure 1, Sheet 1.
+TSAT1:	(TSAT - TSAT1_)
+#C ****** 2.Q.(1)(b)1)h) *************************************
+#C ------ Start of TSAT While Loop ---------------------------
+TSAT_Count:	0
+#C ****** TSAT While Loop Begins Here ************************
+TSATwhileLoop	
+#C ***********************************************************
+TSAT_Count:	(TSAT_Count + 1.0)
+#C **** Equation 11, Figure 1, Sheet 2.
+TSAT2_:	(TSAT1_ - ((TSAT1 * (TSAT1_ - TSAT0_)) / (TSAT1 - TSAT0)))
+#C ---- Equation 7, Figure 1, Sheet 1.
+TSAT:DegF	TSAT2_
+E1_TSAT2:	lookup (E1_TSAT_T)
+#C ---- Equation 8, Figure 1, Sheet 1.
+TSAT:DegF	(TS2 + 4083.0 * (SHum - ((0.6212 * E1_TSAT2) / (PS2 - E1_TSAT2))))
+#C **** Equation 12, Figure 1, Sheet 2.
+TSAT2:DegF	(TSAT - TSAT2_)
+#C ****** 2.Q.(1)(b)1)i) *************************************
+#C **** Equation 13, Figure 1, Sheet 2.
+DELTA1:	(TSAT2_ - TSAT1_)
+DELTA:	abs (DELTA1)
+#C ***********************************************************
+#C * This iteration is to be done no more than 50 times per iteration of TRISE.
+#C ***********************************************************
+#if	((DELTA > 0.0001) & (TSAT_Count < 50.0))
+TSAT0_:	TSAT1_
+TSAT0:	TSAT1
+TSAT1_:	TSAT2_
+TSAT1:	TSAT2
+#C ---- Return to 2.Q.(1)(b)1)h)...
+#goto	TSATwhileLoop
+#C #elseif (DELTA <= 0.0001)
+#endif	
+#C ------ END of TSAT While Loop -----------------------------
+#C ------ Continue with TRISE Calculation --------------------
+#C ****** 2.Q.(1)(b)1)j) *************************************
+TSAT:DegF	TSAT2_
+TRISE_PREV:DegF	TRISE
+TRISE:DegF	(TSAT - TS2)
+#C **** Equation 14, Figure 1, Sheet 2
+DTRISETOL:	(DN1C2DTOL / (N1C2 * KNLC))
+#C **** Equation 15, Figure 1, Sheet 2
+DTRISE:	(TRISE - TRISE_PREV)
+#C -------- TRISE While Loop ---------------------------------
+#if	((TRISE >= 0.0) & (DTRISE > DTRISETOL) & (TRISE_Count < 5.0))
+#C ------ Return to 2.Q.(1)(b)1)a)...
+#goto	TRISEwhileLoop
+#C **** #else EXIT TRISE While Loop ****
+#endif	
+#C ************ End of TRISE While Loop **********************
+#if	(TRISE < 0.0)
+TRISE:DegF	0.0
+#endif	
+#C ------ FN Correction --------------------------------------
+#C ****** 2.Q.(1)(b)2)a) ****************
+#C ***** Figure 1, Sheet 2, Equation 16.
+FNTR2D:Lbs	(FnS / DeltaP2)
+#C ----- FNTR2 Cell Correction -----
+#if	(FNTR2D > 500.0)
+dFNTR2_Cell:	lookup (dFNTR2_Cell_T)
+#else	
+dFNTR2_Cell:	0.0
+#endif	
+FNTR2:Lbs	(FNTR2D + dFNTR2_Cell)
+FNTR2_AC:Lbs    ((FnMeasure / DeltaP2) + dFNTR2_Cell)
+#C ----- Facility Correction Factors ---------------------------
+#if	(FNTR2 > 15000.0)
+dWFPLHCR2_Cell:	lookup (dWFPLHCR2_Cell_T)
+dN1C2_Cell:	lookup (dN1C2_Cell_T)
+dN2C2_Cell:	lookup (dN2C2_Cell_T)
+dT25OP25_Cell:DegC	lookup (dT25OP25_Cell_T)
+dT3OP3_Cell:DegC	lookup (dT3OP3_Cell_T)
+dT45OP45_Cell:DegC	lookup (dT45OP45_Cell_T)
+dT49OP49_Cell:DegC	lookup (dT49OP49_Cell_T)
+dP25Q2_Cell:	lookup (dP25Q2_Cell_T)
+dPS3Q2_Cell:	lookup (dPS3Q2_Cell_T)
+#else	
+dWFPLHCR2_Cell:	0.0
+dN1C2_Cell:	0.0
+dN2C2_Cell:	0.0
+dT25OP25_Cell:DegC	0.0
+dT3OP3_Cell:DegC	0.0
+dT45OP45_Cell:DegC	0.0
+dT49OP49_Cell:DegC	0.0
+dP25Q2_Cell:	0.0
+dPS3Q2_Cell:	0.0
+#endif	
+#C ****** 2.Q.(1)(b)2)b) ****************
+#C ***** Figure 1, Sheet 2, Equation 17.
+#if	compare (ACType "A320")
+FNTR2_TO:Lbs	FnBMin
+#else	
+FNTR2_TO:Lbs	FnAMin
+#endif	
+FNTR2_Ref:Lbs	AccelFNTR2_30
+FNTR2_ACC30:Lbs	(FNTR2_Ref * FNTR2_TO)
+FNTR2_ACC30Mx:Lbs	(FNTR2_ACC30 + 50.0)
+FNTR2_Ref:Lbs	AccelFNTR2_90
+FNTR2_ACC90:Lbs	(FNTR2_Ref * FNTR2_TO)
+FNTR2_ACC90Mx:Lbs	(FNTR2_ACC90 + 50.0)
+#C ****** 2.Q.(1)(b)2)c) ****************
+#C ***** Figure 1, Sheet 2, Equation 18.
+FNTR2_TO:Lbs	FnAMin
+FNTR2_Ref:Lbs	DecelFNTR2_95
+FNTR2_DEC:Lbs	(FNTR2_TO - (FNTR2_Ref * (FNTR2_TO - FNTR2Mx_MI)))
+FNTR2_DECMx:lbs	(FNTR2_DEC - 50.0)
+#C ------ WF Correction --------------------------------------
+#C ****** 2.Q.(1)(b)3)a) ****************
+#C ***** Figure 1, Sheet 2, Equation 19.
+#C * See calcwfnew.cal for WF_Avg calculations.
+#C ****** 2.Q.(1)(b)3)b) ****************
+#C ***** Figure 1, Sheet 3, Equation 20.
+#if	(TRISE >= 5.0)
+KWFC_TRISE:	(1.0 - (KWFC * (TRISE - 5.0)))
+#else	
+KWFC_TRISE:	1.0
+#endif	
+WFEXP:	lookup (WFEXP_T)
+WFPLHCR2_SLS:PPH	(((WFS / (DeltaP2 * ThetaT2^WFEXP * KHWF)) * (LHV / 18400.0)) * KWFC_TRISE)
+WFPLHCR2:PPH	(WFPLHCR2_SLS + dWFPLHCR2_Cell)
+#C WFPLHCR2:PPH ((((WFS / (DeltaP2 * ThetaT2^WFEXP * KHWF)) * (LHV / 18400.0)) * KWFC_TRISE) + dWFPLHCR2_Cell)
+#C ****** 2.Q.(1)(b)3)c) ****************
+#C ***** Figure 1, Sheet 3, Equation 21.
+TSFCPLHC:	(WFPLHCR2 / FNTR2)
+#C ------ Speed Correction -----------------------------------
+#C ****** 2.Q.(1)(b)4)a) ****************
+#C ***** Figure 1, Sheet 3, Equation 22.
+#if	(TRISE < 3.0)
+KNLC_TRISE:	1.0
+#else	
+KNLC_TRISE:	(1.0 - (KNLC * (TRISE - 3.0)))
+#endif	
+#C Fully Corrected N1C2 Dry STD Day + Cell Correction...
+N1C2_SLS:RPM	((EEC_N1 / (ThetaT2^N1EXP * KHNL)) * KNLC_TRISE)
+N1C2D:RPM	(N1C2_SLS + dN1C2_Cell)
+N1C2R:RPM	N1C2D
+#C ****** 2.Q.(1)(b)4)b) ****************
+#C ***** Figure 1, Sheet 3, Equation 23.
+N1C20:RPM	N1C2D
+#C ****** 2.Q.(1)(b)4)c) ****************
+#C ***** Figure 1, Sheet 3, Equation 24.
+N1C2I:RPM	(N1C20 + N1CLASS)
+#C ****** 2.Q.(1)(b)4)d) ****************
+#C ***** Figure 1, Sheet 3, Equation 25.
+N2C2_SLS:RPM	(EEC_N2 / (ThetaT2^N2EXP * KHNH))
+N2C2D:RPM	(N2C2_SLS + dN2C2_Cell)
+#C ------ Temperature Corrections ----------------------------
+#C ****** 2.Q.(1)(b)5)a) CIT ************
+#C ***** Figure 1, Sheet 4, Equation 26.
+T1:DegC	CITDegC
+#C ****** 2.Q.(1)(b)5)b) HCIT ***********
+#C ***** Figure 1, Sheet 4, Equation 27.
+T25F:DegF	temp_c2f(EEC_T25)
+T25R:DegR	(T25F + 459.67)
+T25OP25_SLS:DegF	((T25R / (ThetaT2^T25EXP * KHT25)) - 459.67)
+T25OP25:DegF	(T25OP25_SLS + (dT25OP25_Cell * 1.8))
+T25OP25C:DegC	temp_f2c (T25OP25)
+#C ****** 2.Q.(1)(b)5)c) HCET ***********
+#C ***** Figure 1, Sheet 4, Equation 28.
+T3F:DegF	temp_c2f(EEC_T3)
+T3R:DegR	(T3F + 459.67)
+T3OP3_SLS:DegF	((T3R / (ThetaT2^T3EXP * KHT3)) - 459.67)
+T3OP3:DegF	(T3OP3_SLS + (dT3OP3_Cell * 1.8))
+T3OP3C:DegC	temp_f2c (T3OP3)
+#C ****** 2.Q.(1)(b)5)d) EGT/ITT ********
+#C ***** Figure 1, Sheet 4, Equation 29.
+T45F:DegF	temp_c2f(EEC_ITT)
+T45R:DegR	(T45F + 459.67)
+T45OP45_SLS:DegF	((T45R / (ThetaT2^T45EXP * KHT45)) - 459.67)
+T45OP45:DegF	(T45OP45_SLS + (dT45OP45_Cell * 1.8))
+T45OP45C:DegC	temp_f2c (T45OP45)
+#C ****** 2.Q.(1)(b)5)e) ITT ************
+#C ***** Figure 1, Sheet 4, Equation 30.
+T49EXP:	lookup (T49EXP_T)
+T49F:DegF	temp_c2f(EEC_T5)
+T49R:DegR	(T49F + 459.67)
+T49OP49_SLS:DegF	((T49R / (ThetaT2^T49EXP * KHT49)) - 459.67)
+T49OP49:DegF	(T49OP49_SLS + (dT49OP49_Cell * 1.8))
+T49OP49C:DegC	temp_f2c (T49OP49)
+#C ------ Pressure Corrections -------------------------------
+#C ****** 2.Q.(1)(b)6)a) OPCR ***********
+#C ***** Figure 1, Sheet 4, Equation 31.
+PS3Q2_SLS:	(EEC_PB / Pt2)
+#C PS3Q2_SLS: (EEC_PB / P2_Avg)
+PS3Q2:	(PS3Q2_SLS + dPS3Q2_Cell)
+#C ****** 2.Q.(1)(b)6)b) LPCR ***********
+#C ***** Figure 1, Sheet 4, Equation 32.
+#C P25Q2: ((EEC_P25 / P2ENG) + dP25Q2_Cell)
+P25Q2_SLS:	(EEC_P25 / Pt2)
+#C P25Q2_SLS: (EEC_P25 / P2_Avg)
+P25Q2:	(P25Q2_SLS + dP25Q2_Cell)
+#C ****** 2.Q.(1)(b)6)c) HPCR ***********
+#C ***** Figure 1, Sheet 5, Equation 33.
+PS3Q25:	(PS3Q2 / P25Q2)
+#C ***** Figure 1, Sheet 5, Equation 34 (also TIS R6 8.7.1).
+#C ***** Eliminated by EA EM19CS003...
+#C WFOBS:lbm/hr	(WF_Avg / 3600.0)
+#C ***** TIS Calculations ***************
+#C *** TIS 8.7.1 Step 1 ******
+#C W31I: lookup (CalcW31_T)
+#C *** TIS 8.7.1 Step 2 ******
+#C TIS871Step2
+#C FAR31: (WFOBS / W31I)
+#C *** TIS 8.7.1 Step 3 ******
+#C FAR3: 0.0
+#C **** NEEDFIX Need Std gas Tables...
+#C H3:BTU/lbm T3R
+#C *** TIS 8.7.1 Step 4 ******
+#C H_STDMIX:BTU/lbm (123.96 + (51.76 * F
+MOPCor:PSIG	(POILAC - (0.4135 * (87.78 - TOILAC)))
+OILCons:gal/hr	(SigOilConsRate * 0.25)
+#C ******************************************************************
+$END-GROUP

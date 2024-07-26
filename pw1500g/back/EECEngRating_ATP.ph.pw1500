@@ -1,0 +1,54 @@
+$PHASE EECEngRating_ATP length=-1       level=0 controlrelay=None common=0
+* Engine Rating from EEC Bits: L066B16 - 19.
+#if (EECEngRat = 0.0)
++0 SET EECEngRatTxt concat ("" "UNK")
+#elseif ((EECEngRat = 1.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1127G1-JM")
+#elseif ((EECEngRat = 2.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1124G-JM")
+#elseif ((EECEngRat = 3.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1122G-JM")
+#elseif ((EECEngRat = 4.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1127G-JM")
+#elseif ((EECEngRat = 5.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1124G1-JM")
+#elseif ((EECEngRat = 6.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1127GA-JM")
+#elseif ((EECEngRat = 7.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1129G-JM")
+#elseif ((EECEngRat = 8.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1133G-JM")
+#elseif ((EECEngRat = 9.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1133G1-JM")
+#elseif ((EECEngRat = 10.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1133GA-JM")
+#elseif ((EECEngRat = 12.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1130G-JM")
+#elseif ((EECEngRat = 13.0) & PW1100)
++0 SET EECEngRatTxt concat ("" "PW1135G-JM")
+************* PW1500 NEEDFIX ***************
+#elseif ((EECEngRat = 1.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1519G-JM")
+#elseif ((EECEngRat = 2.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1521G")
+#elseif ((EECEngRat = 3.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1524G")
+#elseif ((EECEngRat = 4.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1525G")
+#elseif ((EECEngRat = 5.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1521G-3")
+#elseif ((EECEngRat = 6.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1524G-3")
+#elseif ((EECEngRat = 7.0) & PW1500)
++0 SET EECEngRatTxt concat ("" "PW1525G-3")
+#elseif PW1100
++0 SET EECEngRatTxt concat ("" "PW11UNK")
+#elseif PW1500
++0 SET EECEngRatTxt concat ("" "PW15UNK")
+#else
++0 SET EECEngRatTxt concat ("" "UNK")
+#endif
+*
+$END-PHASE
+**********
+

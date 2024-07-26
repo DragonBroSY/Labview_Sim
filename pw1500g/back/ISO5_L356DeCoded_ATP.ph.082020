@@ -1,0 +1,102 @@
+$PHASE ISO5_L356DeCoded_ATP length=-1       level=0 controlrelay=None common=0
+**** Get the Alpha Code in ACode3 **********
+#if (compare(ISO5ACode3 "NUL") | (ISO5_356BWC <= 1))
+**** Transition to NUL [NUL] ***************
++0 SET ISO5_356STX_F	OFF
++0 SET ISO5_356ETX_F	OFF
++0 SET ISO5_356EOT_F	OFF
++0 SET ISO5_3561st_F	OFF
++0 SET ISO5_BlokCnt	0
++0 SET ISO5_MsgCnt	0
++0 SET CLM_PgCnt	0
++0 SET CLM_PgMax	0
++0 SET ISO5_CLMATA1 concat ("" " ")
++0 SET ISO5_CLMWD11 concat ("" " ")
++0 SET ISO5_CLMWD12 concat ("" " ")
++0 SET ISO5_CLMATA2 concat ("" " ")
++0 SET ISO5_CLMWD21 concat ("" " ")
++0 SET ISO5_CLMWD22 concat ("" " ")
++0 EXIT
+#C #elseif ((ACode1Diff_F & ACode2Diff_F & ACode3Diff_F) | ISO5_356ETX_F | ISO5_356EOT_F)
+#elseif (ACode1Diff_F & ACode2Diff_F & ACode3Diff_F)
+**** Same Data Just Exit *******************
++0 EXIT
+#endif
+******************************************
+***+0 SET CLM_PgMax max (ISO5_MsgCnt CLM_PgMax)
+******************************************
+**** We have CLM Data **********************
+**** Check for Codes in ACode3 *************
+#if (compare(ISO5ACode3 "STX") & ~ISO5_356STX_F)
+**** Start of TeXt [STX] ****
+**** Transition from ??? to STX ************
++0 SET ISO5_356STX_F	ON
++0 SET ISO5_356ETX_F	OFF
++0 SET ISO5_356EOT_F	OFF
++0 SET ISO5_356NUL_F	OFF
++0 SET ISO5_356FOrg_F	ISO5_356FOrg
++0 SET ISO5_356FCls_F	ISO5_356FCls
++0 SET ISO5_356FStat_F	ISO5_356FStat
++0 SET ISO5_356CFCls_F	ISO5_356CFCls
++0 SET ISO5_356FMsg_N	ISO5_356FMsg
++0 SET ISO5_356BWC_N	ISO5_356BWC
++0 SET ISO5_MsgCnt	(ISO5_MsgCnt + 1)
++0 SET ISO5_CharCnt	0
+#elseif compare(ISO5ACode3 "ETX") & ~ISO5_356ETX_F
+**** End of TeXt [ETX] *****
++0 SET ISO5_356ETX_F ON
++0 SET ISO5_356STX_F OFF
+#elseif compare(ISO5ACode3 "EOT") & ~ISO5_356EOT_F
+**** End Of Transmission [EOT] *****
+**** End of the Block **************
++0 SET ISO5_356EOT_F ON
++0 SET ISO5_356STX_F OFF
++0 SET ISO5_356ETX_F OFF
+*+0 SET ISO5_BlokCnt (ISO5_BlokCnt + 1)
+#endif
+**** First Time in STX... ****************
+**** Capture the BWC, Used to ************
+**** check for the first Message *********
+**** Bite History (ISO5_356BHist) = 1 for the first STX ONLY...
+#if (~ISO5_3561st_F & (ISO5_356BWC > 1) & ISO5_356BHist)
++0 SET ISO5_3561st_F ON
++0 SET ISO5_356BHist_F ON
++0 SET ISO5_1stBWC ISO5_356BWC
++0 SET ISO5_MsgCnt 0
++0 SET ISO5_BlokCnt 0
++0 EXIT
+#elseif ((ISO5_356BWC = ISO5_1stBWC) & (ISO5_MsgCnt > 1) & ISO5_356STX_F)
+**** Check the word count is the *********
+**** same as the first word count ********
+**** Set the Msg Count back to 0 *********
++0 SET ISO5_BlokCnt 0
++0 EXIT
+#endif
+************** Put the CLM in the Display Parameters ********************
+#if	((ISO5_356ETX_F | ISO5_356EOT_F) & (CLM_PgCnt = ISO5_MsgCnt))
++0 SET ISO5_356FCls1_F	ISO5_356FCls_F
++0 SET ISO5_CLMATA1 concat ("" ISO5_356ATA1)
++0 SET ISO5_CLMWD11 concat ("" ISO5_356WD11)
++0 SET ISO5_CLMWD12 concat ("" ISO5_356WD12)
++0 EXIT
+#elseif	((ISO5_356ETX_F | ISO5_356EOT_F) & ((CLM_PgCnt + 1) = ISO5_MsgCnt))
++0 SET ISO5_356FCls2_F	ISO5_356FCls_F
++0 SET ISO5_CLMATA2 concat ("" ISO5_356ATA2)
++0 SET ISO5_CLMWD21 concat ("" ISO5_356WD21)
++0 SET ISO5_CLMWD22 concat ("" ISO5_356WD22)
++0 EXIT
+#elseif	(ISO5_356ETX_F | ISO5_356EOT_F)
++0 EXIT
+#endif
+*************************************************
+***** Put the Data in a String Parameter ********
+#if	((ISO5_MsgCnt = CLM_PgCnt) & ISO5_356STX_F)
++0 SET ISO5_BlokCnt 1
++0 EXECUTE ISO5_BuildStrings_ATP
+#elseif ((ISO5_MsgCnt = (CLM_PgCnt + 1)) & ISO5_356STX_F & ((CLM_PgCnt + 1) <= CLM_PgMax))
++0 SET ISO5_BlokCnt 2
++0 EXECUTE ISO5_BuildStrings_ATP
+#endif
+*************************************************
+$END-PHASE
+**********

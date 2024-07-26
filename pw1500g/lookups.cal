@@ -1,0 +1,169 @@
+$GROUP "lookups" 
+#C Lookup the temperature for the RTD's...
+#C RTD06_000_Cal (Ohms) in ./calibrate/psi9046_temps.cal. (DJR 8/4/15)...
+RTDOhms:Ohms	(IDGOilIn_V / RTDCurrent)
+#C RTDOhms:Ohms RTD06_000_Cal
+#C __________
+#C IDGOilIn:DegC lookup (Platinum100_Ohms_T)
+#C IDGOilIn:DegC lookup (Platinum200_Ohms_T)
+IDGOilIn:DegC	lookup (NickelNo1_Ohms_T)
+#C RTD06_001_Cal (Ohms) in ./calibrate/psi9046_temps.cal. (DJR 8/4/15)...
+RTDOhms:Ohms	(IDGOilOut_V / RTDCurrent)
+#C RTDOhms:Ohms RTD06_001_Cal
+#C IDGOilOut:DegC lookup (Platinum100_Ohms_T)
+#C IDGOilOut:DegC lookup (Platinum200_Ohms_T)
+IDGOilOut:DegC	lookup (NickelNo1_Ohms_T)
+#C ***************************************
+#C Thrust bands (A and B)
+FnAMax:Lbs	lookup (FNAMX_T)
+FnAMin:Lbs	lookup (FNAMN_T)
+FnANom:Lbs	((FnAMax + FnAMin) / 2.0)
+FnBMax:Lbs	lookup (FNBMX_T)
+FnBMin:Lbs	lookup (FNBMN_T)
+FnBNom:Lbs	((FnBMax + FnBMin) / 2.0)
+#if	(N1S < 20.0)
+FnZeroMn:Lbs	-3
+FnZeroMx:Lbs	3
+#else
+FnZeroMn:Lbs	-3
+FnZeroMx:Lbs	(FnAMax + 5000.0)
+#endif
+#C ***************************************
+#C MOTMn:DegC lookup (MOTMn_T)
+#C MOTMxSS:DegC lookup (MOTMx_T)
+#C MOTMxTrans:DegC lookup (MOTMxTrans_T)
+MOPExpMn:PSIG	lookup (MOPExpMn_T)
+MOPExpMx:PSIG	lookup (MOPExpMx_T)
+MOPAccMn:PSIG	lookup (MOPAccMn_T)
+MOPAccMx:PSIG	lookup (MOPAccMx_T)
+MOPSafeMn:PSIG	lookup (MOPSafeMn_T)
+MOPMn:PSIG	lookup (MOPMn_T)
+#C --------------------------------
+#C ******** TIS 4.1.1.2.6 Auxiliary Oil Pressure *******
+#C * Fan Gear Box (FGB) Auxiliary Oil Pressure Max Limits.
+#if	inrange(6500.0 EEC_N2 17500.0)
+AOPMxLim:PSIA	(((EEC_N2 - 6500.0) * 0.00209091) + 54.0)
+#elseif	inrange(17500.0 EEC_N2 22000.0)
+AOPMxLim:PSIA	(((EEC_N2 - 17500.0) * 0.00866667) + 77.0)
+#elseif	(EEC_N2 >= 22000.0)
+AOPMxLim:PSIA	116.0
+#else	
+AOPMxLim:PSIA	54.0
+#endif	
+#if	EECSWv2_11_08_F
+AOPMnLim:PSIA	0.0
+#C * Fan Gear Box (FGB) Auxiliary Oil Pressure Min Limits.
+#elseif	inrange(1000.0 EEC_N1 1200.0)
+AOPMnLim:PSIA	((EEC_N1 - 1000.0) * 0.15)
+#elseif	(EEC_N1 >= 1200.0)
+AOPMnLim:PSIA	(((EEC_N1 - 1200.0) * 0.0052273) + 30.0)
+#else	
+AOPMnLim:PSIA	0.0
+#endif	
+#C _______________
+#C OverTemperatures.
+ITTRunMxRLim:DegC	lookup (ITTRunMxRLim_T)
+ITTRunMxYLim:DegC	(ITTRunMxRLim - 5.0)
+#C _______________
+#C N2 Redline Limits.
+#C #if ArmBrkInHPT_TB
+#C HPT Damper Break-In Test 9
+#C N2Red:RPM lookup (N2R_HPTBI_T)
+#C #elseif (ArmShapedPart20_TS | VibSurvey_TS | ArmAccelDecel_F)
+#C Shaped Accel Part II, Transient Performance and Vibration Survey, Test 9.
+#C N2Red:RPM lookup (N2R_VIB_T)
+#C #else
+N2Red:RPM	lookup (N2R_T)
+#C #endif
+#C _______________
+#C ***** Gas Generator Check Curves (GGCC) *****
+#C ***** Input parameter: FNTR2 Lbs *****
+GGCCWFPLHCR2Mx:PPH	lookup (GGCCWFPLHCR2Mx_T)
+GGCCWFPLHCR2Mn:PPH	lookup (GGCCWFPLHCR2Mn_T)
+GGCCN1C2DMx:RPM	lookup (GGCCN1C2DMx_T)
+GGCCN1C2DMn:RPM	lookup (GGCCN1C2DMn_T)
+GGCCN2C2DMx:RPM	lookup (GGCCN2C2DMx_T)
+GGCCN2C2DMn:RPM	lookup (GGCCN2C2DMn_T)
+GGCCTSFCPLHCMx:PPH	lookup (GGCCTSFCPLHCMx_T)
+GGCCTSFCPLHCMn:PPH	lookup (GGCCTSFCPLHCMn_T)
+GGCCP25Q2Mx:	lookup (GGCCP25Q2Mx_T)
+GGCCP25Q2Mn:	lookup (GGCCP25Q2Mn_T)
+GGCCPS3Q2Mx:	lookup (GGCCPS3Q2Mx_T)
+GGCCPS3Q2Mn:	lookup (GGCCPS3Q2Mn_T)
+GGCCT25OP25Mx:DegC	lookup (GGCCT25OP25Mx_T)
+GGCCT25OP25Mn:DegC	lookup (GGCCT25OP25Mn_T)
+GGCCT3OP3Mx:DegC	lookup (GGCCT3OP3Mx_T)
+GGCCT3OP3Mn:DegC	lookup (GGCCT3OP3Mn_T)
+GGCCT49OP49Mx:DegC	lookup (GGCCT49OP49Mx_T)
+GGCCT49OP49Mn:DegC	lookup (GGCCT49OP49Mn_T)
+GGCCT45OP45Mx:DegC	lookup (GGCCT45OP45Mx_T)
+GGCCT45OP45Mn:DegC	lookup (GGCCT45OP45Mn_T)
+#C --------------------------------------------------
+#C *** E.A MR20CC424 TT2SEL Temperature Buckets and Vane Schedule Biases
+#C *** lookup uses CITDegF...
+#C #if (TRA_Actual > 36.5)
+#C VaneSchedBias:DegC lookup (VaneSchedBiasGT36_T)
+#C #else
+#C VaneSchedBias:DegC lookup (VaneSchedBiasLT36_T)
+#C #endif
+#C ------------------------------
+#if	AutoTLAEnable_F
+TRATargBand:Deg	0.1
+#else	
+TRATargBand:Deg	0.5
+#endif	
+#C --------------------------------------------------
+#C *** Test Instruction Specification (TIS) *********
+#C *** Dew Point Temp Limits DegF
+#if	(CITDegF < 40.0)
+#C TDEWPTLim:DegF (CITDegF - 10.0)
+TDEWPTLim:DegF	lookup (TDEWPT0_T)
+#elseif	(CITDegF < 50.0)
+#C TDEWPTLim:DegF (1.2 * CITDegF - 18.0)
+TDEWPTLim:DegF	lookup (TDEWPT1_T)
+#else	
+TDEWPTLim:DegF	lookup (TDEWPT2_T)
+#endif	
+#C **************************************************
+#C #if	(N1C2D <= 3087.0)
+#C CalcWB25SG:	lookup (CalcWB25SG1_T)
+#C #elseif	inrange (3087.0 N1C2D 6534.5)
+#C CalcWB25SG:	lookup (CalcWB25SG2_T)
+#C #else	
+#C CalcWB25SG:	0.0
+#C #endif	
+#C **************************************************
+#C #if	(N1C2D < 7000.0)
+#C DeltaFNTP125:Lbs	lookup (DeltaFNTP1251_T)
+#C #else	
+#C DeltaFNTP125:Lbs	lookup (DeltaFNTP1252_T)
+#C #endif	
+#C **************************************************
+FNCLINE:Lbs	((0.00464 * FNS) - 0.74)
+#C **** See corrections.cal *************************
+#C CalcW31: lookup (CalcW31_T)
+#C **************************************************
+#C FP4: lookup (CalcFP4_T)
+#C **************************************************
+CalcW2AR:	lookup (CalcW2AR_T)
+#C **************************************************
+FDrag:	lookup (FDrag_T)
+#C **************************************************
+#if	(FNTR2D < 13800.0)
+DeltaFNTFNIM:	lookup (DeltaFNTFNIM1_T)
+#else	
+DeltaFNTFNIM:	lookup (DeltaFNTFNIM2_T)
+#endif	
+#C **************************************************
+FNvsN1HighFN:Lbs	lookup (FNvsN1HighFN_T)
+FNvsN1LowFN:Lbs	lookup (FNvsN1LowFN_T)
+#C --------------------------------------------------
+#C **************************************************
+#C SAPTarg:PSIG ((SAPMn + SAPMx) / 2.0)
+#C SAPTarg:PSIG lookup (SAPTarg_T)
+#C SAPTargPct:% (1.8182 * SAPTarg)
+#C **** Assuming SAP is 0-100 psig. ****
+#C SAPTargPct:% SAPTarg
+#C SET initial SAPTargPct in initlookups.cal, then ma
+#C StoredAirLimY:PSIG      SAPMax
+$END-GROUP

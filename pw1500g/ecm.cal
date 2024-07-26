@@ -1,0 +1,267 @@
+$GROUP "ecm" 
+SWActiveAdpt:	(AdaptcountTotal = 18.0)
+#if	(AdaptcountTotal = 0)
+Adapter_stat:	0
+#elseif	((AdaptcountTotal > 0) & (AdaptcountTotal < 18))
+Adapter_stat:	1
+#elseif	(AdaptcountTotal > 18)
+Adapter_stat:	1
+#elseif	(AdaptcountTotal = 18)
+Adapter_stat:	2
+#endif	
+#C ======================================================================
+#C ----------------- Start of DC Power Test UPS Logic -------------------
+#C In common/dcpowertst.cal (DJR 07/16/19)...
+#C NOTE: SETS parameter (SWActive: TRUE/FALSE)...
+#C ----------------------------- END DC Power Test UPS l
+#if	(ECM_OpTimer_TS & ~OpTimer_F)
+OpTimer_F:	ON
+#C dummy1:		storeevent ("Timer Started N1C2: %vN1C2_SLS ")
+#elseif	(~ECM_OpTimer_TS & OpTimer_F)
+OpTimer_F:	OFF
+#endif	
+#C------------------------ EEC Ground Power Delay Timer Logic
+#if	(SWActive & (EECPwrDelTmr > 9) & EECPwrDelTmr_F)
+CkEngHwCfgOnce_F:	ON
+EECPwrDelTmr_F:		OFF
+EECPwrDelTmr:Sec	0.0
+#endif
+#C------------------------ PL Amp Manual Control to External
+#if	(SWActive & EFSO_I & ~EFSOActivated)
+EFSOActivated:	ON
+#elseif	(EFSOActivated & ~EFSO_I)
+EFSOActivated:	OFF
+#endif	
+#C --------------Ignition Power Enable Logic-------------
+#C With Cell not ready if you arm Air or Fuel and attempt to ignite, that won't work.
+IgnPwrDisable:	(~SWActive | (CellNotReady_I & (FuelArm_I | AirArm_I)))
+#if	(EECEngRunning & ~ECM_IgnPwr_TB)
+#C Ignition Power must stay on during Engine Running to avoid Bits.
+ECM_IGNPwr_TB:	ON
+#endif	
+#C #if (ECM_IGNPwr_TB & (AUTSTA | MANSTA) & (~DCIgnPwrB_O | DCIgnPwrA_O))
+#C **** Start With B Ignitor ONLY...
+#C **** Ref: Testing-09 1.11.3 (NOTE)...
+#C DCIgnPwrA_O: OFF
+#C DCIgnPwrB_O: ON
+#C #elseif (ECM_IGNPwr_TB & ~AUTSTA & ~MANSTA & ~DCIgnPwrA_O)
+#if	(ECM_IGNPwr_TB & ~DCIgnPwrA_O)
+DCIgnPwrA_O:	ON
+DCIgnPwrB_O:	ON
+#elseif	(~ECM_IGNPwr_TB & DCIgnPwrB_O)
+DCIgnPwrA_O:	OFF
+DCIgnPwrB_O:	OFF
+#endif	
+#C -------------- Start Mode -----------------------
+#C ---- Mode 0 = UNK Start
+#C ---- Mode 1 = Auto Start
+#C ---- Mode 2 = Manual Start
+#C ---- Mode 3 = Dry Crank
+#C ---- Mode 4 = Wet Crank
+#C ---- Mode 5 = NORMAL
+#if	(SWActive & AUTSTA)
+ECM_StartMode_Stat:	1
+#elseif	(SWActive & MANSTA)
+ECM_StartMode_Stat:	2
+#elseif	(SWActive & DRYCKA)
+ECM_StartMode_Stat:	3
+#elseif	(SWActive & WETCKA)
+ECM_StartMode_Stat:	4
+#elseif	SWActive
+ECM_StartMode_Stat:	5
+#else	
+ECM_StartMode_Stat:	0
+#endif	
+#C -------------- Starter Air Logic ----------------
+#C ---- ModeSel 0 = Normal (Auto Start)
+#C ---- ModeSel 1 = Crank (Manual Start)
+#C ---
+StartModAut_F:	(SWActive & ~ECM_ModeSel_TB & ECM_FuelCtrl_TB & ~StarterCutOut_F & AirArm_I)
+StartModMan_F:	(SWActive & ECM_ModeSel_TB & ~StarterCutOut_F & AirArm_I)
+#if	((StartModMan_F | StartModAut_F) & ~StartAir_O)
+StartAir_O:	ON
+#elseif	(~StartModMan_F & ~StartModAut_F & StartAir_O)
+StartAir_O:	OFF
+ECM_ModeSel_TB:	OFF
+ECM_IgnCtrl_TB:	OFF
+PAIRs_Cmd:ma	0.0
+#endif	
+#if (EECPwrChA_O & EECPwrChB_O)
+EECPwr_Stat: 2
+#elseif (EECPwrChA_O | EECPwrChB_O)
+EECPwr_Stat: 1
+#else
+EECPwr_Stat: 0
+#endif
+#C -------------- Push Button Auto/Manual Start and Wet/Dry Motor Logic -------------
+#C ----- Push Button Auto Start/Crank...
+#if	((PB_AutoStart_TB | PB_ManStart_TB | PB_WetCrank_TB | PB_DryCrank_TB) & (~InitOilService_F | ~AirArm_I | ~SWActive))
+PB_AutoStart_TB:	OFF
+PB_ManStart_TB:	OFF
+PB_WetCrank_TB:	OFF
+PB_DryCrank_TB:	OFF
+#endif	
+PB_StartCrank_F:	((PB_AutoStart_TB | PB_ManStart_TB | PB_WetCrank_TB | PB_DryCrank_TB) & InitOilService_F & AirArm_I)
+#if	PB_StartCrank_F
+dummy:	startautotest (PB_StartCrank_ATP)
+#endif	
+#C -------------- Engine RUN/OFF Logic -------------
+EngRUN_CHA_O:	ECM_FuelCtrl_TB
+EngRUN_CHB_O:	ECM_FuelCtrl_TB
+EngOFF_CHA_O:	~ECM_FuelCtrl_TB
+EngOFF_CHB_O:	~ECM_FuelCtrl_TB
+#C -------------- QLOP Switch Logic ----------------
+#if	~SWActive
+#C Low Oil Pressure Indication UNK.
+EECLOP_Stat:	0
+#C #elseif ((~LowOilPress_I & (EEC_N2Pct < 10.0)) | (EECLOP_Stat = 4))
+#C Low Oil Pressure Indication InValid (Latch State).
+#C EECLOP_Stat: 4
+#C #elseif (LowOilPress_I & (POILAC > (MOPSafeMn + 20.0)))
+#C Low Oil Pressure Indication BAD
+#C EECLOP_Stat: 3
+#C #elseif (~LowOilPress_I & (POILAC < MOPSafeMn))
+#C Low Oil Pressure Indication
+#elseif	(POILREDL)
+#C HIGH Oil Pressure Indication L272B11 = 1
+EECLOP_Stat:	3
+#elseif	(~POILLO)
+#C Low Oil Pressure Indication NOT LOW
+EECLOP_Stat:	2
+#C #elseif LowOilPress_I
+#elseif	(POILLO)
+#C Low Oil Pressure Indication L272B12 = 1
+EECLOP_Stat:	1
+#endif	
+#C -------- HPSOV Fuel ShutOff Valve --------------
+#if	~SWActive
+#C *** Software Not Active...
+HPSOV_Stat:	0
+#elseif	~ENGRUN
+#C *** HPSOV (Fuel Valve) Closed...
+HPSOV_Stat:	1
+#elseif	ENGRUN
+#C *** HPSOV (Fuel Valve) Open...
+HPSOV_Stat:	2
+#endif	
+#C -------- Approach/Minimum Idle Logic ------------
+#C **** APPROACH/MIN IDLE DECRETES...
+WOW_ChA_O:	~ECM_IdleCtrl_TB
+WOW_ChB_O:	~ECM_IdleCtrl_TB
+#C ------- Oil Filter By-Pass Logic ---------------
+#if	~SWActive
+#C Oil Filter By-Pass UNK.
+OilFBP_Stat:	0
+#elseif	OILFBP
+#C Oil Filter By-Pass.
+OilFBP_Stat:	3
+#elseif	OILFIMBP
+#C Oil Filter Impending By-Pass.
+OilFBP_Stat:	2
+#else	
+#C Oil Filter By-Pass OK.
+OilFBP_Stat:	1
+#endif	
+#C -------- Fuel Filter By-Pass Logic -------------
+#if	~SWActive
+#C Fuel Filter By-Pass UNK.
+FuelFBP_Stat:	0
+#elseif	FFBP
+#C Fuel Filter By-Pass.
+FuelFBP_Stat:	3
+#elseif	FFIMBP
+#C Fuel Filter Impending By-Pass.
+FuelFBP_Stat:	2
+#else	
+#C Fuel Filter By-Pass OK.
+FuelFBP_Stat:	1
+#endif	
+#C --------- Oil Temp Status Logic -------------------
+#if	~SWActive
+TOilAC_Stat:	0
+#elseif	TOILCLD
+#C *** Low Oil Temp No Accel (41 DegC)...
+TOilAC_Stat:	4
+#elseif	TOILRDL
+#C *** High Oil Temp 2 Red Limit...
+TOilAC_Stat:	3
+#elseif	TOILHAM
+#C *** High Oil Temp 1 Amber Limit...
+TOilAC_Stat:	2
+#else	
+#C *** Oil Temp OK...
+TOilAC_Stat:	1
+#endif	
+#C ---------------------------
+#C Cowl Anti-Ice Status from EEC.
+#C ---------------------------
+#if	(~SWActive)
+CowlAI_Stat:	0.0
+#elseif	(~CAIPOS & CAISWOFF)
+#C Cowl Anti-Ice Switch OFF and Valve Closed...
+CowlAI_Stat:	4.0
+#elseif	(CAIPOS & CAISWON)
+#C Cowl Anti-Ice Switch ON and Valve OPEN...
+CowlAI_Stat:	3.0
+#elseif	(CAIPOS & CAISWOFF)
+#C Cowl Anti-Ice Switch OFF and Valve InTransient...
+CowlAI_Stat:	2.0
+#elseif	(~CAIPOS & CAISWON)
+#C Cowl Anti-Ice Switch ON and Valve InTransient...
+CowlAI_Stat:	1.0
+#endif	
+#C ---------------------------
+#C ITT Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECITT_Stat:	0.0
+#elseif	ITTREDL
+EECITT_Stat:	3.0
+#elseif	ITTAMBL
+EECITT_Stat:	2.0
+#else	
+EECITT_Stat:	1.0
+#endif	
+#C ---------------------------
+#C N1 Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECN1_Stat:	0.0
+#elseif	N1REDL
+EECN1_Stat:	2.0
+#else	
+EECN1_Stat:	1.0
+#endif	
+#C ---------------------------
+#C N2 Status from EEC Redline/Amber.
+#C ---------------------------
+#if	(~SWActive)
+EECN2_Stat:	0.0
+#elseif	N2REDL
+EECN2_Stat:	2.0
+#else	
+EECN2_Stat:	1.0
+#endif	
+#C ---------------------------
+#C P2T2 Probe Heat Logic
+#C ---------------------------
+P2T2PHeat_O:	(ECM_IdleCtrl_TB | P2T2Req | ECM_P2T2PHeat_TB)
+#if	(ECM_P2T2PHeat_TB & ~P2T2PHeat_F)
+P2T2PHeat_F:	ON
+P2T2PHeatTmr:Sec	0.0
+#elseif	(ECM_P2T2PHeat_TB & (P2T2PHeatTmr > 5.0))
+ECM_P2T2PHeat_TB:	OFF
+#elseif	(P2T2PHeat_F & (P2T2PHeatTmr > 300.0))
+P2T2PHeat_F:	OFF
+P2T2PHeatTmr:Sec	0.0
+#endif	
+#C ---------------------------
+#C * Under Cowl Temp Logic ***
+#C * Moved to ecm_uctl.cal ***
+#C ---------------------------
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Logic ************
+#C ****** See autothrottle.cal **************
+#C ****** Moved to ecm_atl.cal **************
+#C ---------------------------
+$END-GROUP

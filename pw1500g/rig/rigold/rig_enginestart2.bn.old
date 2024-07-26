@@ -1,0 +1,23 @@
+# Rig file for Engine Start display
+#
+#C (degF) rig sig T4_9 200
+rig sig T4_9C 93
+rig sig N1i 350
+rig sig N2i 350
+rig sig StartValve_TB 0
+#rig sig StartVlv_O   1
+sleep 5
+echo  "turning fuel on"
+rig sig FuelOn_TB 0
+#rig sig QECfuelCutoff_O   0
+sleep 5
+
+rig sig N2i 350 5900  20
+rig sig N1i 350 699  15
+rig sig VibTBB .1 1.5  .01
+rig sig VibFBB .25 1.8  .01
+rig sig MOP 1040 1070  1
+rig sig MOT 100 200  2
+
+echo "Watch for lightoff"
+

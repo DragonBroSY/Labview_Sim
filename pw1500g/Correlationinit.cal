@@ -1,0 +1,64 @@
+$GROUP "Correlationinit"  when=4
+#C --- PS2D +/- Max Limit ---
+PS2DMxLim:%	0.2
+PS2DMnLim:%	-0.2
+#C --- PT2D +/- Max Limit ---
+PT2DMxLim:%	0.1
+PT2DMnLim:%	-0.1
+#C --- Correlation Targets -----
+N1C2TargBand:RPM        10.0
+D1Targ:RPM      9205.0
+D2Targ:RPM      8865.0
+D3Targ:RPM      9205.0
+D4Targ:RPM      8865.0
+C0Targ:RPM      2020.0
+C1Targ:RPM      9625.0
+C2Targ:RPM      9465.0
+C3Targ:RPM      9355.0
+C4Targ:RPM      9205.0
+C5Targ:RPM      9105.0
+C6Targ:RPM      8965.0
+C7Targ:RPM      8865.0
+C8Targ:RPM      8435.0
+C9Targ:RPM      7920.0
+C10Targ:RPM     5780.0
+C11Targ:RPM     3985.0
+C12Targ:RPM     2020.0
+C13Targ:RPM     3050.0
+D1TargMx:Lbf    (D1Targ + N1C2TargBand)
+D1TargMn:Lbf    (D1Targ - N1C2TargBand)
+D2TargMx:Lbf    (D2Targ + N1C2TargBand)
+D2TargMn:Lbf    (D2Targ - N1C2TargBand)
+C0TargMx:RPM    (C0Targ + (N1C2TargBand * 2.0))
+C0TargMn:RPM    (C0Targ - (N1C2TargBand * 2.0))
+C1TargMx:Lbf    (C1Targ + N1C2TargBand)
+C1TargMn:Lbf    (C1Targ - N1C2TargBand)
+C2TargMx:Lbf    (C2Targ + N1C2TargBand)
+C2TargMn:Lbf    (C2Targ - N1C2TargBand)
+C3TargMx:Lbf    (C3Targ + N1C2TargBand)
+C3TargMn:Lbf    (C3Targ - N1C2TargBand)
+C4TargMx:Lbf    (C4Targ + N1C2TargBand)
+C4TargMn:Lbf    (C4Targ - N1C2TargBand)
+C5TargMx:Lbf    (C5Targ + N1C2TargBand)
+C5TargMn:Lbf    (C5Targ - N1C2TargBand)
+C6TargMx:Lbf    (C6Targ + N1C2TargBand)
+C6TargMn:Lbf    (C6Targ - N1C2TargBand)
+C7TargMx:Lbf    (C7Targ + N1C2TargBand)
+C7TargMn:Lbf    (C7Targ - N1C2TargBand)
+C8TargMx:Lbf    (C8Targ + N1C2TargBand)
+C8TargMn:Lbf    (C8Targ - N1C2TargBand)
+C9TargMx:Lbf    (C9Targ + N1C2TargBand)
+C9TargMn:Lbf    (C9Targ - N1C2TargBand)
+C10TargMx:Lbf   (C10Targ + N1C2TargBand)
+C10TargMn:Lbf   (C10Targ - N1C2TargBand)
+C11TargMx:Lbf   (C11Targ + N1C2TargBand)
+C11TargMn:Lbf   (C11Targ - N1C2TargBand)
+C12TargMx:Lbf   (C12Targ + (N1C2TargBand * 2.0))
+C12TargMn:Lbf   (C12Targ - (N1C2TargBand * 2.0))
+C13TargMx:RPM   (C13Targ + (N1C2TargBand * 2.0))
+C13TargMn:RPM   (C13Targ - (N1C2TargBand * 2.0))
+D3TargMx:Lbf    (D3Targ + N1C2TargBand)
+D3TargMn:Lbf    (D3Targ - N1C2TargBand)
+D4TargMx:Lbf    (D4Targ + N1C2TargBand)
+D4TargMn:Lbf    (D4Targ - N1C2TargBand)
+$END-GROUP

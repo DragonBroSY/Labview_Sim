@@ -1,0 +1,198 @@
+$GROUP "autothrottle" 
+#C ****** TRA Throttle Resolver Angle ********
+#C ****** TRA_Actual See mapsignals.cal ************************
+#C TRA_Actual:Deg (PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+#C TRA_Actual:Deg TLAPriCHResolver
+#C *************************************************************
+#C ------------------------------------------
+#C ****** ECM Auto Throttle Logic ***********
+#C ------------------------------------------
+#if	(AutoTRequest_F & (AutoTLAEnable_F | AutoPL_I))
+TRA_Cmd:Deg	TRA_Actual
+TRAStart:Deg	TRA_Actual
+TRATmr:Sec	0.0
+TRATmr_F:	ON
+AutoThrottle_F:	ON
+AutoTRequest_F:	OFF
+#elseif (AutoTRequest_F & ~AutoTLAEnable_F & ~AutoPL_I)
+TRATmr_F:	OFF
+TRATmr:Sec	0.0
+AutoThrottle_F:	OFF
+AutoTRequest_F: OFF
+#elseif	(~AutoThrottle_F & TRATmr_F)
+TRATmr_F:	OFF
+TRATmr:Sec	0.0
+#endif	
+#if     (AutoThrottle_F & ~AutoTLAEnable_F & ~AutoPL_I)
+AutoThrottle_F: OFF
+TRATmr_F:	OFF
+TRATmr:Sec	0.0
+#endif
+#C ------------------------------------------
+#C * TRA AutoThrottle Trim Increment ********
+#C ------------------------------------------
+#if	((TRA_SpeedCtrl_RB = 4) & ~(Trim_Inc = SFastSpeed) & ~ButtonPushed_F)
+Trim_Inc:	SFastSpeed
+#elseif	((TRA_SpeedCtrl_RB = 3) & ~(Trim_Inc = FastSpeed) & ~ButtonPushed_F)
+Trim_Inc:	FastSpeed
+#elseif	((TRA_SpeedCtrl_RB = 2) & ~(Trim_Inc = MedSpeed) & ~ButtonPushed_F)
+Trim_Inc:	MedSpeed
+#elseif	((TRA_SpeedCtrl_RB = 1) & ~(Trim_Inc = SlowSpeed) & ~ButtonPushed_F)
+Trim_Inc:	SlowSpeed
+#elseif	((TRA_SpeedCtrl_RB = 0) & ~(Trim_Inc = FineSpeed) & ~ButtonPushed_F)
+Trim_Inc:	FineSpeed
+#endif	
+#C --------------------------------------------------------
+#C ****** Calculate/SET TRA_CMD Here **********************
+#C ****** Must be before Check TRA_CMD ********************
+#C --------------------------------------------------------
+#if	((TRA_Rate < FineSpeed) & (Accel_F | Decel_F))
+#C ****** Set TRA_Rate Minimum of FineSpeed (0.07917)...
+TRA_Rate:Deg/Sec	FineSpeed
+#endif	
+#C --------------------------------------------------------
+TRAInc_F:	OFF
+TRADec_F:	OFF
+#C --------------------------------------------------------
+#if	(AutoThrottle_F & ~Accel_F & ~Decel_F & ~ADPause_F & (IncreaseTRA_F | GoingToMxPwr_F))
+#C ***** This is for IncreaseTRA Button press...
+TRA_Rate:Deg/Sec	Trim_Inc
+#C StageTmr_F: OFF
+TRAInc_F:	ON
+TRADec_F:	OFF
+TRASnap_F:	OFF
+#C --------------------------------------------------------
+#elseif	(AutoThrottle_F & ~Accel_F & ~Decel_F & ~ADPause_F & (DecreaseTRA_F | GoingToMnIdle_F))
+#C ***** This is for DecreaseTRA Button press...
+TRA_Rate:Deg/Sec	Trim_Inc
+#C StageTmr_F: OFF
+TRADec_F:	ON
+TRAInc_F:	OFF
+TRASnap_F:	OFF
+#C --------------------------------------------------------
+#elseif	(AutoThrottle_F & StageTmr_F & Accel_F & ~TRAAccelTarg_F)
+#C ***** This is for Automated Accel/RunIn/BrkIn procedures...
+TRATmr_F:	OFF
+TRATmr:Sec	StageTmr
+TRAInc_F:	ON
+#C TRASnap_F:	ON
+#C --------------------------------------------------------
+#elseif	(AutoThrottle_F & StageTmr_F & Decel_F & ~TRADecelTarg_F)
+#C ***** This is for Automated Decel/RunIn/BrkIn procedures...
+TRATmr_F:	OFF
+TRATmr:Sec	StageTmr
+TRADec_F:	ON
+#C TRASnap_F:	ON
+#endif	
+#C --------------------------------------------------------
+#C ***** Turn On TRASnap_F to Set TRA_CMD to the exact Target...
+#if     (AutoThrottle_F & StageTmr_F & Decel_F & ~TRADecelTarg_F & RunInHPC_TS)
+TRASnap_F:      ON
+#elseif (AutoThrottle_F & StageTmr_F & Accel_F & ~TRAAccelTarg_F & RunInHPC_TS)
+TRASnap_F:      ON
+#endif
+#C --------------------------------------------------------
+#if	(StageTmr_F & (Accel_F | Decel_F))
+#C **** AutoThrottle TRA Progress % *****
+TRA_Travel:Deg	(TRA_Actual - TRA_Targ)
+TRA_Travel:Deg	abs(TRA_Travel)
+TRA_Totl:Deg	(TRA_Targ - TRAStart)
+TRA_Totl:Deg	abs(TRA_Totl)
+TRA_ProgPct:%	(((TRA_Totl - TRA_Travel) / TRA_Totl) * 100.0)
+#else	
+TRA_ProgPct:%	0.0
+#endif	
+#C --------------------------------------------------------
+#C * Set the Auto Throttle Commanded value here...
+#C * See mapsignals.cal for PLA_Command:VDC parameter...
+#C --------------------------------------------------------
+TRA_CmdPrev:Deg	TRA_Cmd
+#C --------------------------------------------------------
+#if	(AutoThrottle_F & TRAInc_F)
+#C ***** AutoThrottle Accel...
+TRA_Cmd:Deg	(TRAStart + (TRA_Rate * TRATmr))
+#elseif	(AutoThrottle_F & TRADec_F)
+#C ***** AutoThrottle Decel...
+TRA_Cmd:Deg	(TRAStart - (TRA_Rate * TRATmr))
+#elseif	(AutoThrottle_F & TRASnap_F & ~TRATmr_F & (TRAAccelTarg_F | TRADecelTarg_F))
+#C ***** AutoThrottle Snap Accel/Decel to TRA Target...
+TRA_Cmd:Deg	TRA_Targ
+TRASnap_F:	OFF
+#endif	
+#C --------------------------------------------------------
+#C * Check TRA_Actual, Are we at the Idle or Max Power Stop?
+#C --------------------------------------------------------
+TRAatMxPwrStop_F:	(inrange (TRAMxPwrStopMn TRA_Actual TRAMxPwrStopMx) & TRAMxPwrStopSet_F)
+TRAatMnIdleStop_F:	(inrange (TRAMnIdleStopMn TRA_Actual TRAMnIdleStopMx) & TRAMnIdleStopSet_F)
+#C ********************************************************
+#C * Check TRA_Actual, Are we at the Idle or Max Power Stop?
+#C * Perform MAX limits checking for Commanded TRA...
+#C ********************************************************
+#if	(AutoThrottle_F & TRAatMxPwrStop_F & ~TRAOverRide_F & GoingToMxPwr_F)
+GoToMxPwrStop_TS:	OFF
+#elseif	(AutoThrottle_F & TRAatMnIdleStop_F & ~TRAOverRide_F & GoingToMnIdle_F)
+GoToMnIdleStop_TS:	OFF
+#elseif	(AutoThrottle_F & TRAatMxPwrStop_F & ~TRAOverRide_F & TRAInc_F & ~AutoTLAEnable_F)
+TRA_Cmd:Deg	TRAMxPwrStop
+#elseif	(AutoThrottle_F & TRAatMnIdleStop_F & ~TRAOverRide_F & TRADec_F & ~AutoTLAEnable_F)
+TRA_Cmd:Deg	TRAMnIdleStop
+#elseif	(AutoThrottle_F & (TRA_Cmd > TRAMxPwrStop) & ~TRAOverRide_F)
+TRA_Cmd:Deg	TRAMxPwrStop
+#elseif	(AutoThrottle_F & (TRA_Cmd < TRAMnIdleStop) & ~TRAOverRide_F)
+TRA_Cmd:Deg	TRAMnIdleStop
+#elseif	LimitEventLogged
+LimitEventLogged:	OFF
+#endif	
+#C ------------------------------------------------------
+#C * This will only happen if TRAOverRide_F is applied...
+#C ------------------------------------------------------
+#if	(AutoThrottle_F & (TRA_Cmd > TRAMxPwrStop) & ~LimitEventLogged)
+dummy:	storeevent("TRA Upper Limit Exceeded")
+LimitEventLogged:	ON
+#elseif	(AutoThrottle_F & (TRA_Cmd < TRAMnIdleStop) & ~LimitEventLogged)
+dummy:	storeevent("TRA Lower Limit Exceeded")
+LimitEventLogged:	ON
+#endif	
+#C --------------------------------------------------------
+#C * Compute difference between TRA_Cmd and TRA_Actual...
+#C --------------------------------------------------------
+TRA_Diff:Deg	(TRA_Cmd - TRA_Actual)
+TRA_Diff:Deg	abs(TRA_Diff)
+#C ********************************************************
+#C * Check for Operator OverRide (TRAOverRide_F),
+#C * A difference of > TRAOverRideLim degrees
+#C * between commanded and actual Power Lever Position...
+#C ********************************************************
+#C ***** IF TRA Accel/Decel Rate is to fast will trip Oper
+#if	(AutoThrottle_F & (TRA_Diff > TRAOverRideLim) & (TRA_Rate < 20.0))
+OperatorOverride_F:	ON
+#endif	
+#C ------------------------------------------------------------
+#if	(EmergIdle_F & AutoThrottle_F & AutoTLAEnable_F)
+EidleStillSet_F:	ON
+TRA_Cmd:Deg	TRAMnIdleStop
+AutoThrottle_F:	OFF
+#elseif	(EmergIdle_F & AutoThrottle_F)
+EidleStillSet_F:	ON
+TRA_Cmd:Deg	TRAMnIdleStop
+AutoThrottle_F:	OFF
+#elseif	(EmergIdle_F & ~EidleStillSet_F)
+EidleStillSet_F:	ON
+TRA_Cmd:Deg	TRAMnIdleStop
+#elseif	(~EmergIdle_F & EidleStillSet_F)
+EidleStillSet_F:	OFF
+#endif	
+#C ************************************************************
+#C * Enable/Disable AutoThrottle...
+#C * To Enable AutoThrottle,
+#C * Power Lever Mode [Auto] (Red) Must be selected (AutoPL_I = ON)...
+#C ************************************************************
+AutoPLEnable_O:	(AutoThrottle_F & AutoPL_I & ~CalibratingDAC_F & ~AutoTLAEnable_F)
+#if	((AutoPLEnable_O | AutoTLAEnable_F) & AutoThrottle_F & ~ButtonPushed_F)
+ButtonPushed_F:	ON
+#endif	
+#C ************************************************************
+LastAUTOPLReq:	AutoPL_I
+TRACmdLastScan:Deg	TRA_Cmd
+#C ------------------------------------------------------------
+$END-GROUP

@@ -1,0 +1,240 @@
+$GROUP "idgcalcs"
+* 
+* Engine Input Signals and Input Relays
+* *** The calculation vars listed in the left column must not be changed
+* *** as they are hard coded in a parsing routine, rdidgmain() used by BUILDER
+* ALSO, the following $TIMER must be added to the timers config. file
+* for this logic to work properly.
+*    $TIMERS
+*    idgsettletime:secs   RESET   idgtimer
+*    $END-TIMERS
+*
+* Calc vars      User defined params names
+* ------------   -------------------------
+*  Set these accordingly unless they are already set to these names in CST
+*  Relay names must also be set up the same as used in this file.
+* GENFREQ          ???
+* GENVOLT          ???
+* PMGVOLT          ???
+* CTCUR            ???
+*
+* Update the Gen Volt section
+GENFREQ          GenHz
+GENVOLT          Gen_Voltage
+PMGVOLT          PMG_Voltage
+CTCUR            Gen_Current
+ROTATE_I         GenPhaseRot_I
+IDGPhaseCTOA_I   GenPhaseACorr_I
+IDGPhaseCTOB_I   GenPhaseBCorr_I
+IDGPhaseCTOC_I   GenPhaseCCorr_I
+*
+* Calculation Logic
+*
+#if (idgphaseA_TB = ON)
+ctcurradio:     1
+#elseif (idgphaseB_TB = ON)
+ctcurradio:     2
+#elseif (idgphaseC_TB = ON)
+ctcurradio:     3
+#else
+ctcurradio:     0
+#endif
+CTCUR:      Gen_Current
+ROTATE_I:      GenPhaseRot_I
+IDGPhaseCTOA_I:      GenPhaseACorr_I
+IDGPhaseCTOB_I:      GenPhaseBCorr_I
+IDGPhaseCTOC_I:      GenPhaseCCorr_I
+#if      (genvoltradio = 0)
+GenVoltBC_O:      OFF
+GenVoltCA_O:      OFF
+genvoltvalue1:VAC      GENVOLT
+genvoltvalue2:VAC      0.0
+genvoltvalue3:VAC      0.0
+#elseif      (genvoltradio = 1)
+GenVoltBC_O:      ON
+GenVoltCA_O:      OFF
+genvoltvalue1:VAC      0.0
+genvoltvalue2:VAC      GENVOLT
+genvoltvalue3:VAC      0.0
+#elseif      (genvoltradio = 2)
+GenVoltBC_O:      OFF
+GenVoltCA_O:      ON
+genvoltvalue1:VAC      0.0
+genvoltvalue2:VAC      0.0
+genvoltvalue3:VAC      GENVOLT
+#endif      
+#if      (pmgvoltradio = 0)
+PMGVolt23_O:      OFF
+PMGVolt31_O:      OFF
+pmgvoltvalue1:VAC      PMGVOLT
+pmgvoltvalue2:VAC      0.0
+pmgvoltvalue3:VAC      0.0
+#elseif      (pmgvoltradio = 1)
+PMGVolt23_O:      ON
+PMGVolt31_O:      OFF
+pmgvoltvalue1:VAC      0.0
+pmgvoltvalue2:VAC      PMGVOLT
+pmgvoltvalue3:VAC      0.0
+#elseif      (pmgvoltradio = 2)
+PMGVolt23_O:      OFF
+PMGVolt31_O:      ON
+pmgvoltvalue1:VAC      0.0
+pmgvoltvalue2:VAC      0.0
+pmgvoltvalue3:VAC      PMGVOLT
+#endif      
+#if      ((GENFREQ > MAXGENFREQ) | (GENFREQ < MINGENFREQ))
+withinlimits:      0
+phaserotatestate:      0
+#else      
+withinlimits:      1
+#endif      
+#if      ((withinlimits = 1) & (ROTATE_I = OFF))
+phaserotatestate:      1
+#elseif      ((withinlimits = 1) & (ROTATE_I = ON))
+phaserotatestate:      2
+#endif      
+#if      (magtrimtoggle = 0)
+MAGTRIM_O:      OFF
+#elseif      (magtrimtoggle = 1)
+MAGTRIM_O:      ON
+#endif      
+#if      (genpwrtoggle = OFF)
+GenPwr_O:      OFF
+#elseif      (genpwrtoggle = ON)
+GenPwr_O:      ON
+#endif      
+#if      ((ctcurradio > lastctcurradio) | (ctcurradio < lastctcurradio))
+modifysectiona:      ON
+modifysectionb:      ON
+modifysectionc:      ON
+#endif      
+#if      (withinlimits = 0)
+ctcurmessage:      0
+#elseif      ((withinlimits = 1) & (phaserotatestate = 1))
+ctcurmessage:      1
+#elseif      ((withinlimits = 1) & (phaserotatestate = 2))
+ctcurmessage:      2
+#endif      
+#if      (ctcurradio = 0)
+ctcurvaluea:mAmp      0.0
+ctcurvalueb:mAmp      0.0
+ctcurvaluec:mAmp      0.0
+LOADA_O:      OFF
+LOADB_O:      OFF
+LOADC_O:      OFF
+CTBCurrent_O:  OFF
+CTCCurrent_O:  OFF
+#elseif      (ctcurradio = 1)
+ctcurvaluea:mAmp      CTCUR
+ctcurvalueb:mAmp      0.0
+ctcurvaluec:mAmp      0.0
+LOADA_O:      ON
+LOADB_O:      OFF
+LOADC_O:      OFF
+CTBCurrent_O:  OFF
+CTCCurrent_O:  OFF
+#elseif      (ctcurradio = 2)
+ctcurvaluea:mAmp      0.0
+ctcurvalueb:mAmp      CTCUR
+ctcurvaluec:mAmp      0.0
+LOADA_O:      OFF
+LOADB_O:      ON
+CTBCurrent_O:  ON
+CTCCurrent_O:  OFF
+LOADC_O:      OFF
+#elseif      (ctcurradio = 3)
+ctcurvaluea:mAmp      0.0
+ctcurvalueb:mAmp      0.0
+ctcurvaluec:mAmp      CTCUR
+LOADA_O:      OFF
+LOADB_O:      OFF
+LOADC_O:      ON
+CTBCurrent_O:  OFF
+CTCCurrent_O:  ON
+#endif      
+#if      ((ctcurradio = 1) & (CTCUR > 2.0))
+modifysectiona:      OFF
+idgtimer:      ON
+ctcurwireda:      ON
+CTBCurrent_O:      OFF
+CTCCurrent_O:      OFF
+#elseif      ((ctcurradio = 1) & (modifysectiona = ON))
+idgtimer:      OFF
+idgsettletime:      0
+ctcurwireda:      OFF
+ctcurphaseda:      0
+CTBCurrent_O:      OFF
+CTCCurrent_O:      OFF
+#endif      
+#if      ((ctcurradio = 2) & (CTCUR > 2.0))
+modifysectionb:      OFF
+idgtimer:      ON
+ctcurwiredb:      ON
+#C CTBCurrent_O:      OFF
+#C CTCCurrent_O:      OFF
+#elseif      ((ctcurradio = 2) & (modifysectionb = ON))
+idgtimer:      OFF
+idgsettletime:      0
+ctcurwiredb:      OFF
+ctcurphasedb:      0
+CTBCurrent_O:      ON
+CTCCurrent_O:      OFF
+#endif      
+#if      ((ctcurradio = 3) & (CTCUR > 2.0))
+modifysectionc:      OFF
+idgtimer:      ON
+ctcurwiredc:      ON
+#C CTBCurrent_O:      OFF
+#C CTCCurrent_O:      OFF
+#elseif      ((ctcurradio = 3) & (modifysectionc = ON))
+idgtimer:      OFF
+idgsettletime:      0
+ctcurwiredc:      OFF
+ctcurphasedc:      0
+CTBCurrent_O:      OFF
+CTCCurrent_O:      ON
+#endif      
+#if      (idgsettletime < IDGSETTLINGTIME)
+#goto      nophase
+#endif      
+#if      ((CTPHASE_O = 1) & (IDGPhaseCTOA_I = OFF))
+ctcurphaseda:      1
+#elseif      ((CTPHASE_O = 1) & (IDGPhaseCTOA_I = ON))
+ctcurphaseda:      2
+#else
+ctcurphaseda:      0
+#endif      
+#if      ((CTPHASE_O = 1) & (IDGPhaseCTOB_I = OFF))
+ctcurphasedb:      1
+#elseif      ((CTPHASE_O = 1) & (IDGPhaseCTOB_I = ON))
+ctcurphasedb:      2
+#elseif
+ctcurphasedb:      0
+#endif      
+#if      ((CTPHASE_O = 1) & (IDGPhaseCTOC_I = OFF))
+ctcurphasedc:      1
+#elseif      ((CTPHASE_O = 1) & (IDGPhaseCTOC_I = ON))
+ctcurphasedc:      2
+#elseif
+ctcurphasedc:      0
+#endif      
+nophase
+lastctcurradio:      ctcurradio
+* Output Relays Equivalence to user defined parameters
+* User defined     Calculation vars
+* params names       
+*-------------    -----------------Gen_Control_Pw_O               GenPwr_O
+GenPwr_O                       GenPwr_O
+GenLoadSlctPhA_O               LoadA_O
+GenLoadSlctPhB_O               LoadB_O
+GenLoadSlctPhC_O               LoadC_O
+GenVoltSlctPhBtoC_O            GenVoltBC_O
+GenVoltSlctPhCtoA_O            GenVoltCA_O
+PMGVoltSlctPh2to3_O            PMGVolt23_O
+PMGVoltSlctPh3to1_O            PMGVolt31_O
+GenCurrTransTest_O             CTPhase_O
+GenCurrTransB_O                CTBCurrent_O
+GenCurrTransC_O                CTCCurrent_O
+GenMagTrimTest_O               MagTrim_O
+
+$END-GROUP

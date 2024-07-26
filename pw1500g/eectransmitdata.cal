@@ -1,0 +1,939 @@
+$GROUP "eectransmitdata" 
+#C ***************************************************************
+#C The following Parametric and Discrete parameters are transmitted
+#C to the EEC via a Condor_429 card.
+#C decodebits (startbit numbits value)
+#C setbits (highbit lowbit value)
+#C ****** PW1500G Discrete Parameters **************************
+#C ****** DMC Label 001 
+DMCA1_L001B15:	0
+DMCA1_L001B20:	1
+DMC_LabelData:	decodebits (DMCA1_L001_00 1 19)
+DMCA1_L001_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L001_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L001_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L001_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L001_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L001_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L001_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L001_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L001_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L001_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L001_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L001_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L001_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L001_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L001_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 002 ******
+DMCA1_L002B12:	0
+DMC_LabelData:	decodebits (DMCA1_L002_00 1 19)
+DMCA1_L002_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L002_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L002_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L002_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L002_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L002_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L002_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L002_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L002_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L002_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L002_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L002_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L002_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L002_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L002_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 004 ******
+DMCA1_L004B16:	0
+DMCA1_L004B17:	0
+DMC_LabelData:	decodebits (DMCA1_L004_00 1 19)
+DMCA1_L004_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L004_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L004_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L004_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L004_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L004_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L004_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L004_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L004_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L004_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L004_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L004_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L004_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L004_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L004_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 010 ******
+DMCA1_L010B11:	0
+DMCA1_L010B12:	0
+DMCA1_L010B13:	0
+DMCA1_L010B14:	0
+DMCA1_L010B15:	ECM_EECResetChB_MB
+DMCA1_L010B16:	0
+DMCA1_L010B17:	0
+DMCA1_L010B18:	OverRide25Bld_F
+DMCA1_L010B19:	0
+DMCA1_L010B20:	0
+DMCA1_L010B21:	0
+#C **** OverRideSVScd_F = HPVOR (HPC SVS)...
+DMCA1_L010B23:	OverRideSVScd_F
+DMCA1_L010B29:	0
+DMC_LabelData:	decodebits (DMCA1_L010_00 1 19)
+DMCA2_L010_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L010_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L010_00:	setbits (19 1 DMC_LabelData)
+#C ****************************************
+DMC_LabelData:	decodebits (DMCA1_L010_00 1 4)
+DMCA1_L010_01:	setbits (4 1 DMC_LabelData)
+DMC_LabelData:	decodebits (DMCA1_L010_00 6 14)
+DMCA1_L010_01:	setbits (19 6 DMC_LabelData)
+DMCA1_L010B15_01:	ECM_EECResetChA_MB
+DMC_LabelData:	decodebits (DMCA1_L010_01 1 19)
+DMCA2_L010_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L010_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L010_01:	setbits (19 1 DMC_LabelData)
+#C ****************************************
+DMC_LabelData:	decodebits (DMCA1_L010_00 1 4)
+DMCA1_L010_10:	setbits (4 1 DMC_LabelData)
+DMC_LabelData:	decodebits (DMCA1_L010_00 6 14)
+DMCA1_L010_10:	setbits (19 6 DMC_LabelData)
+DMCA1_L010B15_10:	0
+DMC_LabelData:	decodebits (DMCA1_L010_10 1 19)
+DMCA1_L010_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L010_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L010_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L010_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L010_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L010_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L010_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 103 ******
+DMCA1_L103B11:	ECM_IdleCtrl_TB
+DMCA1_L103B15:	~ECM_IdleCtrl_TB
+DMC_LabelData:	decodebits (DMCA1_L103 1 19)
+DMCA2_L103:	setbits (19 1 DMC_LabelData)
+DMCB1_L103:	setbits (19 1 DMC_LabelData)
+DMCB2_L103:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 107 ******
+DMCA1_L107B11:	0
+DMCA1_L107B12:	0
+DMCA1_L107B18:	1
+DMC_LabelData:	decodebits (DMCA1_L107_01 1 19)
+DMCA1_L107_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L107_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L107_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L107_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L107_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L107_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L107_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L107_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L107_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L107_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L107_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 114 ******
+DMCA1_L114B11:	ECM_IdleCtrl_TB
+DMCA1_L114B15:	~ECM_IdleCtrl_TB
+DMC_LabelData:	decodebits (DMCA1_L114 1 19)
+DMCA2_L114:	setbits (19 1 DMC_LabelData)
+DMCB1_L114:	setbits (19 1 DMC_LabelData)
+DMCB2_L114:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 121 ******
+DMCA1_L121B12:	0
+DMC_LabelData:	decodebits (DMCA1_L121 1 19)
+DMCA2_L121:	setbits (19 1 DMC_LabelData)
+DMCB1_L121:	setbits (19 1 DMC_LabelData)
+DMCB2_L121:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 122 ******
+DMCA1_L122B13:	0
+DMC_LabelData:	decodebits (DMCA1_L122 1 19)
+DMCA2_L122:	setbits (19 1 DMC_LabelData)
+DMCB1_L122:	setbits (19 1 DMC_LabelData)
+DMCB2_L122:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 123 ******
+DMCA1_L123B12:	0
+DMC_LabelData:	decodebits (DMCA1_L123 1 19)
+DMCA2_L123:	setbits (19 1 DMC_LabelData)
+DMCB1_L123:	setbits (19 1 DMC_LabelData)
+DMCB2_L123:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 124 ******
+DMCA1_L124B13:	0
+DMC_LabelData:	decodebits (DMCA1_L124 1 19)
+DMCA2_L124:	setbits (19 1 DMC_LabelData)
+DMCB1_L124:	setbits (19 1 DMC_LabelData)
+DMCB2_L124:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 135 ******
+DMCA1_L135_00:	setbits (19 1 0)
+DMC_LabelData:	decodebits (DMCA1_L135_00 1 19)
+DMCA1_L135_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L135_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L135_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L135_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L135_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L135_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L135_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L135_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L135_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L135_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L135_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L135_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L135_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L135_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L135_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 150 ******
+#C ****** UTC TIME ***********
+#C DMCA1_L150_00: setbits (1 1 ON)
+DMCA1_L150_00:	setbits (7 2 Second2)
+DMCA1_L150_00:	setbits (13 8 Minute2)
+DMCA1_L150_00:	setbits (18 14 Hour2)
+DMC_LabelData:	decodebits (DMCA1_L150_00 1 19)
+DMCA1_L150_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L150_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L150_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L150_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L150_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L150_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L150_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L150_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L150_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L150_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L150_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L150_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L150_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L150_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L150_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 214 ******
+DMCA1_L214B14:	0
+DMC_LabelData:	decodebits (DMCA1_L214_10 1 19)
+DMCA1_L214_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L214_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L214_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L214_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L214_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L214_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L214_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 216 ******
+DMCA1_L216B14:	0
+DMC_LabelData:	decodebits (DMCA1_L216_00 1 19)
+DMCA1_L216_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L216_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L216_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L216_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L216_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L216_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L216_01:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 217 ******
+DMCA1_L217B14:	0
+DMC_LabelData:	decodebits (DMCA1_L217_00 1 19)
+DMCA1_L217_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L217_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L217_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L217_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L217_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L217_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L217_01:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 223 ******
+DMCA1_L223B14:	0
+DMC_LabelData:	decodebits (DMCA1_L223_10 1 19)
+DMCA1_L223_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L223_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L223_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L223_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L223_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L223_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L223_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 247 ******
+DMCA1_L247_00:	setbits (9 4 1)
+DMCA1_L247B11:	0
+DMCA1_L247B28:	ECM_IdleCtrl_TB
+DMC_LabelData:	decodebits (DMCA1_L247_00 1 19)
+DMCA1_L247_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L247_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L247_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L247_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L247_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L247_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L247_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L247_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L247_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L247_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L247_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L247_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L247_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L247_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L247_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 250 ******
+DMCA1_L250B11:	0
+DMCA1_L250:	setbits (9 4 0)
+#C DMCA1_L250B28: ECM_IdleCtrl_TB
+DMCA1_L250B28:	0
+DMC_LabelData:	decodebits (DMCA1_L250 1 19)
+DMCA2_L250:	setbits (19 1 DMC_LabelData)
+DMCB1_L250:	setbits (19 1 DMC_LabelData)
+DMCB2_L250:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 260 ******
+#C ****** UTC Date ***********
+DMCA1_L260_00:	setbits (4 1 Year2)
+DMCA1_L260_00:	setbits (8 5 Year1)
+DMCA1_L260_00:	setbits (12 9 Month2)
+DMCA1_L260_00:	setbits (13 13 Month1)
+DMCA1_L260_00:	setbits (17 14 Day2)
+DMCA1_L260_00:	setbits (19 18 Day1)
+DMC_LabelData:	decodebits (DMCA1_L260_00 1 19)
+DMCA1_L260_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L260_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L260_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L260_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L260_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L260_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L260_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L260_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L260_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L260_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L260_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L260_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L260_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L260_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L260_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 267 ******
+DMCA1_L267B17:	0
+DMCA1_L267B29:	0
+DMC_LabelData:	decodebits (DMCA1_L267_00 1 19)
+DMCA1_L267_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L267_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L267_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L267_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L267_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L267_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L267_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L267_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L267_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L267_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L267_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L267_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L267_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L267_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L267_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 270 ******
+DMCA1_L270B11:	0
+DMCA1_L270B28:	0
+DMC_LabelData:	decodebits (DMCA1_L270 1 19)
+DMCA2_L270:	setbits (19 1 DMC_LabelData)
+DMCB1_L270:	setbits (19 1 DMC_LabelData)
+DMCB2_L270:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 271 ******
+DMCA1_L271B11:	0
+DMCA1_L271B13:	0
+DMCA1_L271B15:	ParkBrake_F
+DMC_LabelData:	decodebits (DMCA1_L271_01 1 19)
+DMCA1_L271_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L271_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L271_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L271_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L271_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L271_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L271_10:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 274 ******
+DMCA1_L274B11:	0
+DMCA1_L274B12:	0
+DMCA1_L274B13:	0
+DMCA1_L274B15:	0
+DMCA1_L274B17:	0
+DMCA1_L274B18:	0
+DMCA1_L274B19:	0
+DMCA1_L274B20:	0
+DMCA1_L274B21:	0
+DMCA1_L274B29:	0
+DMC_LabelData:	decodebits (DMCA1_L274_00 1 19)
+DMCA1_L274_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L274_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L274_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L274_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L274_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L274_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L274_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L274_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L274_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L274_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L274_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L274_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L274_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L274_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L274_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 275 ******
+DMCA1_L275B12:	~ECM_IdleCtrl_TB
+DMCA1_L275B13:	~ECM_IdleCtrl_TB
+DMC_LabelData:	decodebits (DMCA1_L275_01 1 19)
+DMCA1_L275_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L275_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L275_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L275_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L275_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L275_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L275_10:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 276 ******
+DMCA1_L276B11:	0
+DMCA1_L276B12:	0
+DMC_LabelData:	decodebits (DMCA1_L276 1 19)
+DMCA2_L276:	setbits (19 1 DMC_LabelData)
+DMCB1_L276:	setbits (19 1 DMC_LabelData)
+DMCB2_L276:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 277 ******
+DMCA1_L277B11:	0
+DMCA1_L277B12:	0
+DMC_LabelData:	decodebits (DMCA1_L277 1 19)
+DMCA2_L277:	setbits (19 1 DMC_LabelData)
+DMCB1_L277:	setbits (19 1 DMC_LabelData)
+DMCB2_L277:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 300 ******
+DMCA1_L300_00:	setbits (2 1 0)
+DMCA1_L300_00:	setbits (6 5 0)
+DMCA1_L300B19:	0
+DMC_LabelData:	decodebits (DMCA1_L300_00 1 19)
+DMCA1_L300_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L300_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L300_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L300_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L300_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L300_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L300_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L300_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L300_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L300_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L300_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L300_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L300_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L300_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L300_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 304 ******
+DMCA1_L304B18:	0
+DMCA1_L304B19:	0
+DMCA1_L304B20:	0
+DMC_LabelData:	decodebits (DMCA1_L304_00 1 19)
+DMCA1_L304_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L304_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L304_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L304_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L304_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L304_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L304_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L304_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L304_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L304_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L304_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L304_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L304_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L304_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L304_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 306 ******
+DMCA1_L306B12:	0
+DMCA1_L306B13:	0
+DMCA1_L306B17:	0
+#C DMCA1_L306B18: EngineRunning
+DMCA1_L306B18:	(ECM_IdleCtrl_TB | P2T2Req | ECM_P2T2PHeat_TB)
+DMCA1_L306B20:	0
+DMCA1_L306B21:	0
+DMCA1_L306B22:	0
+#C DMCA1_L306B23: EngineRunning
+DMCA1_L306B23:	(ECM_IdleCtrl_TB | P2T2Req | ECM_P2T2PHeat_TB)
+DMC_LabelData:	decodebits (DMCA1_L306_00 1 19)
+DMCA1_L306_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L306_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L306_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L306_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L306_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L306_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L306_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L306_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L306_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L306_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L306_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L306_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L306_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L306_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L306_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 307 ******
+DMCA1_L307B12:	0
+DMC_LabelData:	decodebits (DMCA1_L307_00 1 19)
+DMCA1_L307_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L307_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L307_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L307_00:	setbits (19 1 DMC_LabelData)
+DMCA2_L307_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L307_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L307_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L307_00:	setbits (19 1 DMC_LabelData)
+DMCB1_L307_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L307_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L307_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L307_00:	setbits (19 1 DMC_LabelData)
+DMCB2_L307_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L307_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L307_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 315 ******
+DMCA1_L315_01:	setbits (2 1 0)
+DMCA1_L315_01:	setbits (15 5 0)
+DMC_LabelData:	decodebits (DMCA1_L315_01 1 19)
+DMCA1_L315_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L315_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L315_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L315_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L315_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L315_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L315_10:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 317 ******
+DMCA1_L317_01:	setbits (2 1 0)
+DMCA1_L317_01:	setbits (15 5 0)
+DMC_LabelData:	decodebits (DMCA1_L317_01 1 19)
+DMCA1_L317_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L317_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L317_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L317_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L317_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L317_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L317_10:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 326 ******
+DMCA1_L326B21:	~ECM_CowlAI_TB
+DMCA1_L326B22:	0
+DMCA1_L326B23:	ECM_CowlAI_TB
+DMCA1_L326B24:	1
+DMCA1_L326B25:	0
+DMCA1_L326B26:	0
+DMCA1_L326B27:	1
+DMCA1_L326B28:	0
+DMCA1_L326B29:	0
+DMC_LabelData:	decodebits (DMCA1_L326_01 1 19)
+DMCA1_L326_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L326_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L326_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L326_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L326_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L326_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L326_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L326_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L326_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L326_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L326_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 327 ******
+#C ****** Swaped B19/B20 from Excel sheet. (DJR 10/28/21)
+DMCA1_L327B19:	1
+DMCA1_L327B20:	0
+DMCA1_L327B21:	0
+DMC_LabelData:	decodebits (DMCA1_L327_01 1 19)
+DMCA1_L327_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L327_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L327_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L327_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L327_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L327_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L327_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L327_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L327_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L327_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L327_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 332 ******
+DMCA1_L332B11:	1
+DMCA1_L332B12:	0
+DMCA1_L332B17:	1
+DMCA1_L332B18:	0
+DMC_LabelData:	decodebits (DMCA1_L332_01 1 19)
+DMCA1_L332_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L332_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L332_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L332_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L332_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L332_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L332_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L332_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L332_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L332_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L332_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 336 ******
+DMCA1_L336B21:	1
+DMCA1_L336B22:	0
+DMC_LabelData:	decodebits (DMCA1_L336_01 1 19)
+DMCA1_L336_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L336_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L336_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L336_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L336_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L336_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L336_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L336_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L336_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L336_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L336_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 340 ******
+DMCA1_L340B13:	~ECM_IgnCtrl_TB
+DMCA1_L340B14:	ECM_IgnCtrl_TB
+DMCA1_L340B15:	ECM_ModeSel_TB
+DMCA1_L340B16:	~ECM_ModeSel_TB
+DMCA1_L340B17:	0
+DMCA1_L340B19:	1
+DMC_LabelData:	decodebits (DMCA1_L340_01 1 19)
+DMCA1_L340_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L340_11:	setbits (19 1 DMC_LabelData)
+DMCA2_L340_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L340_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L340_11:	setbits (19 1 DMC_LabelData)
+DMCB1_L340_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L340_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L340_11:	setbits (19 1 DMC_LabelData)
+DMCB2_L340_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L340_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L340_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 371 A1 ******
+#C ****** Added L371B16/17 = 1 due to X-Eng elevated Idle in SW v2.11.15.10. (DJR 5/20/24)...
+#C ****** See Reference email from Francisco J Verdeja Perez (PW Controls), Dated 5/20/24.
+#C ****** Added L371B28 = 1 X-Eng Fan Speed Restriction per Dimitrios 7/3/24 email.
+#C ****** Added above Bits to clear Customer DSU Fault bit 357B27. (DJR 7/5/24)...
+#if	EECSWv2_11_15_F
+DMCA1_L371B16:	1
+DMCA1_L371B17:	1
+DMCA1_L371B28:	1
+#endif
+DMCA1_L371B22:	CHAInCtrl_F
+DMC_LabelData:	decodebits (DMCA1_L371_00 1 19)
+DMCA1_L371_01:	setbits (19 1 DMC_LabelData)
+DMCA1_L371_10:	setbits (19 1 DMC_LabelData)
+DMCA1_L371_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 371 A2 ******
+#if	EECSWv2_11_15_F
+DMCA2_L371B16:	1
+DMCA2_L371B17:	1
+DMCA2_L371B28:	1
+#endif
+DMCA2_L371B22:	CHAInCtrl_F
+DMC_LabelData:	decodebits (DMCA2_L371_00 1 19)
+DMCA2_L371_01:	setbits (19 1 DMC_LabelData)
+DMCA2_L371_10:	setbits (19 1 DMC_LabelData)
+DMCA2_L371_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 371 B1 ******
+#if	EECSWv2_11_15_F
+DMCB1_L371B16:	1
+DMCB1_L371B17:	1
+DMCB1_L371B28:	1
+#endif
+DMCB1_L371B22:	CHBInCtrl_F
+DMC_LabelData:	decodebits (DMCB1_L371_00 1 19)
+DMCB1_L371_01:	setbits (19 1 DMC_LabelData)
+DMCB1_L371_10:	setbits (19 1 DMC_LabelData)
+DMCB1_L371_11:	setbits (19 1 DMC_LabelData)
+#C ****** DMC Label 371 B2 ******
+#if	EECSWv2_11_15_F
+DMCB2_L371B16:	1
+DMCB2_L371B17:	1
+DMCB2_L371B28:	1
+#endif
+DMCB2_L371B22:	CHBInCtrl_F
+DMC_LabelData:	decodebits (DMCB2_L371_00 1 19)
+DMCB2_L371_01:	setbits (19 1 DMC_LabelData)
+DMCB2_L371_10:	setbits (19 1 DMC_LabelData)
+DMCB2_L371_11:	setbits (19 1 DMC_LabelData)
+#C ****** END PW1500G Discrete Data ******************************
+#C ===============================================================
+#C ****** PW1500G Parametric (BNR) Parameters ********************
+#C ****** DMC Label 113 ******
+DMCA1_PCESOT_00:DegC	0
+DMCA1_PCESOT_01:DegC	0
+DMCA1_PCESOT_10:DegC	0
+DMCA1_PCESOT_11:DegC	0
+DMCA2_PCESOT_00:DegC	0
+DMCA2_PCESOT_01:DegC	0
+DMCA2_PCESOT_10:DegC	0
+DMCA2_PCESOT_11:DegC	0
+DMCB1_PCESOT_00:DegC	0
+DMCB1_PCESOT_01:DegC	0
+DMCB1_PCESOT_10:DegC	0
+DMCB1_PCESOT_11:DegC	0
+DMCB2_PCESOT_00:DegC	0
+DMCB2_PCESOT_01:DegC	0
+DMCB2_PCESOT_10:DegC	0
+DMCB2_PCESOT_11:DegC	0
+#C ****** DMC Label 117 ******
+DMCA1_RP2T2Cur_10:AAC	P2T2PHeatCurr
+DMCA1_RP2T2Cur_11:AAC	P2T2PHeatCurr
+DMCA2_RP2T2Cur_10:AAC	P2T2PHeatCurr
+DMCA2_RP2T2Cur_11:AAC	P2T2PHeatCurr
+DMCB1_RP2T2Cur_10:AAC	P2T2PHeatCurr
+DMCB1_RP2T2Cur_11:AAC	P2T2PHeatCurr
+DMCB2_RP2T2Cur_10:AAC	P2T2PHeatCurr
+DMCB2_RP2T2Cur_11:AAC	P2T2PHeatCurr
+#C ****** DMC Label 120 ******
+#C ****** P2T2 Probe Heat Current ****
+DMCA1_LP2T2Cur_00:AAC	P2T2PHeatCurr
+DMCA1_LP2T2Cur_01:AAC	P2T2PHeatCurr
+DMCA2_LP2T2Cur_00:AAC	P2T2PHeatCurr
+DMCA2_LP2T2Cur_01:AAC	P2T2PHeatCurr
+DMCB1_LP2T2Cur_00:AAC	P2T2PHeatCurr
+DMCB1_LP2T2Cur_01:AAC	P2T2PHeatCurr
+DMCB2_LP2T2Cur_00:AAC	P2T2PHeatCurr
+DMCB2_LP2T2Cur_01:AAC	P2T2PHeatCurr
+#C ****** DMC Label 130 ******
+DMCA1_T2OE_00:DegC	T2E
+DMCA1_T2OE_01:DegC	T2E
+DMCA1_T2OE_10:DegC	T2E
+DMCA1_T2OE_11:DegC	T2E
+DMCA2_T2OE_00:DegC	T2E
+DMCA2_T2OE_01:DegC	T2E
+DMCA2_T2OE_10:DegC	T2E
+DMCA2_T2OE_11:DegC	T2E
+DMCB1_T2OE_00:DegC	T2E
+DMCB1_T2OE_01:DegC	T2E
+DMCB1_T2OE_10:DegC	T2E
+DMCB1_T2OE_11:DegC	T2E
+DMCB2_T2OE_00:DegC	T2E
+DMCB2_T2OE_01:DegC	T2E
+DMCB2_T2OE_10:DegC	T2E
+DMCB2_T2OE_11:DegC	T2E
+#C ****** DMC Label 133 ******
+DMCA1_TLA3_01:Deg	EEC_TLA
+DMCA1_TLA3_10:Deg	EEC_TLA
+DMCA2_TLA3_01:Deg	EEC_TLA
+DMCA2_TLA3_10:Deg	EEC_TLA
+DMCB1_TLA3_01:Deg	EEC_TLA
+DMCB1_TLA3_10:Deg	EEC_TLA
+DMCB2_TLA3_01:Deg	EEC_TLA
+DMCB2_TLA3_10:Deg	EEC_TLA
+#C ****** DMC Label 167 ******
+DMCA1_ACID:	TestACID
+DMCA2_ACID:	TestACID
+DMCB1_ACID:	TestACID
+DMCB2_ACID:	TestACID
+#C ****** DMC Label 203 ******
+DMCA1_PRALT_00:Feet	PressAlt
+DMCA1_PRALT_01:Feet	PressAlt
+DMCA1_PRALT_10:Feet	PressAlt
+DMCA1_PRALT_11:Feet	PressAlt
+DMCA2_PRALT_00:Feet	PressAlt
+DMCA2_PRALT_01:Feet	PressAlt
+DMCA2_PRALT_10:Feet	PressAlt
+DMCA2_PRALT_11:Feet	PressAlt
+DMCB1_PRALT_00:Feet	PressAlt
+DMCB1_PRALT_01:Feet	PressAlt
+DMCB1_PRALT_10:Feet	PressAlt
+DMCB1_PRALT_11:Feet	PressAlt
+DMCB2_PRALT_00:Feet	PressAlt
+DMCB2_PRALT_01:Feet	PressAlt
+DMCB2_PRALT_10:Feet	PressAlt
+DMCB2_PRALT_11:Feet	PressAlt
+#C ****** DMC Label 206 ******
+DMCA1_CAS_00:Knots	0.0
+DMCA1_CAS_01:Knots	0.0
+DMCA1_CAS_10:Knots	0.0
+DMCA1_CAS_11:Knots	0.0
+DMCA2_CAS_00:Knots	0.0
+DMCA2_CAS_01:Knots	0.0
+DMCA2_CAS_10:Knots	0.0
+DMCA2_CAS_11:Knots	0.0
+DMCB1_CAS_00:Knots	0.0
+DMCB1_CAS_01:Knots	0.0
+DMCB1_CAS_10:Knots	0.0
+DMCB1_CAS_11:Knots	0.0
+DMCB2_CAS_00:Knots	0.0
+DMCB2_CAS_01:Knots	0.0
+DMCB2_CAS_10:Knots	0.0
+DMCB2_CAS_11:Knots	0.0
+#C ****** DMC Label 211 ******
+DMCA1_TAT_00:DegC	CITDegC
+DMCA1_TAT_01:DegC	CITDegC
+DMCA1_TAT_10:DegC	CITDegC
+DMCA1_TAT_11:DegC	CITDegC
+DMCA2_TAT_00:DegC	CITDegC
+DMCA2_TAT_01:DegC	CITDegC
+DMCA2_TAT_10:DegC	CITDegC
+DMCA2_TAT_11:DegC	CITDegC
+DMCB1_TAT_00:DegC	CITDegC
+DMCB1_TAT_01:DegC	CITDegC
+DMCB1_TAT_10:DegC	CITDegC
+DMCB1_TAT_11:DegC	CITDegC
+DMCB2_TAT_00:DegC	CITDegC
+DMCB2_TAT_01:DegC	CITDegC
+DMCB2_TAT_10:DegC	CITDegC
+DMCB2_TAT_11:DegC	CITDegC
+#C ****** DMC Label 233 ******
+DMCA1_FlexTemp_01:DegC	-99.0
+DMCA1_FlexTemp_10:DegC	-99.0
+DMCA2_FlexTemp_01:DegC	-99.0
+DMCA2_FlexTemp_10:DegC	-99.0
+DMCB1_FlexTemp_01:DegC	-99.0
+DMCB1_FlexTemp_10:DegC	-99.0
+DMCB2_FlexTemp_01:DegC	-99.0
+DMCB2_FlexTemp_10:DegC	-99.0
+#if	Lbl242PCell_F
+#C ****** DMC Label 242 ******
+DMCA1_TPRS_00:InHg	PCellFHgA
+DMCA1_TPRS_01:InHg	PCellFHgA
+DMCA1_TPRS_10:InHg	PCellFHgA
+DMCA1_TPRS_11:InHg	PCellFHgA
+DMCA2_TPRS_00:InHg	PCellFHgA
+DMCA2_TPRS_01:InHg	PCellFHgA
+DMCA2_TPRS_10:InHg	PCellFHgA
+DMCA2_TPRS_11:InHg	PCellFHgA
+DMCB1_TPRS_00:InHg	PCellFHgA
+DMCB1_TPRS_01:InHg	PCellFHgA
+DMCB1_TPRS_10:InHg	PCellFHgA
+DMCB1_TPRS_11:InHg	PCellFHgA
+DMCB2_TPRS_00:InHg	PCellFHgA
+DMCB2_TPRS_01:InHg	PCellFHgA
+DMCB2_TPRS_10:InHg	PCellFHgA
+DMCB2_TPRS_11:InHg	PCellFHgA
+#else
+#C ****** DMC Label 242 ******
+DMCA1_TPRS_00:InHg	PT2AHgA
+DMCA1_TPRS_01:InHg	PT2AHgA
+DMCA1_TPRS_10:InHg	PT2AHgA
+DMCA1_TPRS_11:InHg	PT2AHgA
+DMCA2_TPRS_00:InHg	PT2AHgA
+DMCA2_TPRS_01:InHg	PT2AHgA
+DMCA2_TPRS_10:InHg	PT2AHgA
+DMCA2_TPRS_11:InHg	PT2AHgA
+DMCB1_TPRS_00:InHg	PT2AHgA
+DMCB1_TPRS_01:InHg	PT2AHgA
+DMCB1_TPRS_10:InHg	PT2AHgA
+DMCB1_TPRS_11:InHg	PT2AHgA
+DMCB2_TPRS_00:InHg	PT2AHgA
+DMCB2_TPRS_01:InHg	PT2AHgA
+DMCB2_TPRS_10:InHg	PT2AHgA
+DMCB2_TPRS_11:InHg	PT2AHgA
+#C DMCA1_TPRS_00:InHg	PBarHgA
+#C DMCA1_TPRS_01:InHg	PBarHgA
+#C DMCA1_TPRS_10:InHg	PBarHgA
+#C DMCA1_TPRS_11:InHg	PBarHgA
+#C DMCA2_TPRS_00:InHg	PBarHgA
+#C DMCA2_TPRS_01:InHg	PBarHgA
+#C DMCA2_TPRS_10:InHg	PBarHgA
+#C DMCA2_TPRS_11:InHg	PBarHgA
+#C DMCB1_TPRS_00:InHg	PBarHgA
+#C DMCB1_TPRS_01:InHg	PBarHgA
+#C DMCB1_TPRS_10:InHg	PBarHgA
+#C DMCB1_TPRS_11:InHg	PBarHgA
+#C DMCB2_TPRS_00:InHg	PBarHgA
+#C DMCB2_TPRS_01:InHg	PBarHgA
+#C DMCB2_TPRS_10:InHg	PBarHgA
+#C DMCB2_TPRS_11:InHg	PBarHgA
+#endif
+#C ****** DMC Label 251 ******
+DMCA1_FLTLG:	0.0
+DMCA2_FLTLG:	0.0
+DMCB1_FLTLG:	0.0
+DMCB2_FLTLG:	0.0
+#C ****** DMC Label 256 ******
+DMCA1_BLDPRS1_00:PSIG	0.0
+DMCA1_BLDPRS1_01:PSIG	0.0
+DMCA1_BLDPRS1_10:PSIG	0.0
+DMCA1_BLDPRS1_11:PSIG	0.0
+DMCA2_BLDPRS1_00:PSIG	0.0
+DMCA2_BLDPRS1_01:PSIG	0.0
+DMCA2_BLDPRS1_10:PSIG	0.0
+DMCA2_BLDPRS1_11:PSIG	0.0
+DMCB1_BLDPRS1_00:PSIG	0.0
+DMCB1_BLDPRS1_01:PSIG	0.0
+DMCB1_BLDPRS1_10:PSIG	0.0
+DMCB1_BLDPRS1_11:PSIG	0.0
+DMCB2_BLDPRS1_00:PSIG	0.0
+DMCB2_BLDPRS1_01:PSIG	0.0
+DMCB2_BLDPRS1_10:PSIG	0.0
+DMCB2_BLDPRS1_11:PSIG	0.0
+#C ****** DMC Label 257 ******
+DMCA1_BLDPRS2_00:PSIG	0.0
+DMCA1_BLDPRS2_01:PSIG	0.0
+DMCA1_BLDPRS2_10:PSIG	0.0
+DMCA1_BLDPRS2_11:PSIG	0.0
+DMCA2_BLDPRS2_00:PSIG	0.0
+DMCA2_BLDPRS2_01:PSIG	0.0
+DMCA2_BLDPRS2_10:PSIG	0.0
+DMCA2_BLDPRS2_11:PSIG	0.0
+DMCB1_BLDPRS2_00:PSIG	0.0
+DMCB1_BLDPRS2_01:PSIG	0.0
+DMCB1_BLDPRS2_10:PSIG	0.0
+DMCB1_BLDPRS2_11:PSIG	0.0
+DMCB2_BLDPRS2_00:PSIG	0.0
+DMCB2_BLDPRS2_01:PSIG	0.0
+DMCB2_BLDPRS2_10:PSIG	0.0
+DMCB2_BLDPRS2_11:PSIG	0.0
+#C ****** DMC Label 330 ******
+DMCA1_OBWHLSPDL_01:Knots	0.0
+DMCA1_OBWHLSPDL_10:Knots	0.0
+DMCA2_OBWHLSPDL_01:Knots	0.0
+DMCA2_OBWHLSPDL_10:Knots	0.0
+DMCB1_OBWHLSPDL_01:Knots	0.0
+DMCB1_OBWHLSPDL_10:Knots	0.0
+DMCB2_OBWHLSPDL_01:Knots	0.0
+DMCB2_OBWHLSPDL_10:Knots	0.0
+#C ****** DMC Label 333 ******
+DMCA1_OBWHLSPDR_01:Knots	0.0
+DMCA1_OBWHLSPDR_10:Knots	0.0
+DMCA2_OBWHLSPDR_01:Knots	0.0
+DMCA2_OBWHLSPDR_10:Knots	0.0
+DMCB1_OBWHLSPDR_01:Knots	0.0
+DMCB1_OBWHLSPDR_10:Knots	0.0
+DMCB2_OBWHLSPDR_01:Knots	0.0
+DMCB2_OBWHLSPDR_10:Knots	0.0
+#C ****** DMC Label 334 ******
+DMCA1_IBWHLSPDL_01:Knots	0.0
+DMCA1_IBWHLSPDL_10:Knots	0.0
+DMCA2_IBWHLSPDL_01:Knots	0.0
+DMCA2_IBWHLSPDL_10:Knots	0.0
+DMCB1_IBWHLSPDL_01:Knots	0.0
+DMCB1_IBWHLSPDL_10:Knots	0.0
+DMCB2_IBWHLSPDL_01:Knots	0.0
+DMCB2_IBWHLSPDL_10:Knots	0.0
+#C ****** DMC Label 335 ******
+DMCA1_IBWHLSPDR_01:Knots	0.0
+DMCA1_IBWHLSPDR_10:Knots	0.0
+DMCA2_IBWHLSPDR_01:Knots	0.0
+DMCA2_IBWHLSPDR_10:Knots	0.0
+DMCB1_IBWHLSPDR_01:Knots	0.0
+DMCB1_IBWHLSPDR_10:Knots	0.0
+DMCB2_IBWHLSPDR_01:Knots	0.0
+DMCB2_IBWHLSPDR_10:Knots	0.0
+#C ****** DMC Label 337 ******
+DMCA1_N1SETOPP_00:%	N1SET
+DMCA1_N1SETOPP_01:%	N1SET
+DMCA1_N1SETOPP_10:%	N1SET
+DMCA1_N1SETOPP_11:%	N1SET
+DMCA2_N1SETOPP_00:%	N1SET
+DMCA2_N1SETOPP_01:%	N1SET
+DMCA2_N1SETOPP_10:%	N1SET
+DMCA2_N1SETOPP_11:%	N1SET
+DMCB1_N1SETOPP_00:%	N1SET
+DMCB1_N1SETOPP_01:%	N1SET
+DMCB1_N1SETOPP_10:%	N1SET
+DMCB1_N1SETOPP_11:%	N1SET
+DMCB2_N1SETOPP_00:%	N1SET
+DMCB2_N1SETOPP_01:%	N1SET
+DMCB2_N1SETOPP_10:%	N1SET
+DMCB2_N1SETOPP_11:%	N1SET
+#C ****** DMC Label 343 ******
+DMCA1_WFOPP_00:PPH	EEC_WF
+DMCA1_WFOPP_01:PPH	EEC_WF
+DMCA1_WFOPP_10:PPH	EEC_WF
+DMCA1_WFOPP_11:PPH	EEC_WF
+DMCA2_WFOPP_00:PPH	EEC_WF
+DMCA2_WFOPP_01:PPH	EEC_WF
+DMCA2_WFOPP_10:PPH	EEC_WF
+DMCA2_WFOPP_11:PPH	EEC_WF
+DMCB1_WFOPP_00:PPH	EEC_WF
+DMCB1_WFOPP_01:PPH	EEC_WF
+DMCB1_WFOPP_10:PPH	EEC_WF
+DMCB1_WFOPP_11:PPH	EEC_WF
+DMCB2_WFOPP_00:PPH	EEC_WF
+DMCB2_WFOPP_01:PPH	EEC_WF
+DMCB2_WFOPP_10:PPH	EEC_WF
+DMCB2_WFOPP_11:PPH	EEC_WF
+#C ****** DMC Label 346 ******
+DMCA1_N1INDOPP_00:%	EEC_N1IND
+DMCA1_N1INDOPP_01:%	EEC_N1IND
+DMCA1_N1INDOPP_10:%	EEC_N1IND
+DMCA1_N1INDOPP_11:%	EEC_N1IND
+DMCA2_N1INDOPP_00:%	EEC_N1IND
+DMCA2_N1INDOPP_01:%	EEC_N1IND
+DMCA2_N1INDOPP_10:%	EEC_N1IND
+DMCA2_N1INDOPP_11:%	EEC_N1IND
+DMCB1_N1INDOPP_00:%	EEC_N1IND
+DMCB1_N1INDOPP_01:%	EEC_N1IND
+DMCB1_N1INDOPP_10:%	EEC_N1IND
+DMCB1_N1INDOPP_11:%	EEC_N1IND
+DMCB2_N1INDOPP_00:%	EEC_N1IND
+DMCB2_N1INDOPP_01:%	EEC_N1IND
+DMCB2_N1INDOPP_10:%	EEC_N1IND
+DMCB2_N1INDOPP_11:%	EEC_N1IND
+#C ***** END DMC BNR DATA ******************
+$END-GROUP

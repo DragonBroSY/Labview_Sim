@@ -1,0 +1,35 @@
+                              declare.cal file
+===========================================================================================
+(DJR 10/5/07)
+	Trouble:
+	Mapnet EGT Margin differs from Delta EGT Margin.
+
+	Found:
+	EPR80A/B/C & EPR65A/B/C/D were using EPRNorm(X), mapnet uses Band(X)..PEPR + EPRMod(80/65).
+===========================================================================================
+(DJR/GRB 11/13/07) SW Version 1.09.3
+	Trouble:
+	Mapnet EGT Margin differs from Delta EGT Margin.
+
+	Found:
+	Normalized values need to be looked up using EPR Corrected.
+
+	Correction:
+	1. Added new curves in declare.crv (EPRCorvsXXX_CRV) and Added bandD..XXX to the Curves.
+	2. Added new parameter EPRCor to put EPR Corrected into the Performance point BandX..EPRCor
+	in declare.cal for use with the new curves above in declare.crv.
+	3. Changed the XXXNormX parameters to use the new .crv curves above with curveeval(),
+	   looks up value to EPR Corrected (EPR80X) | (EPR65D).
+	   example:BandA..EPRCor = EPR80A
+	 	   T49KNormA = curveeval (EPRCorvsT49K_CRV ERP80A)
+	4. Changed engdecprint.cfg to include bandD data.
+===========================================================================================
+(DJR 11/19/07) SW Version 1.09.5
+
+	Trouble:
+	Declaration doesn't print Band D Pads and corrrected EPR not the same as Mapnet.
+
+	Correction:
+	1. Changed Max Limits tables with lower EPR and N1K Min Ranges (lower than band D's EPR/N1K)...
+	2. Changed Band D Corrected EPR to use EPR80 not EPR65, Value used for DEP Calculation...
+===========================================================================================

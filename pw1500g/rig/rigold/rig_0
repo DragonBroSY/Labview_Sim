@@ -1,0 +1,23 @@
+# Rig file for Engine Start display
+#
+rig sig TT495  00
+rig sig N2i 0
+rig sig T29a  0
+rig sig T29b  0
+rig sig StartAir_O   1
+rig sig QECfueloff_O   0
+rig sig N2i   0 
+rig sig N1i   0  
+
+rig sig VibTBB  0 
+rig sig VibFBB 0
+rig sig MOP  0 
+rig sig MOT 0 
+rig sig manoil 0 
+
+rig sig TT495 0  
+
+rig sig N2i 000 
+rig sig T29a  0 
+rig sig T29b  0
+rig sig thrustmeasure 0 

@@ -1,0 +1,83 @@
+$PHASE ISO5_L356DeCoded_ATP length=-1       level=0 controlrelay=None common=0
+**** Get the Alpha Code in ACode3 **********
+#if compare(ISO5ACode3 "NUL")
+**** Transition to NUL [NUL] ***************
++0 SET ISO5_356NUL_F	ON
++0 SET ISO5_356STX_F	OFF
++0 SET ISO5_356ETX_F	OFF
++0 SET ISO5_356EOT_F	OFF
++0 SET ISO5_3561st_F	OFF
++0 SET ISO5_356BWC_N	0
++0 EXIT
+#elseif (compare(ISO5ACode3 "STX") & (ISO5_356BWC = 1) & ~(ISO5_356BWC_N = 1))
+**** Good Health No Codes ******************
+**** Continous STX and BWC = 1 if no Faults *****
++0 SET ISO5_356NUL_F	OFF
++0 SET ISO5_356STX_F	OFF
++0 SET ISO5_356ETX_F	OFF
++0 SET ISO5_356EOT_F	OFF
++0 SET ISO5_3561st_F	OFF
++0 SET ISO5_356BWC_N	ISO5_356BWC
++0 EXIT
+#elseif (ACode1Diff_F & ACode2Diff_F & ACode3Diff_F)
+***** Same Data Just Exit
++0 EXIT
+******************************************
+**** We have CLM Data ********************
+**** Check for Codes in ACode3 ***********
+******************************************
+#elseif (compare(ISO5ACode3 "EOT") & ~ISO5_356EOT_F & ISO5_3561st_F)
+**** End Of Transmission [EOT] *****
+**** End of the Block **************
++0 SET ISO5_356EOT_F ON
++0 SET ISO5_356STX_F OFF
++0 SET ISO5_356ETX_F OFF
++0 SET ISO5_3561st_F OFF
++0 SET ISO5_356BHist_F OFF
+**** Put the CLM in the Display Parameters...
++0 EXECUTE ISO5_DisplayStrings_ATP
+#elseif (compare(ISO5ACode3 "ETX") & ~ISO5_356ETX_F & ISO5_3561st_F)
+**** End of TeXt [ETX] *****
++0 SET ISO5_356ETX_F ON
++0 SET ISO5_356STX_F OFF
+**** Put the CLM in the Display Parameters...
++0 EXECUTE ISO5_DisplayStrings_ATP
+*#elseif (compare(ISO5ACode3 "STX") & ~ISO5_3561st_F & (ISO5_356BWC > 1) & ISO5_356BHist & ~(ISO5_356BWC = ISO5_356BWC_N))
+#elseif (compare(ISO5ACode3 "STX") & ~ISO5_3561st_F & (ISO5_356BWC > 1) & ISO5_356BHist)
+**** First STX Word of the Frame Block ***
+**** Capture the BWC and All the other ***
+**** Data now 0 in all other STX Words ***
+**** Bite History (ISO5_356BHist) = 1 for the first STX ONLY...
+**** Start of TeXt [STX] ****
++0 SET ISO5_3561st_F	ON
++0 SET ISO5_356BHist_F	ON
++0 SET ISO5_356STX_F	ON
++0 SET ISO5_356NUL_F	OFF
++0 SET ISO5_356FOrg_F	ISO5_356FOrg
++0 SET ISO5_356FCls_F	ISO5_356FCls
++0 SET ISO5_356FStat_F	ISO5_356FStat
++0 SET ISO5_356CFCls_F	ISO5_356CFCls
++0 SET ISO5_356CFCls_N	(ISO5_356CFCls + 1)
++0 SET ISO5_356FCls_N	(ISO5_356FCls + 1)
++0 SET ISO5_356FMsg_N	ISO5_356FMsg
++0 SET ISO5_356BWC_N	ISO5_356BWC
++0 SET ISO5_MsgCnt	1
++0 SET ISO5_CharCnt	0
+#elseif (compare(ISO5ACode3 "STX") & ISO5_3561st_F & ~ISO5_356STX_F & (ISO5_356BWC = 0) & ~ISO5_356BHist)
+**** Subsequent STX Words of the Frame Block ***
+**** But the First STX of the Fault Code *******
+**** Bits 9-15, 20-22 will be coded 0 here *****
+**** Start of TeXt [STX] ****
++0 SET ISO5_356STX_F	ON
++0 SET ISO5_356ETX_F	OFF
++0 SET ISO5_356EOT_F	OFF
++0 SET ISO5_356NUL_F	OFF
++0 SET ISO5_MsgCnt	(ISO5_MsgCnt + 1)
++0 SET ISO5_CharCnt	0
+#elseif	(ISO5_356STX_F & ISO5_3561st_F)
+***** Put the Data in a String Parameter ********
++0 EXECUTE ISO5_BuildStrings_ATP
+#endif
+*************************************************
+$END-PHASE
+**********

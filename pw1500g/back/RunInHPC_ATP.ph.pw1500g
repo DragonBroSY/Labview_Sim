@@ -1,0 +1,189 @@
+$PHASE RunInHPC_ATP length=-1       level=0 controlrelay=None common=0
+#if ((RunInStage = 1) & ECM_IdleCtrl_TB)
++0 SET StepTxt concat ("" "Table 4: ")
++0 SET RunInStageTxt concat (StepTxt "Run-In Armed, waiting for Ground Idle Selection...")
++0 SET GoToGI_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif ((RunInStage = 1) & ~ECM_IdleCtrl_TB)
++0 SET RunInStage 5
++0 SET StepTxt concat ("" "Table 4: ")
++0 SET RunInStageTxt concat (StepTxt "Run-In Initiated, Ground Idle Selected, 60 Sec.")
++0 SET StageTmr 0.0
++0 SET StageTmrLim 30.0
++0 SET StageTmr_F ON
+#elseif ((RunInStage = 5) & ~ECM_IdleCtrl_TB & StageTmrLim_F)
++0 SET RunInStage 10
++0 SET RunInStageTxt concat (StepTxt "Run-In Initiated, LPC Bleed Min. 25% Stroke, 60 Sec.")
++0 SET Disable25Bld ON
++0 SET StageTmrLim 60.0
+#elseif ((RunInStage = 10) & ~ECM_IdleCtrl_TB & StageTmrLim_F)
++0 SET RunInStage 15
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 300.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 15)
++0 EXECUTE RunInHold_ATP
+************** 5000 N1C2 ***************
+#elseif (RunInStage = 20)
++0 SET RunInStage 25
++0 EXECUTE RunInClear_ATP
++0 SET GoTo5000_F ON
++0 SET StageTmrLim 30.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 25)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 30)
++0 SET RunInStage 35
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 35)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 40)
++0 SET RunInStage 45
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 45)
++0 EXECUTE RunInHold_ATP
+************** 6000 N1C2 ***************
+#elseif (RunInStage = 50)
++0 SET RunInStage 55
++0 EXECUTE RunInClear_ATP
++0 SET GoTo6000_F ON
++0 SET StageTmrLim 40.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 55)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 60)
++0 SET RunInStage 65
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 65)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 70)
++0 SET RunInStage 75
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 75)
++0 EXECUTE RunInHold_ATP
+************** 7000 N1C2 ***************
+#elseif (RunInStage = 80)
++0 SET RunInStage 85
++0 EXECUTE RunInClear_ATP
++0 SET GoTo7000_F ON
++0 SET StageTmrLim 50.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 85)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 90)
++0 SET RunInStage 95
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 SET StageTmrLim 30.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 95)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 100)
++0 SET RunInStage 105
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 105)
++0 EXECUTE RunInHold_ATP
+************** 8000 N1C2 ***************
+#elseif (RunInStage = 110)
++0 SET RunInStage 115
++0 EXECUTE RunInClear_ATP
++0 SET GoTo8000_F ON
++0 SET StageTmrLim 40.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 115)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 120)
++0 SET RunInStage 125
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 125)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 130)
++0 SET RunInStage 135
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 135)
++0 EXECUTE RunInHold_ATP
+************** 9000 N1C2 ***************
+#elseif (RunInStage = 140)
++0 SET RunInStage 145
++0 EXECUTE RunInClear_ATP
++0 SET GoTo9000_F ON
++0 SET StageTmrLim 50.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 145)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 150)
++0 SET RunInStage 155
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 155)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 160)
++0 SET RunInStage 165
++0 EXECUTE RunInClear_ATP
++0 SET GoTo4000_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 165)
++0 EXECUTE RunInHold_ATP
+*********** 9625 (TO) N1C2 *************
+#elseif (RunInStage = 170)
++0 SET RunInStage 175
++0 EXECUTE RunInClear_ATP
++0 SET GoToTO_F ON
++0 SET StageTmrLim 56.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 175)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 180)
++0 SET RunInStage 185
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 185)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 190)
++0 SET RunInStage 195
++0 EXECUTE RunInClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 SET StageTmrLim 180.0
++0 EXECUTE RunInSetTargs_ATP
+#elseif (RunInStage = 195)
++0 EXECUTE RunInHold_ATP
+************** Complete ***************
+#elseif (RunInStage = 200)
++0 SET RunInStage 205
++0 SET StageTmr_F OFF
++0 SET ArmRunInLPC_TB OFF
++0 SET Disable25Bld OFF
++0 SET RunInState 5
+#endif
+$END-PHASE
+**********
+

@@ -1,0 +1,183 @@
+$GROUP "loopcalc" 
+TestClosed:	FALSE
+#if	(StartDspOp_F & OSProcDspOp_F & (StartDspOpTmr > 3.0))
+StartDspOp_F:	OFF
+OSProcDspOp_F:	OFF
+StartDspOpTmr:Sec	0.0
+#elseif	(StartDspOpTmr > 4.0)
+StartDspOp_F:	OFF
+OSProcDspOp_F:	OFF
+StartDspOpTmr:Sec	0.0
+#endif	
+#C Moved EngineRunning and FuelOn calc to calcwfnew.cal in common. (DJR 8/2/10)...
+#C #if (EngineNotRunning & (EEC_ITT > 300.0) & (N2I > 5000.0))
+#C EnginerRunning: ON
+#C #endif
+WFDiff:PPH	(WFIS - WFVS)
+WFDiff:PPH	abs (WFDiff)
+#C Wf Max Spread Limit between WF Meters, Ref PW1100G TIS Pg 30.
+#if	(Wf_Avg <= 2000.0)
+Wf_MxSpd:PPH	14.0
+#elseif	(Wf_Avg > 2000.0)
+Wf_MxSpd:PPH	(0.007 * Wf_Avg)
+#endif	
+#C <<<<<<<<<<<< Set Flags >>>>>>>>>>>>>>>>>>>>>>
+StableN1_F:	stable (N1S 25 3.0)
+StableN2_F:	stable (N2S 75 3.0)
+#C ***** Must use StableEGT_F for common calcwfnew.cal file.
+StableEGT_F:	stable (EEC_ITT 8 3.0)
+StableEng_F:	(StableN2_F & EngineRunning)
+StableOilQ_F:	stable (OilQ 0.4 15.0)
+StableMOP_F:	(StableN2_F & (EEC_N2 > 14000.0) & stable (POILAC 2.0 120.0))
+RunModeN2_F:	inrange (7300.0 N2I 25000.0)
+MOT2Low_F:	((TOilAC < MOTWarmTH) & RunMode)
+GIdle_F:	inrange (N1GIdleMn N1C2R N1GIdleMx)
+AIdle_F:	inrange (N1AIdleMn N1C2R N1AIdleMx)
+MOTTrans_F:	(~StableN2_F & RunMode)
+CITGT65_F:	(CITDegF >= 65.0)
+CITLT65_F:	~CITGT65_F
+CITGT86_F:	(CITDegF >= 86.0)
+CITGT95_F:	(CITDegF >= 95.0)
+N2GT5Pct_O:	(N2Pct > 5.0)
+#C #if (RunModeN2_F & EngineRunning & NotRunMode)
+#C RunMode: ON
+#C #elseif (~RunModeN2_F & ~EngineRunning & RunMode)
+#C RunMode: OFF
+#C #endif
+RunMode:	(SWActive & EECEngRunning)
+NotRunMode:	~RunMode
+#if	~StableEng_F
+StableEngTmr:Sec	0.0
+#endif	
+#C ****** MOT Transient Timer ******
+#if	((MOTTmr < 1200.0) & ~StableEng_F)
+MOTMx:DegC	MOTMxTrans
+#else	
+MOTMx:DegC	MOTMxSS
+#endif	
+#C ****** Reset MOTTmr *************
+#if	((StableEngTmr > 300.0) & (MOTTmr > 50.0))
+MOTTmr:Sec	0.0
+#endif	
+#C ****** Reset ITT Run Max Timer *************
+#C ****** Engine is below Max Continuous ITT Limit 1006 DegC *****
+#if	((StableEngTmr > 120.0) & (ITTRunMxTmr > 50.0) & ~ITTRunMxTmr_F)
+ITTRunMxTmr:Sec	0.0
+#endif	
+#C ****** Reset Run Timer Above Band B *************
+#C ****** Engine is below Band B Max *****
+#if	((StableEngTmr > 10.0) & ~GTBandBTmr_F & (GTBandBTmr > 10.0))
+GTBandBTmr:Sec	0.0
+#endif	
+#C *********** Set Parameter Ranges **************************
+#C *********** Check Parameters are Inrange ******************
+BandA_F:	inrange (FnAMin FNTR2 FnAMax)
+BandB_F:	inrange (FnBMin FNTR2 FnBMax)
+BandC_F:	inrange (FnCMin FNTR2 FnCMax)
+BandD_F:	inrange (FnDMin FNTR2 FnDMax)
+BandO_F:	(~BandA_F & ~BandB_F & ~BandC_F & ~BandD_F & ~TRAGIdle_F)
+BandFNTarg_F:	inrange (FNTR2_TargMn FNTR2 FNTR2_TargMx)
+FNTR2Targ_F:	inrange (FNTR2_TargMn FNTR2 FNTR2_TargMx)
+GTBandBTmr_F:	(StableEng_F & (FNTR2 > (FnBMax + 50.0)))
+PLA_Actual_F:	inrange (PLA_TargMn PLA_Actual PLA_TargMx)
+TRATarg_F:	inrange (TRA_TargMn TRA_Actual TRA_TargMx)
+N1C2Targ_F:	inrange (N1C2_TargMn N1C2R N1C2_TargMx)
+N2C2D_F:	inrange (N2C2_TargMn N2C2D N2C2_TargMx)
+HPTDTemp_F:	inrange (290.0 EATHPTDisk 310.0)
+MIdle_F:	(TRAatMnIdleStop_F & ~ECM_IdleCtrl_TB & RunMode)
+AIdle_F:	(TRAatMnIdleStop_F & ECM_IdleCtrl_TB & RunMode)
+ZeroDrift_F:	((EEC_N2 = 0.0) & ECM_EECGndTstPwr_TB & ~RunMode)
+#C RunInAI_F: inrange (RunInAIMn N1C2R RunInAIMx)
+#C RunInGI_F: inrange (RunInGIMn N1C2R RunInGIMx)
+#C ******* Set Other Flags **************************
+StarterCutOut_F:	(N2I > StarterCutOut)
+#if	TRAMnIdleStopSet_F
+TRAGIdle_F:	inrange (TRAMnIdleStopMn TRA_Actual TRAMnIdleStopMx)
+#else	
+TRAGIdle_F:	inrange (-15.0 TRA_Actual -13.0)
+#endif	
+TRAAccel_F:	(TRA_Actual > TRAatArm)
+TRADecel_F:	(TRA_Actual < TRAatArm)
+TRAAccelTarg_F:	(TRA_Actual >= TRAAccelTarg)
+TRADecelTarg_F:	(TRA_Actual <= TRADecelTarg)
+N1C2AccelTarg_F:	(N1C2D >= N1C2AccelTarg)
+N1C2DecelTarg_F:	(N1C2D <= N1C2DecelTarg)
+N1AccelTarg_F:	(N1I >= N1AccelTarg)
+N1DecelTarg_F:	(N1I <= N1DecelTarg)
+StageTmrLim_F:	(StageTmr >= StageTmrLim)
+NotN1_ADBar_F:	~N1_ADBar_F
+#if	ABTSTRT
+StartAborted_F:	ON
+#endif	
+#C ****** Acceptance Band A CIT > 86/95 DegF ******
+#if	(ArmAcceptance_TB & (FNTR2 > FnAMin) & CITGT95_F)
+TRA_TargMinus:Deg	(((CITDegF - 95.0) * 0.3) + 0.9)
+#elseif	(ArmAcceptance_TB & (FNTR2 > FnAMin) & CITGT86_F)
+TRA_TargMinus:Deg	((CITDegF - 86.0) * 0.1)
+#else	
+TRA_TargMinus:Deg	0.0
+#endif	
+#C ************* Motor Timer *******************
+#if	((MotorTm < 0.1) & StartAir_O)
+MotorSysTime:Sec	(SysTime + 1200.0)
+#endif	
+#if	((MotorTm > 0.1) & (SysTime > MotorSysTime) & ~StartAir_O & ~EngineRunning)
+MotorSysTime:Sec	(SysTime + 1200.0)
+MotorTm:Sec	0.0
+#endif	
+MotorTmReset:Sec	(MotorSysTime - SysTime)
+#C ************* Point Name ********************
+#if	(~compare (PointName "EVENT") & ~PointTimer_F)
+PointTimer_F:	ON
+#endif	
+#if	(((ScanAvgSecs = -1) & (PointTimer > 62.0)) | ((ScanAvgSecs > 0) & (PointTimer > (ScanAvgSecs + 2))))
+PointTimer_F:	OFF
+PointTimer:Sec	0.0
+PointName:	concat ("" "EVENT")
+ScanStoreInProgress:	OFF
+#endif	
+#C *********************************************
+#C * Cause a StatusIndicator to Blink...
+#C *********************************************
+#if	((BlinkTmr > 2.0) & Blink_F)
+Blink_F:	OFF
+BlinkTmr:	0.0
+#elseif	((BlinkTmr > 2.0) & ~Blink_F)
+Blink_F:	ON
+BlinkTmr:	0.0
+#endif
+#if	(Blink_TB)
+Blink_F:	OFF
+BlinkTmr_F:	OFF
+BlinkTmr:	0.0
+#else
+BlinkTmr:	0.0
+BlinkTmr_F:	ON
+#endif
+#C *********************************************
+#C * Correlation Mapnet Date Time format *******
+#C *********************************************
+MapnetCorrDate:		concat("20" Year1)
+MapnetCorrDate:		concat(MapnetCorrDate Year2)
+MapnetCorrDate:		concat(MapnetCorrDate Month1)
+MapnetCorrDate:		concat(MapnetCorrDate Month2)
+MapnetCorrDate:		concat(MapnetCorrDate Day1)
+MapnetCorrDate:		concat(MapnetCorrDate Day2)
+#if (Hour2 < 10)
+MapnetCorrTime:		concat("0" Hour2)
+#else
+MapnetCorrTime:		concat("" Hour2)
+#endif
+#if (Minute2 < 10)
+MapnetCorrTime:		concat(MapnetCorrTime "0")
+MapnetCorrTime:		concat(MapnetCorrTime Minute2)
+#else
+MapnetCorrTime:		concat(MapnetCorrTime Minute2)
+#endif
+#if (Second2 < 10)
+MapnetCorrTime:		concat(MapnetCorrTime "0")
+MapnetCorrTime:		concat(MapnetCorrTime Second2)
+#else
+MapnetCorrTime:		concat(MapnetCorrTime Second2)
+#endif
+$END-GROUP

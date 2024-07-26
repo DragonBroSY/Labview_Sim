@@ -1,0 +1,11 @@
+$PHASE BadControlPhase length=1        level=0
+*
+* Phase to stop Auto Throttle on a bad control mode reversion
+*
+0 MESSAGE "Reversion to Invalid control Mode"  <- Display Error Message
+0 SET BadControlMode 0                         <- Reset Flag
+#if (AutoThrottleEngaged)                      <- If auto Throttle engaged
+0 EXECUTE StopAutoTPhase_ATP                   <- shut down auto throttle
+#endif
+$END-PHASE
+**********

@@ -1,0 +1,210 @@
+$GROUP "ecm_uctl" 
+#C ---------------------------
+#C * Under Cowl Temp Logic ***
+#C * PSI Brick Right = 02-001 - 02-009
+#C * PSI Brick Left = 01-000 - 01-008
+#C * PSI Brick Top = 01-010 - 01-011
+#C * UCTs Names are TNFDL??? *
+#C * Fwd-Mid-Aft-Back ---^^^
+#C * Lower-Mid-Upper -----||
+#C * Left-Right-Top -------|
+#C ********* LEFT ********|******* RIGHT *****
+#if	TNFDLFUL_F
+TNFDLFUL03:DegC	0.0
+#endif	
+#if	TNFDLFML_F
+TNFDLFML02:DegC	0.0
+#endif	
+#if	TNFDLFLL_F
+TNFDLFLL01:DegC	0.0
+#endif	
+#C ---- MID LEFT -------------
+#if	TNFDLMUL_F
+TNFDLMUL04:DegC	0.0
+#endif	
+#if	TNFDLMLL_F
+TNFDLMLL09:DegC	0.0
+#endif	
+#C ---- AFT LEFT -------------
+#if	TNFDLAUL_F
+TNFDLAUL05:DegC	0.0
+#endif	
+#if	TNFDLALL_F
+TNFDLALL08:DegC	0.0
+#endif	
+#C ---- BAC LEFT -------------
+#if	TNFDLBUL_F
+TNFDLBUL06:DegC	0.0
+#endif	
+#if	TNFDLBLL_F
+TNFDLBLL07:DegC	0.0
+#endif	
+#C ---- FWD RIGHT ------------
+#if	TNFDLFUR_F
+TNFDLFUR07:DegC	0.0
+#endif	
+#if	TNFDLFMR_F
+TNFDLFMR06:DegC	0.0
+#endif	
+#if	TNFDLFLR_F
+TNFDLFLR01:DegC	0.0
+#endif	
+#C ---- MID RIGHT ------------
+#if	TNFDLMUR_F
+TNFDLMUR08:DegC	0.0
+#endif	
+#if	TNFDLMLR_F
+TNFDLMLR02:DegC	0.0
+#endif	
+#C ---- AFT RIGHT ------------
+#if	TNFDLAUR_F
+TNFDLAUR09:DegC	0.0
+#endif	
+#if	TNFDLALR_F
+TNFDLALR03:DegC	0.0
+#endif	
+#C ---- BAC RIGHT ------------
+#if	TNFDLBUR_F
+TNFDLBUR05:DegC	0.0
+#endif	
+#if	TNFDLBLR_F
+TNFDLBLR04:DegC	0.0
+#endif	
+#C ---- TOP ------------------
+#if	TNFDLFUT_F
+TNFDLFUT10:DegC	0.0
+#endif	
+#if	TNFDLAUT_F
+TNFDLAUT11:DegC	0.0
+#endif	
+#C *** FWD ***
+TNFDLFURPct:%	value2pct (TNFDLFUR07 TNFDLFWDLim)
+TNFDLFMRPct:%	value2pct (TNFDLFMR06 TNFDLFWDLim)
+TNFDLFLRPct:%	value2pct (TNFDLFLR01 TNFDLFWDLim)
+TNFDLFULPct:%	value2pct (TNFDLFUL03 TNFDLFWDLim)
+TNFDLFMLPct:%	value2pct (TNFDLFML02 TNFDLFWDLim)
+TNFDLFLLPct:%	value2pct (TNFDLFLL01 TNFDLFWDLim)
+#C *** MID ***
+TNFDLMULPct:%	value2pct (TNFDLMUL04 TNFDLMIDLim)
+TNFDLMLLPct:%	value2pct (TNFDLMLL09 TNFDLMIDLim)
+TNFDLMURPct:%	value2pct (TNFDLMUR08 TNFDLMIDLim)
+TNFDLMLRPct:%	value2pct (TNFDLMLR02 TNFDLMIDLim)
+#C *** AFT ***
+TNFDLAULPct:%	value2pct (TNFDLAUL05 TNFDLAFTLim)
+TNFDLALLPct:%	value2pct (TNFDLALL08 TNFDLAFTLim)
+TNFDLAURPct:%	value2pct (TNFDLAUR09 TNFDLAFTLim)
+TNFDLALRPct:%	value2pct (TNFDLALR03 TNFDLAFTLim)
+#C *** BAC ***
+TNFDLBULPct:%	value2pct (TNFDLBUL06 TNFDLAFTLim)
+TNFDLBLLPct:%	value2pct (TNFDLBLL07 TNFDLAFTLim)
+TNFDLBURPct:%	value2pct (TNFDLBUR05 TNFDLAFTLim)
+TNFDLBLRPct:%	value2pct (TNFDLBLR04 TNFDLAFTLim)
+#C *** TOP ***
+TNFDLFUTPct:%	value2pct (TNFDLFUT10 TNFDLFWDLim)
+TNFDLAUTPct:%	value2pct (TNFDLAUT11 TNFDLAFTLim)
+#C ---- Get the Max Values --------
+TNFDLF_LPct:%	max (TNFDLFULPct TNFDLFMLPct TNFDLFLLPct)
+TNFDLF_RPct:%	max (TNFDLFURPct TNFDLFMRPct TNFDLFLRPct)
+TNFDLM_LPct:%	max (TNFDLMULPct TNFDLMLLPct)
+TNFDLM_RPct:%	max (TNFDLMURPct TNFDLMLRPct)
+TNFDLA_LPct:%	max (TNFDLAULPct TNFDLALLPct)
+TNFDLA_RPct:%	max (TNFDLAURPct TNFDLALRPct)
+TNFDLB_LPct:%	max (TNFDLBULPct TNFDLBLLPct)
+TNFDLB_RPct:%	max (TNFDLBURPct TNFDLBLRPct)
+#C ------------------------------------------
+TNFDLFWDPct:%	max (TNFDLF_LPct TNFDLF_RPct)
+TNFDLMIDPct:%	max (TNFDLM_LPct TNFDLM_RPct)
+TNFDLAFTPct:%	max (TNFDLA_LPct TNFDLA_RPct)
+TNFDLBACPct:%	max (TNFDLB_LPct TNFDLB_RPct)
+TNFDLTOPPct:%	max (TNFDLFUTPct TNFDLAUTPct)
+TNFDLPct:%	max (TNFDLFWDPct TNFDLMIDPct TNFDLAFTPct TNFDLBACPct TNFDLTOPPct)
+#C ---- Check the limits ----------
+#if	(TNFDLPct > 100.0)
+UnderCowl_Stat:	2
+#C ----- Yellow Limits ------------
+#elseif	(TNFDLPct > TNFDLFWDYPct)
+UnderCowl_Stat:	1
+#C TNFDLPct:% TNFDLFWDPct
+#elseif	(TNFDLPct > TNFDLMIDYPct)
+UnderCowl_Stat:	1
+#C TNFDLPct:% TNFDLMIDPct
+#elseif	(TNFDLPct > TNFDLAFTYPct)
+UnderCowl_Stat:	1
+#C TNFDLPct:% TNFDLAFTPct
+#else	
+UnderCowl_Stat:	0
+#endif	
+#C ------- FWD Left --------------------------
+#if	(TNFDLPct = TNFDLFULPct)
+TNFDLMx:DegC	TNFDLFUL03
+TNFDLMsg:	concat ("UCT FWD UL:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLFMLPct)
+TNFDLMx:DegC	TNFDLFML02
+TNFDLMsg:	concat ("UCT FWD ML:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLFLLPct)
+TNFDLMx:DegC	TNFDLFLL01
+TNFDLMsg:	concat ("UCT FWD LL:" TNFDLMx)
+#C ------- MID Left---------------------------
+#elseif	(TNFDLPct = TNFDLMULPct)
+TNFDLMx:DegC	TNFDLMUL04
+TNFDLMsg:	concat ("UCT MID UL:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLMLLPct)
+TNFDLMx:DegC	TNFDLMLL09
+TNFDLMsg:	concat ("UCT MID LL:" TNFDLMx)
+#C ------- AFT Left --------------------------
+#elseif	(TNFDLPct = TNFDLAULPct)
+TNFDLMx:DegC	TNFDLAUL05
+TNFDLMsg:	concat ("UCT AFT UL:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLALLPct)
+TNFDLMx:DegC	TNFDLALL08
+TNFDLMsg:	concat ("UCT AFT LL:" TNFDLMx)
+#C ------- BAC Left --------------------------
+#elseif	(TNFDLPct = TNFDLBULPct)
+TNFDLMx:DegC	TNFDLBUL06
+TNFDLMsg:	concat ("UCT BAC UL:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLBLLPct)
+TNFDLMx:DegC	TNFDLBLL07
+TNFDLMsg:	concat ("UCT BAC LL:" TNFDLMx)
+#C ------- FWD Right -------------------------
+#elseif	(TNFDLPct = TNFDLFURPct)
+TNFDLMx:DegC	TNFDLFUR07
+TNFDLMsg:	concat ("UCT FWD UR:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLFMRPct)
+TNFDLMx:DegC	TNFDLFMR06
+TNFDLMsg:	concat ("UCT FWD MR:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLFLRPct)
+TNFDLMx:DegC	TNFDLFLR01
+TNFDLMsg:	concat ("UCT FWD LR:" TNFDLMx)
+#C ------- MID Right -------------------------
+#elseif	(TNFDLPct = TNFDLMURPct)
+TNFDLMx:DegC	TNFDLMUR08
+TNFDLMsg:	concat ("UCT MID UR:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLMLRPct)
+TNFDLMx:DegC	TNFDLMLR02
+TNFDLMsg:	concat ("UCT MID LR:" TNFDLMx)
+#C ------- AFT Right -------------------------
+#elseif	(TNFDLPct = TNFDLAURPct)
+TNFDLMx:DegC	TNFDLAUR09
+TNFDLMsg:	concat ("UCT AFT UR:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLALRPct)
+TNFDLMx:DegC	TNFDLALR03
+TNFDLMsg:	concat ("UCT AFT LR:" TNFDLMx)
+#C ------- BAC Right -------------------------
+#elseif	(TNFDLPct = TNFDLBURPct)
+TNFDLMx:DegC	TNFDLBUR05
+TNFDLMsg:	concat ("UCT BAC UR:" TNFDLMx)
+#elseif	(TNFDLPct = TNFDLBLRPct)
+TNFDLMx:DegC	TNFDLBLR04
+TNFDLMsg:	concat ("UCT BAC LR:" TNFDLMx)
+#C ------- FWD TOP ---------------------------
+#elseif	(TNFDLPct = TNFDLFUTPct)
+TNFDLMx:DegC	TNFDLFUT10
+TNFDLMsg:	concat ("UCT FWD UT:" TNFDLMx)
+#C ------- AFT TOP ---------------------------
+#elseif	(TNFDLPct = TNFDLAUTPct)
+TNFDLMx:DegC	TNFDLAUT11
+TNFDLMsg:	concat ("UCT AFT UT:" TNFDLMx)
+#endif	
+TNFDLMsg:	concat (TNFDLMsg "DegC")
+#C ------------------------------------------
+$END-GROUP

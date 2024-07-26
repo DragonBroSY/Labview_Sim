@@ -1,0 +1,97 @@
+# Rig file for testing new vs. old output in event print
+echo "need to rig_critical, rig_aux, too"
+#
+# point A
+rig sig A_270B20 TRUE
+rig sig PBarInHg 29.36
+rig sig N1i 4099
+rig sig N2i 11570
+rig sig VIBFBB 6.51
+rig sig VIBTBB 3.52
+# rig sig T4_9 1042.5
+rig sig EGTHarnessDegC 561.39
+rig sig Fni 35759.
+# does it make sense to rig FnS?  It is calc'd from FnI.
+#C want WFS obs = 13146 PPH.
+rig sig WfiHz 538.15
+#C this gives WFS obs = 13242: rig sig WfiHz 542.13
+echo " rig sig T2_5 252.7"
+rig sig T25DegC 122.61
+echo " rig sig T3_5 1035.9"
+rig sig T35aDegC 557.72
+# warn rig sig Ps3_1 354.83
+rig sig Ps31PSIG 354.83
+# warn rig sig Ps3i 236.37
+rig sig Ps3iPSIG 236.37
+# warn rig sig P4_5ab 0.15
+rig sig Pt45PSIG 0.15
+# warn rig sig P4_9InHg 12.14 rig sig Pt49PSIG 5.965
+# warn rig sig P4_9InHg 12.67  to get P49Pt2 to 1.444
+rig sig Pt49PSIG 6.224
+rig sig PCellFPSIG .131
+rig sig PCellRPSIG  .124
+rig sig Ps25PSIG -.12
+rig sig Pt25PSIG 17.26
+#C rig sig CITDegC_A 29.22 gives CIT = 84.6 DegF.
+#C want CIT = 58.9 DegF
+rig sig CITDegC_A 14.94
+rig sig CITDegC_B 14.94
+rig sig CITDegC_C 14.94
+rig sig CITDegC_D 14.94
+rig sig MOTDegC 133.89
+rig sig ScavOilDegC 151.72
+rig sig TBld14DegC 213.72
+rig sig RelHum 55.2
+#C use rig sig RelHum 55.37 and rig sig CITDegC_x 14.98 to get spec hum=.005889
+echo "use rig sig RelHum 55.37, rig sig CITDegC_x 14.98 to get spec hum=.005889"
+rig sig A_N1 92.
+rig sig A_N2 97.
+rig sig A_EPR_Act 1.438
+rig sig A_EPR_Com 1.418
+rig sig A_TFuel 74.8
+rig sig A_EGT 594.0
+rig sig A_P2 13.941
+rig sig A_T2A 27.19
+rig sig A_PBurner 337.69
+rig sig A_FnLRA 77.7
+rig sig A_SVAP 2.5
+rig sig A_EPR_Max 1.449
+rig sig A_EPR_Idl .994
+rig sig A_FnRevPF .3
+rig sig A_HCCPF .7
+rig sig A_LCCPF 100.0
+rig sig A_AOXPF 1.0
+rig sig A_AccWf 14496.0
+rig sig A_Wf_Com 12832.0
+rig sig A_EPR_Clm 1.314
+rig sig A_25Bld 1.0
+rig sig A_N2C_25 100.3
+rig sig A_PresAlt 1283.73
+rig sig A_TotalPr 964.70
+rig sig A_TotAT 27.19
+#
+rig sig B_N1 92.
+rig sig B_N2 98.
+rig sig B_EPR_Act 1.438
+rig sig B_EPR_Com 1.418
+rig sig B_TFuel 74.0
+rig sig B_EGT 594.0
+rig sig B_T2A 27.06
+rig sig B_PBurner 338.16
+rig sig B_Pamb 13.943
+rig sig B_FnLRA 77.7
+rig sig B_SVAP 2.5
+rig sig B_EPR_Max 1.449
+rig sig B_EPR_Idl .994
+rig sig B_FnRevPF .5
+rig sig B_HCCPF 1.0
+rig sig B_LCCPF 100.1
+rig sig B_AOXPF 1.8
+rig sig B_AccWf 14520.0
+rig sig B_Wf_Com 12800.0
+rig sig B_EPR_Clm 1.314
+rig sig B_25Bld 2.0
+rig sig B_N2C_25 100.4
+rig sig B_PresAlt 1283.73
+rig sig B_TotalPr 964.70
+rig sig B_TotAT 27.06

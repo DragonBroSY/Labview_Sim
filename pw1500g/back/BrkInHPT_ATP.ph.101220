@@ -1,0 +1,312 @@
+$PHASE BrkInHPT_ATP length=-1       level=0 controlrelay=None common=0
+#if ((BrkInStage = 1) & ECM_IdleCtrl_TB)
++0 SET ECM_IdleCtrl_TB OFF
++0 SET BrkInStageTxt concat (StepTxt "Table 5 HPT Damper Break-In Armed, waiting for Ground Idle Selection...")
+#elseif ((BrkInStage = 1) & ~ECM_IdleCtrl_TB)
++0 SET BrkInStage 5
++0 EXECUTE StageClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
++0 SET StageTmr_F ON
++0 SET BrkInStageTxt concat (StepTxt "Table 5 HPT Damper Break-In Initiated, Ground Idle Selected, Hold 300 Sec.")
+#elseif ((BrkInStage = 5) & ~ECM_IdleCtrl_TB & (StageTmr > 10.0))
++0 SET BrkInStage 10
++0 SET BrkInStageTxt concat (StepTxt "Table 5 HPT Damper Break-In Initiated, Setting LPC Bleed > 25% Stroke, Hold 300 Sec.")
++0 SET OverRideB25Bld_F ON
+#elseif ((BrkInStage = 10) & ~ECM_IdleCtrl_TB & (StageTmr > 20.0))
++0 SET BrkInStage 15
+#elseif (BrkInStage = 15)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 20)
++0 SET BrkInStage 25
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 2
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 25)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 30)
++0 SET BrkInStage 35
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 3
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 35)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 40)
++0 SET BrkInStage 45
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 4
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 45)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 50)
++0 SET BrkInStage 55
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 5
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 55)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 60)
++0 SET BrkInStage 65
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 6
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 65)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 70)
++0 SET BrkInStage 75
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 7
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 75)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 80)
++0 SET BrkInStage 85
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 8
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 85)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 90)
++0 SET BrkInStage 95
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 9
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 95)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 100)
++0 SET BrkInStage 105
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 10
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 105)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 110)
++0 SET BrkInStage 115
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 11
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 115)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 120)
++0 SET BrkInStage 125
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 12
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 125)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 130)
++0 SET BrkInStage 135
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 13
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 135)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 140)
++0 SET BrkInStage 145
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 14
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 145)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 150)
++0 SET BrkInStage 155
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 15
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 155)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 160)
++0 SET BrkInStage 165
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 16
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 165)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 170)
++0 SET BrkInStage 175
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 17
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 175)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 180)
++0 SET BrkInStage 185
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 18
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 185)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 190)
++0 SET BrkInStage 195
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 19
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 195)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 200)
++0 SET BrkInStage 205
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 20
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 205)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 210)
++0 SET BrkInStage 215
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 21
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 215)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 220)
++0 SET BrkInStage 225
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 22
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 225)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 230)
++0 SET BrkInStage 235
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 23
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 235)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 240)
++0 SET BrkInStage 245
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 24
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 245)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 250)
++0 SET BrkInStage 255
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 25
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 255)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 260)
++0 SET BrkInStage 265
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 26
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 265)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 270)
++0 SET BrkInStage 275
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 27
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 275)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 280)
++0 SET BrkInStage 285
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 28
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 285)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 290)
++0 SET BrkInStage 295
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 29
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 295)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 300)
++0 SET BrkInStage 305
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 30
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 305)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 310)
++0 SET BrkInStage 315
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 31
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 315)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 320)
++0 SET BrkInStage 325
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 32
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 325)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 330)
++0 SET BrkInStage 335
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 33
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 335)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 340)
++0 SET BrkInStage 345
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 34
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 345)
++0 EXECUTE BrkInAccel_ATP
+#elseif (BrkInStage = 350)
++0 SET BrkInStage 355
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 35
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 355)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 360)
++0 SET BrkInStage 365
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 36
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 365)
++0 EXECUTE BrkInDecel_ATP
+#elseif (BrkInStage = 370)
++0 SET BrkInStage 375
++0 EXECUTE StageClear_ATP
++0 SET BrkInStep 37
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (BrkInStage = 375)
++0 EXECUTE BrkInHold_ATP
+#elseif (BrkInStage = 380)
++0 SET BrkInStage 385
++0 EXECUTE StageClear_ATP
++0 SET OverRideB25Bld_F OFF
++0 SET AutoThrottle_F OFF
+#elseif (BrkInStage = 385)
++0 SET BrkInStage 390
++0 SET BrkInStageTxt concat (StepTxt "Engine Break-In HPT Damper Complete, waiting for N1 < 2250 RPM Idle...")
++0 SET BrkInState 5
+#elseif ((BrkInStage = 390) & (N1S < 2250.0))
++0 SET BrkInStage 395
++0 SET BrkInStageTxt concat (StepTxt "Engine Break-In HPT Damper Complete, Hold at N1 < 2250 RPM for 30 sec...")
++0 SET StageTmrLim 30
++0 SET StageTmr_F ON
+#elseif ((BrkInStage = 395) & (N1S < 2250.0) & StageTmrLim_F)
++0 SET BrkInStage 400
++0 SET BrkInStageTxt concat (StepTxt "Engine Break-In HPT Damper Complete, Continue with next Test...")
++0 SET ArmBrkInHPT_TB OFF
++0 SET StageTmr_F OFF
+#endif
+$END-PHASE
+**********
+

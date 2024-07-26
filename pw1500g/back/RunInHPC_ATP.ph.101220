@@ -1,0 +1,905 @@
+$PHASE RunInHPC_ATP length=-1       level=0 controlrelay=None common=0
+#if ((RunInStage = 1) & ECM_IdleCtrl_TB)
++0 SET ECM_IdleCtrl_TB OFF
++0 SET RunInStageTxt concat (StepTxt "Run-In Armed, waiting for Ground Idle Selection...")
+#elseif ((RunInStage = 1) & ~ECM_IdleCtrl_TB)
++0 SET RunInStage 5
++0 EXECUTE StageClear_ATP
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
++0 SET StageTmr_F ON
++0 SET RunInStageTxt concat (StepTxt "Run-In Initiated, Ground Idle Selected, Hold 300 Sec.")
+#elseif ((RunInStage = 5) & ~ECM_IdleCtrl_TB & (StageTmr > 10.0))
++0 SET RunInStage 10
++0 SET RunInStageTxt concat (StepTxt "Run-In Initiated, Setting LPC Bleed > 25% Stroke, Hold 300 Sec.")
++0 SET OverRideB25Bld_F ON
+#elseif ((RunInStage = 10) & CBN8StgHPC & ~ECM_IdleCtrl_TB & (StageTmr > 20.0))
++0 SET RunInStage 40
+#elseif ((RunInStage = 10) & ~CBN8StgHPC & ~ECM_IdleCtrl_TB & (StageTmr > 20.0))
++0 SET RunInStage 15
+#elseif (RunInStage = 15)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 20)
++0 SET RunInStage 25
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 2
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 25)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 30)
++0 SET RunInStage 35
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 3
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 35)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 40)
++0 SET RunInStage 45
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 4
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 45)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 50)
++0 SET RunInStage 55
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 5
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 55)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 60)
++0 SET RunInStage 65
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 6
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 65)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 70) & CBN8StgHPC)
++0 SET RunInStage 130
+#elseif ((RunInStage = 70) & ~CBN8StgHPC)
++0 SET RunInStage 75
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 7
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 75)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 80)
++0 SET RunInStage 85
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 8
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 85)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 90)
++0 SET RunInStage 95
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 9
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 95)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 100)
++0 SET RunInStage 105
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 10
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 105)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 110)
++0 SET RunInStage 115
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 11
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 115)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 120)
++0 SET RunInStage 125
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 12
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 125)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 130)
++0 SET RunInStage 135
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 13
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 135)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 140)
++0 SET RunInStage 145
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 14
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 145)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 150)
++0 SET RunInStage 155
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 15
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 155)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 160) & CBN8StgHPC)
++0 SET RunInStage 220
+#elseif ((RunInStage = 160) & ~CBN8StgHPC)
++0 SET RunInStage 165
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 16
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 165)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 170)
++0 SET RunInStage 175
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 17
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 175)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 180)
++0 SET RunInStage 185
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 18
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 185)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 190)
++0 SET RunInStage 195
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 19
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 195)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 200)
++0 SET RunInStage 205
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 20
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 205)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 210)
++0 SET RunInStage 215
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 21
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 215)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 220) & CBN8StgHPC)
++0 SET RunInStage 225
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 22
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif ((RunInStage = 220) & ~CBN8StgHPC)
++0 SET RunInStage 225
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 22
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 225)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 230)
++0 SET RunInStage 235
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 23
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 235)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 240)
++0 SET RunInStage 245
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 24
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 245)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 250) & CBN8StgHPC)
++0 SET RunInStage 280
+#elseif ((RunInStage = 250) & ~CBN8StgHPC)
++0 SET RunInStage 255
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 25
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 255)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 260)
++0 SET RunInStage 265
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 26
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 265)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 270)
++0 SET RunInStage 275
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 27
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 275)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 280)
++0 SET RunInStage 285
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 28
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 285)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 290)
++0 SET RunInStage 295
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 29
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 295)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 300)
++0 SET RunInStage 305
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 30
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 305)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 310)
++0 SET RunInStage 315
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 31
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 315)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 320)
++0 SET RunInStage 325
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 32
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 325)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 330)
++0 SET RunInStage 335
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 33
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 335)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 340)
++0 SET RunInStage 345
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 34
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 345)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 350)
++0 SET RunInStage 355
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 35
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 355)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 360)
++0 SET RunInStage 365
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 36
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 365)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 370) & CBN8StgHPC)
++0 SET RunInStage 435
+#elseif ((RunInStage = 370) & ~CBN8StgHPC)
++0 SET RunInStage 375
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 37
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 375)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 380)
++0 SET RunInStage 385
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 38
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 385)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 390)
++0 SET RunInStage 390
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 39
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 390)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 395)
++0 SET RunInStage 400
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 40
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 400)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 405)
++0 SET RunInStage 410
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 41
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 410)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 415)
++0 SET RunInStage 420
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 42
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 420)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 425)
++0 SET RunInStage 430
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 43
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 430)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 435)
++0 SET RunInStage 440
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 44
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 440)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 445)
++0 SET RunInStage 450
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 45
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 450)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 455)
++0 SET RunInStage 460
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 46
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 460)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 465)
++0 SET RunInStage 470
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 47
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 470)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 475)
++0 SET RunInStage 480
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 48
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 480)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 485)
++0 SET RunInStage 490
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 49
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 490)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 495)
++0 SET RunInStage 500
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 50
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 500)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 505)
+#elseif ((RunInStage = 505) & CBN8StgHPC)
++0 SET RunInStage 575
+#elseif ((RunInStage = 505) & ~CBN8StgHPC)
++0 SET RunInStage 510
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 51
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 510)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 515)
++0 SET RunInStage 520
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 52
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 520)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 525)
++0 SET RunInStage 530
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 53
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 530)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 535)
++0 SET RunInStage 540
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 54
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 540)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 545)
++0 SET RunInStage 550
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 55
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 550)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 555)
++0 SET RunInStage 560
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 56
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 560)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 565)
++0 SET RunInStage 570
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 57
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 570)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 575)
++0 SET RunInStage 580
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 58
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 580)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 585)
++0 SET RunInStage 590
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 59
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 590)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 595)
++0 SET RunInStage 600
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 60
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 600)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 605)
++0 SET RunInStage 610
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 61
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 610)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 615)
++0 SET RunInStage 620
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 62
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 620)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 625)
++0 SET RunInStage 630
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 63
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 630)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 635)
++0 SET RunInStage 640
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 64
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 640)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 645)
++0 SET RunInStage 650
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 65
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 650)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 655)
++0 SET RunInStage 660
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 66
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 660)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 665)
++0 SET RunInStage 670
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 67
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 670)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 675)
++0 SET RunInStage 680
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 68
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 680)
++0 EXECUTE RunInDecel_ATP
+#elseif ((RunInStage = 685) & CBN8StgHPC)
++0 SET RunInStage 1015
+#elseif ((RunInStage = 685) & ~CBN8StgHPC)
++0 SET RunInStage 690
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 69
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 690)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 695)
++0 SET RunInStage 700
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 70
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 700)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 705)
++0 SET RunInStage 710
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 71
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 710)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 715)
++0 SET RunInStage 720
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 72
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 720)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 725)
++0 SET RunInStage 730
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 73
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 730)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 735)
++0 SET RunInStage 740
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 74
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 740)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 745)
++0 SET RunInStage 750
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 75
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 750)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 755)
++0 SET RunInStage 760
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 76
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 760)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 765)
++0 SET RunInStage 770
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 77
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 770)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 775)
++0 SET RunInStage 780
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 78
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 780)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 785)
++0 SET RunInStage 790
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 79
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 790)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 795)
++0 SET RunInStage 800
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 80
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 800)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 805)
++0 SET RunInStage 810
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 81
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 810)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 815)
++0 SET RunInStage 820
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 82
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 820)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 825)
++0 SET RunInStage 830
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 83
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 830)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 835)
++0 SET RunInStage 840
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 84
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 840)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 845)
++0 SET RunInStage 850
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 85
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 850)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 855)
++0 SET RunInStage 860
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 86
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 860)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 865)
++0 SET RunInStage 870
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 87
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 870)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 875)
++0 SET RunInStage 880
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 88
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 880)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 885)
++0 SET RunInStage 890
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 89
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 890)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 895)
++0 SET RunInStage 900
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 90
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 900)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 905)
++0 SET RunInStage 910
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 91
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 910)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 915)
++0 SET RunInStage 920
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 92
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 920)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 925)
++0 SET RunInStage 930
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 93
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 930)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 935)
++0 SET RunInStage 940
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 94
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 940)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 945)
++0 SET RunInStage 950
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 95
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 950)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 955)
++0 SET RunInStage 960
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 96
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 960)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 965)
++0 SET RunInStage 970
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 97
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 970)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 975)
++0 SET RunInStage 980
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 98
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 980)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 985)
++0 SET RunInStage 990
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 99
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 990)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 995)
++0 SET RunInStage 1000
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 100
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1000)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1005)
++0 SET RunInStage 1010
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 101
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1010)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1015)
++0 SET RunInStage 1020
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 102
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1020)
++0 EXECUTE RunInHold_ATP
+#elseif (RunInStage = 1025)
++0 SET RunInStage 1030
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 103
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1030)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 1035)
++0 SET RunInStage 1040
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 104
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1040)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 1045)
++0 SET RunInStage 1050
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 105
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1050)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 1055)
++0 SET RunInStage 1060
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 106
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1060)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 1065)
++0 SET RunInStage 1070
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 107
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1070)
++0 EXECUTE RunInAccel_ATP
+#elseif (RunInStage = 1075)
++0 SET RunInStage 1080
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 108
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1080)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1085)
++0 SET RunInStage 1090
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 109
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1090)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1095)
++0 SET RunInStage 1100
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 110
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1100)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1105)
++0 SET RunInStage 1110
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 111
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1110)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1115)
++0 SET RunInStage 1120
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 112
++0 SET GoToGI_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1120)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1125)
++0 SET RunInStage 1130
++0 EXECUTE StageClear_ATP
++0 SET RunInStep 113
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 EXECUTE SetTargs_ATP
+#elseif (RunInStage = 1130)
++0 EXECUTE RunInDecel_ATP
+#elseif (RunInStage = 1135)
++0 SET RunInStage 1140
++0 SET RunInNibble 21
++0 EXECUTE StageClear_ATP
++0 SET OverRideB25Bld_F OFF
++0 SET AutoThrottle_F OFF
+#elseif (RunInStage = 1140)
++0 SET RunInStage 1145
++0 SET RunInStageTxt concat (StepTxt "Engine Run-In Complete, waiting for N1 < 2250 RPM Idle...")
++0 SET RunInState 5
+#elseif ((RunInStage = 1145) & (N1S < 2250.0))
++0 SET RunInStage 1150
++0 SET RunInStageTxt concat (StepTxt "Engine Run-In Complete, Hold at N1 < 2250 RPM for 30 sec...")
++0 SET StageTmrLim 30
++0 SET StageTmr_F ON
+#elseif ((RunInStage = 1150) & (N1S < 2250.0) & StageTmrLim_F)
++0 SET RunInStage 1155
++0 SET RunInStageTxt concat (StepTxt "Engine Run-In Complete, Continue with next Test...")
++0 SET ArmRunInHPC_TB OFF
++0 SET StageTmr_F OFF
+#endif
+$END-PHASE
+**********
+

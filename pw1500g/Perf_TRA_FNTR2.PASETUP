@@ -1,0 +1,4 @@
+* /cust/delta3/pw1500g/Perf_TRA_FNTR2.PASETUP
+$CRSPARAM "FNS" min=0.000000 max=25000.000000 linetype=
+$CRSPARAM "TRA_Cmd" min=-34.000000 max=34.000000 linetype=
+$CRSPARAM "TRA_Actual" min=-34.000000 max=34.000000 linetype=

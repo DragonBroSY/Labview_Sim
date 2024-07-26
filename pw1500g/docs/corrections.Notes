@@ -1,0 +1,10 @@
+                            Corrections.cal file
+===========================================================================================
+(DJR 10/5/07)
+	Trouble:
+	EGT Corrected does not match mapnet corrected EGT.
+
+	Mapnet calc: EGTSTD = ((EGTDegC + 273.15) / (Theta * KHT49)^0.955)
+	Delta calc: EGTSTD = ((EGTDegC + 273.15) / (Theta^0.955 * KHT49))
+	A difference of about 2 DegC.
+===========================================================================================

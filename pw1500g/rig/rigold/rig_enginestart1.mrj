@@ -1,0 +1,43 @@
+# Rig file for Engine Start display
+#
+echo "ECM display must be up -- touchscreen buttons are used by engine start"
+#C old DegF value  rig sig T4_9 200
+rig sig EGTHarnessDegC 93.34
+rig sig N1i 350
+rig sig N2i 650
+echo "Use 'Open Start Valve' button on ecm display to turn air on"
+sleep 10
+rig sig start_vlv_open_I 1
+rig sig EmergFuelSO_I 0
+rig sig FuelArm_I 1
+echo "Use 'Run Fuel Control' button on ecm display to turn fuel on"
+sleep 10
+rig sig Fuel_Vlv_Clsd_I 0
+rig sig Fuel_Vlv_Open_I 1
+rig sig WfiHz 533.4
+
+sleep 5
+#C keep N2 below 5000.1 to stay in start mode
+rig sig N2i 350 5000  20
+rig sig N1i 350 699  15
+rig sig VibTBB .1 1.5  .01
+rig sig VibFBB .25 1.8  .01
+rig sig MOPSig .001 .0027 .0001
+rig sig PressureExcit   1
+rig sig MOTDegC 50 100  2
+
+echo "Watch for NO lightoff"
+rig stop all
+#C old DegF value  rig sig T4_9 205
+rig sig EGTHarnessDegC 96.7 
+sleep 15
+
+#C It doesn't make sense to have N2 go up when emerg shutdown has been started
+#C echo "Watch for stable idle"
+#C rig sig N2i 6130 
+#C sleep 15
+#C echo "Watch that N2 does not produce automatic cutout, since starter"
+#C echo "is already off."
+
+rig stop all
+

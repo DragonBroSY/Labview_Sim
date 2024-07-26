@@ -1,0 +1,414 @@
+$DISPLAY "Engine Run-In" background=DarkGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$INITCALC
+N1_ADBar_F:	OFF
+$END-CALC
+$CALC
+#C **** See loopcalc.cal for FN/N1_ADBar_F calcs **********
+#C **************** Pause RUN-IN Procedures ***************
+#C ********************************************************
+#C N1C2R (Cannot find this Calculated parameter, NEEDFIX)
+N1C2R:RPM	N1C2D
+RunInStage_F:	inrange (1 RunInStage 200)
+#C HPCStageTmr_F:	(ArmRunInHPC_TB & StageTmr_F)
+#C ********************************************************
+#if	(ArmRunInHPC_TB & RunInStage_F & RunInPause_F)
+dummy:	StoreEvent ("Run-In Table 4 (Resumed)")
+StageTmr_F:	RunInTmrState_F
+RunInStageTxt:	concat (StageTxt "")
+RunInStage:	Stage
+RunInPause_F:	OFF
+RunInState:	4
+#elseif	(ArmRunInHPC_TB & (RunInStage > 0))
+dummy:	startautotest (RunInHPC_ATP)
+#elseif	(ArmRunInHPC_TB & (RunInStage = 0))
+RunInStage:	1
+dummy:	StoreEvent ("Run-In Table 4 (Started)")
+StepTxt:	concat ("" "Table 4 ")
+RunInStageTxt:	concat (StepTxt "Run-In Started...")
+RunInState:	1
+#elseif	(~ArmRunInHPC_TB & RunInStage_F & ~RunInPause_F)
+dummy:	StoreEvent ("Run-In Table 4 (PAUSED)")
+StageTxt:	concat (RunInStageTxt "")
+RunInTmrState_F:	StageTmr_F
+Stage:	RunInStage
+RunInPause_F:	ON
+RunInState:	2
+RunInStageTxt:	concat (StepTxt "Run-In Paused at Stage: ")
+RunInStageTxt:	concat (RunInStageTxt RunInStage)
+StageTmr_F:	OFF
+#endif	
+$END-CALC
+$STOREDISPLAY Append
+$OBJECT Bar font=102 startx=40 starty=700 endx=981 endy=764
+labelspace=3 unitspace=1 labelcolor=Black length=679 \
+height=25 format=5.0 ticpos=BELOW dir=0 shading=-2 spacing=1 \
+ticfont=2 parambox=2 paramboxcolor=Black limitwidth=10
+N1C2R label="N1C2R" units="default" min=1500 max=9800 ticinter=400 labelinter=2
+$END-OBJECT
+***********
+$OBJECT String font=92 startx=56 starty=813 endx=332 endy=838
+RunInStageTxt labelspace=7 label="Instructions:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=Black shading=-1
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=57 starty=839 endx=1122 endy=840
+linewidth=1 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=117 starty=339 endx=329 endy=403
+labelspace=6 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+B25 type="FLOAT" width=5 prec=1 label="default" units="default" 
+LPCSVA type="FLOAT" width=5 prec=1 label="default" units="default" 
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=118 starty=504 endx=288 endy=595
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=123 starty=554 endx=288 endy=559
+linewidth=1 linecolor=Magenta
+shading=-2
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=133 starty=567 endx=262 endy=590
+RunInState labelspace=0 label="RUN-IN State:" labelcolor=Black stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+Blue = 0 "Not Started..."
+Green = 1 "Running..."
+Yellow = 2 "Paused..."
+Red = 3 "Reset..."
+Green = 4 "Resumed..."
+Green = 5 "Complete..."
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=100 startx=138 starty=203 endx=362 endy=291
+Disable25Bld textcolor=Black
+Green = 0 "LPC 2.5 Bleed\nEnabled"
+Yellow = 1 "LPC 2.5 Bleed\nOverridden"
+$END-OBJECT
+***********
+$OBJECT String font=101 startx=139 starty=299 endx=349 endy=326
+Disable25Bld labelspace=0 label="Override LPC Bleed" labelcolor=Black stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+Blue = 0 "    LPC Normal"
+Magenta = 1 "LPC > 25% Stroke"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=145 starty=130 endx=852 endy=157
+Black direction=1 alignment=0
+"Elapsed Time"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=165 starty=508 endx=231 endy=554
+Black direction=1 alignment=1
+"Run-In"
+"State"
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=184 starty=159 endx=259 endy=200
+labelspace=0 unitspace=1 spacing=10 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+ElapsedTmTmr type="FLOAT" width=5 prec=2 label="Elapsed Time Timer" 
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=353 starty=9 endx=686 endy=65
+style=2
+boxcolor=LightGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=104 startx=387 starty=17 endx=655 endy=56
+Blue direction=1 alignment=0
+"ENGINE RUN-IN"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=393 starty=295 endx=643 endy=323
+labelspace=5 unitspace=1 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+TT2SELF type="FLOAT" width=5 prec=1 label="TT2 SEL" units="default" 
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=411 starty=212 endx=587 endy=283
+TOGGLE EIU_VibTesting setvalue=-1 onlabel="Stator Vane\nOver ridden" offlabel="Stator Vane\nOverride" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=660 starty=313 endx=903 endy=511
+style=2
+boxcolor=DarkGray
+shading=-3
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=661 starty=80 endx=903 endy=269
+style=2
+boxcolor=DarkGray
+shading=-3
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=663 starty=349 endx=900 endy=351
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=664 starty=119 endx=901 endy=121
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=95 startx=669 starty=86 endx=885 endy=116
+Blue direction=1 alignment=0
+"FAN/HPC Run-In"
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=688 starty=136 endx=867 endy=196
+TOGGLE ArmRunInHPC_TB onlabel="Table 4 Run-In\nArmed/Pause" offlabel="ARM/UNPAUSE\nTable 4 Run-In" offcolor=Cyan oncolor=Green 
+$RELEASE
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=689 starty=198 endx=868 endy=258
+MOMENTARY ResetRunInHPC_MB onlabel="Run-In RESET\nTable 4" offlabel="RESET Run-In\nTable 4" offcolor=DarkGray oncolor=Green 
+$RELEASE
+StageTmr_F:	OFF
+StageTmr:Sec	0.0
+ElapsedTmTmr:Sec	0.0
+ElapsedTmHPCTmr:Sec	0.0
+RunInStage:	0
+RunInStageTxt:	concat ("" "Run-In Table 4 (HPC) RESET")
+dummy:	storeevent ("Run-In Table 4 (HPC) RESET")
+ArmRunInHPC_TB:	OFF
+N1_ADBar_F:	OFF
+RunInPause_F:	OFF
+RunInState:	3
+dummy:	startautotest (RunInClear_ATP)
+RunInTO_F:	OFF
+RunIn9000_F:	OFF
+RunIn8500_F:	OFF
+RunIn8000_F:	OFF
+RunIn7000_F:	OFF
+RunIn6000_F:	OFF
+RunIn5000_F:	OFF
+RunIn4000_F:	OFF
+RunInGI_F:	OFF
+RunInAI_F:	OFF
+Disable25Bld:	OFF
+$END-RELEASE
+$PUSH
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=689 starty=434 endx=868 endy=494
+MOMENTARY ResetRunInHPC_MB onlabel="Table 8/9/10\nRun-In RESET" offlabel="RESET Run-In\nTable 8/9/10" offcolor=DarkGray oncolor=Green 
+$RELEASE
+StageTmr_F:	OFF
+StageTmr:Sec	0.0
+StageTmrLim:Sec	0.0
+ElapsedTmTmr:Sec	ElapsedTmHPCTmr
+ElapsedTmHPCTmr:Sec	0.0
+RunInStage:	0
+RunInStageTxt:	concat ("" "Run-In Table 8/9/10 (HPC) RESET")
+dummy:	storeevent ("Run-In Table 8/9/10 (HPC) RESET")
+ArmRunInHPC_TB:	OFF
+N1_ADBar_F:	OFF
+RunInPause_F:	OFF
+RunInState:	3
+dummy:	startautotest (RunInClear_ATP)
+RunInTO_F:	OFF
+RunIn9000_F:	OFF
+RunIn8500_F:	OFF
+RunIn8000_F:	OFF
+RunIn7000_F:	OFF
+RunIn6000_F:	OFF
+RunIn5000_F:	OFF
+RunIn4000_F:	OFF
+RunInGI_F:	OFF
+RunInAI_F:	OFF
+$END-RELEASE
+$PUSH
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Text font=95 startx=703 starty=322 endx=855 endy=352
+Blue direction=1 alignment=0
+"HPC Run-In"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=279 endx=1003 endy=302
+GotoTO_F labelspace=0 label="T/O 9625" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=309 endx=1003 endy=332
+Goto9000_F labelspace=0 label="9000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=339 endx=1003 endy=362
+Goto8500_F labelspace=0 label="8500" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=369 endx=1003 endy=392
+Goto8000_F labelspace=0 label="8000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=399 endx=1003 endy=422
+Goto7000_F labelspace=0 label="7000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=429 endx=1003 endy=452
+Goto6000_F labelspace=0 label="6000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=459 endx=1003 endy=482
+Goto5000_F labelspace=0 label="5000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=489 endx=1003 endy=512
+Goto4000_F labelspace=0 label="4000" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=519 endx=1003 endy=542
+GotoAI_F labelspace=0 label="Approach Idle" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT String font=1 startx=973 starty=549 endx=1003 endy=572
+GotoGI_F labelspace=0 label="Ground Idle" labelcolor=Black stringcolor=DarkGray parambox=0 paramboxcolor=Black shading=0
+DarkGray = 0 "->"
+White = 1 "->"
+$END-OBJECT
+***********
+$OBJECT Switch font=2 startx=1010 starty=737 endx=1161 endy=770
+MOMENTARY IncTmr_MB onlabel="Increase Timer" offlabel="Increase Timer" offcolor=DarkGray oncolor=Green 
+$PUSH
+StageTmr:Sec	(StageTmr + 10)
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=1011 starty=274 endx=1141 endy=574
+Black direction=1 alignment=0
+"9625 RPM"
+"9000 RPM"
+"8500 RPM"
+"8000 RPM"
+"7000 RPM"
+"6000 RPM"
+"5000 RPM"
+"4000 RPM"
+"2925 RPM"
+"2045 RPM"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1025 starty=705 endx=1133 endy=733
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+StageTmr type="HOURS" width=8 prec=0 label="Stage Timer:" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=1029 starty=683 endx=1132 endy=702
+Blue direction=1 alignment=0
+"Stage Timer"
+$END-OBJECT
+***********
+$HELP
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+$END-HELP
+$END-DISPLAY
+

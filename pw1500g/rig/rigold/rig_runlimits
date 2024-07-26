@@ -1,0 +1,4 @@
+# Rig file rigs run limits
+#
+rig sig N1i 3000
+rig sig N2i 6000

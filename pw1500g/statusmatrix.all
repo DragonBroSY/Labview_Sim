@@ -1,0 +1,20 @@
+$START-STATUS-MATRIX DIS normalsm=0
+sm=0 color=Green      "Normal operation"
+sm=1 color=Cyan       "Functional test"
+sm=2 color=Yellow     "No computed data"
+sm=3 color=Red        "Failure warning"
+$END-STATUS-MATRIX
+*
+$START-STATUS-MATRIX BCD normalsm=3
+sm=0 color=Red        "Failure warning"
+sm=1 color=Yellow     "No computed data"
+sm=2 color=Cyan       "Functional test"
+sm=3 color=Green      "Normal operation"
+$END-STATUS-MATRIX
+$START-STATUS-MATRIX BNR normalsm=3
+sm=0 color=Red        "Failure warning"
+sm=1 color=Yellow     "No computed data"
+sm=2 color=Cyan       "Functional test"
+sm=3 color=Green      "Normal operation"
+$END-STATUS-MATRIX
+*

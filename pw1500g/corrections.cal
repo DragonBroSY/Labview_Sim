@@ -1,0 +1,160 @@
+$GROUP "corrections" 
+#C *************** PW1500G *********************************
+#C ----- Humidity Correction -----------------------------------
+#C ***** Specific Humidity /Inlet Condensation Correction Factors ******
+KHWF:	lookup (KHWF_T)
+KHNL:	lookup (KHNL_T)
+KHNH:	lookup (KHNH_T)
+KHT49:	lookup (KHT49_T)
+KHT3:	lookup (KHT3_T)
+KHT25:	lookup (KHT25_T)
+KHT45:	lookup (KHT45_T)
+#C ****** Correlation Inlet Pressure Ratio ***********
+#C ***** Figure 1, Sheet 1, Equation 1.
+#if	(N1C2_SLS > 2000.0)
+P2QPBar_Cell:	lookup (P2QPBar_Cell_T)
+#else	
+P2QPBar_Cell:	1.0
+#endif	
+Pt2:PSIA	(P2QPBar_Cell * PBarPSIA)
+PT2AHgA:HgA	psi2inhg (Pt2)
+#C ------ Delta/Theta ------------------------------------------
+#C ****** Equation 2. Testing-09 Engine Acceptance.
+DeltaP2:	(Pt2 / 14.696)
+#C ****** Equation 3, Testing-09 Engine Acceptance.
+#C T1 Calculated in commonCIT.cal...
+#C ****** Equation 4, Testing-09 Engine Acceptance.
+#C ThetaT2 Calculated in commonCIT.cal...
+#C ****** Equation 5, Testing-09 Engine Acceptance.
+#C ****** Temperature Rise Due to Condensation...
+#C TRISE:DegF 0.0
+#C Set in initlookups.cal
+#C ------
+FNTR2D:Lbs	(FnS / DeltaP2)
+FNTR2D_ns:Lbs	(FnI / DeltaP2)
+#C ----- FNTR2 Cell Correction -----
+#C #if (FNTR2D > 500.0)
+dFNTR2_Cell:	lookup (dFNTR2_Cell_T)
+#C #else
+#C dFNTR2_Cell: 0.0
+#C #endif
+FNTR2:Lbs	(FNTR2D + dFNTR2_Cell)
+FNTR2_AC:Lbs	((FnMeasure / DeltaP2) + dFNTR2_Cell)
+#C ----- Facility Correction Factors ---------------------------
+#if	(FNTR2 > 14000.0)
+dWFPLHCR2_Cell:	lookup (dWFPLHCR2_Cell_T)
+dN1C2_Cell:	lookup (dN1C2_Cell_T)
+dN2C2_Cell:	lookup (dN2C2_Cell_T)
+dT25OP25_Cell:DegC	lookup (dT25OP25_Cell_T)
+dT3OP3_Cell:DegC	lookup (dT3OP3_Cell_T)
+dT45OP45_Cell:DegC	lookup (dT45OP45_Cell_T)
+dT49OP49_Cell:DegC	lookup (dT49OP49_Cell_T)
+dP25Q2_Cell:	lookup (dP25Q2_Cell_T)
+dPS3Q2_Cell:	lookup (dPS3Q2_Cell_T)
+#else	
+dWFPLHCR2_Cell:	0.0
+dN1C2_Cell:	0.0
+dN2C2_Cell:	0.0
+dT25OP25_Cell:DegC	0.0
+dT3OP3_Cell:DegC	0.0
+dT45OP45_Cell:DegC	0.0
+dT49OP49_Cell:DegC	0.0
+dP25Q2_Cell:	0.0
+dPS3Q2_Cell:	0.0
+#endif	
+#C ***** Equation 7. NOTE: Moved to accel_decel_check.dsp. (DJR 05/17/23)
+#C FNTR2_TO:Lbs	FnAMin
+#C FNTR2_Ref:%	AccelFNTR2
+#C FNTR2_ACC:Lbs	(FNTR2_Ref * FNTR2_TO)
+#C FNTR2_ACCMx:Lbs	(FNTR2_ACC + 50.0)
+#C ***** Equation 8. NOTE: Moved to accel_decel_check.dsp. (DJR 05/17/23)
+#C #if	(FNTR2DecelNom < FnAMin)
+#C FNTR2_TODEC:Lbs	FnAMin
+#C #else
+#C FNTR2_TODEC:Lbs	FNTR2DecelNom
+#C #endif
+#C FNTR2_Ref:%	DecelFNTR2
+#C FNTR2_DEC:Lbs	(FNTR2_TODEC - (FNTR2_Ref * (FNTR2_TODEC - FNTR2Mx_MI)))
+#C FNTR2_DECMx:lbs	(FNTR2_DEC - 50.0)
+#C ------ WF Correction --------------------------------------
+#C ***** Equation 9.
+#C * See calcwfnew.cal for WF_Avg calculations.
+#C ***** Equation 10.
+WFPLHCR2_SLS:PPH	((WFS / (DeltaP2 * ThetaT2^WFEXP * KHWF)) * (LHV / 18400.0))
+WFPLHCR2:PPH	(WFPLHCR2_SLS + dWFPLHCR2_Cell)
+#C ***** Equation 11.
+TSFCPLHC:	(WFPLHCR2 / FNTR2)
+#C ------ Speed Correction -----------------------------------
+#C ***** Equation 12.
+#C See eecreceiver.cal
+#C ***** Equation 13.
+#C Fully Corrected N1C2 Dry STD Day + Cell Correction...
+N1C2_SLS:RPM	((N1S / (RTheta * KHNL * Kuntwist)) * (1.0 - (KNCL * TRISE)))
+N1C2_SLS_ns:RPM	((N1I / (RTheta * KHNL * Kuntwist)) * (1.0 - (KNCL * TRISE)))
+N1C2D:RPM	(N1C2_SLS + dN1C2_Cell)
+EEC_N1C2_SLS:RPM	((EEC_N1 / (RTheta * KHNL * Kuntwist)) * (1.0 - (KNCL * TRISE)))
+EEC_N1C2D:RPM	(EEC_N1C2_SLS + dN1C2_Cell)
+#if	(N1C2D = RMISS)
+N1C2R:RPM	0.0
+#else	
+N1C2R:RPM	N1C2D
+#endif	
+#C ***** Equation 14.
+N1C20:RPM	N1C2D
+#C ***** Equation 15.
+N1C2I:RPM	(N1C20 + N1CLASS)
+#C ***** Equation 16.
+#C See eecreceiver.cal
+#C ***** Equation 17.
+N2C2_SLS:RPM	(N2S / (RTheta * KHNH))
+N2C2D:RPM	(N2C2_SLS + dN2C2_Cell)
+EEC_N2C2_SLS:RPM	(EEC_N2 / (RTheta * KHNH))
+EEC_N2C2D:RPM	(EEC_N2C2_SLS + dN2C2_Cell)
+#C ------ Temperature Corrections ----------------------------
+#C * NOTE: All Temperature Corrections (*_Cell) are in units of DegC, Convert to DegF (*_Cell * 1.8)...
+#C ***** Figure 1, Sheet 4, Equation 26.
+T1:DegC	CITDegC
+#C ****** HCIT ***********
+#C ***** Equation 18.
+T25F:DegF	temp_c2f(EEC_T25)
+T25R:DegR	(T25F + 459.67)
+T25OP25_SLS:DegF	((T25R / (ThetaT2^T25EXP * KHT25)) - 459.67)
+T25OP25:DegF	(T25OP25_SLS + (dT25OP25_Cell * 1.8))
+T25OP25C:DegC	temp_f2c (T25OP25)
+#C ****** HCET ***********
+#C ***** Equation 19.
+T3F:DegF	temp_c2f(EEC_T3)
+T3R:DegR	(T3F + 459.67)
+T3OP3_SLS:DegF	((T3R / (ThetaT2^T3EXP * KHT3)) - 459.67)
+T3OP3:DegF	(T3OP3_SLS + (dT3OP3_Cell * 1.8))
+T3OP3C:DegC	temp_f2c (T3OP3)
+#C ****** EGT/ITT ********
+#C ***** Equation 20.
+T45F:DegF	temp_c2f(EEC_ITT)
+T45R:DegR	(T45F + 459.67)
+T45OP45_SLS:DegF	((T45R / (ThetaT2^T45EXP * KHT45)) - 459.67)
+T45OP45:DegF	(T45OP45_SLS + (dT45OP45_Cell * 1.8))
+T45OP45C:DegC	temp_f2c (T45OP45)
+#C ****** ITT ************
+#C ***** Equation 21.
+T49F:DegF	temp_c2f(EEC_T5)
+T49R:DegR	(T49F + 459.67)
+T49OP49_SLS:DegF	((T49R / (ThetaT2^T49EXP * KHT49)) - 459.67)
+T49OP49:DegF	(T49OP49_SLS + (dT49OP49_Cell * 1.8))
+T49OP49C:DegC	temp_f2c (T49OP49)
+#C ------ Pressure Corrections -------------------------------
+#C ****** OPCR ***********
+#C ***** Equation 22.
+PS3Q2_SLS:	(EEC_PB / Pt2)
+PS3Q2:	(PS3Q2_SLS + dPS3Q2_Cell)
+#C ****** LPCR ***********
+#C ***** Equation 23.
+P25Q2_SLS:	(EEC_P25 / Pt2)
+P25Q2:	(P25Q2_SLS + dP25Q2_Cell)
+#C ****** HPCR ***********
+#C ***** Equation 24.
+PS3Q25:	(PS3Q2 / P25Q2)
+#C ****** MOP Correction *****
+#C MOPCor:PSIG (POILAC - (0.4135 * (87.78 - TOILAC)))
+#C ******************************************************************
+$END-GROUP

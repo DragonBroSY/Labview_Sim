@@ -1,0 +1,34 @@
+# Rig file for Engine Start display
+#
+rig sig TT495  200
+rig sig N2i 350
+rig sig T29a  30
+rig sig T29b  60
+rig sig startvalveopen_I  1
+echo  "turning fuel on"
+rig sig fuelcutoff_O  0
+sleep 5
+
+rig sig N2i 350 6000  20
+rig sig N1i 350 3000  15
+rig sig VibTBB .1 1.5  .01
+rig sig VibFBB .25 1.8  .01
+rig sig MOP 40 70  1
+rig sig MOT 40 110  2
+echo "Watch for lightoff"
+rig sig TT495 250
+sleep 5
+
+echo "Watch for Fuel cutout"
+rig sig startvalveopen_I  0
+sleep 5
+
+echo "Watch for stable idle"
+rig sig N2i 6000 
+sleep 5
+
+echo "Simulating 2.5 Bleed Clousure"
+rig sig T29a  24
+rig sig T29b  30
+
+rig stop all

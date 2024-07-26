@@ -1,0 +1,5 @@
+* /cust/delta3/pw1500g/sspbar_checkout.PASETUP
+$CRSPARAM "N1C2d" min=9500.000000 max=9700.000000 linetype=
+$CRSPARAM "rtheta" min=0.960000 max=1.000000 linetype=
+$CRSPARAM "sspbarpsia" min=14.320000 max=14.360000 linetype=
+$CRSPARAM "pbar" min=14.320000 max=14.360000 linetype=

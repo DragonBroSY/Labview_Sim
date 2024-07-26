@@ -1,0 +1,218 @@
+$GROUP generic
+* 
+* Engine Input Signals and Input Relays
+* *** The calculation vars listed in the left column must not be changed
+* *** as they are hard coded in a parsing routine, rdidgmain() used by BUILDER
+* ALSO, the following $TIMER must be added to the timers config. file
+* for this logic to work properly.
+*    $TIMERS
+*    idgsettletime:secs   RESET   idgtimer
+*    genloadtime:secs     RESET   GenLoad_O
+*    $END-TIMERS
+*
+* Calc vars      User defined params names
+* ------------   -------------------------
+*  Set these accordingly unless they are already set to these names in CST
+*  Relay names must also be set up the same as used in this file.
+* GENFREQ          ???
+* GENVOLT          ???
+* CTCUR            ???
+*
+* Update the Gen Volt section
+*
+MainSelect: ~genselecttoggle
+*
+GenPwr_O:	genpwrtoggle
+GENFREQ          GenHz
+GENVOLT          Gen_Voltage
+CTCUR            Gen_Current
+ROTATE_I         GenPhaseRot_I
+IDGPhaseCTOA_I   GenPhaseACorr_I
+IDGPhaseCTOB_I   GenPhaseBCorr_I
+IDGPhaseCTOC_I   GenPhaseCCorr_I
+VSCFOilPres_I   VSCFPres_I
+VSCFOilLevel_I   VSCFLevel_I
+#if (~Boeing777)
+genselecttoggle: 0
+#endif
+#if (genloadtime > 180)
+genloadtoggle: 0
+GenLoad_O: 0
+genloadtime: 0
+#endif
+GenSelect_O: genselecttoggle
+GenFreqInRange: (GENFREQ > 395) & (GENFREQ < 405)
+#if ~(genloadtoggle = genloadlast)
+genloadtime: 0
+#endif
+#if ~(GenPwr_O) | (GenSelect_O & (GenFreqInRange | ROTATE_I)) | (genloadtime > 180)
+genloadtoggle: 0
+#endif
+GenLoad_O: genloadtoggle
+#if (GenLoad_O)
+LoadOffTime: 180 - genloadtime
+#else
+ctcurradio: 0
+#endif
+genvoltvalue:VAC	GENVOLT
+genfreqvalue:Hz	GENFREQ
+#if	(genvoltradio = 0)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	OFF
+GenSysSelect_O: OFF
+genvoltvalue1:VAC GENVOLT
+#elseif	(genvoltradio = 1)
+GenVoltBC_O:	ON
+GenVoltCA_O:	OFF
+GenSysSelect_O: OFF
+genvoltvalue2:VAC GENVOLT
+#elseif	(genvoltradio = 2)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	ON
+GenSysSelect_O: OFF
+genvoltvalue3:VAC GENVOLT
+#elseif	(genvoltradio = 3)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	OFF
+GenSysSelect_O: ON
+pmgvoltvalue1:VAC GENVOLT
+#elseif	(genvoltradio = 4)
+GenVoltBC_O:	ON
+GenVoltCA_O:	OFF
+GenSysSelect_O: ON
+pmgvoltvalue2:VAC GENVOLT
+#elseif	(genvoltradio = 5)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	ON
+GenSysSelect_O: ON
+pmgvoltvalue3:VAC GENVOLT
+#endif	
+#if (~GenSelect_O) | (pmgselradio = 3)
+PMGA_O: OFF
+PMGB_O: OFF
+PMGC_O: OFF
+PMGD_O: ON
+#elseif (pmgselradio = 0)
+PMGA_O: ON
+PMGB_O: OFF
+PMGC_O: OFF
+PMGD_O: OFF
+#elseif (pmgselradio = 1)
+PMGA_O: OFF
+PMGB_O: ON
+PMGC_O: OFF
+PMGD_O: OFF
+#elseif (pmgselradio = 2)
+PMGA_O: OFF
+PMGB_O: OFF
+PMGC_O: ON
+PMGD_O: OFF
+#endif
+#if	((GENFREQ > MAXGENFREQ) | (GENFREQ < MINGENFREQ))
+withinlimits:	0
+phaserotatestate:	0
+#else	
+withinlimits:	1
+#endif	
+#if	((withinlimits = 1) & (ROTATE_I = OFF))
+phaserotatestate:	1
+#elseif	((withinlimits = 1) & (ROTATE_I = ON))
+phaserotatestate:	2
+#endif	
+#if	(magtrimtoggle = 1) & (~GenSelect_O)
+MAGTRIM_O:	ON
+#else
+MAGTRIM_O:	OFF
+#endif	
+#if	(withinlimits = 0)
+ctcurmessage:	0
+#elseif	((withinlimits = 1) & (phaserotatestate = 1))
+ctcurmessage:	1
+#elseif	((withinlimits = 1) & (phaserotatestate = 2))
+ctcurmessage:	2
+#endif	
+ctcurvalue:mAmp	CTCUR
+#if (ctcurradio = 1)
+ctcurvaluea: ctcurvalue
+#elseif (ctcurradio = 2)
+ctcurvalueb: ctcurvalue
+#elseif (ctcurradio = 3)
+ctcurvaluec: ctcurvalue
+#endif
+#if	(ctcurradio = 0)
+CTPHASE_O:	OFF
+#elseif	(ctcurradio = 1) & (CTCUR > 2.0)
+CTPHASE_O:	ON
+CTBCurrent_O:	OFF
+CTCCurrent_O:	OFF
+#elseif	(ctcurradio = 2) & (CTCUR > 2.0)
+CTPHASE_O:	ON
+CTBCurrent_O:	ON
+CTCCurrent_O:	OFF
+#elseif	(ctcurradio = 3) & (CTCUR > 2.0)
+CTPHASE_O:	ON
+CTBCurrent_O:	OFF
+CTCCurrent_O:	ON
+#endif
+#if ~(ctcurradio = lastphase)
+idgsettletime: 0
+idgtimer: TRUE
+#endif
+#if	(idgsettletime < IDGSETTLINGTIME)
+#goto	vscfnophase
+#endif	
+idgtimer: FALSE
+#if	((CTPHASE_O = 1) & (IDGPhaseCTOA_I = OFF))
+ctcurphaseda:	1
+#elseif	((CTPHASE_O = 1) & (IDGPhaseCTOA_I = ON))
+ctcurphaseda:	2
+#else	
+ctcurphaseda:	0
+#endif	
+#if	((CTPHASE_O = 1) & (IDGPhaseCTOB_I = OFF))
+ctcurphasedb:	1
+#elseif	((CTPHASE_O = 1) & (IDGPhaseCTOB_I = ON))
+ctcurphasedb:	2
+#else
+ctcurphasedb:	0
+#endif	
+#if	((CTPHASE_O = 1) & (IDGPhaseCTOC_I = OFF))
+ctcurphasedc:	1
+#elseif	((CTPHASE_O = 1) & (IDGPhaseCTOC_I = ON))
+ctcurphasedc:	2
+#else
+ctcurphasedc:	0
+#endif	
+#if ((~VSCFOilPres_I) & (VSCFOilLevel_I) & (OilProbe_O))
+OilLevel_Stat: 2
+#elseif ((~VSCFOilPres_I) & (VSCFOilLevel_I))
+OilLevel_Stat: 1
+#else
+OilLevel_Stat: 0
+#endif
+#if (oilleveltoggle = ON)
+OilProbe_O: ON
+#elseif (oilleveltoggle = OFF)
+OilProbe_O: OFF
+#endif
+vscfnophase	
+lastctcurradio:	ctcurradio
+lastphase: ctcurradio
+genloadlast: genloadtoggle
+GenContSysPower_O              GenPwr_O
+GenVSCFSelect_O                GenSelect_O
+GenLoadSelect_O                GenLoad_O
+GenVoltSelPhBC_O               GenVoltBC_O
+GenVoltSelPhCA_O               GenVoltCA_O
+GenPMGSelect_O                 GenSysSelect_O
+GenCurrTransTst_O              CTPhase_O
+GenCurrTransB_O                CTBCurrent_O
+GenCurrTransC_O                CTCCurrent_O
+GenPGMASelect_O                PMGA_O
+GenPGMBSelect_O                PMGB_O
+GenPGMCSelect_O                PMGC_O
+GenPGMDSelect_O                PMGD_O
+GenOilProbeSel_O               OilProbe_O
+GenMagTrimTst_O                MagTrim_O
+
+$END-GROUP

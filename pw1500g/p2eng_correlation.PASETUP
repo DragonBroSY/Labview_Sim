@@ -1,0 +1,5 @@
+* /cust/delta3/pw1500g/p2eng_correlation.PASETUP
+$CRSPARAM "P2_AVG" min=13.900000 max=14.400000 linetype=
+$CRSPARAM "n1c2_sls" min=9580.000000 max=9660.000000 linetype=
+$CRSPARAM "EEC_P2" min=13.900000 max=14.400000 linetype=
+$CRSPARAM "P2Eng" min=13.900000 max=14.400000 linetype=

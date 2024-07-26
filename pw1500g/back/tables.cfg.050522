@@ -1,0 +1,1863 @@
+$TABLEGROUP Emissions
+$TABLE CO_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 extrap=2 xparam=WfIS 
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nCO Lbs/Lbs Fuel Burned. Engine is tested as a PW1525G.\n(DJR 1/8/21)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE NOx_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 extrap=2 xparam=WfIS 
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nNOx Lbs/Lbs Fuel Burned. Engine is Tested as a PW1525G.\n(DJR 1/8/21)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE PM_T
+dim=2 save=0 dynexp=0 offset=2 interp=0 extrap=2 xparam=WfIS 
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nPM Lbs/Lbs Fuel Burned. Engine is Tested as a PW1525G.\n(DJR 1/8/21)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE SO2_T
+dim=1 save=0 dynexp=0 constant=0.003120
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nSO2 Lbs/Lbs Fuel Burned.\n(DJR 9/6/18)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE VOC_T
+dim=2 save=0 dynexp=0 offset=3 interp=0 extrap=2 xparam=WfIS 
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nVOC Lbs/Lbs Fuel Burned. Engine is Tested as a PW1525G.\n(DJR 1/8/21)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE THC_T
+dim=2 save=0 dynexp=0 offset=4 interp=0 extrap=2 xparam=WfIS 
+exp=TRUE
+comment="Criteria Pollutant Emission Factors\nTHC Lbs/Lbs Fuel Burned. Engine is Tested as a PW1525G.\n(DJR 1/8/21)"
+revdate="05 May 2022"
+mandate="14 Dec 2021"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP FireLoops
+$TABLE FanLoopFire_T
+dim=1 save=0 dynexp=0 constant=6600.000000
+exp=true
+comment="Fan Loop Minimum Range indicates Fire...\n(DJR 12/28/20)"
+revdate="28 Dec 2020"
+$END-TABLE
+
+$TABLE FanLoopFault_T
+dim=1 save=0 dynexp=0 constant=7000.000000
+exp=true
+comment="Fan Loop Max Range indicates Fault...\n(DJR 12/28/20)"
+revdate="28 Dec 2020"
+$END-TABLE
+
+$TABLE FireLoopFire_T
+dim=1 save=0 dynexp=0 constant=2800.000000
+exp=true
+comment="Fire Loop Minimum Range indicates Fire...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE FireLoopFault_T
+dim=1 save=0 dynexp=0 constant=3400.000000
+exp=true
+comment="Fire Loop Max Range indicates Fault...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE OvHtLoopFire_T
+dim=1 save=0 dynexp=0 constant=1300.000000
+exp=true
+comment="Overheat Loop Minimum Range indicates Fire...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE OvHtLoopFault_T
+dim=1 save=0 dynexp=0 constant=1600.000000
+exp=true
+comment="Overheat Loop Max Range indicates Fault...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP FacilityModifiers
+$TABLE dFNTR2_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2D 
+coeff0=7.3027536861 coeff1=0.091635151 coeff2=-6.79572e-008 coeff3=-4.06131e-012 maxpoly=24000 minpoly=0 
+exp=(CellNum = 3.0)
+comment="FN Cell 3 Modifiers.\nInput Units: Lbs, Output Units: Lbs\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dFNTR2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="FN Cell 4 Modifiers.\nInput Units: Lbs, Output Units: Lbs\nCleared\n(SAD 01/11/20)"
+revdate="24 Nov 2021"
+$END-TABLE
+
+$TABLE dWFPLHCR2_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-406.46104 coeff1=0.0879024407 coeff2=-4.7202096e-006 coeff3=9.142959e-011 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="Wf Cell 3 Modifiers.\nInput Units: Lbs, Output Units: PPH\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dWFPLHCR2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="Wf Cell 4 Modifiers.\nInput Units: Lbs, Output Units: PPH\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dN1C2_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-141.49195018 coeff1=0.056302381 coeff2=-3.7948153e-006 coeff3=7.51434e-011 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="N1 Cell 3 Modifiers.\nInput Units: Lbs, Output Units: RPM\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dN1C2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="N1 Cell 4 Modifiers.\nInput Units: Lbs, Output Units: RPM\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dN2C2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.000000
+exp=True
+comment="N2 Cell 3/4 Modifiers.\nInput Units: , Output Units:\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dT25OP25_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 3.0)
+comment="T2.5 Cell 3 modifiers\nInput Units: Lbs, Output Units: DegC\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dT25OP25_Cell_T
+dim=1 save=1 dynexp=0 constant=0.000000
+exp=(CellNum = 4.0)
+comment="T2.5 Cell 4 modifiers\nInput Units: , Output Units:\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dT3OP3_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=3.7764405326 coeff1=0.00182905458 coeff2=-1.7104032e-007 coeff3=4.0293564e-012 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="T3 Cell 3 Modifiers\nInput Units: DegC, Output Units: DegC\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dT3OP3_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="T3 Cell 4 Modifiers\nInput Units: Lbs, Output Units: DegC\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dT45OP45_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=95.846557658 coeff1=-0.011079900494 coeff2=4.387362e-007 coeff3=-5.672531e-012 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="T4.5 Cell 3 Modifiers.\nInput Units: Lbs, Output Units: DegC\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dT45OP45_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="T4.5 Cell 4 Modifiers.\nInput Units: Lbs, Output Units: DegC\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dT49OP49_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=56.880484188 coeff1=-0.007474791233 coeff2=3.624956e-007 coeff3=-5.465126e-012 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="T4.9 Cell 3 Modifiers.\nInput Units: Lbs, Output Units: DegC\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dT49OP49_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="T4.9 Cell 4 Modifiers.\nInput Units: Lbs, Output Units: DegC\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dPS3Q2_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-1.1150603726 coeff1=0.00028421 coeff2=-1.5087975e-008 coeff3=2.75487e-013 maxpoly=24000 minpoly=14000 
+exp=(CellNum = 3.0)
+comment="PS3.1/P2 Cell 3 Modifiers. \nInput Units: ND, Output Units: ND\nPrelim Correlation 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE dPS3Q2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="PS3.1/P2 Cell 4 Modifiers. \nInput Units: Lbs, Output Units: PSI\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dP25Q2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 3.0)
+comment="P2.5/P2 Cell 3 Modifiers. \nInput Units: Lbs, Output Units: PSI\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE dP25Q2_Cell_T
+dim=1 save=1 dynexp=0 constant=0.0
+exp=(CellNum = 4.0)
+comment="P2.5/P2 Cell 4 Modifiers. \nInput Units: Lbs, Output Units: PSI\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE P2QPBAR_Cell_T
+dim=0 save=1 dynexp=0 size=3 xparam=N1C2_SLS 
+coeff0=0.99956849817 coeff1=2.9411504e-007 coeff2=-1.099084e-010 coeff3=1.826783e-015 maxpoly=10000 minpoly=2000 
+exp=(CellNum = 3.0)
+comment="Inlet Pressure Ratio Coeff Cell 3\nInput Units: RPM, Output Units: ND\nPW Prelim Correction Table 12/21/2021\n(SAD 12/22/2021)"
+revdate="22 Dec 2021"
+$END-TABLE
+
+$TABLE P2QPBAR_Cell_T
+dim=1 save=1 dynexp=0 constant=1.0
+exp=(CellNum = 4.0)
+comment="Inlet Pressure Ratio Coeff Cell 4, during TCC, NOTE: Multiplier\nINPUT UNITS: RPM, Output Units: Multiplier\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE ABellMouth_T
+dim=1 save=0 dynexp=0 constant=1
+exp=TRUE
+comment="BellMouth Throat Area in Sq In. = 5134.44\nDuctSet DL15, BellMouth S/N:026\nCleared\n(SAD 01/11/21)"
+revdate="26 Feb 2021"
+$END-TABLE
+
+$TABLE ACondiNoz_T
+dim=1 save=0 dynexp=0 constant=1
+exp=TRUE
+comment="CONDI Nozzle (Fan) Exit Area A18 in Sq In. = 2991.0\nDuctSet DL15, S/N:026\nCleared\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE AExhNoz_T
+dim=1 save=0 dynexp=0 constant=1
+exp=TRUE
+comment="Exhaust Nozzle Area in Sq In. = 512.2\nDuctSet DL15, Exhaust Nozzle S/N:026\nCleared\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE CondiNozSN_T
+dim=1 save=0 dynexp=0 constant=0
+exp=TRUE
+comment="CONDI Nozzle (FAN) Exit Area A18 in Sq In. = 2991.0\nDuctSet DL15, S/N:026\nCleared\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE BellMouthSN_T
+dim=1 save=0 dynexp=0 constant=0
+exp=TRUE
+comment="BellMouth Area in Sq In. = 5134.44\nDuctSet DL15, BellMouth S/N:026, PN: XT597124-03\nCleared\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE ExhNozSN_T
+dim=1 save=0 dynexp=0 constant=0
+exp=TRUE
+comment="Exhaust Nozzle Area in Sq In. = 512.2\nDuctSet DL18, Exhaust Nozzle S/N:026\nCleared\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP OperatingLimits
+$TABLE MOPMx_T
+dim=1 save=0 dynexp=0 constant=190.0
+exp=TRUE
+comment="Maximum Oil Pressure, 71-00-00-00A-030A-B Operating Limits, 1.2.1\nUnits Out: PSIG\n(SAD 01/11/21)"
+revdate="16 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE MOPMn_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Minimum Oil Pressure, 71-00-00-00A-030A-B Operating Limits, 1.2.2\nUnits Out: PSIG\n(SAD 01/11/21)"
+revdate="22 Oct 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE MOPSafeMx_T
+dim=1 save=0 dynexp=0 constant=175.3
+exp=TRUE
+comment="Maximum Safe Oil Pressure, TIS 4.1.1.2.1\nUnits Out: PSIG\n(DJR 06/16/21)"
+revdate="16 Jun 2021"
+mandate="22 Oct 2020"
+manrev="TIS Rev C"
+$END-TABLE
+
+$TABLE MOPSafeMn_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Minimum Safe Oil Pressure,  TIS 4.1.1.2.1, TIS MOPMn = ((5.647E-3 * N2) - 4.126E+1) > 50.3)\nUnits Out: PSIG\n(DJR 06/16/21)"
+revdate="22 Oct 2021"
+mandate="22 Oct 2020"
+manrev="TIS Rev C"
+$END-TABLE
+
+$TABLE OilQtyMn_T
+dim=1 save=0 dynexp=0 constant=9.60
+exp=TRUE
+comment="Minimum Oil Quantity, 71-00-00-00A-030A-B Operating Limits, 1.1.8.3\nUnits Out: Qts\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE OilConsMn_T
+dim=1 save=0 dynexp=0 constant=0.000000
+exp=TRUE
+comment="Minimum Oil Consumption (OilC), 71-00-00-04B-320A-B Test-09 Engine Acceptance, 1.12.1.1\nUnits Out: Gal/Hr\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE OilConsMx_T
+dim=1 save=0 dynexp=0 constant=0.07500
+exp=TRUE
+comment="Maximum Oil Consumption (OilC), 71-00-00-04B-320A-B Test-09 Engine Acceptance 1.12.1.1\nUnits Out: Gal/Hr\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FIPMN_T
+dim=1 save=0 dynexp=0 constant=5.000000
+exp=TRUE
+comment="Minimum Inlet Fuel pressure to engine fuel pump, 71-00-00-00A-030A-B Operating Limits, 2.E.(5)\nUnits Out: PSIG\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FIPMX_T
+dim=1 save=0 dynexp=0 constant=45.000000
+exp=TRUE
+comment="Max Inlet Fuel pressure to engine fuel pump, 71-00-00-00A-030A-B Operating Limits, 2.E.(5)\nUnits Out: PSIG\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE StartFuelFlow_T
+dim=1 save=0 dynexp=0 constant=200.000000
+exp=TRUE
+comment="Normal Starting Fuel Flow, 71-00-00-00A-030A-B 1.5.1\nUnits Out: PPH\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25.0"
+$END-TABLE
+
+$TABLE IdleFuelFlow_T
+dim=1 save=0 dynexp=0 constant=550.0
+exp=TRUE
+comment="Normal Idle Fuel Flow, 71-00-00-00A-030A-B 1.5.1\nUnits Out: PPH\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25"
+$END-TABLE
+
+$TABLE OILFILTDIFFMX_T
+dim=1 save=0 dynexp=0 constant=35.000000
+exp=TRUE
+comment="Main Oil Filter Diff Max, 71-00-00-00A-030A-B 1.2.4\nUnits Out: PSID\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE MOTMN_T
+dim=1 save=0 dynexp=0 constant=49.0
+exp=TRUE
+comment="Minimum Oil Temp @ Start to Takeoff, 71-00-00-00A-030A-B 1.3.1\nUnits Out: DegC\n(SAD 01/19/21)"
+revdate="19 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE MOTMX_T
+dim=1 save=0 dynexp=0 constant=168.0
+exp=TRUE
+comment="Maximum Oil Temp Limit, 71-00-00-00A-030A-B 1.3.2\nUnits Out: DegC\n(SAD 01/19/21)"
+revdate="19 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE MOTMXTrans_T
+dim=1 save=0 dynexp=0 constant=174.0
+exp=TRUE
+comment="Maximum Transient Oil Temp Limit, 71-00-00-00A-030A-B 1.3.3\nUnits Out: DegC\n(SAD 01/19/21)"
+revdate="19 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE MOTWarmTH_T
+dim=1 save=0 dynexp=0 constant=49.0
+exp=TRUE
+comment="Main Oil Temp (MOT) Minimum Warm Temperature Threshold Limit, 71-00-00-00A-030A-B 1.3.1\nUnits Out: DegC\n(DJR 06/30/21)"
+revdate="30 Jun 2021"
+mandate="14 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE StarterCutOut_T
+dim=1 save=0 dynexp=0 constant=13500.000000
+exp=TRUE
+comment="Starter CutOut @ N2 RPM, 49% - 54% N2 depending on T2\n(DJR 6/07/21)"
+revdate="07 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE SAPMn_T
+dim=1 save=0 dynexp=0 constant=35.000000
+exp=TRUE
+comment="Starter Air Min Limit, 71-00-00-00A-030A-B 1.9.1\nUnits Out: PSIG\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25"
+$END-TABLE
+
+$TABLE SAPMx_T
+dim=1 save=0 dynexp=0 constant=55.000000
+exp=TRUE
+comment="Starter Air Max Limit, 71-00-00-00A-030A-B 1.9.1\nUnits Out: PSIG\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25"
+$END-TABLE
+
+$TABLE SAPTarg_T
+dim=3 save=0 dynexp=0 offset=2 yparam=CITDegC xparam=PressAlt 
+exp=TRUE
+comment="Starter Air Target, \nUnits Out: PSIG\n(DJR 3/23/20)"
+revdate="23 Mar 2020"
+mandate="10 Jul 2019"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE PAIRsMn_T
+dim=1 save=0 dynexp=0 constant=6.300000
+exp=TRUE
+comment="Starter Air Min Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: PSIG\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsMx_T
+dim=1 save=0 dynexp=0 constant=8.300000
+exp=TRUE
+comment="Starter Air Max Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: PSIG\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsN2Mn_T
+dim=1 save=0 dynexp=0 constant=1400.000000
+exp=TRUE
+comment="N2 Start RPM Min Limit, TIS 6.6.1 Oil System Servicing\nUnits Out: RPM\n(DJR 07/06/21)"
+revdate="06 Jul 2021"
+mandate="06 Oct 2017"
+manrev="TIS Rev C"
+$END-TABLE
+
+$TABLE PAIRsN2Mx_T
+dim=1 save=0 dynexp=0 constant=1600.000000
+exp=TRUE
+comment="N2 Start RPM Max Limit, TIS 6.6.1 Oil System Servicing\nUnits Out: RPM\n(DJR 07/06/21)"
+revdate="06 Jul 2021"
+mandate="06 Oct 2017"
+manrev="TIS Rev C"
+$END-TABLE
+
+$TABLE StarterDutyCycle_T
+dim=1 save=0 dynexp=0 constant=4.0
+exp=TRUE
+comment="Starter Duty Cycle, 71-00-00-00A-030A-B 1.9.2\nUnits Out: Minutes\n(SAD 01/11/21)"
+revdate="11 Jan 2021"
+mandate="22 Oct 2020"
+manrev="25"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP ITTLimits
+$TABLE ITTStrtMxRLim_T
+dim=1 save=0 dynexp=0 constant=1054.000000
+exp=TRUE
+comment="Max ITT Red Start Limit. \nUnits:DegC, Operating Limits, 1.1.1\n(DJR 5/25/21)"
+revdate="25 May 2021"
+mandate="25 May 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE ITTStrtMxYLim_T
+dim=1 save=0 dynexp=0 constant=1016.000000
+exp=TRUE
+comment="Max ITT Amber Start Limit. \nUnits:DegC, Operating Limits, 1.1.1\n(DJR 5/25/21)"
+revdate="25 May 2021"
+mandate="25 May 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE ITTRunMxRLim_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=ITTRunTrigTmr 
+exp=TRUE
+comment="ITT Max Red Limit @ Take-OFF.\nUnits:DegC, Operating Limits, 1.1.2\n(DJR 5/25/21)"
+revdate="25 May 2021"
+mandate="25 May 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE ITTRunTrig_T
+dim=1 save=0 dynexp=0 constant=1006.000000
+exp=TRUE
+comment="Max ITT at Max-Continuous, Lowest Max Limit used to start Timer.\nUnits: DegC, Operating Limits, 1.1.3\n(DJR 5/25/21)"
+revdate="25 May 2021"
+mandate="25 May 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE ITTRunMxTm_T
+dim=1 save=0 dynexp=0 constant=300.000000
+exp=TRUE
+comment="ITT Max Time Limit @ Take-Off.\nUnits:Sec, Operating Limits, 1.1.2\n(DJR 5/25/21)"
+revdate="25 May 2021"
+mandate="25 May 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP RotorSpeedLimits
+$TABLE NSA100_T
+dim=1 save=0 dynexp=0 constant=9163.000000
+exp=TRUE
+comment="100% Starter RPM, NSA 100%=9163\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE NFTimeBase_T
+dim=1 save=0 dynexp=0 constant=4.000000
+exp=TRUE
+comment="NF Fan Rotor Speed electronic Counter Time Base\nTesting-71-00-00\nASE Drawing (3461.2 RPM 100% / 865.3 Hz 100%)\nBased on 20 tooth speed sensor, 60 / 20 = 3\nUnits: TimeBase\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE NF100_T
+dim=1 save=0 dynexp=0 constant=3461.200000
+exp=TRUE
+comment="100% NF RPM, (N1 / 3) (Ratio of gear Reduction)\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE N1R_T
+dim=1 save=0 dynexp=0 constant=10600.000000
+exp=TRUE
+comment="N1 Red Line Limit, Testing 71-00-00-00A-030A-B, 1.1.7.1 N1-N2 OverSpeed\nUnits Out: RPM\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE N1100_T
+dim=1 save=0 dynexp=0 constant=10600.000000
+exp=TRUE
+comment="100% N1 RPM, Testing-71-00-00-00A-030A-B Operating Limits, 1.1.7.1\n(DJR 1/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE N1TimeBase_T
+dim=1 save=0 dynexp=0 constant=3.000003
+exp=TRUE
+comment="N1 Rotor Speed electronic Counter Time Base\nASE Drawings (10600 RPM 100% / 3533.33 Hz 100%)\nBased on 20 tooth speed sensor, 60 / 20 = 3\nUnits: TimeBase\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE N2R_T
+dim=1 save=0 dynexp=0 constant=24470.000000
+exp=TRUE
+comment="N2 Red Line Limit, Testing 71-00-00-00A-030A-B, 1.1.7.2 N1-N2 OverSpeed\nUnits Out: RPM\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$TABLE N2100_T
+dim=1 save=0 dynexp=0 constant=24470.000000
+exp=TRUE
+comment="100% N2 RPM, Testing-71-00-00-00A-030A-B Operating Limits, 1.1.7.2\n(DJR 1/11/21)"
+revdate="11 Jan 2021"
+$END-TABLE
+
+$TABLE N2TimeBase_T
+dim=1 save=0 dynexp=0 constant=8.922701
+exp=TRUE
+comment="N2 Rotor Speed electronic Counter Time Base\nASE Drawings (24470 RPM 100% / 2742.443 Hz 100%)\nUnits: TimeBase\n(DJR 5/25/21)"
+revdate="25 May 2021"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP VibLimits
+$TABLE VibFBBMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="Intermediate Case (IC), Max Acceptance BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFNFMx_T
+dim=1 save=1 dynexp=0 constant=0.600000
+exp=TRUE
+comment="Intermediate Case (IC), Max Acceptance Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFN1Mx_T
+dim=1 save=1 dynexp=0 constant=0.600000
+exp=TRUE
+comment="Intermediate Case (IC), Max Acceptance N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+dim=1 save=1 dynexp=0 constant=0.900000
+exp=WSN2LMVibLim_F
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels WithOUT HPC/HPT Repair, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+dim=1 save=1 dynexp=0 constant=0.700000
+exp=~WSN2LMVibLim_F
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels, With HPC/HPT Repair \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRBBMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="P-Flange, Max Acceptance BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRNFMx_T
+dim=1 save=1 dynexp=0 constant=0.600000
+exp=TRUE
+comment="P-Flange, Max Acceptance Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRN1Mx_T
+dim=1 save=1 dynexp=0 constant=0.600000
+exp=TRUE
+comment="P-Flange, Max Acceptance N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRN2Mx_T
+dim=1 save=1 dynexp=0 constant=0.700000
+exp=~WSN2LMVibLim_F
+comment="P-Flange, Max Acceptance N2 Vibration levels, With HPC/HPT Repair.\nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRN2Mx_T
+dim=1 save=1 dynexp=0 constant=0.900000
+exp=WSN2LMVibLim_F
+comment="P-Flange, Max Acceptance N2 Vibration levels, WithOUT HPC/HPT Repair.\nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 2\n(DJR 6/1/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFBBRMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="Intermediate Case (IC), Max Safe Run Limit BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nIntermediate Case Transducer Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFNFRMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="Intermediate Case (IC), Max Safe Run Limit Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nIntermediate Case Transducer Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFN1RMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="Intermediate Case (IC), Max Safe Run Limit N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nIntermediate Case Transducer Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibFN2RMx_T
+dim=1 save=1 dynexp=0 constant=1.100000
+exp=TRUE
+comment="Intermediate Case (IC), Max Safe Run Limit N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nIntermediate Case Transducer Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRBBRMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="P-Flange, Max Safe Run Limit BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nP-Flange Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRNFRMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="P-Flange, Max Safe Run Limit Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nP-Flange Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRN1RMx_T
+dim=1 save=1 dynexp=0 constant=1.200000
+exp=TRUE
+comment="P-Flange, Max Safe Run Limit N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nP-Flange Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$TABLE VibRN2RMx_T
+dim=1 save=1 dynexp=0 constant=1.100000
+exp=TRUE
+comment="P-Flange, Max Safe Run Limit N2 Vibration levels\nUNITS: IPS (single amp), Operating Limits, 1.1.10 Table 3\nP-Flange Locations\n(DJR 06/01/21)"
+revdate="01 Jun 2021"
+mandate="22 Oct 2020"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP StartLimits
+$TABLE FuelOnToLOMx_T
+dim=1 save=0 dynexp=0 constant=20.000000
+exp=TRUE
+comment="Testing-00  p.1334  J.1"
+$END-TABLE
+
+$TABLE StrtOnToIdleMx_T
+dim=1 save=0 dynexp=0 constant=90.000000
+exp=TRUE
+comment="Testing-00  p.1333  I.1"
+revdate="15 Oct 2004"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP AcceptanceLimits
+$TABLE FNTR2Mx_MI_T
+dim=1 save=0 dynexp=0 constant=960.000000
+exp=TRUE
+comment="Minimum Idle Max Corrected Thrust Limit, Testing-09, 1.15.1\nTable 13, Units Out: Lbs\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNTR2Mx_AI_T
+dim=1 save=0 dynexp=0 constant=2072.000000
+exp=TRUE
+comment="Approach Idle Max Corrected Thrust Limit, Testing-09, 1.15.1\nTable 13, Units Out: Lbs\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_A_T
+dim=1 save=0 dynexp=0 constant=23400.000000
+exp=TRUE
+comment="TakeOff Band A Min Guaranteed Thrust Rating, Testing-09, 1.14.4.\nUnits Out: Lbs, Table 12, N1CLAS1\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_B_T
+dim=1 save=0 dynexp=0 constant=21050.000000
+exp=TRUE
+comment="MCT Band B Min Guaranteed Thrust Rating, Testing-09, 1.14.4.\nUnits Out: Lbs, Table 12, N1CLAS2\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_C_T
+dim=1 save=0 dynexp=0 constant=19150.000000
+exp=TRUE
+comment="Mid-Band Band C Min Guaranteed Thrust Rating, Testing-09, 1.14.4.\nUnits Out: Lbs, Table 12, N1CLAS3\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_D_T
+dim=1 save=0 dynexp=0 constant=15000.000000
+exp=TRUE
+comment="Reduced T/O Band D Min Guaranteed Thrust Rating, Testing-09, 1.14.4.\nUnits Out: Lbs, Table 12, N1CLAS4\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1C2IGMax_A_T
+dim=1 save=0 dynexp=0 constant=9514.000000
+exp=TRUE
+comment="TakeOff Band A, Max N1C2-I @ Guaranteed Thrust, Testing-09, 1.14.4.\nUnits Out: RPM, Table 12, N1CLAS4\n(DJR 8/21/18)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1C2IGMax_B_T
+dim=1 save=0 dynexp=0 constant=9121.000000
+exp=TRUE
+comment="MCT Band B, Max N1C2-I @ Guaranteed Thrust, Testing-09, 1.14.4.\nUnits Out: RPM, Table 12, N1CLAS3\n(DJR 8/21/18)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1C2IGMax_C_T
+dim=1 save=0 dynexp=0 constant=8771.000000
+exp=TRUE
+comment="Mid-Band C, Max N1C2-I @ Guaranteed Thrust, Testing-09, 1.14.4.\nUnits Out: RPM, Table 12, N1CLAS2\n(DJR 8/21/18)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1C2IGMax_D_T
+dim=1 save=0 dynexp=0 constant=7908.000000
+exp=TRUE
+comment="Reduced T/O D, Max N1C2-I @ Guaranteed Thrust, Testing-09, 1.14.4.\nUnits Out: RPM, Table 12, N1CLAS1\n(DJR 8/21/18)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+dim=1 save=0 dynexp=0 constant=1661.000000
+exp=Refurb
+comment="Max T45OP45 (EGT) Fully Refurbished, Testing-09, 1.15.(2)\nUnits Out: DegF, Table 14, N1C2-I @ 9550.\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T45_AllRFBMx_T
+dim=1 save=0 dynexp=0 constant=1661.000000
+exp=TRUE
+comment="Max T45OP45 (EGT) Fully Refurbished, Testing-09, 1.15.(2)\nUnits Out: DegF, Table 14, N1C2-I @ 9550.\n(DJR 6/14/21)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+dim=1 save=0 dynexp=0 constant=1680.000000
+exp=~Refurb
+comment="Max T45OP45 (EGT) Little/No Refurbishment, Testing-09, 1.15.(2)\nUnits Out: DegF, Table 14, N1C2-I @ 9550.\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T45_AllNRFBMx_T
+dim=1 save=0 dynexp=0 constant=1680.000000
+exp=TRUE
+comment="Max T45OP45 (EGT) Little/No Refurbishment, Testing-09, 1.15.(2)\nUnits Out: DegF, Table 14, N1C2-I @ 9550.\n(DJR 6/14/21)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2I_T45Ref_T
+dim=1 save=0 dynexp=0 constant=9550.000000
+exp=TRUE
+comment="Reference N1C2-I, Testing-09, 1.15.(2)\nUnits Out: RPM, Table 14, Reference N1C2-I.\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N2C2DMax_T
+dim=1 save=0 dynexp=0 constant=23262.000000
+exp=TRUE
+comment="Max N2C2D, All Refurbished, Testing-09, 1.15.(3)\nUnits Out: RPM, Table 15, N1C2-I @ 9550.\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1C2I_N2Ref_T
+dim=1 save=0 dynexp=0 constant=9550.000000
+exp=TRUE
+comment="Reference N1C2-I, Testing-09, 1.15.(3)\nUnits Out: RPM, Table 15, Reference N1C2-I.\n(DJR 6/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE TSFCFnA_T
+dim=1 save=0 dynexp=0 constant=32101.000000
+exp=TRUE
+comment="FNTR2 for TSFC Band A, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Lbf, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="20.00"
+$END-TABLE
+
+$TABLE TSFCFnB_T
+dim=1 save=0 dynexp=0 constant=26740.000000
+exp=TRUE
+comment="FNTR2 for TSFC Band B, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Lbf, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCFnC_T
+dim=1 save=0 dynexp=0 constant=20680.000000
+exp=TRUE
+comment="FNTR2 for TSFC Band C, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Lbf, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCMaxA_T
+dim=1 save=0 dynexp=0 constant=0.253500
+exp=TRUE
+comment="TSFC Max Limit Band A, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Ratio, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCMaxB_T
+dim=1 save=0 dynexp=0 constant=0.244600
+exp=TRUE
+comment="TSFC Max Limit Band B, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Ratio, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCMaxC_T
+dim=1 save=0 dynexp=0 constant=0.236700
+exp=TRUE
+comment="TSFC Max Limit Band C, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Ratio, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCWFMax_T
+dim=1 save=0 dynexp=0 constant=0.249900
+exp=TRUE
+comment="TSFC Max Weighted Factor Acceptance Limit ALL, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Ratio, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCWFacA_T
+dim=1 save=0 dynexp=0 constant=0.750000
+exp=TRUE
+comment="TSFC Weighting Factor Band A, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Factor, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCWFacB_T
+dim=1 save=0 dynexp=0 constant=0.100000
+exp=TRUE
+comment="TSFC Weighting Factor Band B, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Factor, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE TSFCWFacC_T
+dim=1 save=0 dynexp=0 constant=0.150000
+exp=TRUE
+comment="TSFC Weighting Factor Band C, TIS Rev 6, 5.1.1.12 TSFC\nUnits Out: Factor, \n(DJR 3/18/20)"
+revdate="18 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE MOPExpMn_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Minimum Main Oil Pressure Expected Limits, 71-00-00-00A-362A-B, Figure 2\nUnits IN: RPM Units Out: PSIG, NOTE: Converted to RPM.\n(DJR 6/16/21)"
+revdate="17 Jun 2021"
+mandate="16 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE MOPExpMx_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Maximum Main Oil Pressure Expected Limits, 71-00-00-00A-362A-B, Figure 2\nUnits IN: RPM Units Out: PSIG, NOTE: Converted to RPM.\n(DJR 6/16/21)"
+revdate="22 Oct 2021"
+mandate="16 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE MOPAccMn_T
+dim=2 save=0 dynexp=0 offset=2 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Minimum Main Oil Pressure Acceptance Limits, 71-00-00-00A-362A-B, Figure 2\nUnits IN: RPM Units Out: PSIG, NOTE: Converted to RPM.\n(DJR 10/22/21)"
+revdate="22 Oct 2021"
+mandate="16 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE MOPAccMx_T
+dim=2 save=0 dynexp=0 offset=3 interp=0 xparam=EEC_N2 
+exp=TRUE
+comment="Maximum Main Oil Pressure Acceptance Limits, 71-00-00-00A-362A-B, Figure 2\nUnits IN: RPM Units Out: PSIG, NOTE: Converted to RPM.\n(DJR 10/22/21)"
+revdate="22 Oct 2021"
+mandate="16 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP MopTest
+$TABLE TrimDiameterChg_T
+dim=3 save=0 dynexp=0 offset=0 yparam=POilN2 xparam=POilDiff 
+exp=TRUE
+comment="Main Oil Pressure Acceptance Trim Change, Testing-13, Figure 4\nUnits IN: % and PSI, Units Out: In\n(DJR 3/1/19) "
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamChg_T
+dim=3 save=0 dynexp=0 offset=1 yparam=POilN2 xparam=POilDiff 
+exp=TRUE
+comment="Oil Pressure Change Trim, MOP Test and Adjustment, Figure 4\nUnits Out: Inches, Units In 1: N2%, 2: PSIG\n(DJR 3/1/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiam_T
+dim=2 save=0 dynexp=0 offset=2 interp=0 xparam=POilTrim 
+exp=TRUE
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamInc_T
+dim=2 save=0 dynexp=0 offset=3 interp=0 xparam=POilTrim 
+exp=TRUE
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4, MOP to High\nIncrease Trim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamDec_T
+dim=2 save=0 dynexp=0 offset=4 interp=0 xparam=POilTrim 
+exp=TRUE
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4, MOP to Low\nDecrease Trim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamMid_T
+dim=2 save=0 dynexp=0 offset=5 interp=0 xparam=POilTrim 
+exp=TRUE
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimClass_T
+dim=2 save=0 dynexp=0 offset=6 interp=0 xparam=POilTrimDiam 
+exp=TRUE
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Class Selection, Input Units: In, Output Units: Class\n(DJR 8/15/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP ThrustBands
+$TABLE FNAMX_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Thrust Band A Max, Testing-09, Figure 3, Sheet 1, PW1500G\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNAMN_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Thrust Band A Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNBMX_T
+dim=2 save=0 dynexp=0 offset=2 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Thrust Band B Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNBMN_T
+dim=2 save=0 dynexp=0 offset=3 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Thrust Band B Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNCMX_T
+dim=1 save=0 dynexp=0 constant=19400.000000
+exp=TRUE
+comment="Thrust Band C Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)\n"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNCMN_T
+dim=1 save=0 dynexp=0 constant=18900.000000
+exp=TRUE
+comment="Thrust Band C Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNDMX_T
+dim=1 save=0 dynexp=0 constant=15000.000000
+exp=TRUE
+comment="Thrust Band D Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE FNDMN_T
+dim=1 save=0 dynexp=0 constant=14500.000000
+exp=TRUE
+comment="Thrust Band D Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-82477-A-002-01\n(DJR 6/11/21)\n\nYohannes"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP GasGenCheck
+$TABLE GGCCN1C2DMx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=3.70401e+03 coeff1=3.34536e-01 coeff2=-3.23648e-06 coeff3=-1.50740e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, N1C2D Max Limit, Figure 12, Sheet 1\nGraphic: P-77445-35011-A-001-01, Units IN: Lbs, Units Out: RPM\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCN1C2DMn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=3.434890e+03 coeff1=3.68649e-01 coeff2=-5.06116e-06 coeff3=1.50746e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, N1C2D Min Limit, Figure 12, Sheet 1\nGraphic: P-77445-35011-A-001-01, Units IN: Lbs, Units Out: RPM\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCN2C2DMx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=1.64971e+04 coeff1=5.60189e-01 coeff2=-1.90668e-05 coeff3=2.90472e-10 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, N2C2D Max Limit, Figure 12, Sheet 2\nGraphic: P-77445-35012-A-001-01, Units IN: Lbs, Units Out: RPM\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCN2C2DMn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=1.83767e+04 coeff1=2.20044e-01 coeff2=-1.22649e-07 coeff3=-5.80403e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, N2C2D Min Limit, Figure 12, Sheet 2\nGraphic: P-77445-35011-A-001-01, Units IN: Lbs, Units Out: RPM\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCTSFCPLHCMx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=3.11691e-01 coeff1=-9.91967e-06 coeff2=5.55161e-10 coeff3=-8.95804e-15 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, TSFCPLHC Max Limit, Figure 12, Sheet 3\nGraphic: P-77445-35013-A-001-01, Units IN: Lbs, Units Out: PPH/Lbf\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCTSFCPLHCMn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=8.43686e-02 coeff1=2.46268e-05 coeff2=-1.25903e-09 coeff3=2.23527e-14 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, TSFCPLHC Min Limit, Figure 12, Sheet 3\nGraphic: P-77445-35013-A-001-01, Units IN: Lbs, Units Out: PPH/Lbf\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCWFPLHCR2Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-8.27352e02 coeff1=3.88128e-01 coeff2=-7.54182e-06 coeff3=1.72901e-10 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, WF Max Limit, Figure 12, Sheet 4\nGraphic: P-77445-35014-A-001-01, Units IN: Lbs, Units Out: PPH\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCWFPLHCR2Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-1.07451e03 coeff1=4.05680e-01 coeff2=-8.66194e-06 coeff3=1.78866e-10 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, WF Min Limit, Figure 12, Sheet 4\nGraphic: P-77445-35014-A-001-01, Units IN: Lbs, Units Out: PPH\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCP25Q2Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-5.02178e-01 coeff1=2.64207e-04 coeff2=-8.60590e-09 coeff3=1.430660e-13 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, P25Q2 Max Limit, Figure 12, Sheet 5\nGraphic: P-77445-35015-A-001-01, Units IN: Lbs, Units Out: N/A\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCP25Q2Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=3.80284e-01 coeff1=1.17549e-04 coeff2=-1.31475e-09 coeff3=1.74322e-14 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, P25Q2 Min Limit, Figure 12, Sheet 5\nGraphic: P-77445-35015-A-001-01, Units IN: Lbs, Units Out: N/A\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT25OP25Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-4.91777e+01 coeff1=1.46260e-02 coeff2=-4.80120e-07 coeff3=7.33259e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T25OP25 Max Limit, Figure 12, Sheet 6\nGraphic: P-77445-35016-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT25OP25Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=5.19510e+00 coeff1=4.86674e-03 coeff2=5.00819e-08 coeff3=-2.32883e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T25OP25 Min Limit, Figure 12, Sheet 6\nGraphic: P-77445-35016-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCPS3Q2Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-1.11418e01 coeff1=3.91371e-03 coeff2=-1.35751e-07 coeff3=2.42846e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, PS3Q2 Max Limit, Figure 12, Sheet 7\nGraphic: P-77445-35017-A-001-01, Units IN: Lbs, Units Out: N/A\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCPS3Q2Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=-2.49662e00 coeff1=2.40362e-03 coeff2=-5.69294e-08 coeff3=1.02701e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, PS3Q2 Min Limit, Figure 12, Sheet 7\nGraphic: P-77445-35017-A-001-01, Units IN: Lbs, Units Out: N/A\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT3OP3Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=1.20568e+02 coeff1=4.91457e-02 coeff2=-1.93949e-06 coeff3=3.22465e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T3OP3 Max Limit, Figure 12, Sheet 8\nGraphic: P-77445-35018-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT3OP3Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=2.28735e+02 coeff1=2.60805e-02 coeff2=-5.73474e-07 coeff3=5.93035e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T3OP3 Min Limit, Figure 12, Sheet 8\nGraphic: P-77445-35018-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT45OP45Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=4.30270e+02 coeff1=2.77753e-02 coeff2=-3.60389e-07 coeff3=1.86923e-12 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T45OP45 Max Limit, Figure 12, Sheet 9\nGraphic: P-77445-35019-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT45OP45Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=2.42094e+02 coeff1=5.16344e-02 coeff2=-1.57224e-06 coeff3=2.17489e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T45OP45 Min Limit, Figure 12, Sheet 9\nGraphic: P-77445-35019-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT49OP49Mx_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=4.86456e+02 coeff1=-7.16092e-03 coeff2=6.61998e-07 coeff3=-1.19661e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T49OP49 Max Limit, Figure 12, Sheet 10\nGraphic: P-77445-35020-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE GGCCT49OP49Mn_T
+dim=0 save=1 dynexp=0 size=3 xparam=FNTR2 
+coeff0=2.90822e+02 coeff1=1.93921e-02 coeff2=-7.28685e-07 coeff3=1.19225e-11 maxpoly=2.600000e+04 minpoly=1.400000e+04 
+exp=TRUE
+comment="Gas Generator Check Curves, T49OP49 Min Limit, Figure 12, Sheet 10\nGraphic: P-77445-35020-A-001-01, Units IN: Lbs, Units Out: DegC\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP ThetaExp
+$TABLE WFEXP_T
+dim=1 save=0 dynexp=0 constant=0.615
+exp=TRUE
+comment="WFPLHCR2 Theta Exponent, Figure 10\nPW1500G, \n(DJR 6/10/21)"
+revdate="10 Jun 2021"
+mandate="10 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T25EXP_T
+dim=1 save=0 dynexp=0 constant=0.966000
+exp=TRUE
+comment="T25OP25 Theta Exponent, Equation 18.\nPW1500G,\n(DJR 6/10/21)"
+revdate="10 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T3EXP_T
+dim=1 save=0 dynexp=0 constant=0.880000
+exp=TRUE
+comment="T3OP3 Theta Exponent, Equation 19.\nPW1500G,\n(DJR 6/10/21)"
+revdate="10 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T45EXP_T
+dim=1 save=0 dynexp=0 constant=1.031000
+exp=TRUE
+comment="T45OP45 Theta Exponent, Equation 20.\nPW1500G,\n(DJR 6/10/21)"
+revdate="10 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE T49EXP_T
+dim=1 save=0 dynexp=0 constant=1.03
+exp=TRUE
+comment="T49OP49 Theta Exponent, Equation 21\nPW1500G, \n(DJR 6/10/21)"
+revdate="10 Jun 2021"
+mandate="10 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP AccelDecelCheck
+$TABLE AccelTmMx_T
+dim=1 save=0 dynexp=0 constant=8.000000
+exp=TRUE
+comment="Accel Max Time Limit to 97% TO, Testing-09, 1.15.4.2\nFNTR2 TO 97% Band A\n(DJR 06/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE DecelTmMx_T
+dim=1 save=0 dynexp=0 constant=8.000000
+exp=TRUE
+comment="Decel Max Time Limit to 90% TO, Testing-09, 1.15.5.2\nFNTR2 TO 90%\n(DJR 06/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE AccelFNTR2_T
+dim=1 save=0 dynexp=0 constant=0.970000
+exp=TRUE
+comment="Accel FNTR2 90% TO Target, Testing-09, 1.15.4.2\nFNTR2 TO 97% Band A\n(DJR 06/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE DecelFNTR2_T
+dim=1 save=0 dynexp=0 constant=0.900000
+exp=TRUE
+comment="Decel FNTR2 90% TO Decay Target, Testing-09, 1.15.5.2\nFNTR2 TO 90% Band A\n(DJR 06/14/21)"
+revdate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP N1ModifierClass
+$TABLE N1Class_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=DeltaN1C2 
+exp=TRUE
+comment="N1Class Modifier to DeltaN1C2, Table 18, PW1500G\nInput Units: RPM, NOTE: DeltaN1C2 using the Higher Class Selection...\n(DJR 6/14/21)"
+revdate="19 Jul 2021"
+mandate="14 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE N1ClassLower_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=DeltaN1C2 
+exp=TRUE
+comment="N1Class Modifier to DeltaN1C2, Table 19, PW1500G\nInput Units: RPM, NOTE: DeltaN1C2 Using the Lower N1Class Selection...\n(DJR 8/6/18)"
+revdate="19 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP Humidity
+$TABLE TDEWPT0_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Condensation Limit, Testing 9, Figure 2, Sheet 1\nEffectivity: PW1500G, Units In: DegF, Range -65 - 40 DegF\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE TDEWPT1_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=CITDegF 
+exp=TRUE
+comment="Condensation Limit, Testing 9, Figure 2, Sheet 1\nEffectivity: PW1500G, Units In: DegF, Range 40 - 50 DegF\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE TDEWPT2_T
+dim=0 save=0 dynexp=0 size=2 xparam=CITDegF 
+coeff0=6.85712 coeff1=0.6217864 coeff2=0.001607138 maxpoly=126.000000 minpoly=50.000000 
+exp=TRUE
+comment="Condensation Limit, Testing 9, Figure 2, Sheet 1\nEffectivity: PW1500G, Units In: DegF, Range 50 - 126 DegF\n(DJR 6/11/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHWF_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=0.621530 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For WF (KH MIN), Testing 9, Figure 4, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23678-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHNL_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=0.096220 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For NL, Testing 9, Figure 5, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23679-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHNH_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=0.012920 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For NH, Testing 9, Figure 6, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23680-A-001-01\n(DJR 6/11/21)\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHT49_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=0.283390 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For T49, Testing 9, Figure 7, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23681-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHT3_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=-0.258620 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For T3, Testing 9, Figure 8, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23682-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHT25_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=-0.084410 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For T25, Testing 9, Figure 9, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23683-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$TABLE KHT45_T
+dim=0 save=0 dynexp=0 size=1 xparam=SHum 
+coeff0=1.000000 coeff1=0.091610 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE
+comment="Specific Humidity Factor For T45, Testing 9, Figure 10, Sheet 1\nEffectivity: PW1500G, Units In: Lbs\nGraphic: P-77445-23684-A-001-01\n(DJR 6/10/21)"
+revdate="11 Jun 2021"
+mandate="11 Jun 2021"
+manrev="25.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP CalcParams
+$TABLE DeltaFNTP1251_T
+dim=0 save=0 dynexp=0 size=3 xparam=N1C2D 
+coeff0=-6.810700e+01 coeff1=6.483400e-02 coeff2=-1.238700e-05 coeff3=1.003900e-09 maxpoly=7.000000e+03 minpoly=1.900000e+03 
+exp=TRUE
+comment="Thrust Correction Due to Rake Loss, TIS Rev 6, Figure 2A Page 93\nEquation 1, Units In: RPM, Units Out: Lbs\n(DJR 3/24/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE DeltaFNTP1252_T
+dim=0 save=0 dynexp=0 size=3 xparam=N1C2D 
+coeff0=-2.044190e+03 coeff1=4.923400e-01 coeff2=-2.925200e-05 coeff3=4.547346e-10 maxpoly=9.000000e+03 minpoly=7.000000e+03 
+exp=TRUE
+comment="Thrust Correction Due to Rake Loss, TIS Rev 6, Figure 2A Page 93\nEquation 2, Units In: RPM, Units Out: Lbs\n(DJR 3/24/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE DeltaFNTFNIM1_T
+dim=0 save=0 dynexp=0 size=2 xparam=FNTR2D 
+coeff0=1.074515e+01 coeff1=7.539100e-02 coeff2=-9.273547e-07 maxpoly=1.380000e+04 minpoly=1.000000e+03 
+exp=TRUE
+comment="Thrust Correction P8 Momentum, TIS Rev 6, Figure 2C Page 96\nEquation 1, Units In: lbs, Units Out: Lbs\n(DJR 3/24/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE DeltaFNTFNIM2_T
+dim=0 save=0 dynexp=0 size=2 xparam=FNTR2D 
+coeff0=8.532634e+01 coeff1=6.032100e-02 coeff2=-1.981622e-07 maxpoly=3.500000e+04 minpoly=1.380000e+04 
+exp=TRUE
+comment="Thrust Correction P8 Momentum, TIS Rev 6, Figure 2C Page 96\nEquation 2, Units In: lbs, Units Out: Lbs\n(DJR 3/24/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE FDrag_T
+dim=0 save=0 dynexp=0 size=2 xparam=FNTR2D 
+coeff0=-1.578870e+00 coeff1=1.889000e-03 coeff2=5.714990e-10 maxpoly=3.500000e+04 minpoly=1.000000e+03 
+exp=TRUE
+comment="Thrust Correction due to Slave Duct and Bellmouth, TIS Rev 6, Figure 2E Page 97\nEffectivity: PW1500G, Units In: lbs\n(DJR 3/24/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE CalcW31_T
+dim=0 save=0 dynexp=0 size=3 xparam=N2C2D 
+coeff0=-5.012048e+01 coeff1=1.874428e-02 coeff2=-1.891268e-06 coeff3=6.170112e-11 maxpoly=2.100000e+04 minpoly=1.250000e+04 
+exp=TRUE
+comment="Calculated W31 Guess Curve (W31I), Figure 21, Pg 114\nInput Units: RPM, Output Units: Lbs/Sec\n(DJR 3/23/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE CalcFP4_T
+dim=0 save=0 dynexp=0 size=5 xparam=EEC_N2 
+coeff0=9.956447e+01 coeff1=-2.787520e-02 coeff2=3.357630e-06 coeff3=-1.992610e-10 coeff4=5.837040e-15 coeff5=-6.765380e-20 maxpoly=2.100000e+04 minpoly=1.250000e+04 
+exp=TRUE
+comment="Calculated FP4 Reference Curve, Figure 22, Pg 115 \nInput Units: RPM, Output Units: (Flow Param - Lbm * SQRT_R/(sec*PSIA))\n(DJR 3/23/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE CalcWB25SG1_T
+dim=0 save=0 dynexp=0 size=1 xparam=N1C2D 
+coeff0=1.494336e+00 coeff1=4.952164e-04 maxpoly=3.088000e+03 minpoly=0.000000e+00 
+exp=TRUE
+comment="Calculated WB25SG Reference Curve, Figure 23, Pg 116 \nInput Units: RPM, Output Units: (2.5 Stability Bleed Flow - lbm/Sec)\n(DJR 3/23/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE CalcWB25SG2_T
+dim=0 save=0 dynexp=0 size=4 xparam=N1C2D 
+coeff0=-9.609367e+01 coeff1=8.724260e-02 coeff2=-2.926230e-05 coeff3=4.515380e-09 coeff4=-2.656520e-13 maxpoly=6.534500e+03 minpoly=3.086000e+03 
+exp=TRUE
+comment="Calculated WB25SG Reference Curve 2, Figure 23, Pg 116 \nInput Units: RPM, Output Units: (2.5 Stability Bleed Flow - lbm/Sec)\n(DJR 3/23/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$TABLE CalcW2AR_T
+dim=0 save=0 dynexp=0 size=4 xparam=N1C2D 
+coeff0=-1.983200e-04 coeff1=2.630820e-05 coeff2=3.810550e-10 coeff3=-6.283650e-14 coeff4=5.983570e-18 maxpoly=8.950000e+03 minpoly=1.694000e+03 
+exp=TRUE
+comment="Calculated W2AR Bellmouth AREA, Figure 24, Pg 117 \nInput Units: RPM, Output Units: lbm/sec * In^2)\n(DJR 3/23/20)"
+revdate="25 Mar 2020"
+manrev="TIS Rev 6"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP SetTargets
+$TABLE RunInN1C2Targ_T
+dim=2 save=0 dynexp=0 offset=0 interp=0 xparam=RunInStep 
+exp=TRUE
+comment="LPC/HPC Run-In N1C2R (RPM) Values From Table 5\nRef: A-71-00-00-04B-320A-B\nINPUT: RunInStep, OUTPUT: RPM\n(DJR 6/18/21)"
+revdate="30 Jun 2021"
+mandate="14 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE RunInTLATarg_T
+dim=2 save=0 dynexp=0 offset=1 interp=0 xparam=RunInStep 
+exp=TRUE
+comment="LPC/HPC Run-In TLA (Degrees) Values From Table 5, Ref: A-71-00-00-04B-320A-B\nNOTE: Convert to TRA in SetTargs_ATP.ph\nINPUT: RunInStep, OUTPUT: Deg\n(DJR 6/23/21)"
+revdate="30 Jun 2021"
+mandate="23 Oct 2020"
+manrev="27.01"
+$END-TABLE
+
+$TABLE RunInEventDur_T
+dim=2 save=0 dynexp=0 offset=2 interp=0 xparam=RunInStep 
+exp=TRUE
+comment="LPC/HPC Run-In Event Duration (sec) Values From Table 5\nRef: A-71-00-00-04B-320A-B\nINPUT: RunInStep, OUTPUT: Seconds\n(DJR 6/18/21)"
+revdate="30 Jun 2021"
+mandate="14 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE AcceptN1C2Targ_T
+dim=2 save=0 dynexp=0 offset=3 interp=0 xparam=AcceptStep 
+exp=TRUE
+comment="Acceptance N1C2 Values From Table 10\nRef: A-71-00-00-04B-320A-B\nINPUT: AcceptStep, OUTPUT: RPM\n(DJR 6/23/21)"
+revdate="02 Nov 2021"
+mandate="23 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE AcceptFNTR2Targ_T
+dim=2 save=0 dynexp=0 offset=4 interp=0 xparam=AcceptStep 
+exp=TRUE
+comment="Acceptance FNTR2 Values From Table 10\nRef: A-71-00-00-04B-320A-B\nINPUT: AcceptStep, OUTPUT: Lbs\n(DJR 6/23/21)"
+revdate="10 Dec 2021"
+mandate="23 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE AcceptTLATarg_T
+dim=2 save=0 dynexp=0 offset=5 interp=0 xparam=AcceptStep 
+exp=TRUE
+comment="Acceptance TLA Values From Table 10\nRef: A-71-00-00-04B-320A-B\nINPUT: AcceptStep, OUTPUT: Deg\n(DJR 6/23/21)"
+revdate="02 Nov 2021"
+mandate="23 Jun 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE AcceptEventDur_T
+dim=2 save=0 dynexp=0 offset=6 interp=0 xparam=AcceptStep 
+exp=TRUE
+comment="Acceptance Event Duration Values From Table 10\nRef: A-71-00-00-04B-320A-B\nINPUT: AcceptStep, OUTPUT: Seconds\n(DJR 6/23/21)"
+revdate="02 Nov 2021"
+mandate="07 Dec 2020"
+manrev="27.01"
+$END-TABLE
+
+$TABLE CorrN1C2Targ_T
+dim=2 save=0 dynexp=0 offset=7 interp=0 xparam=CorrStep 
+exp=TRUE
+comment="Correlation N1C2 Target\nRef: TIS Table 9.3.1 A-1:Schedule A\nINPUT: CorrStep, OUTPUT: RPM\n(DJR 7/7/21)"
+revdate="10 Dec 2021"
+mandate="23 Jun 2021"
+manrev="TIS Rev 3"
+$END-TABLE
+
+$TABLE CorrFNTR2Targ_T
+dim=2 save=0 dynexp=0 offset=8 interp=0 xparam=CorrStep 
+exp=TRUE
+comment="Correlation FNTR2 Maximum Thrust Table\nRef: TIS Table 9.3.1 A-1:Schedule A\nINPUT: CorrStep, OUTPUT: Lbs NOTE: FNTR2 Minimum = (FNTR2Mx - 500)\n(DJR 7/7/21)"
+revdate="07 Jul 2021"
+mandate="23 Jun 2021"
+manrev="TIS Rev 3"
+$END-TABLE
+
+$TABLE CorrTLATarg_T
+dim=2 save=0 dynexp=0 offset=9 interp=0 xparam=CorrStep 
+exp=TRUE
+comment="Correlation TLA Target\nRef: TIS Table 9.3.1 A-1:Schedule A\nINPUT: CorrStep, OUTPUT: Deg\n(DJR 7/7/21)"
+revdate="10 Dec 2021"
+mandate="23 Jun 2021"
+manrev="TIS Rev 3"
+$END-TABLE
+
+$TABLE CorrEventDur_T
+dim=2 save=0 dynexp=0 offset=10 interp=0 xparam=CorrStep 
+exp=TRUE
+comment="Correlation Event Duration\nRef: TIS Table 9.3.1 A-1:Schedule A\nINPUT: CorrStep, OUTPUT: Sec\n(DJR 7/7/21)"
+revdate="07 Jul 2021"
+mandate="07 Dec 2020"
+manrev="TIS Rev 3"
+$END-TABLE
+
+$TABLE VibSvyN1C2Targ_T
+dim=2 save=0 dynexp=0 offset=11 interp=0 xparam=VibSvyStep 
+exp=TRUE
+comment="Vibration Survey N1C2 (RPM) Values From Table 7\nINPUT: VibSvyStep\n(DJR 9/1/21)"
+revdate="01 Sep 2021"
+mandate="04 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE VibSvyTLATarg_T
+dim=2 save=0 dynexp=0 offset=12 interp=0 xparam=VibSvyStep 
+exp=TRUE
+comment="Vibration Survey TLA (Degrees) Values From Table 7\nINPUT: VibSvyStep\n(DJR 9/1/21)"
+revdate="01 Sep 2021"
+mandate="04 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE VibSvyEventDur1_T
+dim=2 save=0 dynexp=0 offset=13 interp=0 xparam=VibSvyStep 
+exp=TRUE
+comment="Vibration Survey Event Duration (Seconds) Values From Table 7\nINPUT: VibSvyStep\n(DJR 9/1/21)"
+revdate="01 Sep 2021"
+mandate="04 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$TABLE VibSvyEventDur2_T
+dim=2 save=0 dynexp=0 offset=14 interp=0 xparam=VibSvyStep 
+exp=TRUE
+comment="Offical Vibration Survey Event Duration (Seconds) Values From Table 11\nINPUT: VibSvyStep\n(DJR 4/19/22)"
+revdate="19 Apr 2022"
+mandate="04 Apr 2021"
+manrev="27.01"
+$END-TABLE
+
+$END-TABLEGROUP
+
+

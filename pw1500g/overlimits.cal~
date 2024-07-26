@@ -1,0 +1,91 @@
+$GROUP "overlimits" 
+#C ------------ N1 and N2 overspeed Limit Flags --------------------------
+#C Added Engine Stall. DJR 10/20/20...
+#C Added N1/N2 overlimits. DJR 2/21/12...
+#C Added AOP Limits. SAD 11/2/21
+N1OvrMx_F:	(SWActive & EngineRunning & (N1I > N1Red))
+N2OvrMx_F:	(SWActive & EngineRunning & (N2I > N2Red))
+#C **************************************************************
+#C New ITT Run Calcs. (DJR 10/04)...
+#C Check to see if ITT is over the Trigger Limit, If so start the timer...
+#C **************************************************************
+#C Removed enginerunning to capture max ITT with fuel off (DJR 0905)...
+ITTNotOpen_F:	(SWActive & (EEC_ITT < 1500.0))
+ITTStrtTrigTmr_F:	(NotRunMode & (EEC_ITT > ITTStrtMxRLim) & ITTNotOpen_F)
+ITTRunTrigTmr_F:	(RunMode & (EEC_ITT > ITTRunTrig) & ITTNotOpen_F)
+#C **************************************************************
+#C Watch the ITT Limits for each Area to see if EEC_ITT is in range...
+#C **************************************************************
+ITTStrtMxTmr_F:	(ITTStrtTrigTmr_F & (EEC_ITT > ITTStrtMxRLim))
+ITTRunMxTmr_F:	(ITTRunTrigTmr_F & (EEC_ITT > ITTRunMxRLim))
+#C **************************************************************
+#C Check for Auxilliary Oil Limits
+#C **************************************************************
+AOPOvrMx_F:	(SWActive & (AOP > AOPMxLim))
+#C AOPUndrMn_F:	(SWActive & (AOP < AOPMnLim))
+#C **** For Correlation Engine that doesn't have AOP. (DJR 12/14/21)
+AOPUndrMn_F:	(SWActive & (AOP < -1.0))
+#C **************************************************************
+#C Capture Peak T49 Overtemps...
+#C **************************************************************
+#if	ITTStrtMxTmr_F
+ITTStrtPk:DegC	max (EEC_ITT ITTStrtPk)
+#endif	
+#if	ITTRunMxTmr_F
+ITTRunPk:DegC	max (EEC_ITT ITTRunPk)
+#endif	
+#if	(SWActive & EngineRunning & (EEC_ITT < 2000.0))
+PeakITT:DegC	max (PeakITT EEC_ITT)
+#endif	
+#C **************************************************************
+#C Watch for VibFN? IPS is Greater than VibFN?RMx (1.2 IPS) Limit...
+#C **************************************************************
+VibNFOvrMx_F:	(SWActive & EngineRunning & ((VibFNF >= VibFNFRMx) | (VibRNF >= VibRNFRMx)))
+VibN1OvrMx_F:	(SWActive & EngineRunning & ((VibFN1 >= VibFN1RMx) | (VibRN1 >= VibRN1RMx)))
+VibN2OvrMx_F:	(SWActive & EngineRunning & ((VibFN2 >= VibFN2RMx) | (VibRN2 >= VibRN2RMx)))
+#C **************************************************************
+#C Pull Engine Back to Idle (EngineOLimits_O)...
+#C **************************************************************
+#if	(~EmergIdle_F & ITTRunMxTmr_F)
+dummy:	storeevent ("ITT Overlimit condition, Emergency Idle Activated")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & EngStall_F)
+#C Added EngStall_F Detected. (DJR 10/20/20)...
+dummy:	storeevent ("Engine Stall Detected, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & VibNFOvrMx_F)
+dummy:	storeevent ("Engine Vibration Vib NF > 1.2 IPS, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & VibN1OvrMx_F)
+dummy:	storeevent ("Engine Vibration Vib N1 > 1.2 IPS, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & VibN2OvrMx_F)
+dummy:	storeevent ("Engine Vibration Vib N2 > 1.1 IPS, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & N1OvrMx_F)
+#C Added N1OvrMx. (DJR 4/22/13)...
+dummy:	storeevent ("N1 OverSpeed condition, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & N2OvrMx_F)
+#C Added N2OvrMx. (DJR 4/22/13)...
+dummy:	storeevent ("N2 OverSpeed condition, Emergency Idle Activated.")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & EngineRunning & ITTStrtMxTmr_F)
+dummy:	storeevent ("Start OverTemp, Emergency Fuel ShutOff Activated.")
+dummy:	startautotest (EFSO_ATP)
+#elseif	(~EmergIdle_F & CellNotReady_I & EngineRunning)
+dummy:	storeevent ("Cell Not Ready, Emergency Idle Activated")
+dummy:	startautotest (CellNotReady_ATP)
+#elseif	(~EmergIdle_F & AOPOvrMx_F)
+dummy:	storeevent ("High Auxilliary (Fan GB) Oil Press, Emergency Idle Activated")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(~EmergIdle_F & AOPUndrMn_F)
+dummy:	storeevent ("Low Auxilliary (Fan GB) Oil Press, Emergency Idle Activated")
+dummy:	startautotest (EngOvrLim_ATP)
+#elseif	(EmergIdle_F & ~ITTStrtMxTmr_F & ~ITTRunMxTmr_F & ~N1OvrMx_F & ~N2OvrMx_F & ~CellNotReady_I & ~EngStall_F & ~VibNFOvrMx_F & ~VibN1OvrMx_F & ~VibN2OvrMx_F & ~AOPUndrMn_F & ~AOPOvrMx_F)
+#C **** Reset the parameters, All Limits are clear...
+EngineOLimits_O:	OFF
+EmergIdle_F:	OFF
+OverLim21_O:	OFF
+#endif	
+$END-GROUP

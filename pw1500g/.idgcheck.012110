@@ -1,0 +1,474 @@
+$TIMERS
+idgsettletime:secs  RESET    idgtimer
+$END-TIMERS
+
+$DISPLAY "IDG Check" background=NewGreen editres=MEDRES
+$INITCALC
+#include .idginit.cal
+$END-CALC
+
+$CALC
+#include .idgmain.cal
+$END-CALC
+
+$STOREDISPLAY Append
+$OBJECT String font=8 startx=10 starty=808 endx=1110 endy=838
+ctcurmessage labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Can't perform Curr Trans Chk, GenFreq too High/Low     "
+Yellow = 1 "Can't perform Curr Trans Chk, Phase rotation Incorrect "
+Green = 2 "All conditions are met, Curr Trans Chk can be performed"
+$END-OBJECT
+***********
+$OBJECT Button font=1 startx=28 starty=704 endx=460 endy=764
+TOGGLE magtrimtoggle setvalue=-1 onlabel="Magnetic Trim Test Active\n" offlabel="Magnetic Trim Test Inactive\n"
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=37 starty=667 endx=337 endy=697
+Black direction=1
+"Phase Rotation:"
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=46 starty=332 endx=1153 endy=645
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=55 starty=439 endx=375 endy=476
+labelspace=6 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+ctcurvaluea type="FLOAT" width=6 prec=2 label="CtCur" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=56 starty=510 endx=356 endy=630
+Black direction=1
+"Wired to"
+"Generator Phase"
+"       and"
+"Phased"
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=60 starty=362 endx=200 endy=392
+Black direction=1
+"Phase A"
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=133 starty=37 endx=526 endy=232
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Button font=0 startx=151 starty=53 endx=279 endy=88
+RADIO genvoltradio setvalue=0 onlabel=" A to B "
+$END-OBJECT
+***********
+$OBJECT Button font=0 startx=151 starty=112 endx=279 endy=147
+RADIO genvoltradio setvalue=1 onlabel=" B to C "
+$END-OBJECT
+***********
+$OBJECT Button font=0 startx=151 starty=169 endx=279 endy=204
+RADIO genvoltradio setvalue=2 onlabel=" C to A "
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=156 starty=5 endx=496 endy=35
+Black direction=1
+"Generator Voltage"
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=192 starty=600 endx=412 endy=630
+ctcurphaseda labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Unknown    "
+Yellow = 1 "Incorrectly"
+Green = 2 "Correct    "
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=226 starty=510 endx=406 endy=540
+ctcurwireda labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Incorrect"
+Green = 1 "Correct  "
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=158 startx=229 starty=343 endx=343 endy=416
+parameter=idgphaseA_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+(withinlimits & (idgphaseB_TB = 0) & (idgphaseC_TB = 0))
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=299 starty=59 endx=499 endy=227
+labelspace=0 unitspace=1 spacing=20 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+genvoltvalue1 type="FLOAT" width=6 prec=2 label="" units="default" 
+genvoltvalue2 type="FLOAT" width=6 prec=2 label="" units="default" 
+genvoltvalue3 type="FLOAT" width=6 prec=2 label="" units="default" 
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=361 starty=667 endx=801 endy=697
+phaserotatestate labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Frequency out of range"
+Yellow = 1 "Incorrect             "
+Green = 2 "Correct               "
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=404 starty=346 endx=404 endy=616
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=419 starty=515 endx=719 endy=635
+Black direction=1
+"Wired to"
+"Generator Phase"
+"       and"
+"Phased"
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=421 starty=364 endx=561 endy=394
+Black direction=1
+"Phase B"
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=423 starty=437 endx=743 endy=474
+labelspace=6 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+ctcurvalueb type="FLOAT" width=6 prec=2 label="CtCur" units="default" 
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=446 starty=238 endx=714 endy=323
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=158 startx=462 starty=244 endx=570 endy=310
+Black direction=1
+"Current"
+"Transformer"
+"Wiring"
+$END-OBJECT
+***********
+$OBJECT Button font=1 startx=550 starty=703 endx=726 endy=763
+TOGGLE genpwrtoggle setvalue=-1 onlabel="Gen Pwr ON\n" offlabel="Gen Pwr OFF\n"
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=562 starty=604 endx=782 endy=634
+ctcurphasedb labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Unknown    "
+Yellow = 1 "Incorrectly"
+Green = 2 "Correct    "
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=158 startx=589 starty=243 endx=697 endy=314
+parameter=CTW_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+(dummy = 0)
+$END-INTERLOCK
+$INITCALC
+CTPHASE_O:      ON
+idgtimer       OFF
+CTBCurrent_O   OFF
+CTCCurrent_O   OFF
+$END-CALC
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$INITCALC
+CTPHASE_O:      OFF
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=158 startx=590 starty=345 endx=704 endy=418
+parameter=idgphaseB_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+(withinlimits & (idgphaseA_TB = 0) & (idgphaseC_TB = 0))
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=591 starty=516 endx=771 endy=546
+ctcurwiredb labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Incorrect"
+Green = 1 "Correct  "
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=652 starty=36 endx=1042 endy=229
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Button font=1 startx=669 starty=50 endx=797 endy=85
+RADIO pmgvoltradio setvalue=0 onlabel="01 to 02"
+$END-OBJECT
+***********
+$OBJECT Button font=1 startx=669 starty=109 endx=797 endy=144
+RADIO pmgvoltradio setvalue=1 onlabel="02 to 03"
+$END-OBJECT
+***********
+$OBJECT Button font=1 startx=669 starty=166 endx=797 endy=201
+RADIO pmgvoltradio setvalue=2 onlabel="03 to 01"
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=750 starty=3 endx=970 endy=33
+Black direction=1
+"PMG Voltage"
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=773 starty=352 endx=773 endy=623
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=785 starty=706 endx=1165 endy=798
+labelspace=9 unitspace=1 spacing=10 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+GenFreq type="FLOAT" width=6 prec=2 label="Gen Freq" units="default" 
+GENVOLT type="FLOAT" width=6 prec=2 label="Gen Volt" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=788 starty=513 endx=1108 endy=633
+Black direction=1
+"Wired to"
+" Generator Phase"
+"       and"
+"Phased"
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=796 starty=443 endx=1116 endy=480
+labelspace=6 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+ctcurvaluec type="FLOAT" width=6 prec=2 label="CtCur" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=8 startx=797 starty=366 endx=937 endy=396
+Black direction=1
+"Phase C"
+$END-OBJECT
+***********
+$OBJECT Digital font=8 startx=815 starty=56 endx=1015 endy=224
+labelspace=0 unitspace=1 spacing=20 labelcolor=Black parambox=2 paramboxcolor=Black shading=-3
+pmgvoltvalue1 type="FLOAT" width=6 prec=2 label="" units="default" 
+pmgvoltvalue2 type="FLOAT" width=6 prec=2 label="" units="default" 
+pmgvoltvalue3 type="FLOAT" width=6 prec=2 label="" units="default" 
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=929 starty=604 endx=1149 endy=634
+ctcurphasedc labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Unknown    "
+Yellow = 1 "Incorrectly"
+Green = 2 "Correct    "
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=158 startx=966 starty=347 endx=1080 endy=420
+parameter=idgphaseC_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=DarkGray
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+(withinlimits & (idgphaseA_TB = 0) & (idgphaseB_TB = 0))
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT String font=8 startx=968 starty=514 endx=1148 endy=544
+ctcurwiredc labelspace=0 label="Default" labelcolor=White stringcolor=Yellow parambox=0 paramboxcolor=Black shading=0
+Yellow = 0 "Incorrect"
+Green = 1 "Correct  "
+$END-OBJECT
+***********
+$HELP
+"     IDG (Integrated Drive Generator) Check Display"
+"     ----------------------------------------------"
+"     CSD (Constant Speed Drive) Check Display"
+"     ----------------------------------------------"
+"     The IDG [CSD] Check Display allows test cell operators to check"
+"     that the components of an engine's constant speed drive"
+"     generator are correctly wired.  Although there are many"
+"     differences in the generators found on various engines,"
+"     the IDG Check Display can be used to test virtually all"
+"     generator types."
+" "
+" "
+"     IDG CHECK DISPLAY PROCEDURES"
+"     ----------------------------"
+" "
+"     Real-time fields"
+"     ----------------"
+"     There are three real-time fields on the IDG Check display"
+"     that will always update.  These are found in the lower right"
+"     corner of the display as below:"
+" "
+"		 Gen Freq    35.4 Hz"
+"		 Gen Volt     3.2 VAC"
+" "
+" "
+"     Generator frequency and phase rotation"
+"     --------------------------------------"
+"     Use the [Gen Pwr] button to turn on the generator power"
+"     The computer checks that the generator's frequency is within the"
+"     allowable range.  (Maximum and minimum limits are specified in the"
+"     IDG configuration file).  After verifying that the frequency"
+"     is within range, the computer determines whether the phase"
+"     rotation is correct.  After these initial checks, two status"
+"     messages will be displayed in the lower left corner of the"
+"     display.  The 'Phase Rotation:' field status message will"
+"     be one of these three:"
+" "
+" "
+"	 Phase Rotation:  Frequency out of range"
+"	   - Generator frequency is not within the specified limits"
+"	 Phase Rotation:  Incorrect"
+"	   - Generator frequency is within the specified limits"
+"	     but the phase rotation input relay is not energized."
+"	 Phase Rotation:  Correct"
+"	   - Generator frequency is within the specified limits"
+"	     and the phase rotation input relay is energized."
+" "
+"     The other status message is located at the very bottom left"
+"     of the IDG Check display.  It will be one of these three:"
+" "
+"         Can't perform Curr Trans Chk, GenFreq too High/Low"
+"	   - Generator frequency is not within the specified limits"
+"	 Can't perform Curr Trans Chk, Phase rotation Incorrect"
+"	   - Generator frequency is within the specified limits"
+"	     but the phase rotation input relay is not energized."
+"	 All conditions are met, Curr Trans Chk can be performed"
+"	   - Generator frequency is within the specified limits"
+"	     and the phase rotation input relay is energized."
+" "
+"     The IDG's generator frequency must be within range and the"
+"     phase rotation correct before you can perform any further"
+"     IDG Check tests."
+" "
+" "
+"     Generator output voltage"
+"     ------------------------"
+"     The section of the display that monitors the IDG generator's"
+"     three phases (A to B, B to C, C to A) is found in the upper"
+"     left corner of the display.  Each of the three digital values"
+"     has a RADIO BUTTON next to it labeled with the appropriate "
+"     phase.  To select any of these three phases simply move the"
+"     mouse to the desired phase and click on that button.  The"
+"     digital value field corresponding to the button will update"
+"     with the current value of the generator voltage.  The "
+"     currently selected button can be identified by its color."
+"     The active button will have a green background and the other"
+"     two buttons will have a grey background."
+" "
+" "
+"     Permanent Magnet Generator (PMG) output voltage"
+"     -----------------------------------------------"
+"     The section of the display that monitors the PMG generator's"
+"     three phases (01 to 02, 02 to 01, 03 to 01) is found in the"
+"     upper right corner of the display.  Each of the three digital"
+"     values has a RADIO BUTTON next to it labeled with the"
+"     appropriate phase.  To select any of these three phases simply"
+"     move the mouse to the desired phase and click on that button."
+"     The digital value field corresponding to the button will"
+"     update with the current value of the PMG voltage.  The "
+"     currently selected button can be identified by its color."
+"     The active button will have a green background and the other"
+"     two buttons will have a grey background."
+" "
+" "
+"     Magnetic Trim Test"
+"     ------------------"
+"     The magnetic trim test button is found in the lower left"
+"     corner of the display.  To begin the magnetic trim test"
+"     click on the button.  The status message next to the"
+"     button will change from 'InActive' to 'Active' and the"
+"     button's background color will change to green.  Clicking"
+"     on the button again will change the status message next to"
+"     the button back to 'InActive' and the button's background"
+"     color will change to grey."
+" "
+" "
+"     Current Transformer Check"
+"     -------------------------"
+"     This check enables the operator to determine whether the"
+"     selected current transformer is wired to the correct phase"
+"     of the generator and to determine whether the selected"
+"     current transformer is phased correctly with its phase."
+" "
+"     In order to perform this check, the generator frequency"
+"     must be within the specified limits and the phase rotation"
+"     must be correct as described above.  Look at the status"
+"     messages at the bottom of the display to determine if"
+"     the current transformer check may be performed."
+" "
+"     This data for this check is contained in the three boxes"
+"     found in the middle of the display with a button above"
+"     them containing the label 'Current Transformer Wiring.'"
+" "
+"     There are three phases in this check (Phase A, Phase B,"
+"     Phase C).  To perform the check on any one of these"
+"     three phases, move the mouse to the desired button and"
+"     click on it.  If the current transformer current is less"
+"     than or equal to 2.0 mAmp, the status message,"
+"		       Wired to Incorrect"
+"		       Generator Phase"
+"     will be displayed.  If the current is above 2.0 mAmp, the "
+"     status message,"
+"		       Wired to Correct"
+"		       Generator Phase"
+"     will be displayed.  Once the transformer current is "
+"     sufficient, the phasing of the transformer being tested"
+"     will be checked.  If the phasing is not correct, the"
+"     status message,"
+"		       Wired to Correct"
+"		       Generator Phase"
+"                              and"
+"		       Phased Incorrectly"
+"     will be displayed.  If the phasing is correct the status"
+"     message,"
+" "
+"		       Wired to Correct"
+"		       Generator Phase"
+"                              and"
+"		       Phased Correct"
+"     will be displayed.  If the transformer current is less"
+"     than or equal to two and has not been above two while"
+"     this phase was active, the message,"
+"		       Wired to Correct"
+"		       Generator Phase"
+"                              and"
+"		       Phased Unknown"
+"     will be displayed."
+""
+""
+""
+""
+""
+""
+""
+$END-HELP
+$END-DISPLAY
+

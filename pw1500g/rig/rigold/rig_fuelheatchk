@@ -1,0 +1,8 @@
+# Rig file for Fuel Heat Check display
+#
+rig sig FIT 2
+rig sig fueldeiceopen_I 1
+echo "test"
+sleep 5
+rig sig fueldeiceopen_I 0
+

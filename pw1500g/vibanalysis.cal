@@ -1,0 +1,137 @@
+$GROUP "vibanalysis" 
+#C #if PBSVibs_F
+#C *** PBS Vibration Data...
+#C VibFBB:IPS VibFBB_PBS
+#C VibFNF:IPS VibFNF_PBS
+#C VibFN1:IPS VibFN1_PBS
+#C VibFN2:IPS VibFN2_PBS
+#C VibRBB:IPS VibRBB_PBS
+#C VibRNF:IPS VibRNF_PBS
+#C VibRN1:IPS VibRN1_PBS
+#C VibRN2:IPS VibRN2_PBS
+#C #else
+#C *** PHMU Vibration Data...
+#C VibFBB:IPS VIB1RMS
+VibFBB:IPS	EEC_VibFBB
+VibFNF:IPS	EEC_VibFNF
+VibFN1:IPS	EEC_VibFN1
+VibFN2:IPS	EEC_VibFN2
+#C VibRBB:IPS VIB2RMS
+VibRBB:IPS	EEC_VibRBB
+VibRNF:IPS	EEC_VibRNF
+VibRN1:IPS	EEC_VibRN1
+VibRN2:IPS	EEC_VibRN2
+#C #endif
+#C *********** Trim Balance Data *****************
+#if     ((VibFNF > VibFNFPkTB) & RunMode)
+VibFNFPkTB:IPS  VibFNF
+VibFNFPkNFTB:RPM        NFS
+VibFNFPkN1TB:RPM        N1S
+VibFNFPkN2TB:RPM        N2S
+FANWGTPk:oz-in  FANWGT
+FANANGPk:Deg    FANANG
+FANWGTPk_oz:oz  (FANWGTPk / 8.0)
+VibFNFPkTime:   concat ("" SysReportTime)
+VibFNFPkDate:   concat ("" SysDate)
+#endif
+#C ***********************************************
+ADState:	acceldecelbutton
+#C ************ Accel Data ***********************
+#if	((VibFBB > VibFBBPk) & RunMode & ~ADState)
+VibFBBPk:IPS	VibFBB
+VibFBBPkNF:RPM	NFS
+VibFBBPkN1:RPM	N1S
+VibFBBPkN2:RPM	N2S
+#endif	
+#if	((VibFNF > VibFNFPk) & RunMode & ~ADState)
+VibFNFPk:IPS	VibFNF
+VibFNFPkNF:RPM	NFS
+VibFNFPkN1:RPM	N1S
+VibFNFPkN2:RPM	N2S
+#endif	
+#if	((VibFN1 > VibFN1Pk) & RunMode & ~ADState)
+VibFN1Pk:IPS	VibFN1
+VibFN1PkNF:RPM	NFS
+VibFN1PkN1:RPM	N1S
+VibFN1PkN2:RPM	N2S
+#endif	
+#if	((VibFN2 > VibFN2Pk) & RunMode & ~ADState)
+VibFN2Pk:IPS	VibFN2
+VibFN2PkNF:RPM	NFS
+VibFN2PkN1:RPM	N1S
+VibFN2PkN2:RPM	N2S
+#endif	
+#if	((VibRBB > VibRBBPk) & RunMode & ~ADState)
+VibRBBPk:IPS	VibRBB
+VibRBBPkNF:RPM	NFS
+VibRBBPkN1:RPM	N1S
+VibRBBPkN2:RPM	N2S
+#endif	
+#if	((VibRNF > VibRNFPk) & RunMode & ~ADState)
+VibRNFPk:IPS	VibRNF
+VibRNFPkNF:RPM	NFS
+VibRNFPkN1:RPM	N1S
+VibRNFPkN2:RPM	N2S
+#endif	
+#if	((VibRN1 > VibRN1Pk) & RunMode & ~ADState)
+VibRN1Pk:IPS	VibRN1
+VibRN1PkNF:RPM	NFS
+VibRN1PkN1:RPM	N1S
+VibRN1PkN2:RPM	N2S
+#endif	
+#if	((VibRN2 > VibRN2Pk) & RunMode & ~ADState)
+VibRN2Pk:IPS	VibRN2
+VibRN2PkNF:RPM	NFS
+VibRN2PkN1:RPM	N1S
+VibRN2PkN2:RPM	N2S
+#endif	
+#C ************ Decel Data ***********************
+#if	((VibFBB > DVibFBBPk) & RunMode & ADState)
+DVibFBBPk:IPS	VibFBB
+DVibFBBPkNF:RPM	NFS
+DVibFBBPkN1:RPM	N1S
+DVibFBBPkN2:RPM	N2S
+#endif	
+#if	((VibFNF > DVibFNFPk) & RunMode & ADState)
+DVibFNFPk:IPS	VibFNF
+DVibFNFPkNF:RPM	NFS
+DVibFNFPkN1:RPM	N1S
+DVibFNFPkN2:RPM	N2S
+#endif	
+#if	((VibFN1 > DVibFN1Pk) & RunMode & ADState)
+DVibFN1Pk:IPS	VibFN1
+DVibFN1PkNF:RPM	NFS
+DVibFN1PkN1:RPM	N1S
+DVibFN1PkN2:RPM	N2S
+#endif	
+#if	((VibFN2 > DVibFN2Pk) & RunMode & ADState)
+DVibFN2Pk:IPS	VibFN2
+DVibFN2PkNF:RPM	NFS
+DVibFN2PkN1:RPM	N1S
+DVibFN2PkN2:RPM	N2S
+#endif	
+#if	((VibRBB > DVibRBBPk) & RunMode & ADState)
+DVibRBBPk:IPS	VibRBB
+DVibRBBPkNF:RPM	NFS
+DVibRBBPkN1:RPM	N1S
+DVibRBBPkN2:RPM	N2S
+#endif	
+#if	((VibRNF > DVibRNFPk) & RunMode & ADState)
+DVibRNFPk:IPS	VibRNF
+DVibRNFPkNF:RPM	NFS
+DVibRNFPkN1:RPM	N1S
+DVibRNFPkN2:RPM	N2S
+#endif	
+#if	((VibRN1 > DVibRN1Pk) & RunMode & ADState)
+DVibRN1Pk:IPS	VibRN1
+DVibRN1PkNF:RPM	NFS
+DVibRN1PkN1:RPM	N1S
+DVibRN1PkN2:RPM	N2S
+#endif	
+#if	((VibRN2 > DVibRN2Pk) & RunMode & ADState)
+DVibRN2Pk:IPS	VibRN2
+DVibRN2PkNF:RPM	NFS
+DVibRN2PkN1:RPM	N1S
+DVibRN2PkN2:RPM	N2S
+#endif	
+$END-GROUP

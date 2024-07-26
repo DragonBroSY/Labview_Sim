@@ -1,0 +1,326 @@
+$DISPLAY "Accel Decel Check" background=DarkGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$CALC
+dummy:	startautotest (SetReducedIdleRate_ATP)
+#C ***************** Parameters *********************
+N1C2D_AC:RPM	N1C2D
+EGT_AC:DegC	EEC_EGT
+#C BandAFnKMn:Lbs lookup (FNAMN_T)
+#C FnKMn95:Lbs (0.95 * BandAFnKMn)
+FNTR2_AC:Lbs	((FnMeasure / DeltaP2) + dFNTR2_Cell)
+#C ***************** ACCEL *************************
+#C ** See Loopcalcs.cal *************
+ArmAccelDecel_F:	(ArmAccel | ArmDecel)
+#if	(ArmAccel & AccelTmr_F)
+MaxVibF1:IPS	max (MaxVibF1 VibFBB)
+MaxVibR1:IPS	max (MaxVibR1 VibRBB)
+MaxEGT_AC:DegC	max (MaxEGT_AC EGT_AC)
+#endif	
+#if	(ArmAccel & (Accelstage = 20) & TRAAccel_F)
+Accelstage:	25
+AccelStageTxt:	concat ("Step 4 " "Accel, Timer Running...")
+AccelTmr_F:	ON
+#elseif	(ArmAccel & (Accelstage = 25) & AccelTmr_F & (FNTR2_AC > FNTR2_ACC30))
+Accelstage:	30
+strAccelTm30:Sec	AccelTmr
+strFNTR2_ACC30:Lbs	FNTR2_ACC30
+AccelStageTxt:	concat ("Step 4 " "30% Accel Check Complete, Continue Accel to 90% FN...")
+#elseif	(ArmAccel & (Accelstage = 30) & AccelTmr_F & (FNTR2_AC > FNTR2_ACC90))
+Accelstage:	35
+AccelTmr_F:	OFF
+strAccelTm90:Sec	AccelTmr
+strFNTR2_ACC90:Lbs	FNTR2_ACC90
+AccelStageTxt:	concat ("Step 4 " "90% Accel Check Complete...")
+#elseif	ArmAccel
+dummy:	startautotest (AccelCheck_ATP)
+#endif	
+#C ***************** DECEL *************************
+#C ** SEE Loopcalc.cal...
+#if	(ArmDecel & (Accelstage = 50) & TRADecel_F)
+Accelstage:	55
+AccelStageTxt:	concat ("Step 6 " "Decel, Timer Running...")
+DecelTmr_F:	ON
+#elseif	(ArmDecel & (Accelstage = 55) & (FNTR2_AC < FNTR2_DEC))
+Accelstage:	60
+DecelTmr_F:	OFF
+AccelStageTxt:	concat ("Step 6 " "Timer OFF, Decel Check Complete...")
+#elseif	(ArmDecel & DecelTmr_F & (DecelTmr > 20.0))
+Accelstage:	60
+AccelStageTxt:	concat ("Step 6 " "Timer OFF, ERROR: Decel Check InComplete...")
+DecelTmr_F:	OFF
+#elseif	(ArmDecel & (Accelstage = 60))
+strDecelTm:Sec	DecelTmr
+strFNTR2_DEC:Lbs	FNTR2_DEC
+StageTmr_F:	OFF
+ArmDecel:	OFF
+#endif	
+$END-CALC
+$STOREDISPLAY Append
+$OBJECT Line font=1 startx=10 starty=129 endx=1172 endy=135
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Bar font=102 startx=13 starty=53 endx=618 endy=117
+labelspace=4 unitspace=0 labelcolor=Black length=343 \
+height=25 format=5.0 ticpos=BELOW dir=0 shading=-2 spacing=1 \
+ticfont=2 parambox=2 paramboxcolor=Black limitwidth=10
+FNTR2_AC label="FNTR2" units="default" min=0 max=34000 ticinter=5000 labelinter=2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=17 starty=365 endx=1179 endy=371
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=19 starty=697 endx=1181 endy=703
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=104 startx=30 starty=455 endx=630 endy=593
+labelspace=10 unitspace=1 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+MaxVibF1 type="FLOAT" width=5 prec=2 label="Max  VibFBB" units="default" 
+MaxVibR1 type="FLOAT" width=5 prec=2 label="Max  VibRBB" units="default" 
+MaxEGT_AC type="FLOAT" width=5 prec=1 label="Max  EGT" units="default" 
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=33 starty=285 endx=363 endy=359
+labelspace=10 unitspace=0 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+strAccelTm30 type="FLOAT" width=5 prec=1 label="Accel Time to 30%" 
+strAccelTm90 type="FLOAT" width=5 prec=1 label="Accel Time to 90%" 
+$END-OBJECT
+***********
+$OBJECT String font=92 displayflag=ArmAccelDecel_F startx=49 starty=899 endx=333 endy=924
+AccelStageTxt labelspace=7 label="Instructions:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=Black shading=-1
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=51 starty=926 endx=1116 endy=927
+linewidth=1 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=102 startx=106 starty=708 endx=371 endy=847
+parameter=ArmAccel type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Accel Timer"
+$END-PANEL
+defaultstate=0
+$STATE 0
+label="Not Armed"
+oncolor=Magenta
+$END-STATE
+$STATE 1
+label="Armed"
+oncolor=Green
+$INTERLOCK
+~ArmDecel
+$END-INTERLOCK
+$INITCALC
+MaxVibF1:IPS	0.0
+MaxVibR1:IPS	0.0
+MaxEGT_AC:DegC	0.0
+dummy:	StoreEvent ("Accel Armed")
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=139 starty=180 endx=469 endy=254
+labelspace=10 unitspace=0 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+FNTR2_ACC30 type="FLOAT" width=5 prec=0 label="Accel 30% Thrust" 
+FNTR2_ACC90 type="FLOAT" width=5 prec=0 label="Accel 90% Thrust" 
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=177 starty=252 endx=345 endy=282
+Magenta direction=1 alignment=0
+"Accel Times:"
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=199 starty=146 endx=483 endy=176
+Magenta direction=1 alignment=0
+"Accel Thrust Targets:"
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=403 starty=285 endx=583 endy=359
+labelspace=0 unitspace=1 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+AccelTmMx30 type="FLOAT" width=5 prec=1 label="30% Max Accel Time" units="default" 
+AccelTmMx90 type="FLOAT" width=5 prec=1 label="90% Max Accel Time" units="default" 
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=101 startx=423 starty=737 endx=798 endy=822
+parameter=AccelTmrReset_S type=MOMENTARY
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+defaultstate=0
+$STATE 1
+label="Accel/Decel\nTimers Reset"
+oncolor=Green
+$INITCALC
+strAccelTm30:Sec	0.0
+strAccelTm90:Sec	0.0
+strDecelTm:Sec	0.0
+AccelTmr_F:	OFF
+AccelTmr:Sec	0.0
+DecelTmr_F:	OFF
+DecelTmr:Sec	0.0
+Accelstage:	0
+AccelStageTxt:	concat ("" "Accel Timers Reset...")
+$END-CALC
+$END-STATE
+$STATE 0
+label="Reset\nAccel/Decel Timers"
+oncolor=DarkGray
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=426 starty=258 endx=471 endy=277
+Yellow direction=1 alignment=0
+"Limit"
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=610 starty=31 endx=616 endy=703
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=639 starty=290 endx=969 endy=325
+labelspace=10 unitspace=1 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+strDecelTm type="FLOAT" width=5 prec=1 label="Decel Time to 95%" 
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=101 startx=692 starty=378 endx=1106 endy=458
+EngStall_F textcolor=Black
+DarkGray = OFF "No Engine Stall/Surge Detected"
+Red = ON "Engine Stall/Surge Detected"
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=695 starty=460 endx=1107 endy=510
+RADIO LPStabilityTest_RB setvalue=0 onlabel="Reduced IDLE Accel Rate OFF" offlabel="SET Reduced IDLE Accel Rate OFF" \
+labelcolor=Black oncolor=Green offcolor=Yellow
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=695 starty=510 endx=901 endy=570
+RADIO LPStabilityTest_RB setvalue=1 onlabel="Baseline\nN2DOT ON" offlabel="Baseline\nN2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=695 starty=570 endx=901 endy=630
+RADIO LPStabilityTest_RB setvalue=2 onlabel="560 RPM/s\nN2DOT ON" offlabel="560 RPM/s\n N2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=695 starty=630 endx=901 endy=690
+RADIO LPStabilityTest_RB setvalue=3 onlabel="680 RPM/s\nN2DOT ON" offlabel="680 RPM/s\n N2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=711 starty=45 endx=1073 endy=123
+labelspace=5 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EGT_AC type="FLOAT" width=7 prec=1 label="EGT" units="default" 
+N1C2R type="FLOAT" width=7 prec=1 label="N1C2R" units="default" 
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=733 starty=194 endx=1063 endy=231
+labelspace=10 unitspace=0 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+FNTR2_DEC type="FLOAT" width=5 prec=0 label="Decel 95% Thrust" 
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=774 starty=152 endx=1045 endy=182
+Blue direction=1 alignment=0
+"Decel Thrust Target:"
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=799 starty=258 endx=968 endy=288
+Blue direction=1 alignment=0
+"Decel Times:"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=860 starty=859 endx=1122 endy=887
+labelspace=7 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+StageTmr type="SECONDS" width=8 prec=0 label="Stage Timer:" units="default" 
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=102 startx=861 starty=709 endx=1121 endy=848
+parameter=ArmDecel type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Decel Timer"
+$END-PANEL
+defaultstate=0
+$STATE 0
+label="Not Armed"
+oncolor=Blue
+$END-STATE
+$STATE 1
+label="Armed"
+oncolor=Green
+$INTERLOCK
+~ArmAccel
+$END-INTERLOCK
+$INITCALC
+dummy:	StoreEvent ("Decel Armed")
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=901 starty=510 endx=1107 endy=570
+RADIO LPStabilityTest_RB setvalue=4 onlabel="800 RPM/s\nN2DOT ON" offlabel="800 RPM/s\nN2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=901 starty=570 endx=1107 endy=630
+RADIO LPStabilityTest_RB setvalue=5 onlabel="920 RPM/s\nN2DOT ON" offlabel="920 RPM/s\n N2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=901 starty=630 endx=1107 endy=690
+RADIO LPStabilityTest_RB setvalue=6 onlabel="1040 RPM/s\nN2DOT ON" offlabel="1040 RPM/s\n N2DOT OFF" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=1001 starty=290 endx=1181 endy=327
+labelspace=0 unitspace=1 spacing=3 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DecelTmMx type="FLOAT" width=5 prec=1 label="Decel Time Max" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=1016 starty=264 endx=1061 endy=283
+Yellow direction=1 alignment=0
+"Limit"
+$END-OBJECT
+***********
+$HELP
+"Arm Accel Timer"
+"Snap Accel to Takeoff and record Accel Time."
+""
+"Stay at Takeoff for 30 seconds and select Min idle on Engine control screen."
+"Arm Decel Timer"
+"Snap decel to  Min idle."
+"Record decel times."
+"Store Display."
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+$END-HELP
+$END-DISPLAY
+

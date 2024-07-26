@@ -1,0 +1,716 @@
+$DISPLAY "Throttle Control" background=Charcoal editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$STOREDISPLAY Append
+$OBJECT Line font=101 startx=0 starty=203 endx=711 endy=204
+linewidth=1 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=0 starty=207 endx=123 endy=499
+style=1
+linewidth=4 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT Line font=0 startx=0 starty=497 endx=714 endy=497
+linewidth=4 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=4 starty=528 endx=110 endy=589
+TOGGLE MaxPower_S onlabel="Max\nPower" offlabel="Max\nPower" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(idle_s)
+MaxPower_S:	OFF
+#elseif	(MaxPower_S)
+increaseTLA:	ON
+GoingToMaxPower:	ON
+AutoThrottle_F:	ON
+#else	
+GoingToMaxPower:	OFF
+increaseTLA:	OFF
+AutoThrottle_F:	OFF
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=4 starty=591 endx=110 endy=651
+TOGGLE Idle_S onlabel="Low\nIdle" offlabel="Low\nIdle" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(MaxPower_S)
+Idle_S:	OFF
+#elseif	(Idle_S)
+decreaseTLA:	ON
+GoingToIdle:	ON
+AutoThrottle_F:	ON
+#else	
+GoingToIdle:	OFF
+decreaseTLA:	OFF
+AutoThrottle_F:	OFF
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=4 starty=668 endx=109 endy=731
+MOMENTARY Increase_S onlabel="Increase" offlabel="Increase" offcolor=LightGray oncolor=Green 
+$RELEASE
+increaseTLA:	OFF
+$END-RELEASE
+$PUSH
+increaseTLA:	ON
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=4 starty=735 endx=109 endy=798
+MOMENTARY Decrease_S onlabel="Decrease" offlabel="Decrease" offcolor=LightGray oncolor=Green 
+$RELEASE
+decreaseTLA:	OFF
+$END-RELEASE
+$PUSH
+decreaseTLA:	ON
+$END-PUSH
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=7 starty=351 endx=118 endy=429
+MOMENTARY ECM_OpTimerRst_MS onlabel="Reset" offlabel="Reset" offcolor=DarkGray oncolor=Green 
+$RELEASE
+OpTimer:Sec	0.0
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Line font=0 startx=8 starty=180 endx=1156 endy=182
+linewidth=2 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=97 startx=9 starty=26 endx=251 endy=176
+labelspace=6 unitspace=1 spacing=4 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+EEC_N1Pct type="FLOAT" width=6 prec=1 label="N1" units="default" 
+EEC_N2Pct type="FLOAT" width=6 prec=1 label="N2" units="default" 
+EEC_NFPct type="FLOAT" width=6 prec=1 label="NFan" units="default" 
+EEC_ITT type="FLOAT" width=6 prec=1 label="EGT" units="default" 
+EEC_WF type="FLOAT" width=6 prec=0 label="Fuel Flow" units="default" 
+TEECI type="FLOAT" width=6 prec=1 label="EEC Temp" units="default" 
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=9 starty=245 endx=117 endy=336
+TOGGLE ECM_OpTimer_TS onlabel="Stop" offlabel="Start" offcolor=LightGray oncolor=Cyan 
+$RELEASE
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT String font=89 startx=12 starty=184 endx=240 endy=203
+CtrlLoopTxt labelspace=8 label="Control Loop:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=13 startx=13 starty=441 endx=112 endy=493
+labelspace=0 unitspace=0 spacing=5 labelcolor=White parambox=0 paramboxcolor=White shading=-2
+OpTimer type="HOURS" width=8 prec=0 
+OpTimer type="SECONDS" width=8 prec=0 
+$END-OBJECT
+***********
+$OBJECT String font=92 startx=18 starty=818 endx=242 endy=843
+StageTxt labelspace=7 label="Instructions:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=Black shading=-1
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=24 starty=812 endx=1179 endy=813
+linewidth=1 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=27 starty=218 endx=92 endy=241
+Cyan direction=1 alignment=0
+"TIMER"
+$END-OBJECT
+***********
+$OBJECT Text font=98 startx=60 starty=3 endx=156 endy=23
+Cyan direction=1 alignment=0
+"EEC DATA"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=125 starty=346 endx=283 endy=493
+parameter=ECM_FuelCtrl_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Master Lever"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+SWActive
+~EFSO_I
+$END-INTERLOCK
+$INITCALC
+dummy:	storeevent ("Master Lever ON")
+$END-CALC
+$CALC
+FuelOn1_O:	ON
+$END-CALC
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Red
+$INITCALC
+dummy:	storeevent ("Master Lever OFF")
+$END-CALC
+$CALC
+FuelOn1_O:	OFF
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=128 starty=207 endx=285 endy=347
+parameter=ECM_IdleCtrl_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Idle Control"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="APPROACH"
+oncolor=Blue
+$INTERLOCK
+~FuelCutOff_O
+EngineRunning
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="MINIMUM"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=128 starty=544 endx=213 endy=592
+TOGGLE Fast_S onlabel="Fast" offlabel="Fast" offcolor=LightGray oncolor=Yellow 
+$RELEASE
+#if	(Fast_S | (~Fine_S & ~Slow_S & ~Med_S))
+Fine_S:	OFF
+Slow_S:	OFF
+Med_S:	OFF
+speed:	fastspeed
+#endif	
+#if	(~Fast_S)
+Fast_S:	ON
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=128 starty=608 endx=213 endy=656
+TOGGLE Med_S onlabel="Medium" offlabel="Medium" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(Med_S | (~Fine_S & ~Slow_S & ~Fast_S))
+Fine_S:	OFF
+Slow_S:	OFF
+Fast_S:	OFF
+speed:	medspeed
+#endif	
+#if	(~Med_S)
+Med_S:	ON
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=128 starty=673 endx=213 endy=721
+TOGGLE Slow_S onlabel="Slow" offlabel="Slow" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(Slow_S | (~Fine_S & ~Med_S & ~Fast_S))
+Fine_S:	OFF
+Med_S:	OFF
+Fast_S:	OFF
+speed:	slowspeed
+#endif	
+#if	(~Slow_S)
+Slow_S:	ON
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=128 starty=737 endx=213 endy=785
+TOGGLE Fine_S onlabel="Fine" offlabel="Fine" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(Fine_S | (~Slow_S & ~Med_S & ~Fast_S))
+Fine_S:	OFF
+Med_S:	OFF
+Fast_S:	OFF
+speed:	finespeed
+#endif	
+#if	(~Fine_S)
+Fine_S:	ON
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=191 starty=506 endx=501 endy=539
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=209 starty=512 endx=491 endy=535
+Blue direction=1 alignment=0
+"AUTOTHROTTLE CONTROL"
+$END-OBJECT
+***********
+$OBJECT Line font=0 startx=239 starty=0 endx=243 endy=180
+linewidth=4 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=240 starty=665 endx=370 endy=729
+TOGGLE ReverseEnable_S onlabel="Reverse\nEnable" offlabel="Reverse\nEnable" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(~ReverseEnableSet)
+ReverseEnableSet:	ON
+#else	
+ReverseEnableSet:	OFF
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=240 starty=740 endx=369 endy=809
+TOGGLE TC_Auto_2 onlabel="Performance" offlabel="Performance" offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Bar font=114 startx=248 starty=553 endx=704 endy=601
+labelspace=8 unitspace=0 labelcolor=White length=189 \
+height=17 format=6.2 ticpos=BELOW dir=0 shading=-2 spacing=1 \
+ticfont=2 parambox=2 paramboxcolor=Black limitwidth=3
+TLA_Actual label="TLA Actual" units="Deg" min=-10 max=85 ticinter=10 labelinter=2
+$END-OBJECT
+***********
+$OBJECT Bar font=114 startx=248 starty=610 endx=704 endy=658
+labelspace=8 unitspace=0 labelcolor=White length=189 \
+height=17 format=6.2 ticpos=BELOW dir=0 shading=-2 spacing=1 \
+ticfont=2 parambox=2 paramboxcolor=Black limitwidth=3
+TLAOutput1 label="TRA Command" units="Deg" min=-10 max=85 ticinter=10 labelinter=2
+$END-OBJECT
+***********
+$OBJECT Digital font=97 startx=255 starty=27 endx=497 endy=152
+labelspace=6 unitspace=1 spacing=4 labelcolor=White parambox=2 paramboxcolor=Black shading=-1
+TOILAC type="FLOAT" width=6 prec=0 label="MOT" units="default" 
+POILAC type="FLOAT" width=6 prec=1 label="MOP" units="default" 
+OILQ type="FLOAT" width=6 prec=1 label="OIL QTY" units="default" 
+N1C2D type="FLOAT" width=6 prec=1 label="N1C2D" units="default" 
+N2C25 type="FLOAT" width=6 prec=1 label="N2C25" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=98 startx=280 starty=5 endx=440 endy=25
+Cyan direction=1 alignment=1
+"QEC INDICATION"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=284 starty=208 endx=428 endy=495
+parameter=ECM_ModeSel_RB type=RADIO
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Mode Selector"
+$END-PANEL
+defaultstate=0
+$STATE 2
+label="IGN/START"
+oncolor=Blue
+$INTERLOCK
+SWActive
+~IgnPwrDisable
+~RunMode
+$END-INTERLOCK
+$END-STATE
+$STATE 1
+label="CRANK"
+oncolor=Blue
+$INTERLOCK
+SWActive
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="NORMAL"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=375 starty=665 endx=499 endy=729
+TOGGLE OverRide_S onlabel="Override\nMax Stop" offlabel="Override\nMax Stop" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(OverRide_S)
+OverRide:	ON
+OverRideTime:sec	0
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Switch font=0 startx=375 starty=740 endx=499 endy=809
+TOGGLE TC_Auto_3 onlabel="Auto 3" offlabel="Auto 3" offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=429 starty=349 endx=563 endy=491
+parameter=ECM_IgnCtrl_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Ignition"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="On"
+oncolor=Green
+$INTERLOCK
+SWActive
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="Auto"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=430 starty=208 endx=561 endy=349
+parameter=ECM_ManStart_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="Manual Start"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Blue
+$INTERLOCK
+SWActive
+(ECM_EECGndTstPwr_TB > 0)
+~RunMode
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Switch font=0 startx=504 starty=739 endx=629 endy=809
+TOGGLE TC_Auto_4 onlabel="Auto 4" offlabel="Auto 4" offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=505 starty=665 endx=629 endy=729
+TOGGLE SetMaxPower_S onlabel="Set Max\nStop" offlabel="Set Max\nStop" offcolor=LightGray oncolor=Green 
+$RELEASE
+#if	(~MaxPowerSet)
+MaxStop:deg	TLAOutput1
+MaxPowerSet:	ON
+#else	
+SetMaxPower_S:	ON
+MaxStop:deg	TLAOutput1
+MaxPowerSet:	ON
+#endif	
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Line font=0 startx=520 starty=0 endx=524 endy=179
+linewidth=4 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=12 startx=535 starty=19 endx=689 endy=65
+labelspace=5 unitspace=1 spacing=2 labelcolor=White parambox=2 paramboxcolor=Black shading=-2
+EECCurrChA type="FLOAT" width=5 prec=3 label="CH A" units="default" 
+EECCurrChB type="FLOAT" width=5 prec=3 label="CH B" units="default" 
+$END-OBJECT
+***********
+$OBJECT Digital font=12 startx=535 starty=96 endx=689 endy=144
+labelspace=5 unitspace=1 spacing=3 labelcolor=White parambox=2 paramboxcolor=Black shading=-2
+ACIgnitionR type="FLOAT" width=5 prec=3 label="CH A" units="default" 
+ACIgnitionL type="FLOAT" width=5 prec=3 label="CH B" units="default" 
+$END-OBJECT
+***********
+$OBJECT String font=97 startx=535 starty=514 endx=688 endy=533
+AutoThrottle_F labelspace=4 label="Status:" labelcolor=White stringcolor=Green parambox=0 paramboxcolor=Black shading=0
+Yellow = TRUE "Automatic"
+Green = FALSE "Manual"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=544 starty=1 endx=691 endy=20
+Cyan direction=1 alignment=1
+"EEC Power Amps"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=556 starty=74 endx=679 endy=93
+Cyan direction=1 alignment=1
+"Ignition Amps"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=567 starty=207 endx=710 endy=345
+parameter=ECM_EECGndTstPwr_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="EEC GND PWR"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+SWActive
+$END-INTERLOCK
+$INITCALC
+GndTstPwr_O:	ON
+$END-CALC
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Blue
+$CALC
+GndTstPwr_O:	OFF
+$END-CALC
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=571 starty=352 endx=710 endy=494
+parameter=ECM_IgnPwr_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="IGN PWR"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+~IgnPwrDisable
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Blue
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Switch font=114 startx=636 starty=742 endx=765 endy=800
+TOGGLE TC_Auto_1 onlabel="Vib Survey\nON" offlabel="Vib Survey\nOFF" offcolor=LightGray oncolor=Red 
+$END-OBJECT
+***********
+$OBJECT Line font=0 startx=712 starty=0 endx=716 endy=815
+linewidth=4 linecolor=Cyan
+shading=0
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=718 starty=191 endx=861 endy=266
+EECLOP_Stat textcolor=Black
+Magenta = 0 "Oil Press\nSwitch UNK"
+Red = 1 "Oil Press\nLOW"
+Green = 2 "Oil Press\nOK"
+Red = 3 "Oil Press\nSwitch BAD"
+Yellow = 4 "Oil Press\nSwitch INVALID"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=723 starty=269 endx=869 endy=344
+OilFBP_Stat textcolor=Black
+Magenta = 0 "Oil Filter\nBy-Pass UNK"
+Green = 1 "Oil Filter\nBy-Pass OK"
+Yellow = 2 "Oil Filter\nImpend By-Pass"
+Red = 3 "Oil Filter\nBy-Pass"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=726 starty=348 endx=874 endy=420
+TOilAC_Stat textcolor=Black
+Yellow = 4 "Oil Temp\nLOW NO ACCEL"
+Red = 3 "Oil Temp\nHigh > Max"
+Yellow = 2 "Oil Temp\nHigh"
+DarkGray = 1 "Oil Temp\nOk"
+Magenta = 0 "Oil Temp\nUNK"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=729 starty=496 endx=876 endy=572
+EECEGT_Stat textcolor=Black
+Magenta = 0 "EGT Redline\nUNK"
+Green = 1 "EGT Redline\nOK"
+Red = 2 "EGT Redline\nExceeded"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=729 starty=654 endx=879 endy=722
+EECN2_Stat textcolor=Black
+Magenta = 0 "N2 RedLine\nUNK"
+Green = 1 "N2 RedLine\nOK"
+Red = 2 "N2 RedLine\nExceeded"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=730 starty=573 endx=878 endy=649
+EECN1_Stat textcolor=Black
+Magenta = 0 "N1 RedLine\nUNK"
+Green = 1 "N1 RedLine\nOK"
+Red = 2 "N1 RedLine\nExceeded"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=732 starty=419 endx=871 endy=494
+FuelFBP_Stat textcolor=Black
+Magenta = 0 "Fuel Filter\nBy-Pass UNK"
+Green = 1 "Fuel Filter\nBy-Pass OK"
+Yellow = 2 "Fuel Filter\nImpend By-Pass"
+Red = 3 "Fuel Filter\nBy-Pass"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=770 starty=31 endx=909 endy=165
+parameter=ECM_P2T2ProbeHeat_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="P2/T2 HEAT"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="On"
+oncolor=Yellow
+$INTERLOCK
+SWActive
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="Off"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=834 starty=4 endx=1026 endy=27
+Cyan direction=1 alignment=0
+"OTHER CONTROLS"
+$END-OBJECT
+***********
+$OBJECT Text font=98 startx=838 starty=783 endx=1001 endy=803
+Cyan direction=1 alignment=0
+"START CONTROL"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=869 starty=191 endx=1005 endy=266
+HPSOV_Stat textcolor=Black
+BurntOrange = 0 "Software\nNot Active"
+DarkGray = 1 "Fuel Valve\nClosed"
+Green = 2 "Fuel Valve\nOpen"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=871 starty=272 endx=1026 endy=347
+ChAInCtrl_F textcolor=Black
+DarkGray = 0 "A channel\nnot in control"
+Green = 1 "A channel\nin control"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=876 starty=351 endx=1038 endy=425
+ChBInCtrl_F textcolor=Black
+DarkGray = 0 "B channel\nnot in control"
+Green = 1 "B channel\nin control"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=910 starty=30 endx=1047 endy=171
+parameter=ECM_DCPwrTst_TB type=TOGGLE
+labelcolor=Black warncolor=Yellow offcolor=LightGray
+$PANEL
+style=2
+boxcolor=DarkGray
+shading=2
+label="DC Pwr Test"
+$END-PANEL
+defaultstate=0
+$STATE 1
+label="ON"
+oncolor=Green
+$INTERLOCK
+(DCPwrTstTmr < 5.0)
+~EngineRunning
+$END-INTERLOCK
+$END-STATE
+$STATE 0
+label="OFF"
+oncolor=Green
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=1008 starty=189 endx=1160 endy=272
+FireDetection_Stat textcolor=Black
+Yellow = -1 "Fire Warning\n>>FAULT<<"
+DarkGray = 0 "Fire Warning\nNormal"
+Red = 1 "Fire Warning\n>>FIRE<<"
+Yellow = 2 "Fire Warning\n>>OVERHEAT<<"
+Green = 3 "Fire Warning\nCont Tst PASSED"
+Yellow = 4 "Fire Warning\nCont Tst FAULT"
+Green = 5 "Fire Warning\nGnd Tst PASSED"
+Yellow = 6 "Fire Warning\nGnd Tst FAULT"
+BurntOrange = 7 "Fire Warning\nUNKNOWN"
+Red = 8 "EEC TAT\nOUT OF RANGE"
+Magenta = 9 "Fire Warning\nDISABLED"
+Yellow = 10 "Under Cowl\nTemp WARNING"
+Red = 11 "Under Cowl\nTemp FIRE"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=1016 starty=278 endx=1174 endy=356
+ChipDetected_F textcolor=Black
+Yellow = 1 "Oil Sys Chip\nDetected"
+Green = 0 "Oil Sys Chip\nNOT Detected"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=1019 starty=360 endx=1171 endy=428
+AdaptcountTotal textcolor=Black
+Yellow = 0 "Adapter NOT\nConnected"
+Green = 13.0 "Adapter Set\nValid"
+Red = 16.0 "Adapter Set\nInvalid"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=2 startx=1021 starty=429 endx=1170 endy=495
+dummy textcolor=Black
+Green = 0 "SAV Closed"
+Yellow = 1 "SAV Open"
+$END-OBJECT
+***********
+$OBJECT Text font=98 startx=1022 starty=780 endx=1117 endy=800
+Cyan direction=1 alignment=0
+"ENG CTRL"
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=1052 starty=29 endx=1190 endy=100
+parameter=ECM_EECResetChA_MB type=MOMENTARY
+labelcolor=Black warncolor=Yellow offcolor=Black
+defaultstate=0
+$STATE 1
+label="EEC Reset A"
+oncolor=Green
+$END-STATE
+$STATE 0
+label="EEC Reset A"
+oncolor=DarkGray
+$END-STATE
+$END-OBJECT
+***********
+$OBJECT Buttonobj font=98 startx=1053 starty=99 endx=1191 endy=172
+parameter=ECM_EECResetChB_MB type=MOMENTARY
+labelcolor=Black warncolor=Yellow offcolor=Black
+defaultstate=0
+$STATE 1
+label="EEC Reset B"
+oncolor=Green
+$END-STATE
+$STATE 0
+label="EEC Reset B"
+oncolor=DarkGray
+$END-STATE
+$END-OBJECT
+***********
+$END-DISPLAY
+

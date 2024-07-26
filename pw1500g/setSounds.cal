@@ -1,0 +1,71 @@
+$GROUP "setSounds" 
+#C --------------------------------------------------------
+#C **** Limits Set Based on limits.cfg or overlimits.cal
+#C **** Initial Setup on: 1/9/2018 DJR...
+#C **** Common Flags are set in ../common/setAudio.cal
+#C **** Sets the values for the Logic in ../common/setAudio.cal
+#C **** See C:\Data\Annunciator\ to create sounds.
+#C **
+#if	(ECM_FuelCtrl_TB & EngineRunning & ~RunMode)
+#C =========================================================
+AuN1YLim_F:	N1OvrMx_F
+AuN2YLim_F:	N2OvrMx_F
+AuEGTYLim_F:	((EEC_ITT > ITTStrtMxYLim) & ~ITTStrtMxTmr_F)
+AuEGTRLim_F:	ITTStrtMxTmr_F
+#C AuFuelP_Low_F: ((FIP_PSIG < FIPMn) | (FIP_PSIG > FIPMx))
+AuFuelP_Low_F:	(FIP_PSIG < FIPMn)
+#C AuWFLim_F:	(WF_Avg > (IdleFuelFlow + 200.0))
+AuWFLim_F:	OFF
+AuMOPLim_F:	OFF
+AuQECMOP_F:	((POILAC < MOPMn) & (EEC_N2 > 11000.0))
+#C AuMOTLim_F:	(TOILAC > 100.0)
+AuMOTLim_F:	(TOILAC > MOTMx)
+#C -----------------------------------------------
+AuOilQtyLim_F:	(OILQ < 5.0)
+AuUnderCowl_F:	(UnderCowl_Stat > 0)
+#C -----------------------------------------------
+#C ================== RUNNING ==============================
+#elseif	(ECM_FuelCtrl_TB & EngineRunning & RunMode)
+#C =========================================================
+AuN1YLim_F:	N1OvrMx_F
+AuN2YLim_F:	N2OvrMx_F
+AuEGTYLim_F:	((EEC_ITT > ITTRunMxYLim) & ~ITTRunMxTmr_F)
+AuEGTRLim_F:	ITTRunMxTmr_F
+#C AuFuelP_Low_F: ((FIP_PSIG < FIPMn) | (FIP_PSIG > FIPMx))
+AuFuelP_Low_F:	(FIP_PSIG < FIPMn)
+AuWFLim_F:	OFF
+AuMOPLim_F:	OFF
+AuQECMOP_F:	((POILAC < MOPMn) | (POILAC > MOPMx))
+#C AuMOTLim_F:	((TOILAC < MOTMn) | (TOILAC > MOTMx))
+AuMOTLim_F:	(TOILAC > MOTMx)
+#C -----------------------------------------------
+AuOilQtyLim_F:	(OILQ < 5.0)
+AuUnderCowl_F:	(UnderCowl_Stat > 0)
+#C ================== MOTORING =============================
+#elseif	(StartAir_O & EngineNotRunning)
+#C =========================================================
+AuFuelP_Low_F:	(FIP_PSIG < FIPMn)
+#C AuWFLim_F:	(WF_Avg > WfLtOffMx)
+AuWFLim_F:	OFF
+AuMOPLim_F:	OFF
+AuQECMOP_F:	((POILAC < MOPMn) & (EEC_N2 > 4000.0))
+AuMOTLim_F:	OFF
+#C -----------------------------------------------
+AuOilQtyLim_F:	(OILQ < 5.0)
+AuUnderCowl_F:	(UnderCowl_Stat > 0)
+#else	
+AuN1YLim_F:	OFF
+AuN2YLim_F:	OFF
+AuEGTRLim_F:	OFF
+AuEGTYLim_F:	OFF
+AuFuelP_Low_F:	OFF
+AuWFLim_F:	OFF
+AuMOPLim_F:	OFF
+AuQECMOP_F:	OFF
+AuMOTLim_F:	OFF
+#C -----------------------------------------------
+AuOilQtyLim_F:	OFF
+AuUnderCowl_F:	OFF
+#C -----------------------------------------------
+#endif	
+$END-GROUP

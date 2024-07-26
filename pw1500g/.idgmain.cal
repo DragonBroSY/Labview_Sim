@@ -1,0 +1,209 @@
+$GROUP "idgcalcs"
+* 
+* Engine Input Signals and Input Relays
+* *** The calculation vars listed in the left column must not be changed
+* *** as they are hard coded in a parsing routine, rdidgmain() used by BUILDER
+* ALSO, the following $TIMER must be added to the timers config. file
+* for this logic to work properly.
+*    $TIMERS
+*    idgsettletime:secs   RESET   idgtimer
+*    $END-TIMERS
+*
+* Calc vars      User defined params names
+* ------------   -------------------------
+*  Set these accordingly unless they are already set to these names in CST
+*  Relay names must also be set up the same as used in this file.
+* GENFREQ          ???
+* GENVOLT          ???
+* PMGVOLT          ???
+* CTCUR            ???
+*
+* Update the Gen Volt section
+GENFREQ          GenHz
+GENVOLT          Gen_Voltage
+PMGVOLT          PMG_Voltage
+CTCUR            Gen_Current
+ROTATE_I         GenPhaseRot_I
+IDGPhaseCTOA_I   GenPhaseACorr_I
+IDGPhaseCTOB_I   GenPhaseBCorr_I
+IDGPhaseCTOC_I   GenPhaseCCorr_I
+*
+* Calculation Logic
+*
+#C ***********************************************
+#C New internal Timer logic (DJR 01/19/2010)
+#C No need to add a timer in timers.cfg
+#C Will have to set the timer to 0 manually with idgSettleTmr 0.0...
+#if	idgTimer
+   idgSettleTmr:Sec	(SysTime - SysTimeNew)
+#else
+   SysTimeNew:Sec	(SysTime - idgSettleTmr)
+#endif
+#C ***********************************************
+#if (idgphaseA_TB = ON)
+ctcurradio:     1
+#elseif (idgphaseB_TB = ON)
+ctcurradio:     2
+#elseif (idgphaseC_TB = ON)
+ctcurradio:     3
+#else
+ctcurradio:     0
+#endif
+#if		(genvoltradio = 0)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	OFF
+genvoltvalue1:VAC	GENVOLT
+#elseif		(genvoltradio = 1)
+GenVoltBC_O:	ON
+GenVoltCA_O:	OFF
+genvoltvalue2:VAC	GENVOLT
+#elseif		(genvoltradio = 2)
+GenVoltBC_O:	OFF
+GenVoltCA_O:	ON
+genvoltvalue3:VAC	GENVOLT
+#endif      
+#if		(pmgvoltradio = 0)
+PMGVolt23_O:	OFF
+PMGVolt31_O:	OFF
+pmgvoltvalue1:VAC	PMGVOLT
+#elseif		(pmgvoltradio = 1)
+PMGVolt23_O:	ON
+PMGVolt31_O:	OFF
+pmgvoltvalue2:VAC	PMGVOLT
+#elseif		(pmgvoltradio = 2)
+PMGVolt23_O:	OFF
+PMGVolt31_O:	ON
+pmgvoltvalue3:VAC	PMGVOLT
+#endif      
+#C Changed to use inrange function DJR 011410
+#C #if      ((GENFREQ > MAXGENFREQ) | (GENFREQ < MINGENFREQ))
+#if		inrange (MINGENFREQ GENFREQ MAXGENFREQ)
+withinlimits:	ON
+#else      
+phaserotatestate:	0
+withinlimits:	OFF
+#endif      
+#if		(withinlimits & ~ROTATE_I)
+phaserotatestate:	1
+#elseif		(withinlimits & ROTATE_I)
+phaserotatestate:	2
+#endif      
+#if		~withinlimits
+ctcurmessage:	0
+#elseif		(withinlimits & (phaserotatestate = 1))
+ctcurmessage:	1
+#elseif		(withinlimits & (phaserotatestate = 2))
+ctcurmessage:	2
+#endif      
+#if		magtrimtoggle
+MAGTRIM_O:      ON
+#else
+MAGTRIM_O:      OFF
+#endif      
+#if		genpwrtoggle
+GenPwr_O:	ON
+#else
+GenPwr_O:	OFF
+genvoltradio:	0
+pmgvoltradio:	0
+idgphaseA_TB:	OFF
+idgphaseB_TB:	OFF
+idgphaseC_TB:	OFF
+CTW_TB:		OFF
+#endif      
+#C ********************************************
+#C Added timer flag idgsettletmr_F. DJR 011510...
+#C idgsettletime_F:	(idgsettletime > IDGSETTLINGTIME)
+idgsettletmr_F:		(idgsettletmr > IDGSETTLINGTIME)
+#C ********************************************
+#C Changed to use ~ (NOT) Operator. DJR 011410...
+#C Added this #if to the logic ladder for ctcurradio so it will loop 1 scan...
+#C #if      ((ctcurradio > lastctcurradio) | (ctcurradio < lastctcurradio))
+#if		~(ctcurradio = lastctcurradio)
+modifysection:        ON
+LOADA_O:	OFF
+LOADB_O:	OFF
+LOADC_O:	OFF
+CTBCurrent_O:	OFF
+CTCCurrent_O:	OFF
+CTPHASE_O:	OFF
+idgtimer:	OFF
+idgsettletmr:	0.0
+#elseif		((ctcurradio = 1) & (ctcurvaluea > 2.0) & idgsettletmr_F & ~CTPHASE_O)
+modifysection:	OFF
+ctcurwireda:	1
+CTPHASE_O:	CTW_TB
+#elseif		((ctcurradio = 1) & modifysection)
+ctcurvaluea:mAmp      CTCUR
+LOADA_O:	ON
+idgtimer:	ON
+ctcurphaseda:	0
+ctcurwireda:	0
+#elseif		((ctcurradio = 2) & (ctcurvalueb > 2.0) & idgsettletmr_F & ~CTPHASE_O)
+modifysection:	OFF
+ctcurwiredb:	1
+CTPHASE_O:	CTW_TB
+#elseif		((ctcurradio = 2) & modifysection)
+ctcurvalueb:mAmp      CTCUR
+LOADB_O:	ON
+CTBCurrent_O:	ON
+idgtimer:	ON
+ctcurphasedb:	0
+ctcurwiredb:	0
+#elseif		((ctcurradio = 3) & (ctcurvaluec > 2.0) & idgsettletmr_F & ~CTPHASE_O)
+modifysection:	OFF
+ctcurwiredc:	1
+CTPHASE_O:	CTW_TB
+#elseif		((ctcurradio = 3) & modifysection)
+ctcurvaluec:mAmp      CTCUR
+LOADC_O:	ON
+CTCCurrent_O:	ON
+idgtimer:	ON
+ctcurphasedc:	0
+ctcurwiredc:	0
+#endif      
+#C ***************************************************************************
+#C Modified logic added CTPHASE_O and IDGSETTLINGTIME * 2.0. DJR 011510...
+#if		((idgsettletmr < (IDGSETTLINGTIME * 2.0)) | ~CTPHASE_O)
+#goto		nophase
+#endif      
+#C ***************************************************************************
+#if		PhaseSwap_F
+IDGPhaseCTOA_I:	~IDGPhaseCTOA_I
+IDGPhaseCTOB_I:	~IDGPhaseCTOB_I
+IDGPhaseCTOC_I:	~IDGPhaseCTOC_I
+#endif
+idgtimer:	OFF
+#if		((ctcurradio = 1) & ~IDGPhaseCTOA_I)
+ctcurphaseda:   1
+#elseif		((ctcurradio = 1) & IDGPhaseCTOA_I)
+ctcurphaseda:   2
+#elseif		((ctcurradio = 2) & ~IDGPhaseCTOB_I)
+ctcurphasedb:   1
+#elseif		((ctcurradio = 2) & IDGPhaseCTOB_I)
+ctcurphasedb:   2
+#elseif		((ctcurradio = 3) & ~IDGPhaseCTOC_I)
+ctcurphasedc:   1
+#elseif		((ctcurradio = 3) & IDGPhaseCTOC_I)
+ctcurphasedc:   2
+#endif      
+nophase
+lastctcurradio:      ctcurradio
+* Output Relays Equivalence to user defined parameters
+* User defined     Calculation vars
+* params names       
+*-------------    -----------------Gen_Control_Pw_O               GenPwr_O
+GenPwr_O                       GenPwr_O
+GenLoadSlctPhA_O               LoadA_O
+GenLoadSlctPhB_O               LoadB_O
+GenLoadSlctPhC_O               LoadC_O
+GenVoltSlctPhBtoC_O            GenVoltBC_O
+GenVoltSlctPhCtoA_O            GenVoltCA_O
+PMGVoltSlctPh2to3_O            PMGVolt23_O
+PMGVoltSlctPh3to1_O            PMGVolt31_O
+GenCurrTransTest_O             CTPhase_O
+GenCurrTransB_O                CTBCurrent_O
+GenCurrTransC_O                CTCCurrent_O
+GenMagTrimTest_O               MagTrim_O
+
+$END-GROUP

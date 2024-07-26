@@ -1,0 +1,614 @@
+$DISPLAY "Engine Start" background=DarkGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$INITCALC
+IgnSystem:	concat ("" "UNK")
+$END-CALC
+$CALC
+#if	ResetOT_S
+EGTStrtTrigTmr_F:	OFF
+EGTRunTrigTmr_F:	OFF
+EGTRunMxTmr_F:	OFF
+EGTStrtMxTmr_F:	OFF
+EGTStrtTrigTmr:Sec	0.0
+EGTRunTrigTmr:Sec	0.0
+EGTRunMxTmr:Sec	0.0
+EGTStrtMxTmr:Sec	0.0
+EGTStrtPk:DegC	0.0
+EGTRunPk:DegC	0.0
+ResetOT_S:	OFF
+#endif	
+#if	RestartES_S
+ES_Stage:	0
+ES_StageTxt:	concat ("" "Start Reset.")
+IgnSystem:	concat ("" "UNK")
+DateAtStart:	concat ("" "UNK")
+TimrAtStart:	concat ("" "UNK")
+StartPeakEGT:DegC	0.0
+StartPeakWf:PPH	0.0
+WfLtOff:PPH	0.0
+NoLightoffMsg:	0.0
+StrtOnToIdleTmr_F:	OFF
+StrtOnToIdleTmr:secs	0.0
+StrtOnToIdle:secs	0.0
+FuelOnToIdleTmr_F:	OFF
+FuelOnToIdleTmr:	0.0
+FuelOnToIdle:secs	0.0
+FuelontoLtOff:secs	0.0
+dummy:	StoreEvent ("Start Reset...")
+RestartES_S:	OFF
+#endif	
+#C ************ Starter Air ***********************
+#if     (~StartAir_PID_F & SAP_ON_TS & AirArm_I)
+#C **** See commonCIT.cal for PAIRs_Cmd *******
+StartOS_TS:	OFF
+SAP_ON_TS:      ON
+StartAir_PID_F:	ON
+StartAir_O:	ON
+#elseif (StartAir_PID_F & (~SAP_ON_TS | ~AirArm_I))
+StartAir_PID_F:	OFF
+StartAir_O:	OFF
+PAIRs_Cmd:ma	0.0
+SAP_CmdPct:%	0.0
+SAP_ON_TS:      OFF
+#endif	
+#C ***********************************************
+#if	((ES_Stage > 1) & (ES_Stage < 35))
+StartPeakEGT:DegC	max (StartPeakEGT EEC_EGT)
+StartPeakWf:PPH	max (StartPeakWf WfI)
+FuelOnToIdle:secs	FuelOnToIdleTmr
+StrtOnToIdle:secs	StrtOnToIdleTmr
+#endif	
+StartMode_F:	(StartAir_PID_F & (N2I > 20.0) & ~RunMode)
+#if	((ES_Stage = 0) & SAP_ON_TS & ~AirArm_I & (ECM_ModeSel_RB > 0))
+EM_StageTxt:	concat ("" "Must Press [AIR ARM ON] Button...")
+ECM_ModeSel_RB:	0
+#elseif	((ES_Stage = 0) & SAP_ON_TS & ~InitOilService_F & (ECM_ModeSel_RB > 0))
+ES_StageTxt:	concat ("" "Perform Initial Oil Service before Engine Start...")
+ECM_ModeSel_RB:	0
+#elseif	((ES_Stage = 0) & SAP_ON_TS & EIU_CRANK & SAVREQ)
+ES_Stage:	1
+ES_StageTxt:	concat ("" "Starter ON Requested. (Dry Crank Mode)")
+dummy:	StoreEvent ("Engine Dry Crank...")
+#elseif	((ES_Stage = 0) & SAP_ON_TS & EIU_IGNStart & SAVREQ & MANSTA)
+ES_Stage:	1
+ES_StageTxt:	concat ("" "Starter ON Requested. (Manual Engine Start Mode)")
+dummy:	StoreEvent ("Manual Engine Start Attempt...")
+#elseif	((ES_Stage = 0) & SAP_ON_TS & EIU_IGNStart & SAVREQ & AUTSTA)
+ES_Stage:	1
+ES_StageTxt:	concat ("" "Starter ON Requested. (AUTO Engine Start Mode)")
+dummy:	StoreEvent ("AUTO Engine Start Attempt...")
+#elseif	((ES_Stage = 1) & StartMode_F & EIU_CRANK)
+ES_Stage:	5
+ES_StageTxt:	concat ("" "Starter ON and N2 Rotation, Dry Crank...")
+StrtOnToIdleTmr_F:	ON
+#elseif	((ES_Stage = 1) & StartMode_F & EIU_IGNStart & MANSTA)
+ES_Stage:	5
+ES_StageTxt:	concat ("" "Starter ON and N2 Rotation, Manual Start...")
+StrtOnToIdleTmr_F:	ON
+#elseif	((ES_Stage = 1) & StartMode_F & EIU_IGNStart & AUTSTA)
+ES_Stage:	5
+ES_StageTxt:	concat ("" "Starter ON and N2 Rotation, AUTO Start...")
+StrtOnToIdleTmr_F:	ON
+#elseif	((ES_Stage >= 5) & StartMode_F & LngCrkInPrgs_F)
+ES_StageTxt:	concat ("" "Long Crank In Progress, Please Wait...")
+#elseif	((ES_Stage = 5) & StartMode_F & ~LngCrkInPrgs_F & ~HPSOVCl)
+ES_Stage:	10
+ES_StageTxt:	concat ("" "Fuel Selected ON.")
+FuelOnToIdleTmr_F:	ON
+#elseif	(((ES_Stage = 5) | (ES_Stage = 10)) & StartMode_F & DRYCKA)
+ES_Stage:	15
+ES_StageTxt:	concat ("" "Dry Crank...")
+FuelOnToIdleTmr_F:	OFF
+NoLightoffMsg:	3.0
+#elseif	((ES_Stage = 10) & StartMode_F & MstrLvrOnSel_F & LightUpDet_F)
+ES_Stage:	15
+ES_StageTxt:	concat ("" "Light-OFF Detected...")
+FuelontoLtOff:secs	FuelOnToIdleTmr
+WfLtOff:PPH	WfI
+NoLightoffMsg:	2.0
+#elseif	((ES_Stage = 10) & StartMode_F & MstrLvrOnSel_F & (FuelOnToIdleTmr > 20.0))
+ES_Stage:	15
+ES_StageTxt:	concat ("" "No Light Off.")
+FuelontoLtOff:secs	FuelOnToIdleTmr
+WfLtOff:PPH	WfI
+NoLightoffMsg:	1.0
+#elseif	((ES_Stage = 15) & StarterCutOut_F & MstrLvrOnSel_F)
+ES_Stage:	20
+ES_StageTxt:	concat ("" "Starter Cutout.")
+#elseif	(((ES_Stage = 15) | (ES_Stage = 20)) & ABTSTRT)
+ES_Stage:	21
+ES_StageTxt:	concat ("" "Start ABorted...")
+dummy:	StoreEvent ("Engine Start Aborted...")
+#elseif	((ES_Stage = 20) & RunMode & EECEngRunning)
+ES_Stage:	25
+ES_StageTxt:	concat ("" "Idle.")
+FuelOnToIdleTmr_F:	OFF
+StrtOnToIdleTmr_F:	OFF
+#elseif	((ES_Stage = 21) & ~StartMode_F)
+ES_Stage:	30
+ES_StageTxt:	concat ("" "Aborted Start Attempt...")
+FuelOnToIdleTmr_F:	OFF
+StrtOnToIdleTmr_F:	OFF
+#elseif	((ES_Stage = 25) & RunMode)
+ES_Stage:	30
+ES_StageTxt:	concat ("" "Successful Start, now at Idle...")
+FuelOnToIdleTmr_F:	OFF
+StrtOnToIdleTmr_F:	OFF
+dummy:	StoreEvent ("Successful Start, now at Idle...")
+#elseif	(ES_Stage = 30)
+ES_Stage:	35
+TimeAtStart:	concat ("" SysReportTime)
+DateAtStart:	concat ("" SysDate)
+StoreStartData:	(StoreStartData + 1)
+SAP_ON_TS:	OFF
+#endif	
+$END-CALC
+$STOREDISPLAY Append
+$OBJECT Line font=101 startx=3 starty=941 endx=1179 endy=943
+linewidth=2 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=9 starty=168 endx=424 endy=573
+style=2
+boxcolor=DarkGray
+shading=3
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=9 starty=578 endx=424 endy=839
+style=2
+boxcolor=DarkGray
+shading=3
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=10 starty=627 endx=420 endy=633
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=11 starty=20 endx=1179 endy=163
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=14 starty=207 endx=421 endy=213
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Button font=101 startx=16 starty=842 endx=249 endy=914
+PHASE storeZeroDrift_ATP setvalue=-1 onlabel="Zero Drift\nStored" offlabel="Store\nZero Drift" \
+labelcolor=BurntOrange oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=17 starty=644 endx=412 endy=836
+labelspace=12 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+WfLtOff type="FLOAT" width=6 prec=1 label="Fuel Flow at Lightoff" units="default" 
+FuelontoLtOff type="FLOAT" width=6 prec=1 label="Fuel on to Lightoff" units="default" 
+FuelOnToIdle type="FLOAT" width=6 prec=1 label="Fuel on to Idle" units="default" 
+StrtOnToIdle type="FLOAT" width=6 prec=1 label="Starter on to Idle" units="default" 
+StartPeakWf type="FLOAT" width=6 prec=1 label="Peak Wf" units="default" 
+StartPeakEGT type="FLOAT" width=6 prec=1 label="Peak EGT" units="default" 
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=18 starty=917 endx=309 endy=940
+ES_StageTxt labelspace=9 label="START STATUS:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=DarkGray shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=19 starty=219 endx=414 endy=571
+labelspace=12 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+NFPctS type="FLOAT" width=6 prec=1 label="NF Pct" units="default" 
+N1PctS type="FLOAT" width=6 prec=1 label="N1 Pct" units="default" 
+N2PctS type="FLOAT" width=6 prec=1 label="N2 Pct" units="default" 
+NSA type="FLOAT" width=6 prec=1 label="Starter" units="default" 
+EEC_EGT type="FLOAT" width=6 prec=1 label="EGT" units="default" 
+WfS type="FLOAT" width=6 prec=1 label="Wf" units="default" 
+FIP_PSIG type="FLOAT" width=6 prec=1 label="Fuel Pressure" units="default" 
+POILAC type="FLOAT" width=6 prec=1 label="Oil Pressure" units="default" 
+StoredAir type="FLOAT" width=6 prec=1 label="Stored Air" units="default" 
+PAIRStart type="FLOAT" width=6 prec=1 label="Starter Air Press" units="default" 
+TCSTAT type="FLOAT" width=6 prec=1 label="Starter Air Temp" units="default" 
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=49 starty=47 endx=119 endy=107
+Blue direction=1 alignment=0
+"EGT"
+"DegC"
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=101 starty=176 endx=351 endy=206
+Blue direction=1 alignment=0
+"OBSERVED DATA  "
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=127 starty=592 endx=309 endy=622
+Blue direction=1 alignment=0
+"START DATA"
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=160 starty=25 endx=162 endy=161
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=164 starty=75 endx=1177 endy=77
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=220 starty=35 endx=347 endy=65
+Blue direction=1 alignment=0
+"Max Limit"
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=227 starty=81 endx=323 endy=116
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EGTStrtMxRLim type="FLOAT" width=6 prec=1 
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=400 starty=25 endx=402 endy=161
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=401 starty=122 endx=886 endy=123
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=97 startx=422 starty=133 endx=840 endy=157
+labelspace=18 unitspace=1 spacing=1 labelcolor=Blue parambox=2 paramboxcolor=Black shading=-2
+MTSC_CDTmr type="FLOAT" width=6 prec=0 label="Motor to Start Count Down Timer" units="default" 
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=426 starty=197 endx=814 endy=838
+style=2
+boxcolor=DarkGray
+shading=3
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=428 starty=190 endx=1179 endy=192
+linewidth=2 linecolor=Red
+shading=0
+$END-OBJECT
+***********
+$OBJECT String font=97 startx=430 starty=169 endx=645 endy=188
+CtrlLoopTxt labelspace=7 label="CTRL LOOP:" labelcolor=Yellow stringcolor=White parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=200 endx=620 endy=290
+CoolCredits_F textcolor=Black
+Green = 1 "Cooling Credits\nAvailable"
+DarkGray = 1 "Cooling Credits\nNOT Available"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=290 endx=620 endy=380
+LngCrkInPrgs_F textcolor=Black
+Yellow = 1 "Long Crank\nIn Progress"
+DarkGray = 0 "Long Crank\nNOT In Progress"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=380 endx=620 endy=470
+LightupDet_F textcolor=Black
+Green = 1 "Light Off\nDetected"
+DarkGray = 0 "Light Off\nNOT Detected"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=470 endx=620 endy=560
+HungStart_F textcolor=Black
+Red = 1 "HUNG START\nDetected"
+DarkGray = 0 "HUNG START\nNOT Detected"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=560 endx=620 endy=650
+HotStart_F textcolor=Black
+Red = 1 "HOT START\nDetected"
+DarkGray = 0 "HOT START\nNOT Detected"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=650 endx=620 endy=740
+ABTSTRT textcolor=Black
+Red = 1 "START\nABORTED"
+DarkGray = 0 "START\nNOT ABORTED"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=430 starty=740 endx=620 endy=830
+BowedROvrCrk_F textcolor=Black
+Red = 1 "Bowed Rotor\nOverCrank"
+DarkGray = 0 "Bowed Rotor\nNO OverCrank"
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=463 starty=81 endx=559 endy=116
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EEC_EGT type="FLOAT" width=6 prec=1 
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=465 starty=35 endx=583 endy=62
+Blue direction=1 alignment=0
+"Observed"
+$END-OBJECT
+***********
+$OBJECT Switch font=103 startx=604 starty=841 endx=812 endy=913
+TOGGLE RestartES_S onlabel="Restart" offlabel="Restart" offcolor=DarkGray oncolor=Green 
+$RELEASE
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=618 starty=652 endx=808 endy=742
+InitOilService_F textcolor=Black
+Green = 1 "Initial Oil\nService Complete"
+Red = 0 "Perform Initial\nOil Service"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=619 starty=470 endx=809 endy=560
+EngineRunning textcolor=Black
+Green = 1 "Engine\nRunning"
+DarkGray = 0 "Engine\nNOT Running"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=619 starty=560 endx=809 endy=650
+BLOWOUT textcolor=Black
+Red = 1 "FLAME OUT\nDetected"
+DarkGray = 0 "FLAME OUT\nNOT Detected"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=619 starty=741 endx=809 endy=831
+STLIM textcolor=Black
+Red = 1 "Start Duty\nCycle LIMIT"
+DarkGray = 0 "Start Duty\nCycle OK"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=620 starty=200 endx=810 endy=290
+StrtInPrgs_F textcolor=Black
+Green = 1 "START\nIN PROGRESS"
+DarkGray = 0 "NO START\nIN PROGRESS"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=620 starty=290 endx=810 endy=380
+ECM_StartMode_Stat textcolor=Black
+Green = 1 "Start Mode\nAUTO Start"
+Yellow = 2 "Start Mode\nMANUAL Start"
+Blue = 3 "Start Mode\nDRY CRANK"
+Magenta = 0 "Start Mode\nStatus UNK"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=97 startx=620 starty=380 endx=810 endy=470
+MstrLvrOnSel_F textcolor=Black
+Green = 1 "Master Lever\nSelected ON"
+DarkGray = 0 "Master Lever\nSelected OFF"
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=640 starty=25 endx=642 endy=121
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=700 starty=35 endx=807 endy=62
+Blue direction=1 alignment=0
+"Peak EGT"
+$END-OBJECT
+***********
+$OBJECT Digital font=103 startx=703 starty=82 endx=799 endy=117
+labelspace=0 unitspace=0 spacing=1 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+StartPeakEGT type="FLOAT" width=6 prec=1 
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=817 starty=196 endx=1179 endy=320
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT String font=101 startx=831 starty=276 endx=1141 endy=303
+IgnSystem labelspace=8 label="Igniter Used:" labelcolor=Black stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT Switch font=103 startx=834 starty=821 endx=1206 endy=879
+TOGGLE ResetOT_S onlabel="Over Temps Reset" offlabel="Reset Over Temps" offcolor=DarkGray oncolor=Green 
+$RELEASE
+$END-RELEASE
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=836 starty=712 endx=1204 endy=822
+style=2
+boxcolor=DarkGray
+shading=-3
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=840 starty=747 endx=1200 endy=753
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=856 starty=759 endx=1144 endy=775
+White direction=1 alignment=0
+"AREA   EGT   LIMIT          TIME"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=864 starty=780 endx=950 endy=812
+labelspace=2 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EGTStrtPk type="FLOAT" width=4 prec=0 label="A" 
+$END-OBJECT
+***********
+$OBJECT String font=101 startx=867 starty=240 endx=1148 endy=271
+NoLightoffMsg labelspace=0 label="" labelcolor=Black stringcolor=Yellow parambox=2 paramboxcolor=DarkGray shading=-2
+Yellow = 0.0 "Light Off Status Reset"
+Red = 1.0 "Light Off Not Detected"
+Black = 2.0 "Light Off Detected"
+Black = 3.0 "DRY CRANK"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=867 starty=721 endx=1160 endy=744
+Blue direction=1 alignment=1
+"START OVER TEMPERATURE"
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=879 starty=206 endx=1115 endy=233
+Magenta direction=1 alignment=0
+"LIGHT OFF STATUS"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=879 starty=335 endx=1167 endy=399
+labelspace=7 unitspace=1 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+SAPTarg type="FLOAT" width=5 prec=1 label="SAP Target:" units="default" 
+PAIRStart type="FLOAT" width=5 prec=1 label="          SAP:" units="default" 
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=885 starty=23 endx=887 endy=161
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Input font=100 startx=886 starty=417 endx=1152 endy=542
+SAPTargPct label="SET SAP TARGET %" labelcolor=Black max=105.00   min=0.00     \
+interval=10.00    width=6 prec=1 bar=1 \
+leftlabel="-" calclabel="SAP %" rightlabel="+" \
+parambox=2 paramboxcolor=Black shading=-2 delta=1.00    
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=933 starty=119 endx=1112 endy=142
+TimeAtStart labelspace=3 label="Time:" labelcolor=Black stringcolor=Black parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=101 startx=935 starty=34 endx=1128 endy=61
+Blue direction=1 alignment=0
+"Start Date/Time"
+$END-OBJECT
+***********
+$OBJECT Switch font=100 startx=939 starty=556 endx=1088 endy=630
+TOGGLE SAP_ON_TS onlabel="Starter Air\nON" offlabel="Starter Air\nOFF" offcolor=Cyan oncolor=Green 
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=940 starty=90 endx=1114 endy=113
+DateAtStart labelspace=3 label="Date:" labelcolor=Black stringcolor=Black parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=969 starty=780 endx=1093 endy=812
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EGTStrtMxRLim type="FLOAT" width=4 prec=0 label="A" units="default" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1096 starty=779 endx=1201 endy=811
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+EGTStrtMxTmr type="FLOAT" width=4 prec=1 label="A" units="default" 
+$END-OBJECT
+***********
+$HELP
+"This is the help for the Engine Start display"
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+$END-HELP
+$END-DISPLAY
+

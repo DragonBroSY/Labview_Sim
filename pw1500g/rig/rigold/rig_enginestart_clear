@@ -1,0 +1,11 @@
+# Rig file to clear data for Engine Start display
+#
+rig sig EGTHarnessDegC 0
+rig sig N1i 0.1
+rig sig N2i 0.1
+rig sig Fuel_Control_S 0
+rig sig Fuel_Vlv_Open_I 0
+rig sig Fuel_Vlv_Clsd_I 1
+rig sig Start_Air_S 0
+rig sig Start_Vlv_Open_I   0
+rig stop all

@@ -1,0 +1,91 @@
+$GROUP "throttlecontrol" 
+#C *****************************************
+TLA_Actual:Deg	(PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+#C 
+#C Compute the Difference between TLA Target and TLA Actual...
+#C 
+TLA_Diff:Deg	(TLA_Targ - TLA_Actual)
+TLA_Diff:Deg	abs (TLA_Diff)
+#C *****************************************
+#if	(SendMaxPowerMessage)
+SendMaxPowerMessage:	0
+#endif	
+#C *****************************
+TLALastScan:Deg	TempTLA
+#C *****************************
+#if	(IncreaseTLA)
+TempTLA:Deg	TempTLA + speed
+#elseif	(DecreaseTLA)
+TempTLA:Deg	TempTLA - speed
+#endif	
+#C *****************************
+#if	((TempTLA > MaxStop) & ~OverRide & ((TLALastScan < MaxStop) | (TLALastScan = MaxStop)))
+TempTLA:Deg	MaxStop
+#elseif	(ReverseEnableSet & (TempTLA < MinRange))
+TempTLA:Deg	MinRange
+#elseif	(~ReverseEnableSet & (TempTLA < IdleStop))
+TempTLA:Deg	IdleStop
+#elseif	(TempTLA > MaxRange)
+TempTLA:Deg	MaxRange
+#endif	
+#C *****************************
+#if	(GoingToMaxPower = ON) & ((TempTLA = MaxStop) | (TempTLA > MaxStop))
+GoingToMaxPower:	OFF
+increaseTLA:	OFF
+MaxPower_S:	0
+AutoThrottle_F:	OFF
+#endif	
+#C *****************************
+#if	(GoingToIdle = ON) & ((TempTLA = IdleStop) | (TempTLA < IdleStop))
+GoingToIdle:	OFF
+decreaseTLA:	OFF
+Idle_S:		OFF
+AutoThrottle_F:	OFF
+#endif	
+#C *****************************************
+TLAOutput1:Deg	TempTLA
+#C ------------------------------------------------------------
+#C Set the AutoThrottle movement here...
+#C PLA_Command:vdc ((TLA_PLA_Mcoeff * TLAOutput1) + TLA_PLA_Bcoeff)
+PLA_Handle:vdc ((TLA_PLA_Mcoeff * TLAOutput1) + TLA_PLA_Bcoeff)
+#C ------------------------------------------------------------
+#C *****************************************
+#C Bring TLA back down to Idle if Emergency Idle Switch is Set
+#if	(OverRide & (OverRideTm > MaxOverRideTm))
+OverRide:	OFF
+OverRideTm:sec	0.0
+OverRide_S:	OFF
+OverOnce:	OFF
+#endif	
+#C *****************************************
+#if	(OverRide & (TempTLA > MaxStop))
+OverOnce:	ON
+#endif	
+#C *****************************************
+#if	(OverRide & (TempTLA < MaxStop) & (OverOnce = ON))
+OverRide:	OFF
+OverOnce:	OFF
+OverRide_S:	OFF
+#endif	
+#if	(speed = 0.0333)
+Fine_S:	ON
+Slow_S:	OFF
+Med_S:	OFF
+Fast_S:	OFF
+#elseif	(speed = 0.3333)
+Fine_S:	OFF
+Slow_S:	ON
+Med_S:	OFF
+Fast_S:	OFF
+#elseif	(speed = 0.6666)
+Fine_S:	OFF
+Slow_S:	OFF
+Med_S:	ON
+Fast_S:	OFF
+#elseif	(speed = 5.0)
+Fine_S:	OFF
+Slow_S:	OFF
+Med_S:	OFF
+Fast_S:	ON
+#endif	
+$END-GROUP

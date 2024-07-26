@@ -1,0 +1,8 @@
+# Rig file to clear data for Engine Start display
+#
+rig sig T4_9 0
+rig sig N1i 0
+rig sig N2i 0
+rig sig QECfuelCutoff_O   1
+rig sig StartVlv_O   1
+rig stop all

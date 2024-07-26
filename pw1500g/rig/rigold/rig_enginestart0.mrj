@@ -1,0 +1,52 @@
+# Rig file for Engine Start display
+#
+echo "ECM display must be up -- touchscreen buttons are used by engine start"
+rig sig EGTHarnessDegC 93.34
+#C old value-degF rig sig T4_9 200
+rig sig N1i 350
+rig sig N2i 650
+# rig sig Start_Air_S   1
+echo "Use 'Open Start Valve' button on ecm display to turn air on"
+sleep 10
+rig sig start_vlv_open_i 1
+# rig sig Fuel_Control_S 1
+rig sig EmergFuelSO_I 0
+rig sig FuelArm_I 1
+echo "Use 'Run Fuel Control' button on ecm display to turn fuel on"
+sleep 10
+rig sig Fuel_Vlv_Clsd_I 0
+rig sig Fuel_Vlv_Open_I 1
+rig sig WfiHz 533.4
+sleep 5
+
+rig sig N2i 350 5900  20
+rig sig N1i 350 699  15
+rig sig VibTBB .1 1.5  .01
+rig sig VibFBB .25 1.8  .01
+rig sig MOPSig .001 .0027 .0001
+rig sig PressureExcit   1
+rig sig MOTDegC 50 100  2
+sleep 10
+
+echo "Watch for lightoff"
+sleep 3
+#C old value-degF rig sig T4_9 250
+rig sig EGTHarnessDegC 121
+#C old value-degF rig sig T4_9 300
+rig sig EGTHarnessDegC 149
+#C old value-degF rig sig T4_9 325
+rig sig EGTHarnessDegC 163
+#C old value-degF rig sig T4_9 350
+rig sig EGTHarnessDegC 176.5
+sleep 5
+
+echo "Watch for Starter cutout when N2 > 6125"
+rig stop all
+
+echo "Watch for stable idle"
+rig sig N2i 6126 
+sleep 15
+rig sig start_vlv_open_i 0
+
+rig stop all
+

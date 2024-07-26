@@ -1,0 +1,305 @@
+$DISPLAY "Vibration Peaks" background=DarkGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$STOREDISPLAY Append
+$OBJECT Button font=100 displayflag=StrARVibPeaks_F startx=47 starty=725 endx=247 endy=825
+PHASE RestoreARVibPeaks_ATP setvalue=-1 onlabel="As Received\nVibration Peaks\nRestored" offlabel="Restore\nAs Received\nVibration Peaks" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Box font=1 startx=100 starty=85 endx=1140 endy=582
+style=2
+boxcolor=LightGray
+shading=3
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=103 starty=366 endx=1138 endy=372
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=104 starty=165 endx=1138 endy=171
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=109 starty=95 endx=397 endy=118
+VibPeakDate labelspace=7 label="Date Stored:" labelcolor=Black stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT String font=100 startx=109 starty=129 endx=402 endy=152
+VibPeakTime labelspace=7 label="Time Stored:" labelcolor=Black stringcolor=Blue parambox=0 paramboxcolor=Black shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=103 startx=130 starty=423 endx=252 endy=483
+Blue direction=1 alignment=1
+"P-Flange"
+"Vibration"
+$END-OBJECT
+***********
+$OBJECT Text font=103 displayflag=AP21_F startx=133 starty=236 endx=255 endy=296
+Blue direction=1 alignment=1
+"AP21"
+"Vibration"
+$END-OBJECT
+***********
+$OBJECT Text font=103 displayflag=EFlange_F startx=134 starty=236 endx=256 endy=296
+Blue direction=1 alignment=1
+"E-Flange"
+"Vibration"
+$END-OBJECT
+***********
+$OBJECT Switch font=102 startx=183 starty=592 endx=346 endy=681
+TOGGLE acceldecelbutton onlabel="Select\nAccel" offlabel="Select\nDecel" offcolor=Magenta oncolor=Blue 
+$END-OBJECT
+***********
+$OBJECT Button font=100 displayflag=StrVibPeaks_F startx=262 starty=725 endx=462 endy=825
+PHASE RestoreVibPeaks_ATP setvalue=-1 onlabel="Vibration Peaks\nRestored" offlabel="Restore Final\nVibration Peaks" \
+labelcolor=Black oncolor=Green offcolor=Cyan
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=290 starty=205 endx=480 endy=349
+labelspace=5 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibFBBPk type="FLOAT" width=5 prec=2 label="Peak" 
+VibFBBPkNF type="FLOAT" width=5 prec=0 label="  NF" 
+VibFBBPkN1 type="FLOAT" width=5 prec=0 label="  N1" 
+VibFBBPkN2 type="FLOAT" width=5 prec=0 label="  N2" 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=290 starty=415 endx=480 endy=559
+labelspace=5 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibRBBPk type="FLOAT" width=5 prec=2 label="Peak" 
+VibRBBPkNF type="FLOAT" width=5 prec=0 label="  NF" 
+VibRBBPkN1 type="FLOAT" width=5 prec=0 label="  N1" 
+VibRBBPkN2 type="FLOAT" width=5 prec=0 label="  N2" 
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=394 starty=89 endx=400 endy=579
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=404 starty=16 endx=775 endy=71
+style=2
+boxcolor=DarkGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=413 starty=391 endx=1035 endy=414
+Blue direction=1 alignment=0
+"ACCEL                ACCEL                 ACCEL                 ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=414 starty=182 endx=1036 endy=205
+Blue direction=1 alignment=0
+"ACCEL                ACCEL                 ACCEL                 ACCEL"
+$END-OBJECT
+***********
+$OBJECT Text font=36 startx=422 starty=27 endx=757 endy=63
+Blue direction=1 alignment=1
+"VIBRATION PEAKS"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=447 starty=94 endx=525 endy=163
+Blue direction=1 alignment=1
+"Broad"
+"Band"
+"(IPS SA)"
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=477 starty=725 endx=677 endy=825
+PHASE StoreARVibPeaks_ATP setvalue=-1 onlabel="As Received\nVibration Peaks\nStored" offlabel="Store\nAs Received\nVibration Peaks" \
+labelcolor=BurntOrange oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=495 starty=205 endx=570 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibFBBPk type="FLOAT" width=5 prec=2 label="Peak" 
+DVibFBBPkNF type="FLOAT" width=5 prec=0 label="  NF" 
+DVibFBBPkN1 type="FLOAT" width=5 prec=0 label="  N1" 
+DVibFBBPkN2 type="FLOAT" width=5 prec=0 label="  N2" 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=495 starty=415 endx=570 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibRBBPk type="FLOAT" width=5 prec=2 label="Peak" 
+DVibRBBPkNF type="FLOAT" width=5 prec=0 label="  NF" 
+DVibRBBPkN1 type="FLOAT" width=5 prec=0 label="  N1" 
+DVibRBBPkN2 type="FLOAT" width=5 prec=0 label="  N2" 
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=503 starty=391 endx=1124 endy=414
+Magenta direction=1 alignment=0
+"DECEL                 DECEL                 DECEL                 DECEL"
+$END-OBJECT
+***********
+$OBJECT String font=101 startx=504 starty=693 endx=648 endy=722
+StrARVibPeaks_F labelspace=0 label="As Received Vib Peaks:" labelcolor=Black stringcolor=Green parambox=2 paramboxcolor=Black shading=-1
+Red = OFF "NOT Stored"
+Green = ON "    Stored"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=506 starty=182 endx=1127 endy=205
+Magenta direction=1 alignment=0
+"DECEL                 DECEL                 DECEL                 DECEL"
+$END-OBJECT
+***********
+$OBJECT StatusIndicator font=103 startx=528 starty=597 endx=809 endy=676
+ADState textcolor=Black
+Blue = 0 "ACCEL SELECTED"
+Magenta = 1 "DECEL SELECTED"
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=579 starty=89 endx=585 endy=579
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=590 starty=205 endx=665 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibFNFPk type="FLOAT" width=5 prec=2 label="Peak" 
+VibFNFPkNF type="FLOAT" width=5 prec=0 label="NFan" 
+VibFNFPkN1 type="FLOAT" width=5 prec=0 label="N1" 
+VibFNFPkN2 type="FLOAT" width=5 prec=0 label="N2" 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=590 starty=415 endx=665 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibRNFPk type="FLOAT" width=5 prec=2 label="Peak" 
+VibRNFPkNF type="FLOAT" width=5 prec=0 label="NFan" 
+VibRNFPkN1 type="FLOAT" width=5 prec=0 label="N1" 
+VibRNFPkN2 type="FLOAT" width=5 prec=0 label="N2" 
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=630 starty=95 endx=711 endy=164
+Blue direction=1 alignment=1
+"NF"
+"Tracked"
+"(IPS SA)"
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=680 starty=205 endx=755 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibFN1Pk type="FLOAT" width=5 prec=2 
+DVibFNFPkNF type="FLOAT" width=5 prec=0 
+DVibFNFPkN1 type="FLOAT" width=5 prec=0 
+DVibFNFPkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=680 starty=415 endx=755 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibRNFPk type="FLOAT" width=5 prec=2 
+DVibRNFPkNF type="FLOAT" width=5 prec=0 
+DVibRNFPkN1 type="FLOAT" width=5 prec=0 
+DVibRNFPkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=692 starty=725 endx=892 endy=825
+PHASE StoreVibPeaks_ATP setvalue=-1 onlabel="Vibration Peaks\nStored" offlabel="Store Final\nVibration Peaks" \
+labelcolor=BurntOrange oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT String font=101 startx=716 starty=693 endx=860 endy=722
+StrVibPeaks_F labelspace=0 label="Final Vib Peaks:" labelcolor=Black stringcolor=Red parambox=2 paramboxcolor=Black shading=-1
+Red = OFF "NOT Stored"
+Green = ON "    Stored"
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=764 starty=89 endx=770 endy=579
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=775 starty=205 endx=850 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibFN1Pk type="FLOAT" width=5 prec=2 
+VibFN1PkNF type="FLOAT" width=5 prec=0 
+VibFN1PkN1 type="FLOAT" width=5 prec=0 
+VibFN1PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=775 starty=415 endx=850 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibRN1Pk type="FLOAT" width=5 prec=2 
+VibRN1PkNF type="FLOAT" width=5 prec=0 
+VibRN1PkN1 type="FLOAT" width=5 prec=0 
+VibRN1PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=819 starty=94 endx=900 endy=163
+Blue direction=1 alignment=1
+"N1"
+"Tracked"
+"(IPS SA)"
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=865 starty=205 endx=940 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibFN1Pk type="FLOAT" width=5 prec=2 
+DVibFN1PkNF type="FLOAT" width=5 prec=0 
+DVibFN1PkN1 type="FLOAT" width=5 prec=0 
+DVibFN1PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=865 starty=415 endx=940 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibRN1Pk type="FLOAT" width=5 prec=2 
+DVibRN1PkNF type="FLOAT" width=5 prec=0 
+DVibRN1PkN1 type="FLOAT" width=5 prec=0 
+DVibRN1PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Button font=100 startx=942 starty=641 endx=1142 endy=721
+PHASE StoreSaveEndParams_ATP setvalue=-1 onlabel="Data Stored\nfor Reports" offlabel="Store Data\nfor Reports" \
+labelcolor=Black oncolor=Green offcolor=LightGray
+$END-OBJECT
+***********
+$OBJECT Button font=103 startx=942 starty=725 endx=1142 endy=825
+PHASE ClearVibPeaks_ATP setvalue=-1 onlabel="Peaks Cleared" offlabel="Clear Peaks" \
+labelcolor=Black oncolor=Green offcolor=DarkGray
+$END-OBJECT
+***********
+$OBJECT Line font=1 startx=949 starty=87 endx=955 endy=577
+linewidth=2 linecolor=Black
+shading=-2
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=960 starty=205 endx=1035 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibFN2Pk type="FLOAT" width=5 prec=2 
+VibFN2PkNF type="FLOAT" width=5 prec=0 
+VibFN2PkN1 type="FLOAT" width=5 prec=0 
+VibFN2PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=960 starty=415 endx=1035 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+VibRN2Pk type="FLOAT" width=5 prec=2 
+VibRN2PkNF type="FLOAT" width=5 prec=0 
+VibRN2PkN1 type="FLOAT" width=5 prec=0 
+VibRN2PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=1003 starty=94 endx=1084 endy=163
+Blue direction=1 alignment=1
+"N2"
+"Tracked"
+"(IPS SA)"
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=1050 starty=205 endx=1125 endy=349
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibFN2Pk type="FLOAT" width=5 prec=2 
+DVibFN2PkNF type="FLOAT" width=5 prec=0 
+DVibFN2PkN1 type="FLOAT" width=5 prec=0 
+DVibFN2PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$OBJECT Digital font=101 startx=1050 starty=415 endx=1125 endy=559
+labelspace=0 unitspace=0 spacing=5 labelcolor=Black parambox=2 paramboxcolor=Black shading=-2
+DVibRN2Pk type="FLOAT" width=5 prec=2 
+DVibRN2PkNF type="FLOAT" width=5 prec=0 
+DVibRN2PkN1 type="FLOAT" width=5 prec=0 
+DVibRN2PkN2 type="FLOAT" width=5 prec=0 
+$END-OBJECT
+***********
+$END-DISPLAY
+

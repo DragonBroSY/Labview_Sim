@@ -1,0 +1,23 @@
+$GROUP "equivalent" 
+#C Old Param New Param
+#C _________ _________
+VibN1RPM:RPM	PBS_N1
+VibN2RPM:RPM	PBS_N2
+VibNFRPM:RPM	PBS_NF
+VibN1Frq:Hz	(PBS_N1 / 60.0)
+VibN2Frq:Hz	(PBS_N2 / 60.0)
+VibNFFrq:Hz	(PBS_NF / 60.0)
+#C ----------------------------------------------
+#C - Wet Pressure Parameters --------------------
+#C Sump:PSIG WetPress_1
+#C ScanFilterDiff:PSID WetPress_2
+#C WetPress_3:PSIG WetPress_3
+MOP_PSIG:PSIG	WetPress_4
+#C BearScav:PSIG WetPress_5
+#C FIP_PSIG:PSIG WetPress_6
+#C WetPress_7:PSIG WetPress_7
+#C WetPress_8:PSIG WetPress_8
+MGB_PSIG:PSIG	WetPress_9
+#C WetPress_10:PSIG WetPress_10
+#C WetPress_11:PSIG WetPress_11
+$END-GROUP

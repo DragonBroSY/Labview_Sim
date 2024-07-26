@@ -1,0 +1,3 @@
+rig sig fuel_vlv_open_i 0
+rig sig fuel_vlv_clsd_i 1
+rig sig start_vlv_open_i 0

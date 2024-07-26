@@ -1,0 +1,23 @@
+$GROUP "throttleinit"  when=0
+MinRange:deg	-1.0
+MaxRange:deg	80.0
+MaxStop:deg	80.0
+IdleStop:deg	1.0
+TLA_Actual:deg	0.0
+MaxOverRideTm:sec	15.0
+OverRide:	OFF
+increaseTLA:	OFF
+decreaseTLA:	OFF
+GoingToMaxPwr:	OFF
+OverOnce:	OFF
+MaxPowerSet:	OFF
+SendMaxPwrMsg:	OFF
+Slow_S:		ON
+finespeed:	0.0333
+slowspeed:	0.3333
+medspeed:	0.6666
+fastspeed:	5.0
+speed:		slowspeed
+AutoThrottle_F:	OFF
+TempTLA:deg	0.0
+$END-GROUP

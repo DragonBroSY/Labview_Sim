@@ -1,0 +1,27 @@
+$GROUP "smooth" 
+#C Wf smoothing is now done in common/calcwfnew
+#if	(NFI < NF100)
+NFS:RPM	smoothsignal (NFI NFS WeightFac)
+#else	
+NFS:RPM	NFI
+#endif	
+#if	(N1I < N1100)
+N1S:RPM	smoothsignal (N1I N1S WeightFac)
+#else	
+N1S:RPM	N1I
+#endif	
+#if	(N2I < N2100)
+N2S:RPM	smoothsignal (N2I N2S WeightFac)
+#else	
+N2S:RPM	N2I
+#endif	
+NFPctS:%	value2pct (NFS NF100)
+N1PctS:%	value2pct (N1S N1100)
+N2PctS:%	value2pct (N2S N2100)
+#if	(FnMeasure < 40000.0)
+FnS:Lbs	smoothsignal (FnMeasure FnS WeightFac)
+#else	
+FnS:Lbs	FnMeasure
+#endif	
+OilQtyGal:Gal	(OilQ / 4)
+$END-GROUP

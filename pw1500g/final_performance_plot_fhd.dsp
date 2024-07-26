@@ -1,0 +1,242 @@
+$DISPLAY "Final Performance Plot FHD" background=White loadflag=ctrlFHD_F editres=FHD movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$STOREDISPLAY Append
+$OBJECT Text font=97 startx=19 starty=300 endx=35 endy=395
+Black direction=0 alignment=0
+"N2C2D"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=20 starty=498 endx=36 endy=650
+Black direction=0 alignment=0
+"WFPLHCR2"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=24 starty=84 endx=40 endy=160
+Black direction=0 alignment=0
+"TSFC"
+$END-OBJECT
+***********
+$OBJECT Plot font=1 startx=57 starty=29 endx=593 endy=770
+$TYPE PERFORMANCE
+$PERFORMANCE
+$POINTS BandA BandB BandC BandD
+$LINE_WIDTH 1
+$XAXIS FNTR2 741 40 506 1000 2 ABOVE BELOW 14500 24500 Black 3600.000000
+$YAXIS TSFCPLHC 40 0 229 0.001 2 RIGHT LEFT 0.24 0.27 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCTSFCPLHCMx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCTSFCPLHCMn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$YAXIS N2C2D 40 240 467 200 2 RIGHT LEFT 21000 24000 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Red
+N2C2DMax_T
+$END-TABLE-PLOT
+$TABLE-PLOT Magenta
+GGCCN2C2DMx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCN2C2DMn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$YAXIS WFPLHCR2 40 480 741 200 2 RIGHT LEFT 3600 6500 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCWFPLHCR2Mx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCWFPLHCR2Mn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$HARDCOPYPLOT 1 0 QUANTITY=1
+"Engine Type: $EngNameNew" 100 820
+"Delta Air Lines, Inc." 450 820
+"$CustomerName" 900 820
+"Serial Number: $SerialNum" 100 835
+"Performance Plot" 450 835
+"$SysReportTime" 900 835
+"$SysReportDate" 900 850
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=300 starty=796 endx=368 endy=819
+Black direction=1 alignment=0
+"FNTR2"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=625 starty=561 endx=641 endy=694
+Black direction=0 alignment=0
+"T49OP49"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=627 starty=300 endx=643 endy=433
+Black direction=0 alignment=0
+"T45OP45"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=628 starty=70 endx=644 endy=203
+Black direction=0 alignment=0
+"T25OP25"
+$END-OBJECT
+***********
+$OBJECT Plot font=1 startx=641 starty=29 endx=1261 endy=773
+$TYPE PERFORMANCE
+$PERFORMANCE
+$POINTS BandA BandB BandC BandD
+$LINE_WIDTH 1
+$XAXIS FNTR2 744 40 590 1000 2 ABOVE BELOW 14500 24500 Black 450.000000
+$YAXIS T25OP25C 40 0 234 2.5 2 RIGHT LEFT 80 130 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCT25OP25Mx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCT25OP25Mn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$YAXIS T45OP45C 40 244 474 10 2 RIGHT LEFT 730 910 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCT45OP45Mx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCT45OP45Mn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$YAXIS T49OP49C 40 484 744 5 2 RIGHT LEFT 450 530 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCT49OP49Mx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCT49OP49Mn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$HARDCOPYPLOT 5 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=926 starty=801 endx=994 endy=824
+Black direction=1 alignment=0
+"FNTR2"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=1272 starty=310 endx=1288 endy=386
+Black direction=0 alignment=0
+"N1C2D"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=1278 starty=56 endx=1294 endy=151
+Black direction=0 alignment=0
+"T3OP3"
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=1278 starty=621 endx=1294 endy=697
+Black direction=0 alignment=0
+"MOP "
+$END-OBJECT
+***********
+$OBJECT Plot font=1 startx=1297 starty=542 endx=1893 endy=768
+$TYPE PERFORMANCE
+$PERFORMANCE
+$POINTS BandA BandB BandC BandD
+$LINE_WIDTH 1
+$XAXIS EEC_N2 226 40 566 250 2 ABOVE BELOW 21000 24000 Black 110.000000
+$YAXIS POILAC 40 0 226 5 2 RIGHT LEFT 110 175 Black 0 21000.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Red
+MOPExpMx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Red
+MOPExpMn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$HARDCOPYPLOT 1 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Plot font=1 startx=1298 starty=30 endx=1881 endy=232
+$TYPE PERFORMANCE
+$PERFORMANCE
+$POINTS BandA BandB BandC BandD
+$LINE_WIDTH 1
+$XAXIS FNTR2 202 40 553 1000 2 ABOVE BELOW 14500 24500 Black 490.000000
+$YAXIS T3OP3C 40 0 202 10 2 RIGHT LEFT 490 630 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCT3OP3Mx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCT3OP3Mn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$HARDCOPYPLOT 5 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Plot font=1 startx=1298 starty=284 endx=1885 endy=503
+$TYPE PERFORMANCE
+$PERFORMANCE
+$POINTS BandA BandB BandC BandD
+$LINE_WIDTH 1
+$XAXIS FNTR2 219 40 557 1000 2 ABOVE BELOW 14500 24500 Black 7800.000000
+$YAXIS N1C2D 40 0 219 100 2 RIGHT LEFT 7800 9600 Black 0 14500.000000
+$COLOR
+Blue
+$END-COLOR
+$HC-LINETYPE "None" 0 0 1 8
+$TABLE-PLOT Magenta
+GGCCN1C2DMx_T
+$END-TABLE-PLOT
+$TABLE-PLOT Blue
+GGCCN1C2DMn_T
+$END-TABLE-PLOT
+$END-YAXIS
+$HARDCOPYPLOT 5 0 QUANTITY=1
+$END-HARDCOPYPLOT
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=1585 starty=258 endx=1653 endy=281
+Black direction=1 alignment=0
+"FNTR2"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=1586 starty=525 endx=1654 endy=548
+Black direction=1 alignment=0
+"FNTR2"
+$END-OBJECT
+***********
+$OBJECT Text font=100 startx=1622 starty=801 endx=1649 endy=824
+Black direction=1 alignment=0
+"N2"
+$END-OBJECT
+***********
+$END-DISPLAY
+

@@ -1,0 +1,227 @@
+$PHASE RunInSetTargs_ATP length=-1       level=0 controlrelay=None common=0
++0 SET TLA_Prev	RunInTLA
++0 SET N1C2R_Prev	N1C2R
++0 SET RunInAccel_F	OFF
++0 SET RunInDecel_F	OFF
++0 SET StepTxt concat ("Step " RunInStep)
++0 SET StepTxt concat (StepTxt ": ")
+#if (GoToGI3_F & GoToHold_F)
+* Use this for TLA_Targ of 3.0 GI...
++0 SET GoToGI_F ON
++0 SET RunInTarg 2000.0
++0 SET StageTmrLim 180.0
++0 SET ECM_IdleCtrl_TB OFF
++0 SET TLA_Targ	3.0
+#elseif GoToGI3_F
+* Use this for TLA_Targ of 3.0 GI...
+* Don't Set StageTmrLim Here, Set before function call Without GoToHold_F...
++0 SET GoToGI_F ON
++0 SET RunInTarg 2000.0
++0 SET ECM_IdleCtrl_TB OFF
++0 SET TLA_Targ	3.0
+#elseif GoToGI6_F
+* Use this for TLA_Targ of 6.84 GI...
+* Used for decel to GI, Set StageTmrLim Before the Function Call...
++0 SET GoToGI_F ON
++0 SET RunInTarg RunInGI
++0 SET ECM_IdleCtrl_TB OFF
++0 SET TLA_Targ	6.84
+#elseif GoToGI61_F
+* Use this for TLA_Targ of 6.84 GI...
+* Adds the GoToHold_F Flag & StageTmrLim = 180...
++0 SET GoToGI_F ON
++0 SET GoToHold_F ON
++0 SET RunInTarg RunInGI
++0 SET StageTmrLim 180.0
++0 SET ECM_IdleCtrl_TB OFF
++0 SET TLA_Targ	6.84
+#elseif GoToAI_F
++0 SET RunInTarg RunInAI
++0 SET ECM_IdleCtrl_TB ON
++0 SET TLA_Targ	6.84
+#elseif (RunInStep = 2)
++0 SET RunInTarg 2610.0
++0 SET TLA_Targ	5.40
++0 SET StageTmrLim 6.5
+#elseif (RunInStep = 5)
++0 SET RunInTarg 3220.0
++0 SET TLA_Targ	7.80
++0 SET StageTmrLim 13.0
+#elseif (RunInStep = 8)
++0 SET RunInTarg 3690.0
++0 SET TLA_Targ	9.225
++0 SET StageTmrLim 17.5
+#elseif (RunInStep = 11)
++0 SET RunInTarg 4160.0
++0 SET TLA_Targ	10.65
++0 SET StageTmrLim 22.0
+#elseif (RunInStep = 14)
++0 SET RunInTarg 4802.5
++0 SET TLA_Targ	12.605
++0 SET StageTmrLim 28.5
+#elseif (RunInStep = 17)
++0 SET RunInTarg 5445.0
++0 SET TLA_Targ	14.560
++0 SET StageTmrLim 35.0
+#elseif (RunInStep = 20)
++0 SET RunInTarg 6022.5
++0 SET TLA_Targ	16.310
++0 SET StageTmrLim 36.0
+#elseif (RunInStep = 23)
++0 SET RunInTarg 6600.0
++0 SET TLA_Targ	18.060
++0 SET StageTmrLim 37.0
+#elseif (RunInStep = 26)
++0 SET RunInTarg 7365.0
++0 SET TLA_Targ	20.415
++0 SET StageTmrLim 45.0
+#elseif (RunInStep = 29)
++0 SET RunInTarg 7620.0
++0 SET TLA_Targ	20.840
++0 SET StageTmrLim 47.2
+#elseif (RunInStep = 32)
++0 SET RunInTarg 7876.0
++0 SET TLA_Targ	21.630
++0 SET StageTmrLim 49.8
+#elseif (RunInStep = 35)
++0 SET RunInTarg 8130.0
++0 SET TLA_Targ	22.770
++0 SET StageTmrLim 53.0
+#elseif (RunInStep = 40)
++0 SET RunInTarg 8347.0
++0 SET TLA_Targ	27.690
++0 SET StageTmrLim 0.9
+#elseif (RunInStep = 41)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 0.9
+#elseif (RunInStep = 46)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 0.5
+#elseif (RunInStep = 47)
++0 SET RunInTarg 8563.0
++0 SET TLA_Targ	30.445
++0 SET StageTmrLim 2.8
+#elseif (RunInStep = 48)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 2.8
+#elseif ((RunInStep = 38) | (RunInStep = 45) | (RunInStep = 52) | (RunInStep = 59))
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 53.6
+#elseif (RunInStep = 54)
++0 SET RunInTarg 8779.0
++0 SET TLA_Targ	32.180
++0 SET StageTmrLim 5.2
+#elseif (RunInStep = 55)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 5.2
+#elseif ((RunInStep = 42) | (RunInStep = 49) | (RunInStep = 56) | (RunInStep = 67) | (RunInStep = 78)  | (RunInStep = 89) | (RunInStep = 100) | (RunInStep = 111))
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 0.5
+#elseif ((RunInStep = 39) | (RunInStep = 46) | (RunInStep = 53) | (RunInStep = 60) | (RunInStep = 71) | (RunInStep = 82)  | (RunInStep = 93) | (RunInStep = 104))
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 0.5
+#elseif ((RunInStep = 61) | (RunInStep = 72) | (RunInStep = 83) | (RunInStep = 94) | (RunInStep = 105))
++0 SET RunInTarg 8819.0
++0 SET TLA_Targ	33.300
++0 SET StageTmrLim 5.6
+#elseif ((RunInStep = 62) | (RunInStep = 73) | (RunInStep = 84) | (RunInStep = 95) | (RunInStep = 106))
++0 SET RunInTarg 8819.0
++0 SET TLA_Targ	36.700
++0 SET StageTmrLim 0.5
+#elseif ((RunInStep = 63) | (RunInStep = 74) | (RunInStep = 85) | (RunInStep = 96) | (RunInStep = 107))
++0 SET RunInTarg 8995.0
++0 SET TLA_Targ	45.000
++0 SET StageTmrLim 1.8
+#elseif ((RunInStep = 64) | (RunInStep = 75) | (RunInStep = 86) | (RunInStep = 97) | (RunInStep = 108))
++0 SET RunInTarg 8819.0
++0 SET TLA_Targ	36.700
++0 SET StageTmrLim 1.8
+#elseif ((RunInStep = 65) | (RunInStep = 76) | (RunInStep = 87) | (RunInStep = 98) | (RunInStep = 109))
++0 SET RunInTarg 8819.0
++0 SET TLA_Targ	33.300
++0 SET StageTmrLim 0.5
+#elseif ((RunInStep = 66) | (RunInStep = 77) | (RunInStep = 88)  | (RunInStep = 99) | (RunInStep = 110))
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	27.100
++0 SET StageTmrLim 5.6
+#elseif (RunInStep = 70)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 38.3
+#elseif (RunInStep = 81)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 29.8
+#elseif (RunInStep = 92)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 26.8
+#elseif (RunInStep = 103)
++0 SET RunInTarg 8262.0
++0 SET TLA_Targ	22.900
++0 SET StageTmrLim 24.4
+#else
++0 SET RunInTarg RunInGI
++0 SET TLA_Targ	3.0
+#endif
+#if (GoToGI6_F | GoToGI61_F)
++0 SET RunInN1C2TargMx (RunInGIMx + N1C2TargBand)
++0 SET RunInN1C2TargMn RunInGIMn
+#else
++0 SET RunInN1C2TargMx (RunInTarg + N1C2TargBand)
++0 SET RunInN1C2TargMn (RunInTarg - N1C2TargBand)
+#endif
++0 SET RunInTLATargMx (TLA_Targ + TLATargBand)
++0 SET RunInTLATargMn (TLA_Targ - TLATargBand)
++0 SET RunInStartMx (RunInTLA + 0.2)
++0 SET RunInStartMn (RunInTLA - 0.2)
+#if GoToHold_F
+*+0 SET RunInN1Rat 0.0
++0 SET TLA_Rate 0.0
++0 SET RunInAccel_F OFF
++0 SET RunInDecel_F OFF
+#else
++0 SET RunInN1Rat ((RunInTarg - N1C2R) / StageTmrLim)
++0 SET TLA_Rate ((TLA_Targ - RunInTLA) / StageTmrLim)
++0 SET RunInAccel_F (TLA_Targ > RunInTLA)
++0 SET RunInDecel_F (TLA_Targ < RunInTLA)
+*+0 SET RunInAccel_F (RunInTarg > RunInN1)
+*+0 SET RunInDecel_F (RunInTarg < RunInN1)
+#endif
+#if RunInDecel_F
++0 SET RunInN1Rat ((N1C2R - RunInTarg) / StageTmrLim)
++0 SET TLA_Rate ((RunInTLA - TLA_Targ) / StageTmrLim)
++0 SET RunInDecelMx RunInStartMx
++0 SET RunInDecelMn RunInStartMn
++0 SET RunInAccelMx 0.0
++0 SET RunInAccelMn 0.0
++0 SET TLAatArm (RunInTLA - 0.2)
++0 SET N1C2DecelTarg RunInN1C2TargMx
++0 SET TLADecelTarg RunInTLATargMx
+#elseif RunInAccel_F
++0 SET RunInN1Rat ((RunInTarg - N1C2R) / StageTmrLim)
++0 SET TLA_Rate ((TLA_Targ - RunInTLA) / StageTmrLim)
++0 SET RunInAccelMx RunInStartMx
++0 SET RunInAccelMn RunInStartMn
++0 SET RunInDecelMx RunInTargMx
++0 SET RunInDecelMn RunInTargMn
++0 SET TLAatArm (RunInTLA + 0.2)
++0 SET N1C2AccelTarg RunInN1C2TargMn
++0 SET TLAAccelTarg RunInTLATargMn
+#else
++0 SET TLA_Rate 0.0
++0 SET RunInDecelMx 0.0
++0 SET RunInDecelMn 0.0
++0 SET RunInAccelMx 0.0
++0 SET RunInAccelMn 0.0
+#endif
+$END-PHASE
+**********
+

@@ -1,0 +1,15 @@
+rig sig egtharnessdegc 541
+demosys: /cust/nwa/pw2037/rig 167 > rig sig egtharnessdegc 546
+demosys: /cust/nwa/pw2037/rig 168 > rig sig egtharnessdegc 551
+demosys: /cust/nwa/pw2037/rig 169 > rig sig egtharnessdegc 541
+demosys: /cust/nwa/pw2037/rig 170 > rig sig egtharnessdegc 539
+demosys: /cust/nwa/pw2037/rig 171 > rig sig egtharnessdegc 200
+demosys: /cust/nwa/pw2037/rig 172 >
+
+
+timer did start when egt > 540,
+then displayed limit did change when egt > 545, but timer kept accumulating
+   (a new timer for the higher value did not start)
+then displayed limit changed again when egt=551, but same timer kept timing.
+
+Also, timer did not stop until egt down to 200.

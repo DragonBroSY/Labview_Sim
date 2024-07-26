@@ -1,0 +1,259 @@
+$GROUP "initialize"  when=4
+dummy:	0
+BitDummy:	0
+BlinkTmr_F:	ON
+Blink_TB:	OFF
+#if	(CellNum = 3.0)
+VXINAME:   concat("" "delta3arinc429")
+#else
+VXINAME:   concat("" "delta4arinc429")
+#endif
+MLD_Recording_F:        OFF
+ParkBrake_F:	ON
+StartDspOp_F:   OFF
+OSProcDspOp_F:  OFF
+FlexTemp:DegC           -99.0
+OverRideSVScd_F:	OFF
+OverRide25Bld_F:	OFF
+#C LoPwrStabTst1_F:	OFF
+#C LoPwrStabTst2_F:	OFF
+#C LoPwrStabTst3_F:	OFF
+#C LastLPStability_RB:	0
+#C VaneSchedBias_TS:	OFF
+#C PW1500 has LVDT TLA...
+TLA_LVDT_ON_O:		OFF
+LoopCount:	0
+CtrlLoopTxt:	concat ("" "No Data")
+CtrlLoopName:	concat ("" "INVALID")
+EECACTypeTxt:	concat ("" "UNK")
+EECEngRatTxt:	concat ("" "UNK")
+MaxFuelUsed:	32000.0
+PointTmr_F:	OFF
+PointTmr:Sec	0.0
+PointName:	concat ("", "EVENT")
+ScanStoreInProgress:	OFF
+OpTimer:	0.0
+OpTimer_F:	OFF
+#C **** PID Loop Parameters ********
+PAIRs:		0.0
+PAIRs_CmdPct:%	0.0
+FNTR2_CmdPct:%	0.0
+FNTR2_Cmd:%	0.0
+FNTR2_PID_F:	OFF
+FNTR2_FBP:%	0.0
+FNTR2_SPP:%	0.0
+#C **** FNTR2_Slope is based on FNTR2 FNAMax and FNDMin = 16591 - 32768 = 0 - 100%...
+#C **** Used to calculate FNTR2_Pct and Acceptance Targets%.
+#C **** See FNTR2 PID Loop.xlsx for more info...
+FNTR2_SlopeA:	0.006182
+FNTR2_SlopeB:	-102.559189
+#C **** TRA_Slope is based on TRA = 0 - 65.0 = 0 - 100%...
+#C **** Used to control TRA_Cmd from FNTR2_CmdPct output parameter for Acceptance Targets%.
+#C **** See FNTR2 PID Loop.xlsx for more info...
+TRA_SlopeA:	0.29
+TRA_SlopeB:	33.0
+#C *********************************
+TimeAtStart:	concat ("" "No Data")
+DateAtStart:	concat ("" "No Data")
+TimeAtStop:	concat ("" "No Data")
+DateAtStop:	concat ("" "No Data")
+#C LPStabilityTest_RB:	0
+NFHz:Hz	0.0
+N1Hz:Hz	0.0
+N2Hz:Hz	0.0
+NFI:RPM	0.0
+N1I:RPM	0.0
+N2I:RPM	0.0
+NFPctS:%	0.0
+N1PctS:%	0.0
+N2PctS:%	0.0
+WfS:PPH	0.0
+GenHz:Hz	0.0
+Gen_Voltage:VAC	0.0
+Gen_Current:mA	0.0
+DCIgnCurrA:ADC	0
+DCIgnCurrB:ADC	0
+PCellFPSIG:PSIG	0.0
+PCellRPSIG:PSIG	0.0
+OATDegC:DegC	0.0
+TRISE:DegF	0.0
+#C QECMOP:PSID	0.0
+#C QECFuelPress:PSIG	0.0
+Bignumber:	999999
+WeightFac:	0.85
+EngineRunning:	OFF
+EngineNotRunning:	ON
+RunMode:	OFF
+NotRunMode:	ON
+EmergIdle_F:	OFF
+IgnSystem:	concat ("" "IGN:")
+EngTypeSTR:	concat ("" "UNK")
+N1RnDnAtStop:RPM	0
+N2RnDnAtStop:RPM	0
+ITTAtStop:DegC	0.0
+FuelCutOff_O:	ON
+EngineOLimits_O:	OFF
+NoLightoffMsg:	0.0
+StartPeakITT:DegC	0.0
+StartPeakWf:PPH	0.0
+FuelOnToIdle:secs	0.0
+StrtOnToIdleTmr:secs	0.0
+MotorTm:Sec	0.0
+MotorSysTime:Sec	0.0
+StableN1_F:	OFF
+StableN2_F:	OFF
+StableEGT_F:	OFF
+StableEng_F:	OFF
+WSLookup:	concat ("" "N/A")
+WSLookupVal:	0.0
+#C ***************************************
+TargBandTxt:	concat ("" "Band X")
+DecelSpdTxt:	concat ("" "Fast")
+FNTR2_Targ:Lbf		0.0
+FNTR2_TargMx:Lbf        0.0
+FNTR2_TargMn:Lbf        0.0
+#C *** Run-In Parameters ***
+#C *** Alse see initsaveparams.cal ***
+StageTmr_F:     OFF
+StageTmr:Sec	0.0
+StageTmrLim:Sec	0.0
+#C ElapsedTmTmr:   0.0
+Accel_F:	OFF
+Decel_F:	OFF
+#C * TLA_Targ is the EEC TLA Target Lookup for AutoThrottle Break-in Runs.
+#C * TRA_Actual = (TLA_Targ - 14.0) Ref. FSID Table 4.1.1.1-1 (Angular Relationships Throttle lever to RVDT Position)...
+TLA_Targ:Deg	0.0
+TLATarg_F:	OFF
+#C ************************************************
+RunInPause_F:   OFF
+RunInTRA:Deg    0.0
+TRA_Travel:Deg	0.0
+TRA_Totl:Deg	0.0
+TRA_ProgPct:%	0.0
+TRA_Prev:Deg	0.0
+TRA_Rate:Deg/Sec	0.0
+TRAStartMn:Deg	0.0
+TRAStartMx:Deg	0.0
+TRAAccel_F:	OFF
+TRADecel_F:	OFF
+TRAAccelMn:Deg	0.0
+TRAAccelMx:Deg	0.0
+TRADecelMn:Deg	0.0
+TRADecelMx:Deg	0.0
+#C * TRA_Targ is used for AutoThrottle Break-in Runs.
+TRA_Targ:Deg	0.0
+TRA_TargMn:Deg	0.0
+TRA_TargMx:Deg	0.0
+TRAAccelTarg:Deg	0.0
+TRADecelTarg:Deg	0.0
+N1C2R:RPM	0.0
+N1C2R_Prev:RPM	0.0
+N1C2_Rate:RPM/Sec	0.0
+N1C2StartMn:RPM	0.0
+N1C2StartMx:RPM	0.0
+N1C2Targ_F:	OFF
+N1C2Accel_F:	OFF
+N1C2Decel_F:	OFF
+N1C2AccelMn:RPM	0.0
+N1C2AccelMx:RPM	0.0
+N1C2DecelMn:RPM	0.0
+N1C2DecelMx:RPM	0.0
+N1C2_Targ:RPM	0.0
+N1C2_TargMn:RPM	0.0
+N1C2_TargMx:RPM	0.0
+N1C2TargMinus:RPM	5.0
+N1C2TargAdd:RPM	5.0
+N1C2AccelTarg:RPM	0.0
+N1C2DecelTarg:RPM	0.0
+N2C2AccelTarg:RPM	0.0
+N2C2_TargMn:RPM	0.0
+N2C2_TargMx:RPM	0.0
+#C OverRideLPCBld:	OFF
+N1AccelStop:RPM	0.0
+N1DecelStop:RPM	0.0
+GotoAI_F:       OFF
+GotoGI_F:       OFF
+GotoHold_F:     OFF
+N1_ADBar_F:     OFF
+N1_ADStart:RPM	0.0
+N1_ADRat:RPM/Sec	0.0
+ArmRunInHPC_TB:	OFF
+#C ArmBrkInHPT_TB:	OFF
+AutoTDisplay_F:	OFF
+#C CheckN2Min_F:	OFF
+#C *** Break-In Parameters ***
+#C BrkInPause_F:   OFF
+#C ************************
+#C Accel/Decel state for plotting vibs.
+ADState:	1.0
+#C Initialization for the Vib Peaks display
+VibSmoothFact:	0.50
+VibFBBPk:IPS	0.0
+VibFBBPkN1:RPM	0.0
+VibFBBPkN2:RPM	0.0
+VibFN1Pk:IPS	0.0
+VibFN1PkN1:RPM	0.0
+VibFN1PkN2:RPM	0.0
+VibFN2Pk:IPS	0.0
+VibFN2PkN1:RPM	0.0
+VibFN2PkN2:RPM	0.0
+VibRBBPk:IPS	0.0
+VibRBBPkN1:RPM	0.0
+VibRBBPkN2:RPM	0.0
+VibRN1Pk:IPS	0.0
+VibRN1PkN1:RPM	0.0
+VibRN1PkN2:RPM	0.0
+VibRN2Pk:IPS	0.0
+VibRN2PkN1:RPM	0.0
+VibRN2PkN2:RPM	0.0
+VibPeakDate:	concat ("" "No Data")
+VibPeakTime:	concat ("" "No Data")
+#C Initialize Vibration Signals...
+VibFBB:IPS	0.0
+VibF2BB:IPS	0.0
+VibRBB:IPS	0.0
+VibFN1:IPS	0.0
+VibFN2:IPS	0.0
+VibN2Frq:Hz	0.0
+VibFAmp:IPS	0.0
+VibN1Frq:Hz	0.0
+VibFPhs:Deg	0.0
+VibN1RPM:RPM	0.0
+VibN2RPM:RPM	0.0
+VibRN1:IPS	0.0
+VibRN2:IPS	0.0
+VibRAmp:IPS	0.0
+VibRPhs:Deg	0.0
+#C ITT overtemp timers...
+ITTRunTrigTmr_F:	OFF
+ITTRunTrigTmr:Sec	0.0
+ITTRunMxTmr_F:		OFF
+ITTRunMxTmr:Sec		0.0
+ITTRunPk:DegC		0.0
+ITTStrtTrigTmr_F:	OFF
+ITTStrtTrigTmr:Sec	0.0
+ITTStrtMxTmr_F:		OFF
+ITTStrtMxTmr:Sec	0.0
+ITTStrtPk:DegC		0.0
+#C --- Under Cowl Temp Disable Flags -------
+TNFDLFUL_F:		OFF
+TNFDLFML_F:		OFF
+TNFDLFLL_F:		OFF
+TNFDLAUL_F:		OFF
+TNFDLALL_F:		OFF
+TNFDLMUL_F:		OFF
+TNFDLMLL_F:		OFF
+TNFDLBUL_F:		OFF
+TNFDLBLL_F:		OFF
+TNFDLFUR_F:		OFF
+TNFDLFMR_F:		OFF
+TNFDLFLR_F:		OFF
+TNFDLAUR_F:		OFF
+TNFDLALR_F:		OFF
+TNFDLMUR_F:		OFF
+TNFDLMLR_F:		OFF
+TNFDLBUR_F:		OFF
+TNFDLBLR_F:		OFF
+TNFDLFUT_F:		OFF
+TNFDLAUT_F:		OFF
+$END-GROUP

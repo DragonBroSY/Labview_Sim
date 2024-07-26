@@ -1,0 +1,297 @@
+$GROUP "ecm_atl" 
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Logic ************
+#C ****** See autothrottle.cal **************
+#C ------------------------------------------
+#if	(SWActive & AutoThrottle_F & AutoTLAEnable_F & Blink_F)
+#C * Automatic TLA Orange...
+AutoThrottle_Stat:	5
+#elseif	(SWActive & AutoThrottle_F & AutoTLAEnable_F & ~Blink_F)
+#C * Automatic TLA Yellow...
+AutoThrottle_Stat:	4
+#elseif	(SWActive & AutoThrottle_F & AutoPL_I)
+#C * Automatic PLA...
+AutoThrottle_Stat:	3
+#elseif	(SWActive & ~AutoThrottle_F & (AutoPL_I | AutoTLAEnable_F))
+#C * Active...
+AutoThrottle_Stat:	2
+#elseif	(SWActive & ~AutoThrottle_F & ~AutoPL_I & ~AutoTLAEnable_F)
+#C * OFF...
+AutoThrottle_Stat:	1
+#elseif	~SWActive
+#C * Not Active...
+AutoThrottle_Stat:	0
+#endif	
+#if	(AutoPL_I & AutoTLAEnable_F)
+AutoTLAEnable_TS:	OFF
+#endif	
+#C ------------------------------------------
+#C ****** ECM AutoThrottle Switch Logic *****
+#C ------------------------------------------
+#C ------------------------------------------
+#C ****** TRA Going To Max Power Stop *******
+#C ------------------------------------------
+#if	((~GoToMxPwrStop_TS | TRAatMxPwrStop_F | Accel_F | Decel_F | ADPause_F) & GoingToMxPwr_F)
+GoToMxPwrStop_TS:	OFF
+GoingToMxPwr_F:	OFF
+TRATmr_F:	OFF
+#elseif	(GoToMxPwrStop_TS & ~GoingToMxPwr_F & (AutoPL_I | AutoTLAEnable_F))
+GoToMnIdleStop_TS:	OFF
+GoingToMxPwr_F:	ON
+AutoTRequest_F:	ON
+TRA_TargMn:	TRAMxPwrStopMn
+TRA_TargMx:	TRAMxPwrStopMx
+Accel_F:	OFF
+Decel_F:	OFF
+ADPause_F:	OFF
+dummy:  storeevent ("GoTo Max Power Stop Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** TRA Going To Min Idle Stop ********
+#C ------------------------------------------
+#if	((~GoToMnIdleStop_TS | TRAatMnIdleStop_F) & GoingToMnIdle_F)
+GoToMnIdleStop_TS:	OFF
+GoingToMnIdle_F:	OFF
+TRATmr_F:	OFF
+#elseif	(GoToMnIdleStop_TS & ~GoingToMnIdle_F & (AutoPL_I | AutoTLAEnable_F))
+#C Allow GoToMnIdleStop_TS to cancel AutoTest Phases if needed for emergency to goto Idle...
+GoToMxPwrStop_TS:	OFF
+GoingToMnIdle_F:	ON
+AutoTRequest_F:	ON
+TRA_TargMx:	TRAMnIdleStopMx
+TRA_TargMn:	TRAMnIdleStopMn
+Accel_F:	OFF
+Decel_F:	OFF
+ADPause_F:	OFF
+dummy:  storeevent ("GoTo Min Idle Stop Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** IncreaseTRA Switch ****************
+#C ------------------------------------------
+#if	((~IncreaseTRA_MS | TRAatMxPwrStop_F | Accel_F | Decel_F | ADPause_F) & IncreaseTRA_F)
+IncreaseTRA_F:	OFF
+IncreaseTRA_MS:	OFF
+TRATmr_F:	OFF
+#elseif	(IncreaseTRA_MS & ~IncreaseTRA_F & ~Accel_F & ~Decel_F & ~ADPause_F & (AutoPL_I | AutoTLAEnable_F))
+DecreaseTRA_F:	OFF
+IncreaseTRA_F:	ON
+AutoTRequest_F:	ON
+dummy:  storeevent ("Increase TRA Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** DecreaseTRA Switch ****************
+#C ------------------------------------------
+#if	((~DecreaseTRA_MS | TRAatMnIdleStop_F | Accel_F | Decel_F | ADPause_F) & DecreaseTRA_F)
+DecreaseTRA_F:	OFF
+DecreaseTRA_MS:	OFF
+TRATmr_F:	OFF
+#elseif	(DecreaseTRA_MS & ~DecreaseTRA_F & ~Accel_F & ~Decel_F & ~ADPause_F & (AutoPL_I | AutoTLAEnable_F))
+IncreaseTRA_F:	OFF
+DecreaseTRA_F:	ON
+AutoTRequest_F:	ON
+dummy:  storeevent ("Decrease TRA Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Run-In HPC Test 4 *****************
+#C ------------------------------------------
+#if	(~RunInHPC_TS & ArmRunInHPC_TB)
+ArmRunInHPC_TB:	OFF
+OverRide25Bld_F:	OFF
+OverRideSVScd_F:	OFF
+dummy:  StoreEvent ("Engine Run-In HPC (Stopped) by Runner.")
+#elseif	(RunInHPC_TS & ~ArmRunInHPC_TB & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	4
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Run In HPC Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Vib Survey 6 **********************
+#C ------------------------------------------
+#if	(~VibSurvey_TS & ~VibSvyOffical_TS & ArmVibSurvey_TB)
+ArmVibSurvey_TB:	OFF
+OverRide25Bld_F:	OFF
+OverRideSVScd_F:	OFF
+dummy:  StoreEvent ("Offical Vibration Survey (Stopped) by Runner.")
+#elseif	((VibSurvey_TS | VibSvyOffical_TS) & ~ArmVibSurvey_TB & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	6
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Offical VibSurvey Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Shaped Accel **********************
+#C ------------------------------------------
+#if	(~ShapedAccel_TS & ArmShapedAccel_F)
+ArmShapedAccel_F:	OFF
+OverRide25Bld_F:	OFF
+OverRideSVScd_F:	OFF
+dummy:  StoreEvent ("Shaped Accel (Stopped) by Runner.")
+#elseif	(ShapedAccel_TS & ~ArmShapedAccel_F & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	8
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Shaped Accel Switch Pushed...")
+#endif	
+#if	(ArmShapedAccel_F & (ShapedStage > 0))
+dummy:	startautotest (ShapedAccel_ATP)
+#elseif	(ArmShapedAccel_F & (ShapedStage = 0))
+dummy:	StoreEvent ("Shaped Accel Procedure (Started)")
+ShapedStage:	1
+StepTxt:	concat ("" "Shaped Accel: ")
+ShapedStageTxt:	concat (StepTxt "Procedure (Started)...")
+#endif	
+#C ------------------------------------------
+#C ****** Acceptance Test 9 *****************
+#C ------------------------------------------
+#if	(~AcceptT9_TS & ArmAcceptance_TB)
+ArmAcceptance_TB:	OFF
+dummy:  StoreEvent ("Acceptance T9 (Stopped) by Runner.")
+#elseif	(AcceptT9_TS & ~ArmAcceptance_TB & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	9
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Acceptance T9 Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Accel Decel Test ******************
+#C ------------------------------------------
+#if	(~AccelDecel_TS & ArmAccelDecel_F)
+ArmAccel_F:	OFF
+ArmDecel_F:	OFF
+ArmAccelDecel_F:	OFF
+dummy:  storeevent ("Accel Decel (Stopped) by Runner...")
+#elseif	(AccelDecel_TS & ~ArmAccelDecel_F & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	10
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Accel Decel Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Cool Down Procedure 12 ************
+#C ****** Bowed Rotor Prevention ************
+#C ------------------------------------------
+#if	(~CoolDown_TS & ArmCoolDown_F)
+ArmCoolDown_F:	OFF
+dummy:  storeevent ("Cool Down (Stopped) by Runner...")
+#elseif	(CoolDown_TS & ~ArmCoolDown_F & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	12
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Cool Down Switch Pushed...")
+#endif	
+#if	(ArmCoolDown_F & (CoolDnStage > 0))
+dummy:	startautotest (CoolDown_ATP)
+#elseif	(ArmCoolDown_F & (CoolDnStage = 0))
+dummy:	StoreEvent ("Cool Down Procedure (Started)")
+CoolDnStage:	1
+dummy:	startautotest (StageClear_ATP)
+StepTxt:	concat ("" "Cool Down: ")
+CoolDnStageTxt:	concat (StepTxt "Procedure (Started)...")
+#endif	
+#C ------------------------------------------
+#C ****** Warm UP Procedure *****************
+#C ------------------------------------------
+#if	(~WarmUP_TS & ArmWarmUP_F)
+ArmWarmUp_F:	OFF
+WarmUpStage:    0
+dummy:  storeevent ("Warm UP (Stopped) by Runner...")
+#elseif	(WarmUP_TS & ~ArmWarmUP_F & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	13
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Warm UP Switch Pushed...")
+#endif	
+#if	(ArmWarmUp_F & (WarmUpStage > 0))
+dummy:	startautotest (EngWarmUp_ATP)
+#elseif	(ArmWarmUp_F & (WarmUpStage = 0))
+dummy:	StoreEvent ("Warn UP Procedure (Started)")
+WarmUpStage:	1
+dummy:	startautotest (StageClear_ATP)
+StepTxt:	concat ("" "Warm UP: ")
+WarmUpStageTxt:	concat (StepTxt "Procedure (Started)...")
+#endif	
+#C ------------------------------------------
+#C ****** Correlation Procedure *************
+#C ------------------------------------------
+#if	(~Correlation_TS & ArmCorrelation_TB)
+ArmCorrelation_TB:	OFF
+dummy:  StoreEvent ("Correlation (Stopped) by Runner.")
+#elseif	(Correlation_TS & ~ArmCorrelation_TB & ~AutoThrottle_F & ~AutoTDisplay_F & (AutoPL_I | AutoTLAEnable_F))
+AutoTRASw:	15
+AutoTRequest_F:	ON
+AutoTDisplay_F:	ON
+dummy:	startautotest(AutoTDisplays_ATP)
+dummy:  storeevent ("Correlation Switch Pushed...")
+#endif	
+#C ------------------------------------------
+#C ****** Shutdown AutoThrottle *************
+#C ------------------------------------------
+#if	(~DecreaseTRA_MS & ~IncreaseTRA_MS & ~GoToMnIdleStop_TS & ~GoToMxPwrStop_TS & ~RunInHPC_TS & ~AcceptT9_TS & ~AccelDecel_TS & ~VibSurvey_TS & ~VibSvyOffical_TS & ~ShapedAccel_TS & ~CoolDown_TS & ~BowedRotor_TS & ~WarmUp_TS & ~Correlation_TS & AutoThrottle_F)
+AutoThrottle_F:	OFF
+TRATmr_F:	OFF
+AutoTRASw:	0
+OverRide25Bld_F:	OFF
+OverRideSVScd_F:	OFF
+StageTmr_F:	OFF
+StageTmr:Sec	0.0
+IncreaseTRA_F:	OFF
+DecreaseTRA_F:	OFF
+ButtonPushed_F: OFF
+dummy:  storeevent ("No Buttons Pushed, Button Bush OFF...")
+#endif	
+#C -------------------------------------------------
+#C ****** Make sure Over Rides are off *************
+#C -------------------------------------------------
+#if	((OverRideSVScd_F | OverRide25Bld_F) & ~ArmRunInHPC_TB & ~ArmVibSurvey_TB)
+OverRideSVScd_F:	OFF
+OverRide25Bld_F:	OFF
+#endif	
+#C -------------------------------------------------
+#C ****** Turn AutoThrottle_F Switch Functions OFF *
+#C -------------------------------------------------
+#if	(~AutoPL_I & ~AutoTLAEnable_F & ButtonPushed_F)
+GoToMxPwrStop_TS:	OFF
+GoToMnIdleStop_TS:	OFF
+#C TRAOverRide_TS: OFF
+RunInHPC_TS:	OFF
+#C BrkInHPT_TS: OFF
+VibSurvey_TS:	OFF
+VibSvyOffical_TS:	OFF
+AccelDecel_TS:	OFF
+ShapedAccel_TS:	OFF
+AcceptT9_TS:	OFF
+#C HPCStability_TS: OFF
+CoolDown_TS:	OFF
+BowedRotor_TS:	OFF
+WarmUP_TS: OFF
+Correlation_TS:	OFF
+ButtonPushed_F:	OFF
+#endif	
+#C **********************************************************
+#C * Set the Initial MIN/MAX TRA Stops if TRA Rigged ********
+#C **********************************************************
+#if	(~TRAMxPwrStopSet_F & (AutoPL_I | AutoTLAEnable_F | SetMnMxStops_S))
+TRAMxPwrStop:deg	TLA_Takeoff
+TRAMxPwrStopMx:deg	(TRAMxPwrStop + 1.0)
+TRAMxPwrStopMn:deg	(TRAMxPwrStop - 0.2)
+TRAMxPwrStopSet_F:	ON
+#endif	
+#if	(~TRAMnIdleStopSet_F & (AutoPL_I | AutoTLAEnable_F | SetMnMxStops_S))
+#C TRAMnIdleStop:deg TLA_Idle
+TRAMnIdleStop:deg	-14.0
+TRAMnIdleStopMx:deg	(TRAMnIdleStop + 0.5)
+TRAMnIdleStopMn:deg	(TRAMnIdleStop - 1.0)
+TRAMnIdleStopSet_F:	ON
+#endif	
+#C -------------------------------------------------
+LastAutoTRASw:	AutoTRASw
+#C -------------------------------------------------
+$END-GROUP

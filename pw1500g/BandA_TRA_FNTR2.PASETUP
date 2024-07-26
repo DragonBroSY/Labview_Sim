@@ -1,0 +1,3 @@
+* /cust/delta3/pw1500g/BandA_TRA_FNTR2.PASETUP
+$CRSPARAM "FNTR2" min=0.000000 max=25000.000000 linetype=
+$CRSPARAM "TRA_CMD" min=-34.000000 max=34.000000 linetype=

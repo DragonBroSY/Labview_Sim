@@ -1,0 +1,10 @@
+**************** Cenco Errors Notes File ******************************
+*** This file contains Notes on Errors/Bugs with the Cenco Program ****
+==========================================================================
+(DJR 061306) - Press the Clear button on the message que display with a
+display in any quadrent that has a message que box at the bottom in the 
+control display... (Ceres Version 6.5.51 only)
+>>> Resaults - Pilot Fatal Error message box appears and program quits...
+>>> Work around - Remove the $MSGQ (message que) from All displays that 
+		  can be open on the control display...
+==========================================================================

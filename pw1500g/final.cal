@@ -1,0 +1,236 @@
+$GROUP "final" 
+DCPwrTstOnce:	OFF
+DCPwrTstTmr:Sec 0.0
+DCIgnPwrA_O:	OFF
+DCIgnPwrB_O:	OFF
+FireDetCont_O:	OFF
+HPBV_On_O:	OFF
+EECPwrChA_O:	OFF
+EECPwrChB_O:	OFF
+PHMUPwrON_O:	OFF
+P2T2PHeat_O:	OFF
+EngPosL_CHA_O:	OFF
+EngPosL_CHB_O:	OFF
+EngPosR_CHA_O:	OFF
+EngPosR_CHB_O:	OFF
+EngRUN_CHA_O:	OFF
+EngRUN_CHB_O:	OFF
+EngOFF_CHA_O:	OFF
+EngOFF_CHB_O:	OFF
+AntiIce_ChA_O:	OFF
+AntiIce_ChB_O:	OFF
+WOW_ChA_O:	OFF
+WOW_ChB_O:	OFF
+BRCloseTm:	systime
+#C ^^^^^ PW1500G ^^^^^
+#C vvvvv Common Relays vvvvvv
+IDGDisc_O:	OFF
+FuelSuppReg_O:	OFF
+FuelSuppEng_O:	OFF
+CoolingAirVib_O:	OFF
+ThrustCalPower_O:	OFF
+ThrustCalRamSpeed_O:	OFF
+ThrustRamInc_O:	OFF
+ThrustRamDec_O:	OFF
+ThrustRamExt_O:	OFF
+ThrustRamLock_O:	OFF
+GenPwr_O:	OFF
+GenLoadSlctPhC_O:	OFF
+GenLoadSlctPhB_O:	OFF
+GenLoadSlctPhA_O:	OFF
+GenVoltSlctPhBtoC_O:	OFF
+GenVoltSlctPhCtoA_O:	OFF
+PMGVoltSlctPh2to3_O:	OFF
+PMGVoltSlctPh3to1_O:	OFF
+GenCurrTransB_O:	OFF
+GenCurrTransC_O:	OFF
+GenCurrTransTest_O:	OFF
+GenMagTrimTest_O:	OFF
+TLA_LVDT_ON_O:	OFF
+UPSFault_O:	OFF
+PressRegVlvOn_O:	OFF
+FuelControl_O:	OFF
+FuelOn1_O:	OFF
+GroundIdle_O:	OFF
+Enrich_O:	OFF
+FuelCutOff_O:	OFF
+EngineOLimits_O:	OFF
+AutoPLEnable_O:	OFF
+N2GT5Pct_O:	OFF
+StartAir_O:	OFF
+DCPwrTst_O:	OFF
+DSA_NitrogenSupply_O:   OFF
+DSA_C1C2_O:     OFF
+DSA_Zero_O:     OFF
+#C WeatherStaReset_O:	ON
+#C ^^^^^^ Common Relays ^^^^^^^
+FinalCloseDate:	concat ("" SYSDATE)
+FinalCloseTime:	SYSTIME
+TestClosed:	TRUE
+OpTimer_F:	OFF
+OpTimer:	0.0
+OverLim14_O:	OFF
+OverLim15_O:	OFF
+OverLim16_O:	OFF
+OverLim17_O:	OFF
+OverLim18_O:	OFF
+OverLim19_O:	OFF
+OverLim20_O:	OFF
+OverLim21_O:	OFF
+AudioOn_F:	OFF
+#C **** Calc Final Coriolis Meter Total Fuel Used/Burn. (DJR 060722)
+CM1_EndFuelUsed:Gal     CM1_TotalfuelUsed
+CM1_EndFuelBurn:Gal     CM1_TotalfuelBurn
+#C #if     (~StrVibPeaks_F & ~StrARVibPeaks_F)
+#C dummy:          startautotest (VibPeaksNOTStored_ATP)
+#C #if	(compare(StrVibPeakDate, "No Data") & ~compare(StrARVibPeakDate, "No Data"))
+#if     (~StrVibPeaks_F & StrARVibPeaks_F)
+StrVibFBBPk:IPS		StrARVibFBBPk
+StrVibFBBPkNF:RPM	StrARVibFBBPkNF
+StrVibFBBPkN1:RPM	StrARVibFBBPkN1
+StrVibFBBPkN2:RPM	StrARVibFBBPkN2
+StrVibFNFPk:IPS		StrARVibFNFPk
+StrVibFNFPkNF:RPM	StrARVibFNFPkNF
+StrVibFNFPkN1:RPM	StrARVibFNFPkN1
+StrVibFNFPkN2:RPM	StrARVibFNFPkN2
+StrVibFN1Pk:IPS		StrARVibFN1Pk
+StrVibFN1PkNF:RPM	StrARVibFN1PkNF
+StrVibFN1PkN1:RPM	StrARVibFN1PkN1
+StrVibFN1PkN2:RPM	StrARVibFN1PkN2
+StrVibFN2Pk:IPS		StrARVibFN2Pk
+StrVibFN2PkNF:RPM	StrARVibFN2PkNF
+StrVibFN2PkN1:RPM	StrARVibFN2PkN1
+StrVibFN2PkN2:RPM	StrARVibFN2PkN2
+StrVibRBBPk:IPS		StrARVibRBBPk
+StrVibRBBPkNF:RPM	StrARVibRBBPkNF
+StrVibRBBPkN1:RPM	StrARVibRBBPkN1
+StrVibRBBPkN2:RPM	StrARVibRBBPkN2
+StrVibRNFPk:IPS		StrARVibRNFPk
+StrVibRNFPkNF:RPM	StrARVibRNFPkNF
+StrVibRNFPkN1:RPM	StrARVibRNFPkN1
+StrVibRNFPkN2:RPM	StrARVibRNFPkN2
+StrVibRN1Pk:IPS		StrARVibRN1Pk
+StrVibRN1PkNF:RPM	StrARVibRN1PkNF
+StrVibRN1PkN1:RPM	StrARVibRN1PkN1
+StrVibRN1PkN2:RPM	StrARVibRN1PkN2
+StrVibRN2Pk:IPS		StrARVibRN2Pk
+StrVibRN2PkNF:RPM	StrARVibRN2PkNF
+StrVibRN2PkN1:RPM	StrARVibRN2PkN1
+StrVibRN2PkN2:RPM	StrARVibRN2PkN2
+StrDVibFBBPk:IPS	StrARDVibFBBPk
+StrDVibFBBPkNF:RPM	StrARDVibFBBPkNF
+StrDVibFBBPkN1:RPM	StrARDVibFBBPkN1
+StrDVibFBBPkN2:RPM	StrARDVibFBBPkN2
+StrDVibFNFPk:IPS	StrARDVibFNFPk
+StrDVibFNFPkNF:RPM	StrARDVibFNFPkNF
+StrDVibFNFPkN1:RPM	StrARDVibFNFPkN1
+StrDVibFNFPkN2:RPM	StrARDVibFNFPkN2
+StrDVibFN1Pk:IPS	StrARDVibFN1Pk
+StrDVibFN1PkNF:RPM	StrARDVibFN1PkNF
+StrDVibFN1PkN1:RPM	StrARDVibFN1PkN1
+StrDVibFN1PkN2:RPM	StrARDVibFN1PkN2
+StrDVibFN2Pk:IPS	StrARDVibFN2Pk
+StrDVibFN2PkNF:RPM	StrARDVibFN2PkNF
+StrDVibFN2PkN1:RPM	StrARDVibFN2PkN1
+StrDVibFN2PkN2:RPM	StrARDVibFN2PkN2
+StrDVibRBBPk:IPS	StrARDVibRBBPk
+StrDVibRBBPkNF:RPM	StrARDVibRBBPkNF
+StrDVibRBBPkN1:RPM	StrARDVibRBBPkN1
+StrDVibRBBPkN2:RPM	StrARDVibRBBPkN2
+StrDVibRNFPk:IPS	StrARDVibRNFPk
+StrDVibRNFPkNF:RPM	StrARDVibRNFPkNF
+StrDVibRNFPkN1:RPM	StrARDVibRNFPkN1
+StrDVibRNFPkN2:RPM	StrARDVibRNFPkN2
+StrDVibRN1Pk:IPS	StrARDVibRN1Pk
+StrDVibRN1PkNF:RPM	StrARDVibRN1PkNF
+StrDVibRN1PkN1:RPM	StrARDVibRN1PkN1
+StrDVibRN1PkN2:RPM	StrARDVibRN1PkN2
+StrDVibRN2Pk:IPS	StrARDVibRN2Pk
+StrDVibRN2PkNF:RPM	StrARDVibRN2PkNF
+StrDVibRN2PkN1:RPM	StrARDVibRN2PkN1
+StrDVibRN2PkN2:RPM	StrARDVibRN2PkN2
+StrVibPeakDate:	concat ("" StrARVibPeakDate)
+StrVibPeakTime:	concat ("" StrARVibPeakTime)
+#endif	
+#if	FanWeightLoc1=0
+FanWeight1:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc2=0
+FanWeight2:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc3=0
+FanWeight3:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc4=0
+FanWeight4:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc5=0
+FanWeight5:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc6=0
+FanWeight6:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc7=0
+FanWeight7:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc8=0
+FanWeight8:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc9=0
+FanWeight9:	concat ("" "NONE")
+#endif	
+#if	FanWeightLoc10=0
+FanWeight10:	concat ("" "NONE")
+#endif	
+#if	compare (FanWeight1, "NONE")
+FanWeightLoc1:	0
+#endif	
+#if	compare (FanWeight2, "NONE")
+FanWeightLoc2:	0
+#endif	
+#if	compare (FanWeight3, "NONE")
+FanWeightLoc3:	0
+#endif	
+#if	compare (FanWeight4, "NONE")
+FanWeightLoc4:	0
+#endif	
+#if	compare (FanWeight5, "NONE")
+FanWeightLoc5:	0
+#endif	
+#if	compare (FanWeight6, "NONE")
+FanWeightLoc6:	0
+#endif	
+#if	compare (FanWeight7, "NONE")
+FanWeightLoc7:	0
+#endif	
+#if	compare (FanWeight8, "NONE")
+FanWeightLoc8:	0
+#endif	
+#if	compare (FanWeight9, "NONE")
+FanWeightLoc9:	0
+#endif	
+#if	compare (FanWeight10, "NONE")
+FanWeightLoc10:	0
+#endif	
+#C ****** Mapnet Information ********
+MapnetTC:	TCSN
+MapnetTC:	TSO
+#if	WorkScope_COR
+MapNetTSTYPE:	7
+#elseif	Compare (EngineStatus, "Accepted")
+MapNetTSTYPE:	1
+#elseif	Compare (EngineStatus, "Rejected")
+MapNetTSTYPE:	2
+#elseif	Compare (EngineStatus, "Returned")
+MapNetTSTYPE:	4
+#else	
+MapNetTSTYPE:	3
+#endif	
+#if	Compare (CompWash, "YES")
+MapNetWWASH:	concat ("" "Y")
+#elseif	Compare (CompWash, "NO")
+MapNetWWASH:	concat ("" "N")
+#else	
+MapNetWWASH:	concat ("" "U")
+#endif	
+$END-GROUP

@@ -1,0 +1,997 @@
+$DISPLAY "EEC System Bits" background=LightGray editres=MEDRES movegrid=0 resizegrid=0 showgrid=0 gridcolor=Cyan
+$MSGQ
+$STOREDISPLAY Append
+$OBJECT Box font=101 startx=8 starty=101 endx=1225 endy=702
+style=3
+linewidth=2 linecolor=Cyan
+boxcolor=LightGray
+shading=2
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=13 starty=155 endx=1222 endy=157
+linewidth=2 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=97 startx=14 starty=113 endx=88 endy=151
+Yellow direction=1 alignment=2
+"Label:"
+"Channel:"
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=14 starty=413 endx=1220 endy=414
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=17 starty=30 endx=499 endy=83
+style=2
+boxcolor=Cyan
+shading=3
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=42 starty=165 endx=111 endy=697
+labelspace=3 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_350B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_350B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_350B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_350B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_350B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_350B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_350B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_350B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_350B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_350B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_350B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_350B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_350B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_350B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_350B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_350B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_350B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_350B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_350B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Text font=104 startx=53 starty=37 endx=502 endy=76
+Black direction=1 alignment=0
+"EEC SYSTEM FAULT BITS"
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=88 starty=106 endx=89 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=99 starty=136 endx=1206 endy=152
+Blue direction=1 alignment=0
+"A B    A B    A B    A B    A B    A B    A B    A B     A B    A B    A B    A B    A B    A B    A B    A B    A B    A B"
+$END-OBJECT
+***********
+$OBJECT Text font=2 startx=100 starty=116 endx=1207 endy=132
+Magenta direction=1 alignment=0
+"350    351    352    353    354    355    357    360     361    362    363    366    370    371    372    373    374    XXX"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=118 starty=165 endx=130 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_350B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_350B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_350B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_350B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_350B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_350B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_350B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_350B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_350B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_350B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_350B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_350B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_350B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_350B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_350B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_350B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_350B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_350B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_350B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=144 starty=106 endx=145 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=162 starty=165 endx=174 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_351B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_351B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_351B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_351B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_351B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_351B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_351B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_351B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_351B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_351B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_351B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_351B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_351B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_351B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_351B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_351B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_351B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_351B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_351B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=181 starty=165 endx=194 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_351B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_351B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_351B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_351B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_351B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_351B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_351B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_351B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_351B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_351B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_351B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_351B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_351B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_351B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_351B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_351B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_351B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_351B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_351B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=207 starty=106 endx=208 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=225 starty=165 endx=237 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_352B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_352B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_352B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_352B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_352B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_352B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_352B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_352B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_352B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_352B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_352B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_352B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_352B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_352B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_352B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_352B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_352B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_352B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_352B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=244 starty=165 endx=256 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_352B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_352B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_352B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_352B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_352B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_352B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_352B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_352B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_352B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_352B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_352B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_352B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_352B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_352B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_352B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_352B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_352B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_352B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_352B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=270 starty=106 endx=271 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=288 starty=165 endx=300 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_353B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_353B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_353B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_353B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_353B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_353B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_353B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_353B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_353B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_353B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_353B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_353B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_353B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_353B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_353B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_353B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_353B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_353B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_353B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=307 starty=165 endx=319 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_353B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_353B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_353B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_353B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_353B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_353B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_353B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_353B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_353B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_353B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_353B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_353B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_353B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_353B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_353B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_353B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_353B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_353B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_353B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=333 starty=106 endx=334 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=351 starty=165 endx=363 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_354B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_354B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_354B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_354B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_354B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_354B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_354B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_354B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_354B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_354B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_354B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_354B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_354B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_354B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_354B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_354B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_354B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_354B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_354B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=370 starty=165 endx=382 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_354B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_354B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_354B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_354B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_354B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_354B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_354B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_354B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_354B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_354B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_354B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_354B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_354B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_354B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_354B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_354B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_354B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_354B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_354B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=396 starty=106 endx=397 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=414 starty=165 endx=426 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_355B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_355B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_355B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_355B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_355B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_355B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_355B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_355B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_355B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_355B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_355B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_355B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_355B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_355B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_355B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_355B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_355B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_355B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_355B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=433 starty=165 endx=445 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_355B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_355B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_355B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_355B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_355B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_355B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_355B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_355B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_355B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_355B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_355B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_355B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_355B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_355B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_355B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_355B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_355B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_355B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_355B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=459 starty=106 endx=460 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=477 starty=165 endx=489 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_357B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_357B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_357B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_357B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_357B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_357B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_357B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_357B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_357B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_357B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_357B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_357B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_357B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_357B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_357B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_357B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_357B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_357B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_357B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=496 starty=165 endx=508 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_357B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_357B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_357B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_357B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_357B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_357B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_357B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_357B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_357B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_357B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_357B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_357B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_357B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_357B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_357B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_357B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_357B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_357B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_357B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=522 starty=6 endx=528 endy=699
+linewidth=2 linecolor=Cyan
+shading=2
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=540 starty=165 endx=552 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_360B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_360B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_360B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_360B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_360B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_360B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_360B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_360B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_360B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_360B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_360B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_360B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_360B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_360B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_360B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_360B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_360B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_360B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_360B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=559 starty=165 endx=571 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_360B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_360B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_360B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_360B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_360B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_360B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_360B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_360B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_360B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_360B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_360B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_360B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_360B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_360B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_360B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_360B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_360B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_360B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_360B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=590 starty=106 endx=591 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=610 starty=165 endx=622 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_361B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_361B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_361B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_361B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_361B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_361B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_361B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_361B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_361B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_361B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_361B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_361B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_361B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_361B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_361B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_361B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_361B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_361B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_361B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=629 starty=165 endx=641 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_361B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_361B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_361B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_361B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_361B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_361B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_361B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_361B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_361B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_361B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_361B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_361B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_361B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_361B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_361B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_361B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_361B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_361B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_361B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Box font=101 startx=637 starty=28 endx=1149 endy=81
+style=2
+boxcolor=Cyan
+shading=3
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=656 starty=106 endx=657 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Text font=104 startx=673 starty=35 endx=1122 endy=74
+Black direction=1 alignment=0
+"EEC SYSTEM STATUS BITS"
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=673 starty=165 endx=685 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_362B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_362B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_362B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_362B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_362B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_362B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_362B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_362B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_362B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_362B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_362B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_362B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_362B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_362B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_362B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_362B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_362B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_362B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_362B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=692 starty=165 endx=704 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_362B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_362B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_362B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_362B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_362B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_362B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_362B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_362B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_362B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_362B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_362B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_362B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_362B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_362B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_362B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_362B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_362B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_362B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_362B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=719 starty=106 endx=720 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=736 starty=165 endx=748 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_363B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_363B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_363B13 type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+A2_363B15 type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+A2_363B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_363B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_363B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_363B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_363B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_363B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_363B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_363B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_363B27 type="FLOAT" width=1 prec=0 label="27" 
+A2_363B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_363B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=755 starty=165 endx=767 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_363B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_363B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_363B13 type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+B2_363B15 type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+B2_363B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_363B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_363B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_363B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_363B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_363B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_363B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_363B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_363B27 type="FLOAT" width=1 prec=0 label="27" 
+B2_363B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_363B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=782 starty=106 endx=783 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=799 starty=165 endx=811 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_366B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_366B12 type="FLOAT" width=1 prec=0 label="12" 
+A2_366B13 type="FLOAT" width=1 prec=0 label="13" 
+A2_366B14 type="FLOAT" width=1 prec=0 label="14" 
+A2_366B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_366B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_366B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_366B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_366B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_366B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_366B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_366B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_366B23 type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+A2_366B25 type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=818 starty=165 endx=830 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_366B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_366B12 type="FLOAT" width=1 prec=0 label="12" 
+B2_366B13 type="FLOAT" width=1 prec=0 label="13" 
+B2_366B14 type="FLOAT" width=1 prec=0 label="14" 
+B2_366B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_366B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_366B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_366B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_366B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_366B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_366B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_366B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_366B23 type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+B2_366B25 type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=845 starty=106 endx=846 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=862 starty=165 endx=874 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+A2_370B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+A2_370B17 type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+A2_370B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_370B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_370B27 type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=881 starty=165 endx=893 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+B2_370B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+B2_370B17 type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+B2_370B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_370B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_370B27 type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=908 starty=106 endx=909 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=925 starty=165 endx=937 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+BitDummy type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+A2_371B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_371B19 type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+A2_371B21 type="FLOAT" width=1 prec=0 label="21" 
+A2_371B22 type="FLOAT" width=1 prec=0 label="22" 
+A2_371B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_371B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_371B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_371B26 type="FLOAT" width=1 prec=0 label="26" 
+A2_371B27 type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=944 starty=165 endx=956 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+BitDummy type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+B2_371B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_371B19 type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+B2_371B21 type="FLOAT" width=1 prec=0 label="21" 
+B2_371B22 type="FLOAT" width=1 prec=0 label="22" 
+B2_371B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_371B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_371B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_371B26 type="FLOAT" width=1 prec=0 label="26" 
+B2_371B27 type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=971 starty=106 endx=972 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=988 starty=165 endx=1000 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_372B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_372B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+A2_372B14 type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+A2_372B16 type="FLOAT" width=1 prec=0 label="16" 
+A2_372B17 type="FLOAT" width=1 prec=0 label="17" 
+A2_372B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_372B19 type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+A2_372B22 type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+BitDummy type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1007 starty=165 endx=1019 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_372B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_372B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+B2_372B14 type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+B2_372B16 type="FLOAT" width=1 prec=0 label="16" 
+B2_372B17 type="FLOAT" width=1 prec=0 label="17" 
+B2_372B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_372B19 type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+B2_372B22 type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+BitDummy type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=1034 starty=106 endx=1035 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1051 starty=165 endx=1063 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+A2_373B11 type="FLOAT" width=1 prec=0 label="11" 
+A2_373B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+A2_373B15 type="FLOAT" width=1 prec=0 label="15" 
+A2_373B16 type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+A2_373B18 type="FLOAT" width=1 prec=0 label="18" 
+A2_373B19 type="FLOAT" width=1 prec=0 label="19" 
+A2_373B20 type="FLOAT" width=1 prec=0 label="20" 
+A2_373B21 type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+A2_373B23 type="FLOAT" width=1 prec=0 label="23" 
+A2_373B24 type="FLOAT" width=1 prec=0 label="24" 
+A2_373B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_373B26 type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+A2_373B28 type="FLOAT" width=1 prec=0 label="28" 
+A2_373B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1070 starty=165 endx=1082 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+B2_373B11 type="FLOAT" width=1 prec=0 label="11" 
+B2_373B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+B2_373B15 type="FLOAT" width=1 prec=0 label="15" 
+B2_373B16 type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+B2_373B18 type="FLOAT" width=1 prec=0 label="18" 
+B2_373B19 type="FLOAT" width=1 prec=0 label="19" 
+B2_373B20 type="FLOAT" width=1 prec=0 label="20" 
+B2_373B21 type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+B2_373B23 type="FLOAT" width=1 prec=0 label="23" 
+B2_373B24 type="FLOAT" width=1 prec=0 label="24" 
+B2_373B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_373B26 type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+B2_373B28 type="FLOAT" width=1 prec=0 label="28" 
+B2_373B29 type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=1097 starty=106 endx=1098 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1114 starty=165 endx=1126 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+A2_374B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+A2_374B17 type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+A2_374B21 type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+A2_374B23 type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+A2_374B25 type="FLOAT" width=1 prec=0 label="25" 
+A2_374B26 type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1133 starty=165 endx=1145 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+B2_374B12 type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+B2_374B17 type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+B2_374B21 type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+B2_374B23 type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+B2_374B25 type="FLOAT" width=1 prec=0 label="25" 
+B2_374B26 type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Line font=101 startx=1160 starty=106 endx=1161 endy=696
+linewidth=1 linecolor=Black
+shading=0
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1177 starty=165 endx=1189 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+BitDummy type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+BitDummy type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$OBJECT Digital font=100 startx=1196 starty=165 endx=1208 endy=697
+labelspace=0 unitspace=1 spacing=5 labelcolor=White parambox=0 paramboxcolor=Black shading=0
+BitDummy type="FLOAT" width=1 prec=0 label="11" 
+BitDummy type="FLOAT" width=1 prec=0 label="12" 
+BitDummy type="FLOAT" width=1 prec=0 label="13" 
+BitDummy type="FLOAT" width=1 prec=0 label="14" 
+BitDummy type="FLOAT" width=1 prec=0 label="15" 
+BitDummy type="FLOAT" width=1 prec=0 label="16" 
+BitDummy type="FLOAT" width=1 prec=0 label="17" 
+BitDummy type="FLOAT" width=1 prec=0 label="18" 
+BitDummy type="FLOAT" width=1 prec=0 label="19" 
+BitDummy type="FLOAT" width=1 prec=0 label="20" 
+BitDummy type="FLOAT" width=1 prec=0 label="21" 
+BitDummy type="FLOAT" width=1 prec=0 label="22" 
+BitDummy type="FLOAT" width=1 prec=0 label="23" 
+BitDummy type="FLOAT" width=1 prec=0 label="24" 
+BitDummy type="FLOAT" width=1 prec=0 label="25" 
+BitDummy type="FLOAT" width=1 prec=0 label="26" 
+BitDummy type="FLOAT" width=1 prec=0 label="27" 
+BitDummy type="FLOAT" width=1 prec=0 label="28" 
+BitDummy type="FLOAT" width=1 prec=0 label="29" 
+$END-OBJECT
+***********
+$HELP
+"EEC Idle Bit Test		Testing-06	71-00-00-760-017-0"
+"========================================================="
+"EEC Ground Power must be ON to perform Test and record data."
+"Remember to turn Ground Power OFF when done"
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+$END-HELP
+$END-DISPLAY
+

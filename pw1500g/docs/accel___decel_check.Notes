@@ -1,0 +1,7 @@
+*************** Accel / Decel Check.dsp Notes File ******************
+===============================================================================
+(DJR 061206) - Deleted several parameters not used for accel/decel check (Used
+for averaging 2 accel/decel runs,NOT USED by Delta), changed calcs to use #elseif
+statements not just #if statements. Changed some parameter names that are only
+referenced in the routine, timers.cfg or limits.cfg.
+===============================================================================

@@ -1,0 +1,265 @@
+$GROUP "firewarning" 
+#C ----- Turns Fire Loops on for Systron Donner System -------
+#if	(SystronDonner)
+FireDetCont_O:	SWActive
+#endif	
+#C ***********************************
+FanLoopARes:Ohms	((FireLoopRes * QECFireDet_1) / (FireLoopVolts - QECFireDet_1))
+CoreLoopARes:Ohms	((FireLoopRes * QECFireDet_2) / (FireLoopVolts - QECFireDet_2))
+FanLoopBRes:Ohms	((FireLoopRes * QECFireDet_3) / (FireLoopVolts - QECFireDet_3))
+CoreLoopBRes:Ohms	((FireLoopRes * QECFireDet_4) / (FireLoopVolts - QECFireDet_4))
+#C OvhtLoopARes:Ohms ((FireLoopRes * QECFireDet_5) / (FireLoopVolts - QECFireDet_5))
+#C OvhtLoopBRes:Ohms ((FireLoopRes * QECFireDet_6) / (FireLoopVolts - QECFireDet_6))
+#C ***********************************
+#if	(FanLoopARes < 0.0)
+FanLoopARes:Ohms	FireLoopError
+#endif	
+#C--------------------
+#if	(FanLoopBRes < 0.0)
+FanLoopBRes:Ohms	FireLoopError
+#endif	
+#C--------------------
+#if	(CoreLoopARes < 0.0)
+CoreLoopARes:Ohms	FireLoopError
+#endif	
+#C--------------------
+#if	(CoreLoopBRes < 0.0)
+CoreLoopBRes:Ohms	FireLoopError
+#endif	
+#C--------------------
+#C #if (OvhtLoopARes < 0.0)
+#C OvhtLoopARes:Ohms FireLoopError
+#C #endif
+#C--------------------
+#C #if (OvhtLoopBRes < 0.0)
+#C OvhtLoopBRes:Ohms FireLoopError
+#C #endif
+#C -------------------Fire Loop A Fan ----
+#if	(SystronDonner & (DisableFanLoops_L | DisableFireLoops_L))
+#C Fire Loop Disabled...
+FanLoopA_Stat:	7
+#elseif	(SWActive & SystronDonner & inrange (FanLoopFire FanLoopARes FanLoopFault))
+#C Fire Loop Ok...
+FanLoopA_Stat:	0
+#elseif	(SWActive & SystronDonner & (FanLoopARes < FanLoopFire))
+#C Fire Loop >>> Fire <<<
+FanLoopA_Stat:	1
+#elseif	(SWActive & SystronDonner)
+#C Fire Loop Fault...
+FanLoopA_Stat:	-1
+#elseif	(SystronDonner)
+#C Fire Loop UNKnown...
+FanLoopA_Stat:	6
+#endif	
+#C -------------------Fire Loop B Fan ----
+#if	(SystronDonner & (DisableFanLoops_L | DisableFireLoops_L))
+#C Fire Loop Disabled...
+FanLoopB_Stat:	7
+#elseif	(SWActive & SystronDonner & inrange (FanLoopFire FanLoopBRes FanLoopFault))
+#C Fire Loop Ok...
+FanLoopB_Stat:	0
+#elseif	(SWActive & SystronDonner & (FanLoopBRes < FanLoopFire))
+#C Fire Loop >>> Fire <<<
+FanLoopB_Stat:	1
+#elseif	(SWActive & SystronDonner)
+#C Fire Loop Fault...
+FanLoopB_Stat:	-1
+#elseif	(SystronDonner)
+#C Fire Loop UNKnown...
+FanLoopB_Stat:	6
+#endif	
+#C -------------------Fire Loop A Core ---
+#if	(SystronDonner & (DisableCoreLoops_L | DisableFireLoops_L))
+#C Fire Loop Disabled...
+CoreLoopA_Stat:	7
+#elseif	(SWActive & SystronDonner & inrange (FireLoopFire CoreLoopARes FireLoopFault))
+#C Fire Loop Ok...
+CoreLoopA_Stat:	0
+#elseif	(SWActive & SystronDonner & (CoreLoopARes < FireLoopFire))
+#C Fire Loop >>> Fire <<<
+CoreLoopA_Stat:	1
+#elseif	(SWActive & SystronDonner)
+#C Fire Loop Fault...
+CoreLoopA_Stat:	-1
+#elseif	(SystronDonner)
+#C Fire Loop UNKnown...
+CoreLoopA_Stat:	6
+#endif	
+#C -------------------Fire Loop B Core ---
+#if	(SystronDonner & (DisableCoreLoops_L | DisableFireLoops_L))
+#C Fire Loop Disabled...
+CoreLoopB_Stat:	7
+#elseif	(SWActive & SystronDonner & inrange (FireLoopFire CoreLoopBRes FireLoopFault))
+#C Fire Loop Ok...
+CoreLoopB_Stat:	0
+#elseif	(SWActive & SystronDonner & (CoreLoopBRes < FireLoopFire))
+#C Fire Loop >>> Fire <<<
+CoreLoopB_Stat:	1
+#elseif	(SWActive & SystronDonner)
+#C Fire Loop Fault...
+CoreLoopB_Stat:	-1
+#elseif	(SystronDonner)
+#C Fire Loop UNKnown...
+CoreLoopB_Stat:	6
+#endif	
+#C -------------------Ovht Loop A Fan ----
+#C #if (SystronDonner & (DisableOvhtLoops_L | DisableFireLoops_L))
+#C Ovht Loop Disabled...
+#C OvhtLoopA_Stat: 7
+#C #elseif (SWActive & SystronDonner & inrange (OvhtLoopFire OvhtLoopARes OvhtLoopFault))
+#C Ovht Loop Ok...
+#C OvhtLoopA_Stat: 0
+#C #elseif (SWActive & SystronDonner & (OvhtLoopAR
+#if	(Kidde & (DisableFanLoops_L | DisableFireLoops_L))
+#C Fan Loop Disabled...
+FanLoopA_Stat:	7
+#C #elseif (SWActive & Kidde & (FanLoopARes = FireLoopError))
+#C Fire Loop Resistance < 0 Ohms Problem...
+#C FanLoopA_Stat: -1
+#elseif	(SWActive & Kidde & FireDetCont_O & (FanLoopARes < FireLoopCont))
+#C Fire Loop Continuity Passed...
+FanLoopA_Stat:	2
+#elseif	(SWActive & Kidde & FireDetCont_O & (FanLoopARes >= FireLoopCont))
+#C Fire Loop Continuity Fault...
+FanLoopA_Stat:	3
+#elseif	(SWActive & Kidde & FLGroundTest_S & (FanLoopARes >= FireLoopGnd))
+#C Fire Loop Ground Test Passed...
+FanLoopA_Stat:	4
+#elseif	(SWActive & Kidde & FLGroundTest_S & (FanLoopARes < FireLoopGnd))
+#C Fire Loop Ground Test Fault...
+FanLoopA_Stat:	5
+#elseif	(SWActive & Kidde & ~FireDetCont_O & ~FLGroundTest_S & (FanLoopARes < FireLoopFire))
+#C Fire Loop >>> Fire <<<
+FanLoopA_Stat:	1
+#elseif	(SWActive & Kidde)
+#C Fire Loop Ok...
+FanLoopA_Stat:	0
+#elseif	(Kidde)
+#C Fire Loop UNKnown...
+FanLoopA_Stat:	6
+#endif	
+#C--------------------
+#if	(Kidde & (DisableFanLoops_L | DisableFireLoops_L))
+#C Fan Loop Disabled...
+FanLoopB_Stat:	7
+#C #elseif (SWActive & Kidde & (FanLoopBRes = FireLoopError))
+#C Fire Loop Resistance < 0 Ohms Problem...
+#C FanLoopB_Stat: -1
+#elseif	(SWActive & Kidde & FireDetCont_O & (FanLoopBRes < FireLoopCont))
+#C Fire Loop Continuity Passed...
+FanLoopB_Stat:	2
+#elseif	(SWActive & Kidde & FireDetCont_O & (FanLoopBRes >= FireLoopCont))
+#C Fire Loop Continuity Fault...
+FanLoopB_Stat:	3
+#elseif	(SWActive & Kidde & FLGroundTest_S & (FanLoopBRes >= FireLoopGnd))
+#C Fire Loop Ground Test Passed...
+FanLoopB_Stat:	4
+#elseif	(SWActive & Kidde & FLGroundTest_S & (FanLoopBRes < FireLoopGnd))
+#C Fire Loop Ground Test Fault...
+FanLoopB_Stat:	5
+#elseif	(SWActive & Kidde & ~FireDetCont_O & ~FLGroundTest_S & (FanLoopBRes < FireLoopFire))
+#C Fire Loop >>> Fire <<<
+FanLoopB_Stat:	1
+#elseif	(SWActive & Kidde)
+#C Fire Loop Ok...
+FanLoopB_Stat:	0
+#elseif	(Kidde)
+#C Fire Loop UNKnown...
+FanLoopB_Stat:	6
+#endif	
+#C--------------------
+#if	(Kidde & (DisableCoreLoops_L | DisableFireLoops_L))
+#C Core Loop Disabled...
+CoreLoopA_Stat:	7
+#C #elseif (SWActive & Kidde & (CoreLoopARes = FireLoopError))
+#C Core Loop Resistance < 0 Ohms Problem...
+#C CoreLoopA_Stat: -1
+#elseif	(SWActive & Kidde & FireDetCont_O & (CoreLoopARes < FireLoopCont))
+#C OverHeat Loop Continuity Passed...
+CoreLoopA_Stat:	2
+#elseif	(SWActive & Kidde & FireDetCont_O & (CoreLoopARes >= FireLoopCont))
+#C OverHeat Loop Continuity Fault...
+CoreLoopA_Stat:	3
+#elseif	(SWActive & Kidde & FLGroundTest_S & (CoreLoopARes >= FireLoopGnd))
+#C OverHeat Loop Ground Test Passed...
+CoreLoopA_Stat:	4
+#elseif	(SWActive & Kidde & FLGroundTest_S & (CoreLoopARes < FireLoopGnd))
+#C OverHeat Loop Ground Test Fault...
+CoreLoopA_Stat:	5
+#elseif	(SWActive & Kidde & ~FireDetCont_O & ~FLGroundTest_S & (CoreLoopARes < FireLoopFire))
+#C OverHeat Loop >>> Fire <<<
+CoreLoopA_Stat:	1
+#elseif	(SWActive & Kidde)
+#C OverHeat Loop Ok...
+CoreLoopA_Stat:	0
+#elseif	(Kidde)
+#C OverHeat Loop UNKnown...
+CoreLoopA_Stat:	6
+#endif	
+#C--------------------
+#if	(Kidde & (DisableCoreLoops_L | DisableFireLoops_L))
+#C Core Loop Disabled...
+CoreLoopB_Stat:	7
+#C #elseif (SWActive & Kidde & (CoreLoopBRes = FireLoopError))
+#C Core Loop Resistance < 0 Ohms Problem...
+#C CoreLoopB_Stat: -1
+#elseif	(SWActive & Kidde & FireDetCont_O & (CoreLoopBRes < FireLoopCont))
+#C OverHeat Loop Continuity Passed...
+CoreLoopB_Stat:	2
+#elseif	(SWActive & Kidde & FireDetCont_O & (CoreLoopBRes >= FireLoopCont))
+#C OverHeat Loop Continuity Fault...
+CoreLoopB_Stat:	3
+#elseif	(SWActive & Kidde & FLGroundTest_S & (CoreLoopBRes >= FireLoopGnd))
+#C OverHeat Loop Ground Test Passed...
+CoreLoopB_Stat:	4
+#elseif	(SWActive & Kidde & FLGroundTest_S & (CoreLoopBRes < FireLoopGnd))
+#C OverHeat Loop Ground Test Fault...
+CoreLoopB_Stat:	5
+#elseif	(SWActive & Kidde & ~FireDetCont_O & ~FLGroundTest_S & (CoreLoopBRes < FireLoopFire))
+#C OverHeat Loop >>> Fire <<<
+CoreLoopB_Stat:	1
+#elseif	(SWActive & Kidde)
+#C OverHeat Loop Ok...
+CoreLoopB_Stat:	0
+#elseif	(Kidde)
+#C OverHeat Loop UNKnown...
+CoreLoopB_Stat:	6
+#endif	
+#C--------------------
+#if	((FanLoopA_Stat = 7) & (FanLoopB_Stat = 7) & (CoreLoopA_Stat = 7) & (CoreLoopB_Stat = 7))
+#C #if ((FanLoopA_Stat = 7)&(FanLoopB_Stat = 7)&(CoreLoopA_Stat = 7)&(CoreLoopB_Stat = 7)&(OvhtLoopA_Stat = 7)&(OvhtLoopB_Stat = 7))
+#C Loops Status Disabled...
+FireDetection_Stat:	(7 + UnderCowl_Stat)
+#elseif	((FanLoopA_Stat = -1)|(FanLoopB_Stat = -1)|(CoreLoopA_Stat = -1)|(CoreLoopB_Stat = -1))
+#C #elseif ((FanLoopA_Stat = -1)|(FanLoopB_Stat = -1)|(CoreLoopA_Stat = -1)|(CoreLoopB_Stat = -1)|(OvhtLoopA_Stat = -1)|(OvhtLoopB_Stat = -1))
+#C Loop Fault...
+FireDetection_Stat:	-1
+#elseif	((FanLoopA_Stat = 6)|(FanLoopB_Stat = 6)|(CoreLoopA_Stat = 6)|(CoreLoopB_Stat = 6))
+#C #elseif ((FanLoopA_Stat = 6)|(FanLoopB_Stat = 6)|(CoreLoopA_Stat = 6)|(CoreLoopB_Stat = 6)|(OvhtLoopA_Stat = 6)|(OvhtLoopB_Stat = 6))
+#C Loops Status UNKnown...
+FireDetection_Stat:	6
+#elseif	((FanLoopA_Stat = 5)|(FanLoopB_Stat = 5)|(CoreLoopA_Stat = 5)|(CoreLoopB_Stat = 5))
+#C #elseif ((FanLoopA_Stat = 5)|(FanLoopB_Stat = 5)|(CoreLoopA_Stat = 5)|(CoreLoopB_Stat = 5)|(OvhtLoopA_Stat = 5)|(OvhtLoopB_Stat = 5))
+#C Loops Ground Test Fault...
+FireDetection_Stat:	5
+#elseif	((FanLoopA_Stat = 4)&(FanLoopB_Stat = 4)&(CoreLoopA_Stat = 4)&(CoreLoopB_Stat = 4))
+#C #elseif ((FanLoopA_Stat = 4)&(FanLoopB_Stat = 4)&(CoreLoopA_Stat = 4)&(CoreLoopB_Stat = 4)&(OvhtLoopA_Stat = 4)&(OvhtLoopB_Stat = 4))
+#C Loops Ground Test Passed...
+FireDetection_Stat:	4
+#elseif	((FanLoopA_Stat = 3)|(FanLoopB_Stat = 3)|(CoreLoopA_Stat = 3)|(CoreLoopB_Stat = 3))
+#C #elseif ((FanLoopA_Stat = 3)|(FanLoopB_Stat = 3)|(CoreLoopA_Stat = 3)|(CoreLoopB_Stat = 3)|(OvhtLoopA_Stat = 3)|(OvhtLoopB_Stat = 3))
+#C Loops Continuity Fault...
+FireDetection_Stat:	3
+#elseif	((FanLoopA_Stat = 2)&(FanLoopB_Stat = 2)&(CoreLoopA_Stat = 2)&(CoreLoopB_Stat = 2))
+#C #elseif ((FanLoopA_Stat = 2)&(FanLoopB_Stat = 2)&(CoreLoopA_Stat = 2)&(CoreLoopB_Stat = 2)&(OvhtLoopA_Stat = 2)&(OvhtLoopB_Stat = 2))
+#C Loops Continuity Passed...
+FireDetection_Stat:	2
+#elseif	((FanLoopA_Stat = 1)|(FanLoopB_Stat = 1)|(CoreLoopA_Stat = 1)|(CoreLoopB_Stat = 1))
+#C #elseif ((FanLoopA_Stat = 1)|(FanLoopB_Stat = 1)|(CoreLoopA_Stat = 1)|(CoreLoopB_Stat = 1)|(OvhtLoopA_Stat = 1)|(OvhtLoopB_Stat = 1))
+#C Loops <<Fire>>...
+FireDetection_Stat:	1
+#else	
+#C Loops Ok...
+FireDetection_Stat:	0
+#endif	
+$END-GROUP

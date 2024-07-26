@@ -1,0 +1,9 @@
+$PHASE StopAutoTPhase_ATP length=0        level=0
+*
+* This Phase is used to shutdown auto throttle
+*
++0 SET AutoPLEnable_O OFF                 <- Disengage the clutch
++0 SET AutoThrottle_F OFF                 <- Reset flags
++0 SET AutoThrottleEngaged OFF            <- Reset flags
+$END-PHASE
+**********

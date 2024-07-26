@@ -1,0 +1,4 @@
+$GROUP "mapnet" 
+FnI_MapNet:Lbs      FnMeasure
+FIP_MapNet:PSIG      FSP
+$END-GROUP

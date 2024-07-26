@@ -1,0 +1,84 @@
+
+$GROUP "idginit"
+
+* Add ':' to the end of params. DJR 011510...
+* The Following variables are required to be in the channel setup 
+* table for they are used in IDG calculations and on the display
+*   GENFREQ            0.0
+*   GENVOLT            0.0
+*   PMGVOLT            0.0
+*   CTCUR              0.0
+
+GenVoltBC_O:     OFF
+GenVoltCA_O:     OFF
+
+PMGVolt23_O:     OFF
+PMGVolt31_O:     OFF
+
+LOADA_O:         OFF
+LOADB_O:         OFF
+LOADC_O:         OFF
+CTPHASE_O:       OFF
+CTBCurrent_O:    OFF
+CTCCurrent_O:    OFF
+MAGTRIM_O:       OFF
+GenPwr_O:        OFF
+
+genvoltradio:	     OFF
+genvoltvalue1:VAC    GENVOLT
+genvoltvalue2:VAC    0.0
+genvoltvalue3:VAC    0.0
+
+pmgvoltradio:        OFF
+pmgvoltvalue1:VAC    PMGVOLT
+pmgvoltvalue2:VAC    0.0
+pmgvoltvalue3:VAC    0.0
+
+ctcurradio:          0
+lastcturradio:       0
+ctcurvaluea:mAmp     0.0
+ctcurvalueb:mAmp     0.0
+ctcurvaluec:mAmp     0.0
+ctcurwireda:         0
+ctcurwiredb:         0
+ctcurwiredc:         0
+ctcurphaseda:        0
+ctcurphasedb:        0
+ctcurphasedc:        0
+*ctcurcurrent:        OFF
+*ctcurphase:          OFF
+*ctcurrelay:          OFF
+*ctcurwiring:         OFF
+*ctcurradiolast:      OFF
+*ctcurchkmessage:     OFF
+ctcurmessage:        0
+magtrimtoggle:       OFF
+genpwrtoggle:        OFF
+
+
+phaserotatestate:    OFF
+withinlimits:        OFF
+
+**************************************
+#C New parameters added. DJR 011510...
+idgSettleTmr:	     0.0
+SysTimeNew:	     SysTime
+#C Set PhaseSwap to ON for CT Reversed Phase.
+PhaseSwap_F:	     OFF
+#C Set to ON for an IDG with a PMG.
+DispPMG_F:	     ON	
+**************************************
+
+idgtimer:            OFF
+#C only need 1 parameter for this. DJR 011510...
+modifysection:       OFF
+#C modifysectiona:   ON
+#C modifysectionb:   ON
+#C modifysectionc:   ON
+
+IDGSETTLINGTIME:     3
+MAXGENFREQ       405
+MINGENFREQ       395
+SETTLINGTIME     3
+
+$END-GROUP

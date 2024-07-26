@@ -1,0 +1,17 @@
+************** mapsignals.cal Notes File *********************************
+=================================================================================
+(DJR 062106) - Changed the method of looking up a QEC pressure from a ratio, from
+a table to a polynomial. This allows the ratio range to go above or below the ratio
+range without displaying *******'s. Moved Lookups to lookups.cal...
+QECMOP:PSIG		lookup (QECMOPRatio_T) ! Table lookup where QECMOPRatio Input is .6 to .4...
+0 - 100 PSIG @ .6 to .4 ratio range = (-500 * (ratio value)) + 300)
+0 - 150 PSIG @ .6 to .4 ratio range = (-750 * (ratio value)) + 450)
+0 - 160 PSIG @ .6 to .4 ratio range = (-800 * (ratio value)) + 480) extends to 200 PSIG @ .35 Ratio range...
+0 - 200 PSIG @ .6 to .4 ratio range = (-1000 * (ratio value)) + 600)
+0 - 350 PSIG @ .6 to .4 ratio range = (-1750 * (ratio value)) + 1050)
+0 - 400 PSIG @ .6 to .4 ratio range = (-2000 * (ratio value)) + 1200)
+---------------------------------------------------------------------------------
+Also added logic to all except CFM's for open question QECFPTransInst_L.
+Check if the QEC Transmitter is installed and answer the question...
+Some engines do not have this option and will display *******'s, now will be 0.0...
+=================================================================================

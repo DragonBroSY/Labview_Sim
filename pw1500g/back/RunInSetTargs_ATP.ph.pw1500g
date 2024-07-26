@@ -1,0 +1,95 @@
+$PHASE RunInSetTargs_ATP length=-1       level=0 controlrelay=None common=0
++0 SET PrevRunInTLA	RunInTLA
+#if GoToGI_F
++0 SET RunInTarg RunInGI
++0 SET RunInTargMn RunInGIMn
++0 SET RunInTargMx RunInGIMx
++0 SET ECM_IdleCtrl_TB OFF
++0 SET RunInTLA	0.0
+#elseif GoToAI_F
++0 SET RunInTarg RunInAI
++0 SET RunInTargMn RunInAIMn
++0 SET RunInTargMx RunInAIMx
++0 SET ECM_IdleCtrl_TB ON
++0 SET RunInTLA	0.0
+#elseif GoTo4000_F
++0 SET RunInTarg RunIn4000
++0 SET RunInTargMn RunIn4000Mn
++0 SET RunInTargMx RunIn4000Mx
++0 SET RunInTLA	6.43
+#elseif GoTo5000_F
++0 SET RunInTarg RunIn5000
++0 SET RunInTargMn RunIn5000Mn
++0 SET RunInTargMx RunIn5000Mx
++0 SET RunInTLA	10.35
+#elseif GoTo6000_F
++0 SET RunInTarg RunIn6000
++0 SET RunInTargMn RunIn6000Mn
++0 SET RunInTargMx RunIn6000Mx
++0 SET RunInTLA	15.49
+#elseif GoTo7000_F
++0 SET RunInTarg RunIn7000
++0 SET RunInTargMn RunIn7000Mn
++0 SET RunInTargMx RunIn7000Mx
++0 SET RunInTLA	21.68
+#elseif GoTo8000_F
++0 SET RunInTarg RunIn8000
++0 SET RunInTargMn RunIn8000Mn
++0 SET RunInTargMx RunIn8000Mx
++0 SET RunInTLA	28.83
+#elseif GoTo8500_F
++0 SET RunInTarg RunIn8500
++0 SET RunInTargMn RunIn8500Mn
++0 SET RunInTargMx RunIn8500Mx
++0 SET RunInTLA	33.58
+#elseif GoTo9000_F
++0 SET RunInTarg RunIn9000
++0 SET RunInTargMn RunIn9000Mn
++0 SET RunInTargMx RunIn9000Mx
++0 SET RunInTLA	38.74
+#elseif GoToTO_F
++0 SET RunInTarg RunInTO
++0 SET RunInTargMn RunInTOMn
++0 SET RunInTargMx RunInTOMx
++0 SET RunInTLA	46.0
+#endif
+#if GoToHold_F
++0 SET RunInN1Rat 0.0
++0 SET RunInAccel_F OFF
++0 SET RunInDecel_F OFF
++0 SET RunInN1StartMn RunInTargMn
++0 SET RunInN1StartMx RunInTargMx
++0 SET RunInTLARat 0.0
+#else
++0 SET RunInN1Rat ((RunInTarg - RunInN1) / StageTmrLim)
++0 SET RunInTLARat ((RunInTLA - PrevRunInTLA) / StageTmrLim)
++0 SET RunInAccel_F (RunInTarg > RunInN1)
++0 SET RunInDecel_F (RunInTarg < RunInN1)
++0 SET RunInN1StartMn (RunInN1 - N1TargBand)
++0 SET RunInN1StartMx (RunInN1 + N1TargBand)
+#endif
+#if GoToHold_F
++0 SET RunInDecelMn 0.0
++0 SET RunInDecelMx 0.0
++0 SET RunInAccelMn 0.0
++0 SET RunInAccelMx 0.0
+#elseif RunInDecel_F
++0 SET RunInDecelMn RunInN1StartMn
++0 SET RunInDecelMx RunInN1StartMx
++0 SET RunInAccelMn 0.0
++0 SET RunInAccelMx 0.0
++0 SET TLAatArm (TLA - 0.2)
++0 SET N1DecelTarg RunInTargMx
++0 SET N1C2DecelTarg RunInTargMx
+#elseif RunInAccel_F
++0 SET RunInAccelMn RunInN1StartMn
++0 SET RunInAccelMx RunInN1StartMx
++0 SET RunInDecelMn RunInTargMn
++0 SET RunInDecelMx RunInTargMx
++0 SET TLAatArm (TLA + 0.2)
++0 SET N1AccelTarg RunInTargMn
++0 SET N1C2AccelTarg RunInTargMn
+#endif
+$END-PHASE
+**********
+

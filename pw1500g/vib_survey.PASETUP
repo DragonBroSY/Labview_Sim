@@ -1,0 +1,5 @@
+* /cust/delta3/pw1500g/vib_survey.PASETUP
+$CRSPARAM "N1S" min=0.000000 max=10000.000000 linetype=
+$CRSPARAM "StageTmr" min=0.000000 max=300.000000 linetype=
+$CRSPARAM "TRA_CMD" min=-15.000000 max=33.000000 linetype=
+$CRSPARAM "StageTmrLim" min=0.000000 max=300.000000 linetype=

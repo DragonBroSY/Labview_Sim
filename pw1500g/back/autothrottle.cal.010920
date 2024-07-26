@@ -1,0 +1,258 @@
+$GROUP autothrottle
+#C ********************************************************
+#C TLA_Actual (PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+   TLA_Actual:	TLAPriCHResolver
+#C ********************************************************
+#if             (increaseTLA & AutoThrottle_F)
+   TLA_Cmd:Deg	(TLA_Cmd + Trim_Inc)
+#elseif         (decreaseTLA & AutoThrottle_F)
+   TLA_Cmd:Deg	(TLA_Cmd - Trim_Inc)
+#elseif         (StageTmr_F & AutoThrottle_F)
+   TLA_Cmd:Deg	(TLA_Cmd + (TLA_Rate * StageTmr))
+#endif
+#C ********************************************************
+#if	((TLA_Cmd > MaxStop) & ~OverRide & (TLALastScan <= MaxStop))
+   TLA_Cmd:Deg	MaxStop
+#endif
+#C ********************************************************
+#C * Compute difference between TLA_Cmd and TLA_Actual...
+#C ********************************************************
+TLA_Diff:	(TLA_Cmd - TLA_Actual)
+TLA_Diff:	abs(TLA_Diff)
+#C ********************************************************
+#C * Check for Operator OverRide (TLA_OverRide),  A difference of > X degrees
+#C * between commanded and actual Power Lever Position
+#C * Set the actual Ramping PLA Voltage (PLA_Command) here...
+#C ********************************************************
+#if			(AutoTRequest_F & ~AutoThrottle_F)
+#C * Check for an auto throttle request from autotest...
+   AutoTRequest_F:	OFF
+   #goto CHECK_TLA_Cmd
+#elseif			(AutoPL_I & ~LastAUTOPLReq & ~AutoThrottle_F)
+#C *  P/L toggle request just made with auto throttle not engaged...
+   #goto CHECK_TLA_Cmd
+#elseif			(AutoPL_I & ~LastAUTOPLReq & AutoThrottle_F)
+#C *  P/L toggle request just made with auto throttle engaged...
+   dummy:		StoreEvent("Test Mode Revision to Manual")
+   AutoPLEnable_O:	OFF
+   AutoThrottle_F:	OFF
+   AutoThrottleEngaged:	OFF
+   PLA_DAC_Tmr_F:	ON
+   DAC_PLA_Voltage:	0.0
+   #goto NO_CHECK_TLA
+#elseif			(~AutoPL_I & AutoThrottle_F)
+   OperatorOverride:	ON
+#elseif			((TLA_Diff > TLA_OverRide) & AutoThrottle_F)
+   OperatorOverride:	ON
+#elseif			(MaxPowerSet_F & (TLA_Actual > MaxStop) & AutoThrottle_F)
+   OperatorOverride:	ON
+#elseif			AutoThrottle_F
+   PLA_Command:Deg	(TLA_PLA_mcoeff * TLA_Cmd + TLA_PLA_bcoeff)
+#endif
+#C ******************************************************
+#C * Set the MAX TLA limits if TLA Rigged...
+#C ******************************************************
+#C #if		(~(TLA_CmdMx = TLA_Takeoff) | ~(TLA_CmdMn = -38.0))
+#if		(~(TLA_CmdMx = TLA_Takeoff) | ~(TLA_CmdMn = TLA_Idle))
+   TLA_CmdMx:Deg	TLA_Takeoff
+   TLA_CmdMn:Deg	TLA_Idle
+   #C TLA_CmdMn:Deg	-38.0
+   dummy:	setvxivalue("TLA_Unique_MAX", TLA_CmdMx, "SHMEM_arinc")
+   dummy:	setvxivalue("TLA_Unique_MIN", TLA_CmdMn, "SHMEM_arinc")
+#endif
+#C ******************************************************
+#C * Perform MAX limits checking...
+#C ******************************************************
+#if		((TLA_Cmd > TLA_CmdMx) & AutoThrottle_F)
+   PLA_Command:	(TLA_PLA_Mcoeff * TLA_CmdMx + TLA_PLA_Bcoeff)
+#elseif		((TLA_Cmd < TLA_CmdMn) & AutoThrottle_F)
+   PLA_Command:	(TLA_PLA_Mcoeff * TLA_CmdMn + TLA_PLA_Bcoeff)
+#elseif		LimitEventLogged
+   LimitEventLogged:	OFF
+#endif
+#C ------------------------------------------------------
+#if		((TLA_Cmd > TLA_CmdMx) & ~LimitEventLogged & AutoThrottle_F)
+   dummy:	StoreEvent("TLA Upper Limit Exceeded")
+   LimitEventLogged:	ON
+#elseif		((TLA_Cmd < TLA_CmdMn) & ~LimitEventLogged & AutoThrottle_F)
+   dummy:	StoreEvent("TLA Lower Limit Exceeded")
+   LimitEventLogged:	ON
+#endif
+#C ******************************************************
+#C ------------------------------------------------------
+#C * End Code Checked...
+#C ------------------------------------------------------
+#C ******************************************************
+#C * Check for an auto throttle request from autotest
+#C ********************************************************
+#C #if (AutoTRequest_F & ~AutoThrottle_F)
+#C    AutoTRequest_F:	OFF
+#C    #goto CHECK_TLA_Cmd
+#C #endif
+#C ********************************************************
+#C * Check for a test mode revision request
+#C ********************************************************
+EidleStillSet:	OFF
+#C #if (AutoPL_I & ~LastAUTOPLReq & ~AutoThrottle_F)
+#C *  P/L toggle request just made with auto throttle not engaged
+#C    #goto CHECK_TLA_Cmd
+#C #elseif (AutoPL_I & ~LastAUTOPLReq & AutoThrottle_F)
+#C *  P/L toggle request just made with auto throttle engaged
+#C    dummy: StoreEvent("Test Mode Revision to Manual")
+#C   AutoPLEnable_O:	OFF
+#C    AutoThrottle_F:	OFF
+#C    AutoThrottleEngaged:	OFF
+#C    PLA_DAC_Tmr_F:	ON
+#C    DAC_PLA_Voltage:	0.0
+#C    #goto NO_CHECK_TLA
+#C #else
+#C    #goto NO_CHECK_TLA
+#C #endif
+#C *
+CHECK_TLA_Cmd
+#C ********************************************************
+#C * Check for Emergancy Idle
+#C ********************************************************
+#C *#if (FCSEmrgIdle2_I)
+#C *   EidleStillSet 1
+#C *   #goto NO_CHECK_TLA
+#C *#endif
+#C *
+#C * Check if TLA Target is defined
+#C * Set Target to current value...
+#C * Set the Targets in SetTargs_ATP. (DJR 12/11/19)...
+#C #if ((ControlMode = EPRControlMode) & (EPR_Target = 0.0))
+#C    EPR_Target:	EPR
+#C #elseif ((ControlMode = N1ControlMode) & (N1_Target = 0.0))
+#C    N1_Target:	N1S
+#C #elseif ((ControlMode = TLAControlMode) & (TLA_Cmd = 0.0))
+#C   TLA_Cmd:	TLA_Actual
+#C #endif
+#C *
+#C * Perform TLA Target Lookup
+#C * Sets the Initial TLA_Cmd
+#C *
+#C #if (ControlMode = EPRControlMode)
+#C    TLA_Cmd:	lookup (EPRControl_T)
+#C #elseif (ControlMode = N1ControlMode)
+#C    TLA_Cmd:	lookup (N1Control_T)
+#C #elseif (ControlMode = TLAControlMode)
+#C #C   TLA_Cmd:	lookup (TLAControl_T)
+#C   TLA_Cmd:	TLA_Actual
+   TLA_Cmd:	TLA_Actual
+#C #elseif
+#C    TLA_Cmd RMISS
+#C    BadControlMode ON
+#C #endif
+#C *
+#if (TLA_Diff > TLA_Diff_Limit)
+   TLA_Diff_Msg:	ON
+#elseif ((TLA_Cmd > TLA_CmdMx) | (TLA_Cmd < TLA_CmdMn))
+   BadTLAmsg:	ON
+#else
+   dummy:	StoreEvent("Test Mode Revision to Auto")
+   PLA_Command:		(TLA_PLA_mcoeff * TLA_Actual + TLA_PLA_bcoeff)
+   DAC_PLA_Voltage:	-(DACSlope * PLA_Handle + DACOffset)
+   PLA_DAC_Tmr_F:	ON
+   AutoThrottleEngaged:		ON
+#endif
+#C *
+NO_CHECK_TLA
+#C ********************************************************
+#C * Check for timer to start or stop auto throttle
+#C ********************************************************
+#if	~PLA_DAC_Tmr_F
+   #goto NO_TIMER_CHECK
+#endif
+#C *
+#if (AutoThrottleEngaged & (PLA_DAC_Tmr > 1.5))
+   AutoPLEnable_O:	ON
+   PLA_DAC_Tmr_F:	OFF
+   PLA_DAC_Tmr:		0.0
+   AutoThrottle_F:	ON
+#elseif (~AutoThrottleEngaged & (PLA_DAC_Tmr > 1.0))
+   AutoPLEnable_O:	OFF
+   PLA_DAC_Tmr_F:	OFF
+   PLA_DAC_Tmr:		0.0
+#endif
+#C *
+NO_TIMER_CHECK
+#C ********************************************************
+#C * Check for control mode revision
+#C ********************************************************
+#if	(ControlMode = LastControlMode)
+   #goto NO_CONTROL_CHANGE
+#else
+   ControlModeRevision:	StoreEvent("Control Mode Revision")
+#endif
+#C ********************************************************
+#C * Check for new operating point if in auto throttle
+#C ********************************************************
+#C #if	~AutoThrottle_F
+#C    #goto NEW_LIMITS
+#C #endif
+#C *
+#C #if	((ControlMode = EPRControlMode) & (EPR_Target = 0.0))
+#C    BadOperatingPoint ON
+#C #elseif ((ControlMode = N1ControlMode) & (N1_Target = 0.0))
+#C    BadOperatingPoint ON
+#C #elseif ((ControlMode = TLAControlMode) & (TLA_Cmd = 0.0))
+#C    BadOperatingPoint ON
+#C #endif
+#C *
+#C NEW_LIMITS
+#C *
+NO_CONTROL_CHANGE
+#C ******************************************************
+#C * Compute difference between TLA_Cmd and TLA_Actual
+#C *
+#C * Check for operator override  A difference of > X degrees
+#C * between commanded and actual Power Lever Position
+#C ********************************************************
+#C #if	(AutoThrottle_F & (TLA_Diff > TLA_Override))
+#C    OperatorOverride ON
+#C #else
+#C    OperatorOverride OFF
+#C #endif
+#C ******************************************************
+#C * Perform TLA Target Lookup and Add Trim Value...
+#C ******************************************************
+#if			(ControlMode = EPRControlMode)
+#C    EPR_Target:	(EPR_Target + (EPR_Target * Trim_Value / 100.0))
+#C    TLA_Cmd:	lookup (EPRControl_T)
+#elseif		(ControlMode = N1ControlMode)
+#C    N1_Target:	(N1_Target + (N1_Target * Trim_Value / 100.0))
+#C    TLA_Cmd:	lookup (N1Control_T)
+#elseif		(ControlMode = TLAControlMode)
+#C    TLA_Cmd:	(TLA_Cmd + (TLA_Cmd * Trim_Value / 100.0))
+#C    TLA_Cmd:	lookup (TLAControl_T)
+#C #else
+#C    TLA_Cmd:	RMISS
+#endif
+#C ******************************************************
+#C * If in Auto throttle mode Perform Conversions
+#C ******************************************************
+#if	~AutoThrottle_F
+   #goto NO_AUTO_THROTTLE
+#endif
+#C ******************************************************
+#C * Compute DAC value
+#C ******************************************************
+   DAC_PLA_Voltage:	-(DACSlope * PLA_Handle + DACOffset)
+#C *
+NO_AUTO_THROTTLE
+#C *
+#if CalibratingDAC
+   PLALow:	((PLA1 + PLA2) / 2.0)
+   PLAHigh:	((PLA3 + PLA4) / 2.0)
+   DACSlope:	(2.0 / (PLAHigh - PLALow))
+   DACOffset:	(1.5 - (PLALow * DACSlope))
+   CalibratingDAC:	OFF
+#endif
+#C --------------------------
+#C LastControlMode:	ControlMode
+LastAUTOPLReq:		AutoPL_I
+TLALastScan:Deg		TLA_Cmd
+#C --------------------------
+$END-GROUP
+

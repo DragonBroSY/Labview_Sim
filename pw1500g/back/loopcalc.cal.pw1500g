@@ -1,0 +1,108 @@
+$GROUP "loopcalc" 
+TestClosed:	FALSE
+#C Moved EngineRunning and FuelOn calc to CalcWfNew.cal in common. (DJR 8/2/10)...
+#C <<<<<<<<<<<< Set Flags >>>>>>>>>>>>>>>>>>>>>>
+StableN1_F:	stable (N1S 25 3.0)
+StableN2_F:	stable (N2S 50 3.0)
+StableITT_F:	stable (EEC_ITT 10 3.0)
+StableEGT_F:	StableITT_F
+StableEng_F:	(StableN2_F & EngineRunning)
+RunModeN2_F:	inrange (7300.0 N2I 20000.0)
+#if	(RunModeN2_F & EngineRunning & NotRunMode)
+RunMode:	ON
+#elseif	(~RunModeN2_F & RunMode)
+RunMode:	OFF
+#endif	
+NotRunMode:	~RunMode
+#if	~StableEng_F
+StableEngTmr:Sec	0.0
+#endif	
+#C *********** Set Parameter Ranges **************************
+RunInTOMx:RPM   (RunInTO + N1TargBand)
+RunInTOMn:RPM   (RunInTO - N1TargBand)
+#C *********** Check Parameters are Inrange ******************
+BandA_F:	inrange (FnAMin FNTR2 FnAMax)
+BandB_F:	inrange (FnBMin FNTR2 FnBMax)
+BandC_F:	inrange (FnCMin FNTR2 FnCMax)
+BandD_F:	inrange (FnDMin FNTR2 FnDMax)
+RunInTO_F:      inrange (RunInTOMn N1C2D RunInTOMx)
+RunIn9000_F:	inrange (RunIn9000Mn N1C2D RunIn9000Mx)
+RunIn8500_F:    inrange (RunIn8500Mn N1C2D RunIn8500Mx)
+RunIn8000_F:    inrange (RunIn8000Mn N1C2D RunIn8000Mx)
+RunIn7000_F:    inrange (RunIn7000Mn N1C2D RunIn7000Mx)
+RunIn6000_F:    inrange (RunIn6000Mn N1C2D RunIn6000Mx)
+RunIn5000_F:    inrange (RunIn5000Mn N1C2D RunIn5000Mx)
+RunIn4000_F:    inrange (RunIn4000Mn N1C2D RunIn4000Mx)
+RunInAI_F:      inrange (RunInAIMn N1C2D RunInAIMx)
+RunInGI_F:      inrange (RunInGIMn N1C2D RunInGIMx)
+#C ******* Set Other Flags **************************
+StarterCutOut_F:	(N2I > StarterCutOut)
+TLAAccel_F:		(TLA > TLAatArm)
+TLADecel_F:		(TLA < TLAatArm)
+N1C2AccelTarg_F:        (N1C2D_ACDC >= N1C2AccelTarg)
+N1C2DecelTarg_F:        (N1C2D_ACDC <= N1C2DecelTarg)
+N1AccelTarg_F:          (N1I >= N1AccelTarg)
+N1DecelTarg_F:          (N1I <= N1DecelTarg)
+StageTmrLim_F:          (StageTmr > StageTmrLim)
+NotN1_ADBar_F:          ~N1_ADBar_F
+#C **************************************************
+#C *** Dew Point Temp Limits DegF
+#if		(PW1500 & (CITDegF < 40.0))
+TDEWPTLim:DegF	lookup (TDEWPT0_T)
+#elseif		(PW1500 & (CITDegF < 50.0))
+TDEWPTLim:DegF	lookup (TDEWPT1_T)
+#elseif		(PW1100 & (CITDegF < 51.0))
+TDEWPTLim:DegF	lookup (TDEWPT1_T)
+#else
+TDEWPTLim:DegF	lookup (TDEWPT2_T)
+#endif
+TDEWPT:DegF	DewPtF
+#C **************************************************
+#if	((MotorTm < 0.1) & StartAir_O)
+MotorSysTime:Sec	(SysTime + 1200.0)
+#endif	
+#if	((MotorTm > 0.1) & (SysTime > MotorSysTime) & ~StartAir_O & ~EngineRunning)
+MotorSysTime:Sec	(SysTime + 1200.0)
+MotorTm:Sec	0.0
+#endif	
+MotorTmReset:Sec	(MotorSysTime - SysTime)
+#if	(~Compare (PointName "EVENT") & ~PointTmr_F)
+PointTmr_F:	ON
+#endif	
+#if	(PointTmr > 12.0)
+PointTmr_F:	OFF
+PointTmr:Sec	0.0
+PointName:	concat ("" "EVENT")
+#endif	
+#C ******** Sets the pace for Accel/Decel of FN or N1 RPM/Pct *******************
+#C #if     (StageTmr_F & FN_ADBar_F)
+#C FN_ADTrak:Lbf  (FN_ADStart + (FN_ADRat * StageTmr))
+#C FN_ADTrakMn:Lbf        (FN_ADTrak - FnTargBand)
+#C FN_ADTrakMx:Lbf        (FN_ADTrak + FnTargBand)
+#C FN_ADTrakMnY:Lbf       (FN_ADTrak - FnTargBandY)
+#C FN_ADTrakMxY:Lbf       (FN_ADTrak + FnTargBandY)
+#C #else
+#C FN_ADTrak:Lbf          FNAccelTarg
+#C FN_ADTrakMn:Lbf        FNAccelTarg
+#C FN_ADTrakMx:Lbf        FNAccelTarg
+#C FN_ADTrakMnY:Lbf       FNAccelTarg
+#C FN_ADTrakMxY:Lbf       FNAccelTarg
+#C #endif
+#if     (StageTmr_F & N1_ADBar_F)
+N1_ADTrak:RPM           (N1_ADStart + (N1_ADRat * StageTmr))
+N1_ADTrakMn:RPM         (N1_ADTrak - 10.0)
+N1_ADTrakMx:RPM         (N1_ADTrak + 10.0)
+N1_ADTrakMnY:RPM        (N1_ADTrak - 20.0)
+N1_ADTrakMxY:RPM        (N1_ADTrak + 20.0)
+N1_ADTrakPctMn:%        value2pct (N1_ADTrakMnY N1100)
+N1_ADTrakPctMx:%        value2pct (N1_ADTrakMxY N1100)
+#else
+N1_ADTrak:RPM           N1AccelTarg
+N1_ADTrakMn:RPM         N1AccelTarg
+N1_ADTrakMx:RPM         N1AccelTarg
+N1_ADTrakMnY:RPM        N1AccelTarg
+N1_ADTrakMxY:RPM        N1AccelTarg
+N1_ADTrakPctMn:%        value2pct (N1_ADTrakMnY N1100)
+N1_ADTrakPctMx:%        value2pct (N1_ADTrakMxY N1100)
+#endif
+$END-GROUP

@@ -1,0 +1,16 @@
+$PHASE RampEPR_ATP length=40       level=0
+*
+* This is a sample for ramping the engine using EPR control mode
+*
+0 MESSAGE "Starting EPR Ramp"
+0 SET RestartAuto 1                    <- Allows this test to be restarted
+0 SET TLA_Override 10                  <- Sets operator override threshold
+2 SET RampTimer 0                      <- Used for plotting ramp
+2 SET RampTimerFlag 1
+6 RAMP EPR_Target 1.4 20               <- Ramp EPR_Target to 1.4 over 20 secs
+27 RAMP EPR_Target 1.15 10             <- Ramp EPR_Target to 1.15 over 10 secs
+END SET RestartAuto 0                  <- Reset flag
+END SET RampTimerFlag 0                <- Stop Plot Timer
+END MESSAGE "END of ramp"
+$END-PHASE
+**********

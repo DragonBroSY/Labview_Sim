@@ -1,0 +1,6 @@
+<DataStudy Name="N1Stability_Test" RateInHz="100" LengthInMinutes="5">
+ <Parameter Type="ARINC 429 Signal" Name="A2_N2P_L1"/>
+ <Parameter Type="ARINC 429 Signal" Name="A2_N2P_L2"/>
+ <Parameter Type="ARINC 429 Signal" Name="A2_N2P_L3"/>
+ <Parameter Type="ARINC 429 Signal" Name="A2_N2P_L4"/>
+</DataStudy>

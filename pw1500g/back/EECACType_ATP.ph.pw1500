@@ -1,0 +1,22 @@
+$PHASE EECACType_ATP length=-1       level=0 controlrelay=None common=0
+* Aircraft Type from the EEC bits L066B11, 12.
+#if ((EECACType = 0.0) & PW1100)
++0 SET EECACTypeTxt concat ("" "A320")
+#elseif ((EECACType = 1.0) & PW1100)
++0 SET EECACTypeTxt concat ("" "A318")
+#elseif ((EECACType = 2.0) & PW1100)
++0 SET EECACTypeTxt concat ("" "A321")
+#elseif ((EECACType = 3.0) & PW1100)
++0 SET EECACTypeTxt concat ("" "A319")
+************* PW1500 NEEDFIX *********
+#elseif ((EECACType = 1.0) & PW1500)
++0 SET EECACTypeTxt concat ("" "CS300")
+#elseif ((EECACType = 2.0) & PW1500)
++0 SET EECACTypeTxt concat ("" "CS100")
+#else
++0 SET EECACTypeTxt concat ("" "UNK")
+#endif
+*
+$END-PHASE
+**********
+

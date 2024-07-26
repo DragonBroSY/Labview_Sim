@@ -1,0 +1,8 @@
+# Rigs Trim Balance Survey Display and Trim Balance function
+#
+rig sig n1hz 1500.0 4100 15.0
+rig sig vibfamp 0.7 3.2 0.02
+rig sig vibtamp 0.3 4.1 0.05
+rig sig vibfphs -60.0 100.0 0.3
+rig sig vibtphs -30 160.0 0.2
+rig sig vibffrq 25.0 70.0

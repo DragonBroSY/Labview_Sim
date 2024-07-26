@@ -1,0 +1,1583 @@
+$TABLEGROUP Emissions
+$FORMAT ascii
+
+$TABLE CO_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=0 xparam=WfIS 
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nCO Lbs/Lbs Fuel Burned. Engine is tested as a PW1133G.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE NOx_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=1 xparam=WfIS 
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nNOx Lbs/Lbs Fuel Burned. Engine is Tested as a PW1133G.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE PM_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=2 xparam=WfIS 
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nPM Lbs/Lbs Fuel Burned. Engine is Tested as a PW1133G.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE SO2_T
+format="%f" ascii=1 dim=1 size=6 save=0 dynexp=0 constant=0.003120
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nSO2 Lbs/Lbs Fuel Burned.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE VOC_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=3 xparam=WfIS 
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nVOC Lbs/Lbs Fuel Burned. Engine is Tested as a PW1133G.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$TABLE THC_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=4 xparam=WfIS 
+exp=TRUE 
+comment="Criteria Pollutant Emission Factors\nTHC Lbs/Lbs Fuel Burned. Engine is Tested as a PW1133G.\n(DJR 9/6/18)"
+revdate="06 Sep 2018"
+manrev="v25a ICAO Databank 5/28/2018"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP FireLoops
+$FORMAT ascii
+
+$TABLE FireLoopFire_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=2800.000000
+exp=true 
+comment="Fire Loop Minimum Range indicates Fire...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE FireLoopFault_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=3400.000000
+exp=true 
+comment="Fire Loop Max Range indicates Fault...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE OvHtLoopFire_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1300.000000
+exp=true 
+comment="Overheat Loop Minimum Range indicates Fire...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$TABLE OvHtLoopFault_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1600.000000
+exp=true 
+comment="Overheat Loop Max Range indicates Fault...\n(DJR 11/13/13)"
+revdate="13 Nov 2013"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP FacilityModifiers
+$FORMAT ascii
+
+$TABLE dFNTR2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 3.0) 
+comment="FN Cell 3 Modifiers.\nInput Units: Lbs, Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dFNTR2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 4.0) 
+comment="FN Cell 4 Modifiers.\nInput Units: Lbs, Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dWFPLHCR2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 3.0) 
+comment="Wf Cell 3 Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 3 Aug 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dWFPLHCR2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 4.0) 
+comment="Wf Cell 4 Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 3 Aug 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dN1C2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 3.0) 
+comment="N1 Cell 3 Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dN1C2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 4.0) 
+comment="N1 Cell 4 Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dN2C2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 3.0) 
+comment="N2 Cell 3 Modifiers.\nInput Units: , Output Units:\n(DJR 9/1/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dN2C2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=(CellNum = 4.0) 
+comment="N2 Cell 4 Modifiers.\nInput Units: , Output Units:\n(DJR 9/1/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dT25OP25_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="T2.5 Cell modifiers\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 3 Aug 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dT3OP3_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=0 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="T3 Cell Modifiers\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 3 Aug 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dT45OP45_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="T4.5 Cell Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dT49OP49_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=1 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="T4.9 Cell Modifiers.\nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 9 Mar 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dP25Q2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=0 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="P2.5/P2 Cell Modifiers. \nInput Units: , Output Units:\n(DJR 9/1/18)"
+revdate="06 Aug 2018"
+mandate=" 3 Aug 1999"
+manrev="2.00"
+$END-TABLE
+
+$TABLE dPS3Q2_Cell_T
+format="%e" ascii=1 dim=1 size=4 save=0 dynexp=0 constant=0.000000e+00
+exp=True 
+comment="PS3.1/P2 Cell Modifiers. \nInput Units: , Output Units:\n(DJR 9/2/18)"
+revdate="06 Aug 2018"
+mandate=" 7 Apr 1999"
+manrev="2.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP OperatingLimits
+$FORMAT ascii
+
+$TABLE MOPMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=259.000000
+exp=TRUE 
+comment="Maximum Oil Pressure, 71-00-00-00A-030A-B Operating Limits, 2.B.(1)\nUnits Out: PSIA\n(DJR 9/16/19)"
+revdate="16 Jul 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE MOPMn_T
+format="%f" ascii=1 dim=2 size=6 save=0 dynexp=0 offset=0 xparam=N2S 
+exp=TRUE 
+comment="Minimum Oil Pressure, 71-00-00-00A-030A-B Operating Limits, 2.B.(2)\nUnits Out: PSIG, Units IN: RPM\n(DJR 7/16/19)"
+revdate="20 Aug 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE MOPSafeMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=270.000000
+exp=TRUE 
+comment="Maximum Oil Pressure Limit, MOP Test and Adjustment, Figure 2\nUnits Out: PSIG\n(DJR 3/1/19)"
+revdate="28 Feb 2019"
+manrev="2.00"
+$END-TABLE
+
+$TABLE MOPSafeMn_T
+format="%f" ascii=1 dim=2 size=4 save=0 dynexp=0 offset=1 xparam=EEC_N2Pct 
+exp=TRUE 
+comment="Maximum Oil Pressure Limit, MOP Test and Adjustment, Figure 2\nUnits Out: PSIG\n(DJR 3/1/19)"
+revdate="28 Feb 2019"
+manrev="2.00"
+$END-TABLE
+
+$TABLE SumpMx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=N2S 
+coeff0=-1.468600e+01 coeff1=5.999000e-03 coeff2=-7.974000e-07 coeff3=3.550000e-11 maxpoly=1.280000e+04 minpoly=6.800000e+03 
+exp=TRUE 
+comment="Sump / Gearbox breather, Fig. 1304, L-96448(0104)\nUnits: PSIG\n(DJR 1/05)"
+revdate="21 Aug 2018"
+manrev="2.00"
+$END-TABLE
+
+$TABLE OilConsMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=0.100000
+exp=TRUE 
+comment="Maximum Oil Consumption, 71-00-00-00A-030A-B Operating Limits, 2.H.(1)\nUnits Out: Gal/Hr\n(DJR 8/23/18)"
+revdate="21 Aug 2018"
+manrev="2.00"
+$END-TABLE
+
+$TABLE FIPMN_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=5.000000
+exp=TRUE 
+comment="Minimum Inlet Fuel pressure to engine fuel pump, 71-00-00-00A-030A-B Operating Limits, 2.E.(5)\nUnits Out: PSIG\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FIPMX_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=40.000000
+exp=TRUE 
+comment="Max Inlet Fuel pressure to engine fuel pump, 71-00-00-00A-030A-B Operating Limits, 2.E.(5)\nUnits Out: PSIG\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE StartFuelFlow_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=200.000000
+exp=TRUE 
+comment="Normal Starting Fuel Flow, 71-00-00-00A-030A-B Operating Limits, 2.E.(1)\nUnits Out: PPH\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+mandate="14 Jun 2018"
+manrev="20.00"
+$END-TABLE
+
+$TABLE IdleFuelFlow_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=555.000000
+exp=TRUE 
+comment="Normal Idle Fuel Flow, 71-00-00-00A-030A-B Operating Limits, 2.E.(2)\nUnits Out: PPH\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+mandate="14 Jun 2018"
+manrev="20.00"
+$END-TABLE
+
+$TABLE OILFILTDIFFMX_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=35.000000
+exp=TRUE 
+comment="Main Oil Filter Diff Max, 71-00-00-00A-030A-B Operating Limits, 2.B.(4)\nUnits Out: PSID\n(DJR 8/23/18)"
+revdate="21 Aug 2018"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE MOTMN_T
+format="%f" ascii=1 dim=2 size=3 save=0 dynexp=0 offset=2 xparam=N2S 
+exp=TRUE 
+comment="Minimum Oil Temp @ Start to Takeoff, 71-00-00-00A-030A-B Operating Limits, 2.C.(2)\nUnits Out: DegC\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE MOTMX_T
+format="%f" ascii=1 dim=2 size=5 save=0 dynexp=0 offset=3 xparam=N2S 
+exp=TRUE 
+comment="Maximum Oil Temp Limit, 71-00-00-00A-030A-B Operating Limits, 2.C.(1)\nUnits Out: DegC\n(DJR 8/6/19)"
+revdate="06 Aug 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE StarterCutOut_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=12265.000000
+exp=TRUE 
+comment="Starter CutOut @ N2 RPM, 55% N2 \n(DJR 8/23/18)"
+revdate="21 Aug 2018"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE SAPMn_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=35.000000
+exp=TRUE 
+comment="Starter Air Min Limit, 71-00-00-00A-030A-B Operating Limits, 2.I.(1)\nUnits Out: PSIG\n(DJR 8/23/18)"
+revdate="21 Aug 2018"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE SAPMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=55.000000
+exp=TRUE 
+comment="Starter Air Max Limit, 71-00-00-00A-030A-B Operating Limits, 2.I.(1)\nUnits Out: PSIG\n(DJR 8/23/18)"
+revdate="06 Aug 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsMn_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=6.300000
+exp=TRUE 
+comment="Starter Air Min Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: PSIG\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=8.300000
+exp=TRUE 
+comment="Starter Air Max Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: PSIG\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsN2Mn_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1800.000000
+exp=TRUE 
+comment="N2 Start RPM Min Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: RPM\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE PAIRsN2Mx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=2200.000000
+exp=TRUE 
+comment="N2 Start RPM Max Limit, 71-00-00-01B-120A-B Dry Motor Oil Fill Limits, 11.A\nUnits Out: RPM\n(DJR 12/11/19)"
+revdate="11 Dec 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE StarterDutyCycle_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=15.000000
+exp=TRUE 
+comment="Starter Duty Cycle, 71-00-00-00A-030A-B Operating Limits, 2.I.(2)\nUnits Out: Minutes\n(DJR 8/23/18)"
+revdate="06 Aug 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP EGTLimits
+$FORMAT ascii
+
+$TABLE EGTStrtMxRLim_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=1080.000000
+exp=TRUE 
+comment="Max EGT Red Start Limit. \nUnits:DegC, Operating Limits, 2.A.(1)\n(DJR 10/19)"
+revdate="02 Oct 2019"
+mandate="15 May 1997"
+manrev="20.00"
+$END-TABLE
+
+$TABLE EGTRunMxRLim_T
+format="%f" ascii=1 dim=2 size=4 save=0 dynexp=0 offset=0 xparam=EGTRunTrigTmr 
+exp=TRUE 
+comment="EGT Max Red Limit @ Take-OFF.\nUnits:DegC, Operating Limits, 2.A.(2-3)\n(DJR 10/19)"
+revdate="02 Oct 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE EGTRunTrig_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1042.000000
+exp=TRUE 
+comment="Max EGT at Max-Continuous, Lowest Max Limit used to start Timer.\nUnits: DegC, Operating Limits, 2.A.(3)\n(DJR 10/19)"
+revdate="02 Oct 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE EGTRunMxTm_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=300.000000
+exp=TRUE 
+comment="EGT Max Time Limit @ Take-Off.\nUnits:Sec, Operating Limits, 2.A.(2)\n(DJR 10/19)"
+revdate="02 Oct 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP RotorSpeedLimits
+$FORMAT ascii
+
+$TABLE NFTimeBase_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=3.749999
+exp=TRUE 
+comment="NF Fan Rotor Speed electronic Counter Time Base\nTesting-71-00-00\nASE Drawing (3280.66 RPM 100% / 874.843 Hz 100%)\nBased on 20 tooth speed sensor, 60 / 20 = 3\nUnits: TimeBase\n(DJR 8/23/18)"
+revdate="17 Dec 2019"
+$END-TABLE
+
+$TABLE NF100_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=3349.000000
+exp=TRUE 
+comment="100% NF RPM, (N1 / 3) (Ratio of gear Reduction)\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$TABLE N1R_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=10047.000000
+exp=TRUE 
+comment="N1 Red Line Limit, Testing 71-00-00-00A-030A-B, N1-N2 OverSpeed\nUnits Out: RPM\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$TABLE N2R_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=22300.000000
+exp=TRUE 
+comment="N2 Red Line Limit, Testing 71-00-00-00A-030A-B, N1-N2 OverSpeed\nUnits Out: RPM\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$TABLE N1100_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=10047.000000
+exp=TRUE 
+comment="100% N1 RPM, Testing-71-00-00-00A-030A-B Operating Limits, 2.G.(1)\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$TABLE N1TimeBase_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1.200000
+exp=TRUE 
+comment="N1 Rotor Speed electronic Counter Time Base\nASE Drawings (10047 RPM 100% / 8372.5 Hz 100%)\nBased on 20 tooth speed sensor, 60 / 20 = 3\nUnits: TimeBase\n(DJR 8/23/18)"
+revdate="17 Dec 2019"
+$END-TABLE
+
+$TABLE N2100_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=22300.000000
+exp=TRUE 
+comment="100% N2 RPM, Testing-71-00-00-00A-030A-B Operating Limits, 2.G.(2)\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$TABLE N2TimeBase_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=5.566037
+exp=TRUE 
+comment="N2 Rotor Speed electronic Counter Time Base\nASE Drawings (22300 RPM 100% / 4006.441 Hz 100%)\nUnits: TimeBase\n(DJR 8/23/18)"
+revdate="14 Jun 2018"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP VibLimits
+$FORMAT ascii
+
+$TABLE VibFBBMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.300000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Acceptance BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFNFMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.300000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Acceptance Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3&5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN1Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.600000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Acceptance N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3&5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.700000
+exp=(EFlange_F & WSHPC_HM & WSHPT_HM) 
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3\nWorkscope HPC and HPT, (DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.000000
+exp=(EFlange_F & (~WSHPC_HM | ~WSHPT_HM)) 
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3\nNOT Workscope HPC and HPT, (DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.000000
+exp=(AP21_F & WSHPC_HM & WSHPT_HM) 
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 5\nWorkscope HPC and HPT, (DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.300000
+exp=(AP21_F & (~WSHPC_HM | ~WSHPT_HM)) 
+comment="Intermediate Case (IC), Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 5\nNOT Workscope HPC and HPT, (DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRBBMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.400000
+exp=TRUE 
+comment="P-Flange, Max Acceptance BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3&5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRNFMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.400000
+exp=TRUE 
+comment="P-Flange, Max Acceptance Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3&5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRN1Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.600000
+exp=TRUE 
+comment="P-Flange, Max Acceptance N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3&5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.700000
+exp=EFlange_F 
+comment="P-Flange, Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 3\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRN2Mx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.000000
+exp=AP21_F 
+comment="P-Flange, Max Acceptance N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 5\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFBBRMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.600000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Safe Run Limit BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFNFRMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.600000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Safe Run Limit Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN1RMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.200000
+exp=TRUE 
+comment="Intermediate Case (IC), Max Safe Run Limit N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2RMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.200000
+exp=EFlange_F 
+comment="Intermediate Case (IC), Max Safe Run Limit N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibFN2RMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.500000
+exp=AP21_F 
+comment="Intermediate Case (IC), Max Safe Run Limit N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRBBRMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.800000
+exp=TRUE 
+comment="P-Flange, Max Safe Run Limit BB Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRNFRMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=0.800000
+exp=TRUE 
+comment="P-Flange, Max Safe Run Limit Fan Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRN1RMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.200000
+exp=TRUE 
+comment="P-Flange, Max Safe Run Limit N1 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE VibRN2RMx_T
+format="%f" ascii=1 dim=1 size=2 save=1 dynexp=0 constant=1.200000
+exp=TRUE 
+comment="P-Flange, Max Safe Run Limit N2 Vibration levels, \nUNITS: IPS (single amp), Operating Limits, 2.J. Table 4&6\n(DJR 8/13/19)"
+revdate="13 Aug 2019"
+mandate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP StartLimits
+$FORMAT ascii
+
+$TABLE FuelOnToLOMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=20.000000
+exp=TRUE 
+comment="Testing-00  p.1334  J.1"
+$END-TABLE
+
+$TABLE StrtOnToIdleMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=90.000000
+exp=TRUE 
+comment="Testing-00  p.1333  I.1"
+revdate="15 Oct 2004"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP AcceptanceLimits
+$FORMAT ascii
+
+$TABLE FNTR2Mx_MI_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1420.000000
+exp=PW1100 
+comment="Minimum Idle Max Corrected Thrust Limit, Testing-09, O.(1)\nUnits Out: Lbs\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNTR2Mx_AI_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=2250.000000
+exp=PW1100 
+comment="Approach Idle Max Corrected Thrust Limit, Testing-09, O.(1)\nUnits Out: Lbs\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_A_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=32351.000000
+exp=PW1100 
+comment="TakeOff Band A Min Guaranteed Thrust Rating, Testing-09, O.\nUnits Out: Lbs, Table 12, N1CLAS1\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_B_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=26740.000000
+exp=PW1100 
+comment="MCT Band B Min Guaranteed Thrust Rating, Testing-09, O.\nUnits Out: Lbs, Table 12, N1CLAS2\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_C_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=20680.000000
+exp=PW1100 
+comment="Mid-Band Band C Min Guaranteed Thrust Rating, Testing-09, O.\nUnits Out: Lbs, Table 12, N1CLAS3\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNTR2GRat_D_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=16723.000000
+exp=PW1100 
+comment="Reduced T/O Band D Min Guaranteed Thrust Rating, Testing-09, O.\nUnits Out: Lbs, Table 12, N1CLAS4\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2GMax_A_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=8866.000000
+exp=TRUE 
+comment="TakeOff Band A, Max N1C2-I @ Guaranteed Thrust, Testing-09, O.\nUnits Out: RPM, Table 12, N1CLAS4\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2GMax_B_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=8209.000000
+exp=TRUE 
+comment="MCT Band B, Max N1C2-I @ Guaranteed Thrust, Testing-09, O.\nUnits Out: RPM, Table 12, N1CLAS3\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2GMax_C_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=7358.000000
+exp=TRUE 
+comment="Mid-Band C, Max N1C2-I @ Guaranteed Thrust, Testing-09, O.\nUnits Out: RPM, Table 12, N1CLAS2\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2GMax_D_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=6692.000000
+exp=TRUE 
+comment="Reduced T/O D, Max N1C2-I @ Guaranteed Thrust, Testing-09, O.\nUnits Out: RPM, Table 12, N1CLAS1\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1738.000000
+exp=(PW1133 & Refurb) 
+comment="Max T45OP45 (EGT) Fully Refurbished, Testing-09, O.(2)\nUnits Out: DegF, Table 16 PW1133G, N1C2-I @ 8852.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1753.000000
+exp=(~PW1133 & Refurb) 
+comment="Max T45OP45 (EGT) Fully Refurbished, Testing-09, O.(2)\nUnits Out: DegF, Table 16 All Others, N1C2-I @ 8852.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1756.000000
+exp=(PW1133 & ~Refurb) 
+comment="Max T45OP45 (EGT) Little/No Refurbishment, Testing-09, O.(2)\nUnits Out: DegF, Table 16 PW1133G, N1C2-I @ 8852.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T45OP45Max_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=1771.000000
+exp=(~PW1133 & ~Refurb) 
+comment="Max T45OP45 (EGT) Little/No Refurbishment, Testing-09, O.(2)\nUnits Out: DegF, Table 16 All Others, N1C2-I @ 8852.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N2C2DMax_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=21051.000000
+exp=TRUE 
+comment="Max N2C2D, All Refurbished, Testing-09, O.(3)\nUnits Out: RPM, Table 15, N1C2-I @ 8843.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2I_T45Ref_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=8852.000000
+exp=TRUE 
+comment="Reference N1C2-I, Testing-09, O.(2)\nUnits Out: RPM, Table 14, N1C2-I @ 8852.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1C2I_N2Ref_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=8843.000000
+exp=TRUE 
+comment="Reference N1C2-I, Testing-09, O.(2)\nUnits Out: RPM, Table 15, N1C2-I @ 8843.\n(DJR 8/21/18)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE MOPCorMn_T
+format="%f" ascii=1 dim=2 size=4 save=0 dynexp=0 offset=0 xparam=EEC_N2Pct 
+exp=TRUE 
+comment="Minimum Main Oil Pressure Acceptance Limits, Testing-13, Figure 3\nUnits IN: %, Units Out: PSIG\n(DJR 3/1/19) "
+revdate="14 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE MOPCorMx_T
+format="%f" ascii=1 dim=2 size=4 save=0 dynexp=0 offset=1 xparam=EEC_N2Pct 
+exp=TRUE 
+comment="Maximum Main Oil Pressure Acceptance Limits, Testing-13, Figure 3\nUnits IN: %, Units Out: PSIG\n(DJR 3/1/19) "
+revdate="15 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP MopTest
+$FORMAT ascii
+
+$TABLE TrimDiameterChg_T
+format="%f" ascii=1 dim=3 size=44 save=0 dynexp=0 offset=0 xparam=POilN2 zparam=POilDiff 
+exp=TRUE 
+comment="Main Oil Pressure Acceptance Trim Change, Testing-13, Figure 4\nUnits IN: % and PSI, Units Out: In\n(DJR 3/1/19) "
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamChg_T
+format="%f" ascii=1 dim=3 size=44 save=0 dynexp=0 offset=1 xparam=POilN2 zparam=POilDiff 
+exp=TRUE 
+comment="Oil Pressure Change Trim, MOP Test and Adjustment, Figure 4\nUnits Out: Inches, Units In 1: N2%, 2: PSIG\n(DJR 3/1/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiam_T
+format="%f" ascii=1 dim=2 size=24 save=0 dynexp=0 offset=2 xparam=POilTrim 
+exp=TRUE 
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamInc_T
+format="%f" ascii=1 dim=2 size=24 save=0 dynexp=0 offset=3 xparam=POilTrim 
+exp=TRUE 
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4, MOP to High\nIncrease Trim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamDec_T
+format="%f" ascii=1 dim=2 size=24 save=0 dynexp=0 offset=4 xparam=POilTrim 
+exp=TRUE 
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4, MOP to Low\nDecrease Trim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="20 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimDiamMid_T
+format="%f" ascii=1 dim=2 size=24 save=0 dynexp=0 offset=5 xparam=POilTrim 
+exp=TRUE 
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Diameter Selection, Input Units: In, Output Units: In\n(DJR 8/15/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE POilTrimClass_T
+format="%g" ascii=1 dim=2 size=12 save=0 dynexp=0 offset=6 xparam=POilTrimDiam 
+exp=TRUE 
+comment="Main Oil Pressure Test and Adjustment, Testing 13, Figure 4\nTrim Class Selection, Input Units: In, Output Units: Class\n(DJR 8/15/19)"
+revdate="19 Aug 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP ThrustBands
+$FORMAT ascii
+
+$TABLE FNAMX_T
+format="%f" ascii=1 dim=2 size=3 save=0 dynexp=0 offset=0 xparam=CITDegF 
+exp=TRUE 
+comment="Thrust Band A Max, Testing-09, Figure 3, Sheet 1, PW1100G\nGraphic: P-77445-16542-A-002-01, equation: > 86 DegF: (-141.046 * T2F + 44914.956)\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNAMN_T
+format="%f" ascii=1 dim=2 size=3 save=0 dynexp=0 offset=1 xparam=CITDegF 
+exp=TRUE 
+comment="Thrust Band A Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01, equation: > 86 DegF: (-141.046 * T2F + 44414.956)\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNBMX_T
+format="%f" ascii=1 dim=2 size=2 save=0 dynexp=0 offset=2 xparam=CITDegF 
+exp=TRUE 
+comment="Thrust Band B Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNBMN_T
+format="%f" ascii=1 dim=2 size=2 save=0 dynexp=0 offset=3 xparam=CITDegF 
+exp=TRUE 
+comment="Thrust Band B Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNCMX_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=21088.000000
+exp=TRUE 
+comment="Thrust Band C Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01, PW1100G\n(DJR 8/7/18)\n"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNCMN_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=20588.000000
+exp=TRUE 
+comment="Thrust Band C Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01, PW1100G\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE FNDMX_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=17091.000000
+exp=TRUE 
+comment="Thrust Band D Max, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01, PW1100G\n(DJR 8/7/18)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE FNDMN_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=16591.000000
+exp=TRUE 
+comment="Thrust Band C Min, Testing-09, Figure 3, Sheet 1\nGraphic: P-77445-16542-A-002-01, PW1100G\n(DJR 8/7/18)\n\nYohannes"
+revdate="27 Jun 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP GasGenCheck
+$FORMAT ascii
+
+$TABLE GGCCWFPLHCR2Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.008510e+03 coeff1=3.617160e-01 coeff2=-5.313500e-06 coeff3=9.997260e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, WF Max Limit, Figure 13, Sheet 1\nGraphic: H-27374(0218), Units IN: Lbs, Units Out: PPH\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCWFPLHCR2Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.625940e+03 coeff1=8.949580e-03 coeff2=8.454910e-06 coeff3=-7.981980e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, WF Min Limit, Figure 13, Sheet 1\nGraphic: H-27374(0218), Units IN: Lbs, Units Out: PPH\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCN1C2DMx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=2.340800e+03 coeff1=3.685540e-01 coeff2=-7.382940e-06 coeff3=7.039160e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, N1C2D Max Limit, Figure 13, Sheet 2\nGraphic: H-27375(0218), Units IN: Lbs, Units Out: RPM\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCN1C2DMn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=2.207170e+03 coeff1=3.699170e-01 coeff2=-7.419460e-06 coeff3=7.099180e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, N1C2D Min Limit, Figure 13, Sheet 2\nGraphic: H-27375(0218), Units IN: Lbs, Units Out: RPM\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCN2C2DMx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.733440e+04 coeff1=7.254970e-02 coeff2=2.816950e-06 coeff3=-5.139160e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, N2C2D Max Limit, Figure 13, Sheet 3\nGraphic: H-27376(0218), Units IN: Lbs, Units Out: RPM\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCN2C2DMn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.838830e+04 coeff1=-6.986450e-06 coeff2=8.400630e-06 coeff3=-1.246470e-10 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, N2C2D Min Limit, Figure 13, Sheet 3\nGraphic: H-27376(0218), Units IN: Lbs, Units Out: RPM\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT25OP25Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.227930e+02 coeff1=-1.193060e-02 coeff2=6.800380e-07 coeff3=-9.421240e-12 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T25OP25 Max Limit, Figure 13, Sheet 4\nGraphic: H-27377(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT25OP25Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.227930e+02 coeff1=-1.193060e-02 coeff2=6.800380e-07 coeff3=-9.421240e-12 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T25OP25 Min Limit, Figure 13, Sheet 4\nGraphic: H-27377(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCP25Q2Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=3.261850e+00 coeff1=-2.943050e-04 coeff2=1.524970e-08 coeff3=-2.045240e-13 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, P25Q2 Max Limit, Figure 13, Sheet 5\nGraphic: H-27378(0218), Units IN: Lbs, Units Out: N/A\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCP25Q2Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=3.446230e+00 coeff1=-3.238800e-04 coeff2=1.618020e-08 coeff3=-2.193360e-13 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, P25Q2 Min Limit, Figure 13, Sheet 5\nGraphic: H-27378(0218), Units IN: Lbs, Units Out: N/A\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCPS3Q2Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.698210e+01 coeff1=-7.126600e-04 coeff2=7.330360e-08 coeff3=-9.641410e-13 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, PS3Q2 Max Limit, Figure 13, Sheet 6\nGraphic: H-27379(0218), Units IN: Lbs, Units Out: N/A\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCPS3Q2Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.085890e+01 coeff1=4.692440e-05 coeff2=3.899730e-08 coeff3=-4.953080e-13 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, PS3Q2 Min Limit, Figure 13, Sheet 6\nGraphic: H-27379(0218), Units IN: Lbs, Units Out: N/A\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT3OP3Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=2.856650e+02 coeff1=1.546710e-02 coeff2=-1.968750e-07 coeff3=1.627060e-12 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T3OP3 Max Limit, Figure 13, Sheet 7\nGraphic: H-27380(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT3OP3Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=3.624520e+02 coeff1=2.663860e-03 coeff2=3.355440e-07 coeff3=-5.615530e-12 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T3OP3 Min Limit, Figure 13, Sheet 7\nGraphic: H-27380(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT49OP49Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.810820e+02 coeff1=3.497700e-02 coeff2=-1.313370e-06 coeff3=1.818800e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T49OP49 Max Limit, Figure 13, Sheet 8\nGraphic: H-27381(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT49OP49Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=1.722110e+02 coeff1=3.041400e-02 coeff2=-1.165010e-06 coeff3=1.665770e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T49OP49 Min Limit, Figure 13, Sheet 8\nGraphic: H-27381(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT45OP45Mx_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=5.912220e+01 coeff1=7.162310e-02 coeff2=-2.327150e-06 coeff3=3.001990e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T45OP45 Max Limit, Figure 13, Sheet 9\nGraphic: H-27382(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE GGCCT45OP45Mn_T
+format="%e" ascii=1 dim=0 size=3 save=1 dynexp=0 xparam=FNTR2 
+coeff0=-4.152620e+01 coeff1=7.526950e-02 coeff2=-2.411360e-06 coeff3=3.051620e-11 maxpoly=3.400000e+04 minpoly=1.600000e+04 
+exp=TRUE 
+comment="Gas Generator Check Curves, T45OP45 Min Limit, Figure 13, Sheet 9\nGraphic: H-27382(0218), Units IN: Lbs, Units Out: DegC\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP ThetaExp
+$FORMAT ascii
+
+$TABLE WFEXP_T
+format="%f" ascii=1 dim=2 size=3 save=0 dynexp=0 offset=0 xparam=FNTR2 
+exp=TRUE 
+comment="WFPLHCR2 Theta Exponent, Figure 14, Sheet 1\nPW1100G, Units IN: Lbs, (0.63791 + (1.3233e-06 * FNTR2))\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N1EXP_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=0.490000
+exp=TRUE 
+comment="N1C2 Theta Exponent, Figure 1, Sheet 3, Equation 21.\nPW1100G,\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE N2EXP_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=0.493000
+exp=TRUE 
+comment="N2C2 Theta Exponent, Figure 1, Sheet 3, Equation 24.\nPW1100G,\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE T25EXP_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=0.958000
+exp=TRUE 
+comment="T25OP25 Theta Exponent, Figure 1, Sheet 4, Equation 26.\nPW1100G,\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE T3EXP_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=0.880000
+exp=TRUE 
+comment="T3OP3 Theta Exponent, Figure 1, Sheet 4, Equation 27.\nPW1100G,\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE T45EXP_T
+format="%f" ascii=1 dim=1 size=3 save=0 dynexp=0 constant=0.905000
+exp=TRUE 
+comment="T45OP45 Theta Exponent, Figure 1, Sheet 4, Equation 28.\nPW1100G,\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE T49EXP_T
+format="%f" ascii=1 dim=2 size=3 save=0 dynexp=0 offset=1 xparam=FNTR2 
+exp=TRUE 
+comment="T49OP49 Theta Exponent, Figure 15, Sheet 1\nPW1100G, Units IN: Lbs, (0.936573 + (3.84276e-06 * FNTR2))\n(DJR 6/27/19)"
+revdate="10 Jul 2019"
+manrev="20.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP AccelDecelCheck
+$FORMAT ascii
+
+$TABLE AccelTmMx30_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=4.500000
+exp=(ACType = "A321") 
+comment="Accel Max Time Limit to 30% TO, Testing-09, O.(3)(a)\nFNTR2 TO A321, 33K Rating 30%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE AccelTmMx30_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=4.200000
+exp=~(ACType = "A321") 
+comment="Accel Max Time Limit to 30% TO, Testing-09, O.(3)(a)\nFNTR2 TO A320, 27K Rating 30%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE AccelTmMx90_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=7.500000
+exp=(ACType = "A321") 
+comment="Accel Max Time Limit to 90% TO, Testing-09, O.(3)(a)\nFNTR2 TO A321, 33K Rating 90%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE AccelTmMx90_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=7.000000
+exp=~(ACType = "A321") 
+comment="Accel Max Time Limit to 90% TO, Testing-09, O.(3)(a)\nFNTR2 TO A320, 27K Rating 90%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE DecelTmMx_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=13.000000
+exp=TRUE 
+comment="Decel Max Time Limit to 95% TO, Testing-09, O.(3)(b)\nFNTR2 TO 95%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE AccelFNTR2_30_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=0.300000
+exp=TRUE 
+comment="Accel FNTR2 30% TO Target, Testing-09, O.(3)(a)\nFNTR2 TO A321, 33K Rating 30%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE AccelFNTR2_90_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=0.900000
+exp=TRUE 
+comment="Accel FNTR2 90% TO Target, Testing-09, O.(3)(a)\nFNTR2 TO A321, 33K Rating 90%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE DecelFNTR2_95_T
+format="%f" ascii=1 dim=1 size=0 save=0 dynexp=0 constant=0.950000
+exp=TRUE 
+comment="Decel FNTR2 95% TO Decay Target, Testing-09, O.(3)(a)\nFNTR2 TO A321, 33K Rating 95%\n(DJR 10/9/19)"
+revdate="10 Jul 2019"
+mandate="10 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP N1ModifierClass
+$FORMAT ascii
+
+$TABLE DeltaN1C_2_T
+format="%f" ascii=1 dim=2 size=64 save=0 dynexp=0 offset=0 xparam=N1Class 
+exp=TRUE 
+comment="N1Class Modifier to DeltaN1C2, Table 20, PW1000G\nInput Units: N1Class\n(DJR 8/6/18)"
+revdate="31 Aug 2018"
+manrev="2.00"
+$END-TABLE
+
+$TABLE DeltaN1C2_T
+format="%f" ascii=1 dim=2 size=200 save=0 dynexp=0 offset=1 xparam=N1Class 
+exp=TRUE 
+comment="N1Class Modifier to DeltaN1C2, Table 20, PW1000G\nInput Units: N1Class\n(DJR 8/6/18)"
+revdate="31 Aug 2018"
+manrev="2.00"
+$END-TABLE
+
+$TABLE N1Class_2_T
+format="%f" ascii=1 dim=2 size=64 save=0 dynexp=0 offset=2 xparam=DeltaN1C2 
+exp=TRUE 
+comment="N1Class Modifier to DeltaN1C2, Table 20, PW1000G\nInput Units: RPM\n(DJR 8/6/18)"
+revdate="31 Aug 2018"
+manrev="2.00"
+$END-TABLE
+
+$TABLE N1Class_T
+format="%f" ascii=1 dim=2 size=130 save=0 dynexp=0 offset=3 xparam=DeltaN1C2 
+exp=TRUE 
+comment="N1Class Modifier to DeltaN1C2, Table 19, PW1100G\nInput Units: RPM, NOTE: DeltaN1C2 using the Higher Class Selection...\n(DJR 8/6/18)"
+revdate="19 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE N1ClassLower_T
+format="%f" ascii=1 dim=2 size=130 save=0 dynexp=0 offset=4 xparam=DeltaN1C2 
+exp=TRUE 
+comment="N1Class Modifier to DeltaN1C2, Table 19, PW1100G\nInput Units: RPM, NOTE: DeltaN1C2 Using the Lower N1Class Selection...\n(DJR 8/6/18)"
+revdate="19 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP Humidity
+$FORMAT ascii
+
+$TABLE E1_TSAT_T
+format="%e" ascii=1 dim=0 size=8 save=0 dynexp=0 xparam=TSAT 
+coeff0=1.823100e-02 coeff1=1.021900e-03 coeff2=2.518300e-05 coeff3=2.773400e-07 coeff4=9.951300e-10 coeff5=8.248200e-12 coeff6=1.649100e-13 coeff7=1.280700e-16 coeff8=-5.876200e-18 maxpoly=2.000000e+02 minpoly=0.000000e+00 
+exp=TRUE 
+comment="Testing-09 Engine Acceptance Test, Figure 1, Sheet 1\nEquation 6.\n(DJR 8/9/18)"
+revdate="27 Jun 2019"
+manrev="2.00"
+$END-TABLE
+
+$TABLE P2QPS2_T
+format="%e" ascii=1 dim=0 size=4 save=0 dynexp=0 xparam=N1C2D 
+coeff0=1.026700e+00 coeff1=-2.983210e-05 coeff2=1.284480e-08 coeff3=-1.773820e-12 coeff4=1.072710e-16 maxpoly=8.950000e+03 minpoly=1.694000e+03 
+exp=TRUE 
+comment="Testing-09 Engine Acceptance Test, Figure 11, PW1100G\nINPUT: N1C2D, Units In: RPM, Units Out: N/A\nICN-PW1000G-C-710003-P-77445-17506-A-002-01\n(DJR 7/15/19)"
+revdate="15 Jul 2019"
+mandate="11 Jul 2019"
+manrev="21.00"
+$END-TABLE
+
+$TABLE TDEWPT1_T
+format="%f" ascii=1 dim=0 size=2 save=0 dynexp=0 xparam=CITDegF 
+coeff0=-9.876900 coeff1=0.935290 coeff2=0.001900 maxpoly=51.000000 minpoly=0.000000 
+exp=TRUE 
+comment="Condensation Limit, Testing 9, Figure 2, Sheet 1\nEffectivity: PW1100G, Units In: DegF, Range 0 - 51 DegF\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE TDEWPT2_T
+format="%f" ascii=1 dim=0 size=2 save=0 dynexp=0 xparam=CITDegF 
+coeff0=6.142850 coeff1=0.639460 coeff2=0.001518 maxpoly=100.000000 minpoly=51.000000 
+exp=TRUE 
+comment="Condensation Limit, Testing 9, Figure 2, Sheet 1\nEffectivity: PW1100G, Units In: DegF, Range 51 - 100 DegF\n(DJR 6/27/19)"
+revdate="27 Jun 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHWF_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=0.320000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For WF, Testing 9, Figure 4, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHNL_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=0.257000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For NL, Testing 9, Figure 5, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHNH_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=0.072000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For NH, Testing 9, Figure 6, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHT49_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=-0.100000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For T49, Testing 9, Figure 7, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHT3_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=-0.370000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For T3, Testing 9, Figure 8, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHT25_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=-0.110000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For T25, Testing 9, Figure 9, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$TABLE KHT45_T
+format="%f" ascii=1 dim=0 size=1 save=0 dynexp=0 xparam=SHum 
+coeff0=1.000000 coeff1=-0.220000 maxpoly=0.025000 minpoly=0.000000 
+exp=TRUE 
+comment="Specific Humidity Factor For T45, Testing 9, Figure 10, Sheet 1\nEffectivity: PW1100G, Units In: Lbs\n(DJR 6/27/19)"
+revdate="24 May 2019"
+manrev="20.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+
+$TABLEGROUP SetTargets
+$FORMAT ascii
+
+$TABLE RunInN1C2Targ_T
+format="%f" ascii=1 dim=2 size=134 save=0 dynexp=0 offset=0 xparam=RunInStep 
+exp=~CBN8StgHPC 
+comment="LPC/HPC Run-In N1C2R (RPM) Values From Table 4\nINPUT: RunInStep, WithOUT CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInTLATarg_T
+format="%f" ascii=1 dim=2 size=186 save=0 dynexp=0 offset=1 xparam=RunInStep 
+exp=~CBN8StgHPC 
+comment="LPC/HPC Run-In TLA (Degrees) Values From Table 4\nINPUT: RunInStep, WithOUT CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInEventDur_T
+format="%f" ascii=1 dim=2 size=188 save=0 dynexp=0 offset=2 xparam=RunInStep 
+exp=~CBN8StgHPC 
+comment="LPC/HPC Run-In Event Duration (Sec) Values From Table 4\nINPUT: RunInStep, WithOUT CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInN1C2Targ_T
+format="%f" ascii=1 dim=2 size=58 save=0 dynexp=0 offset=3 xparam=RunInStep 
+exp=CBN8StgHPC 
+comment="LPC/HPC Run-In N1C2R (RPM) Values From Table 4\nINPUT: RunInStep, With CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInTLATarg_T
+format="%f" ascii=1 dim=2 size=78 save=0 dynexp=0 offset=4 xparam=RunInStep 
+exp=CBN8StgHPC 
+comment="LPC/HPC Run-In TLA (Degrees) Values From Table 4\nINPUT: RunInStep, With CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInEventDur_T
+format="%f" ascii=1 dim=2 size=78 save=0 dynexp=0 offset=5 xparam=RunInStep 
+exp=CBN8StgHPC 
+comment="LPC/HPC Run-In Event Duration (sec) Values From Table 4\nINPUT: RunInStep, With CBN coated 8th Stage HPC Blade Tips.\n(DJR 9/20/19)"
+revdate="20 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE RunInNibble_T
+format="%f" ascii=1 dim=2 size=42 save=0 dynexp=0 offset=6 xparam=RunInStep 
+exp=TRUE 
+comment="LPC/HPC Run-In Nibble Values From Table 4\nINPUT: RunInStep\n(DJR 9/20/19)"
+revdate="23 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE BrkInN1C2Targ_T
+format="%f" ascii=1 dim=2 size=42 save=0 dynexp=0 offset=7 xparam=BrkInStep 
+exp=TRUE 
+comment="HPT Damper Seal Break-In N1C2R (RPM) Values From Table 5\nINPUT: BrkInStep\n(DJR 9/20/19)"
+revdate="24 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE BrkInTLATarg_T
+format="%f" ascii=1 dim=2 size=42 save=0 dynexp=0 offset=8 xparam=BrkInStep 
+exp=TRUE 
+comment="HPT Damper Seal Break-In TLA (Degrees) Values From Table 5\nINPUT: BrkInStep\n(DJR 9/20/19)"
+revdate="24 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE BrkInEventDur_T
+format="%f" ascii=1 dim=2 size=68 save=0 dynexp=0 offset=9 xparam=BrkInStep 
+exp=TRUE 
+comment="HPT Damper Seal Break-In Event Duration (sec) Values From Table 5\nINPUT: BrkInStep\n(DJR 9/20/19)"
+revdate="24 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE BrkInNibble_T
+format="%f" ascii=1 dim=2 size=20 save=0 dynexp=0 offset=10 xparam=BrkInStep 
+exp=TRUE 
+comment="HPT Damper Seal Break-In Nibble Values From Table 5\nINPUT: BrkInStep\n(DJR 9/20/19)"
+revdate="24 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE AcceptN1C2Targ_T
+format="%f" ascii=1 dim=2 size=14 save=0 dynexp=0 offset=11 xparam=AcceptStep 
+exp=TRUE 
+comment="Acceptance N1C2 Values From Table 9\nINPUT: AcceptStep\n(DJR 9/20/19)"
+revdate="25 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$TABLE AcceptTLATarg_T
+format="%f" ascii=1 dim=2 size=14 save=0 dynexp=0 offset=12 xparam=AcceptStep 
+exp=TRUE 
+comment="Acceptance TLA Values From Table 9\nINPUT: AcceptStep\n(DJR 9/20/19)"
+revdate="25 Sep 2019"
+manrev="22.00"
+$END-TABLE
+
+$END-TABLEGROUP
+
+

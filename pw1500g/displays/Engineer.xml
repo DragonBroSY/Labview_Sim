@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><cencodisplay xmlns="http://www.w3.org/TR/2009/REC-xml-names-20091208/" xmlns:ui="http://xmlns.cenco.us/ui/" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
+<desc>
+<revision>2.0</revision>
+<title>Engineer</title>
+<loadflag/>
+</desc>
+<rect displayflag="1" fill="wheat" fill-opacity="0.8" height="500" id="0" rx="30" ry="30" stroke="black" stroke-width="4" width="230" x="540" y="60" z="71"/>
+<rect displayflag="1" fill="wheat" fill-opacity="0.8" height="499" id="1" rx="30" ry="30" stroke="black" stroke-width="4" width="232" x="280" y="60" z="70"/>
+<rect displayflag="1" fill="wheat" fill-opacity="0.8" height="500" id="2" rx="30" ry="30" stroke="black" stroke-width="4" width="230" x="20" y="60" z="69"/>
+<rect displayflag="1" fill="aquamarine" fill-opacity="1.0" height="38" id="3" rx="20" ry="10" stroke="blueviolet" stroke-width="4" width="457" x="187" y="12" z="68"/>
+<ui:digital displayflag="1" height="20" id="4" tooltiptext="N/A" width="160" x="322" y="170" z="67">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="1" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="ITT Cor" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegF" unitspacing="5.0"/>
+<parameter name="T45OP45"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="5" tooltiptext="N/A" width="160" x="322" y="150" z="66">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="1" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Wf Std" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="WfStd"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="6" tooltiptext="N/A" width="160" x="322" y="480" z="65">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="OAT" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegF" unitspacing="5.0"/>
+<parameter name="OATDegF"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="7" tooltiptext="N/A" width="160" x="322" y="460" z="64">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="OAT" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="OATDegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="8" tooltiptext="N/A" width="178" x="570" y="260" z="63">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T3.5 c" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T35cDegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="9" tooltiptext="N/A" width="178" x="570" y="190" z="62">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT Spread" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT_Spread"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="10" tooltiptext="N/A" width="178" x="570" y="170" z="61">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT Avg" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT_Avg"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="11" tooltiptext="N/A" width="178" x="570" y="150" z="60">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT #4" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT4"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="12" tooltiptext="N/A" width="167" x="50" y="510" z="59">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PEPR" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PEPR"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="13" tooltiptext="N/A" width="167" x="50" y="530" z="58">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="EPR Test" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="EPRTest"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="14" tooltiptext="N/A" width="167" x="50" y="490" z="57">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="EEC EPR" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="A_EPR_Act"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="15" tooltiptext="N/A" width="167" x="50" y="470" z="56">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Ps3.1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="Ps31PSIA"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="16" tooltiptext="N/A" width="167" x="50" y="400" z="55">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 Spread" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_Spread"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="17" tooltiptext="N/A" width="167" x="50" y="380" z="54">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 Avg" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_Avg"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="18" tooltiptext="N/A" width="167" x="50" y="360" z="53">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #8" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_8A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="19" tooltiptext="N/A" width="167" x="50" y="280" z="52">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #4" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_4A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="20" tooltiptext="N/A" width="167" x="50" y="190" z="51">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PCell Rear" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PCellRPSIA"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="21" tooltiptext="N/A" width="167" x="50" y="170" z="50">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PCell Front" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PCellFPSIA"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="22" tooltiptext="N/A" width="167" x="50" y="150" z="49">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PCell F Rt" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIG" unitspacing="5.0"/>
+<parameter name="PCellFPSIG_Rt"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="23" tooltiptext="N/A" width="160" x="322" y="130" z="48">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="0" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="N2 Std" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="RPM" unitspacing="5.0"/>
+<parameter name="N2Std"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="24" tooltiptext="N/A" width="160" x="322" y="510" z="47">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="TRise" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegF" unitspacing="5.0"/>
+<parameter name="ZTRise"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="25" tooltiptext="N/A" width="160" x="322" y="430" z="46">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT tc Diff" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_tcDiff"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="26" tooltiptext="N/A" width="160" x="322" y="410" z="45">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT tc Sprd" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CIT_MaxSpread_tc"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="27" tooltiptext="N/A" width="160" x="322" y="320" z="44">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT Sprd" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CIT_MaxSpread"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="28" tooltiptext="N/A" width="160" x="322" y="300" z="43">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT Avg" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITDegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="29" tooltiptext="N/A" width="160" x="322" y="280" z="42">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT #4" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_4"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="30" tooltiptext="N/A" width="178" x="570" y="240" z="41">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T3.5 b" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T35bDegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="31" tooltiptext="N/A" width="178" x="570" y="130" z="40">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT #3" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT3"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="32" tooltiptext="N/A" width="167" x="50" y="430" z="39">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Ps2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="Ps2PSIA"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="33" tooltiptext="N/A" width="167" x="50" y="340" z="38">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #7" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_7A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="34" tooltiptext="N/A" width="167" x="50" y="260" z="37">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #3" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_3A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="35" tooltiptext="N/A" width="167" x="50" y="130" z="36">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PCell F Lt" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIG" unitspacing="5.0"/>
+<parameter name="PCellFPSIG_Lt"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="36" tooltiptext="N/A" width="160" x="322" y="390" z="35">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT tc Avg" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITDegC_tc"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="37" tooltiptext="N/A" width="160" x="322" y="260" z="34">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT #3" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_3"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="38" tooltiptext="N/A" width="178" x="570" y="220" z="33">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T3.5 a" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T35aDegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="39" tooltiptext="N/A" width="178" x="570" y="110" z="32">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT #2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT2"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="40" tooltiptext="N/A" width="167" x="50" y="450" z="31">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2.5" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="Pt25PSIA"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="41" tooltiptext="N/A" width="167" x="50" y="320" z="30">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #6" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_6A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="42" tooltiptext="N/A" width="167" x="50" y="240" z="29">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PT2_2A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="43" tooltiptext="N/A" width="167" x="50" y="110" z="28">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PBar #2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PBar2"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="44" tooltiptext="N/A" width="160" x="322" y="110" z="27">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="1" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="N1 Std" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="RPM" unitspacing="5.0"/>
+<parameter name="N1Std"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="45" tooltiptext="N/A" width="160" x="322" y="370" z="26">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT tc #2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_tc2"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="46" tooltiptext="N/A" width="160" x="322" y="240" z="25">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT #2" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_2"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="47" tooltiptext="N/A" width="178" x="570" y="330" z="24">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T2.5" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T25DegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="48" tooltiptext="N/A" width="178" x="570" y="90" z="23">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="BMT #1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="BMT1"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="49" tooltiptext="N/A" width="167" x="50" y="300" z="22">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #5" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="Pt2_5A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="50" tooltiptext="N/A" width="167" x="50" y="220" z="21">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Pt2 #1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="Pt2_1A"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="51" tooltiptext="N/A" width="167" x="50" y="90" z="20">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="4" width="7"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="PBar #1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="PSIA" unitspacing="5.0"/>
+<parameter name="PBar1"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="52" tooltiptext="N/A" width="160" x="322" y="90" z="19">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="0" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="Fn Std" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="Lbs" unitspacing="5.0"/>
+<parameter name="FnStd"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="53" tooltiptext="N/A" width="160" x="322" y="350" z="18">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT tc #1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_tc1"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="54" tooltiptext="N/A" width="160" x="322" y="220" z="17">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="CIT #1" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="CITC_1"/>
+</ui:digital>
+<ui:txtlabel displayflag="1" height="21" id="55" tooltiptext="N/A" width="200" x="552" y="70" z="16">
+<text_style font="Times New Roman" font-size="16" fontstyle="bolditalic"/>
+<label label="TEMPERATURE PROBES" labelspacing="0.0" text-anchor="start" text-color="blue"/>
+<parameter name="dummy" value=""/>
+</ui:txtlabel>
+<ui:txtlabel displayflag="1" height="21" id="56" tooltiptext="N/A" width="160" x="50" y="70" z="15">
+<text_style font="Times New Roman" font-size="16" fontstyle="bolditalic"/>
+<label label="PRESSURE PROBES" labelspacing="0.0" text-anchor="start" text-color="blue"/>
+<parameter name="dummy" value=""/>
+</ui:txtlabel>
+<ui:txtlabel displayflag="1" height="21" id="57" tooltiptext="N/A" width="100" x="342" y="200" z="14">
+<text_style font="Times New Roman" font-size="16" fontstyle="bolditalic"/>
+<label label="CIT PROBES" labelspacing="0.0" text-anchor="start" text-color="blue"/>
+<parameter name="dummy" value=""/>
+</ui:txtlabel>
+<ui:txtlabel displayflag="1" height="21" id="58" tooltiptext="N/A" width="183" x="312" y="70" z="13">
+<text_style font="Times New Roman" font-size="16" fontstyle="bolditalic"/>
+<label label="ENGINE PARAMETERS" labelspacing="0.0" text-anchor="start" text-color="blue"/>
+<parameter name="dummy" value=""/>
+</ui:txtlabel>
+<ui:txtlabel displayflag="1" height="30" id="59" tooltiptext="N/A" width="431" x="200" y="20" z="12">
+<text_style font="Times New Roman" font-size="20" fontstyle="bolditalic"/>
+<label label="Engine Type:" labelspacing="0.0" text-anchor="start" text-color="black"/>
+<parameter name="EngName" value=""/>
+</ui:txtlabel>
+<ui:digital displayflag="1" height="20" id="60" tooltiptext="N/A" width="178" x="570" y="350" z="11">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T4.9 (EGT)" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T49DegC"/>
+</ui:digital>
+<ui:digital displayflag="1" height="20" id="61" tooltiptext="N/A" width="178" x="570" y="300" z="10">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T3.5 Spread" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T35_MaxSpread"/>
+</ui:digital>
+<ui:clock displayflag="1" height="30" hours="24" id="62" tooltiptext="N/A" width="130" x="600" y="520" z="9">
+<digital_config background="true" bgcolor="black" color="lime"/>
+<text_style font="Serif" font-size="20" fontstyle="normal"/>
+<label label="Time:" labelspacing="0.0" text-anchor="start" text-color="black"/>
+<parameter name="SysTime"/>
+</ui:clock>
+<line displayflag="1" height="3" id="63" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="543" y="212" z="8"/>
+<line displayflag="1" height="3" id="64" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="543" y="323" z="7"/>
+<line displayflag="1" height="3" id="65" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="24" y="214" z="6"/>
+<line displayflag="1" height="3" id="66" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="285" y="344" z="5"/>
+<line displayflag="1" height="3" id="67" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="284" y="503" z="4"/>
+<line displayflag="1" height="3" id="68" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="285" y="454" z="3"/>
+<line displayflag="1" height="3" id="69" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="222" x="23" y="424" z="2"/>
+<line displayflag="1" height="0" id="70" stroke="black" stroke-opacity="1.0" stroke-width="2" style="0" width="220" x="30" y="430" z="1"/>
+<ui:digital displayflag="1" height="20" id="71" tooltiptext="N/A" width="178" x="570" y="280" z="0">
+<digital_config background="true" bgcolor="black" color="green" format="float" precision="2" width="6"/>
+<text_style font="Lucida Bright" font-size="12" fontstyle="normal"/>
+<label label="T3.5 Avg" labelspacing="5.0" text-anchor="start" text-color="black"/>
+<units unitareapct="23.0" units="DegC" unitspacing="5.0"/>
+<parameter name="T35DegC"/>
+</ui:digital>
+</cencodisplay>

@@ -1,0 +1,92 @@
+$GROUP "mapsignals" 
+#C __________
+FnI:Lbs	FnMeasure
+NFI:RPM	(NFHz * NFTimeBase)
+NFPct:%	value2pct (NFI NF100)
+#if	(((N1Hz * N1TimeBase) < 20.0) & (EEC_N1 >= 20))
+#C We have a glitch in N1Hz...
+N1I:RPM	EEC_N1
+#else	
+N1I:RPM	(N1Hz * N1TimeBase)
+#endif	
+N1Pct:%	value2pct (N1I N1100)
+#C ========================================================
+N2I:RPM	(N2Hz * N2TimeBase)
+#if	((N2I < 7300.0) & (EEC_N2 > (N2I + 100.0)))
+#C We have a glitch in N2Hz...
+N2I:RPM	EEC_N2
+#endif	
+N2Pct:%	value2pct (N2I N2100)
+PAIRsN2:RPM	N2I
+#C ========================================================
+#C #if (~RunMode)
+#C #if	(EEC_WF < 1000.0)
+#C WfS:PPH	EEC_WF
+#C Wf_Avg:PPH	EEC_WF
+#C WfI:PPH	EEC_WF
+#C #elseif	(WfI < 20000)
+#if	(WfI < 20000)
+WfS:PPH	Wf_Avg
+#else	
+WfS:PPH	EEC_WF
+#endif	
+OilQtyGal:Gal	(OilQ / 4.0)
+TDEWPT:DegF	DewPtF
+#C =========================================================
+#C Replace OLD TLA_UNIQUE Parameter.
+#C Added for Ceres 7. DJR 9/24/12
+#C Added PLA_Handle Smoothing, (DJR 6/3/20)...
+PLA_Handle_s:VDC	smoothsignal(PLA_Handle PLA_Handle_s WeightFac)
+#C PLA_OffSet for PLA_Command to equal PLA_Handle...
+#C See AutoThrottle Check.xlsx...
+#if	(CellNum = 3.0)
+PLA_OffSet:VDC	(((0.8104 * PLA_Handle) - 0.0234) - PLA_Handle)
+#else	
+PLA_OffSet:VDC	(((0.8104 * PLA_Handle) - 0.0234) - PLA_Handle)
+#endif	
+PLA_Actual:Deg	(PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+#C ---------------------------------------------
+#if	(AutoTLAEnable_F)
+#C Auto Throttle without the PLA_Handle...
+#C **** See initlookups.cal for Coeff's, (DJR 12/3/21)
+TRA_Cmd_Corr:Deg	((TRA_Cor_Coeff1 * TRA_Cmd) + TRA_Cor_Coeff2)
+TLAPriCHResolver:DEGS	TRA_Cmd_Corr
+TLASecCHResolver:DEGS	TLAPriCHResolver
+#else	
+#C TLAPriCHResolver:DEGS (PLA_TLA_mcoeff * PLA_Handle + PLA_TLA_bcoeff)
+#C TLAPriCHResolver:DEGS PLA_Actual
+#C **** See initlookups.cal for Coeff's, (DJR 12/3/21)
+PLA_Corr:Deg	((TRA_Cor_Coeff1 * PLA_Actual) + TRA_Cor_Coeff2)
+TLAPriCHResolver:DEGS	PLA_Corr
+TLASecCHResolver:DEGS	TLAPriCHResolver
+#endif	
+#C TRA_Actual:Deg TLAPriCHResolver
+#C TRA Slope due to RVDT Unit not working. (DJR 10/27/21)
+#C **** See initlookups.cal for Coeff's, (DJR 12/3/21)
+TRA_Actual:Deg	((TRA_ACT_Coeff1 * TLAPriCHResolver) + TRA_ACT_Coeff2)
+#C ---------------------------------------------
+#if	(TRA_Actual <= -13.5)
+PLA_TargMx:Deg	-13.5
+PLA_TargMn:Deg	-15.5
+#else	
+PLA_TargMx:Deg	(TRA_Actual + 0.5)
+PLA_TargMn:Deg	(TRA_Actual - 0.5)
+#endif	
+#C **********************************************************
+#if	(AutoThrottle_F & AutoPL_I & ~AutoTLAEnable_F)
+#C **********************************************************
+#C * Added AutoThrottle capabilities...
+#C * Set the actual Ramping TLA Voltage (PLA_Command) here...
+#C * PLA_Command MUST be nagitive (-VDC)(Ref Drawing B5730704)...
+#C **********************************************************
+#C PLA_Command:VDC -((TLA_PLA_mcoeff * T
+PLA_Command:VDC	-((TLA_PLA_mcoeff * TRA_Cmd_Corr + TLA_PLA_bcoeff) + PLA_OffSet)
+#endif	
+#C =========================================================
+#C Calculate VDC value for PLA_Handle Autothrottle...
+#C AutoPLA:VDC (TLA_PLA_mcoeff * RigPLA + TLA_PLA_bcoeff)
+#C =========================================================
+#C ===== Yanos CRio Throttle Resolver ======================
+yaiTLACmd1:Deg	TLAPriCHResolver
+#C =========================================================
+$END-GROUP

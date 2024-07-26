@@ -1,0 +1,4 @@
+<DataStudy Name="N1Stability_Test" RateInHz="100" LengthInMinutes="5">
+ <Parameter Type="ARINC 429 Signal" Name="FCC2/TMC"/>
+ <Parameter Type="ARINC 429 Signal" Name="PDIU/TMC"/>
+</DataStudy>

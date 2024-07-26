@@ -1,0 +1,77 @@
+$GROUP "eectransmitdata" 
+#C ***************************************************************
+#C The following Parametric and Discrete parameters are transmitted
+#C to the EEC via a Condor_429 card.
+#C ***** ADIRU Parametric Parameters *********
+A_ALT1I:Ft	((1 - ((A_P2 / 1013.25)^0.190284)) * 145366.45)
+A_MN1I:		0.0
+A_CAS1I:kt	0.0
+A_TTAT1I:DegC	CITDegC
+A_TPRS1I:hPa	psi2mbar (P2_Avg)
+#C -------------------------------------
+B_ALT2I:Ft	((1 - ((B_P2 / 1013.25)^0.190284)) * 145366.45)
+B_MN2I:		A_MN1I
+B_CAS2I:kt	A_CAS1I
+B_TTAT2I:DegC	A_TTAT1I
+B_TPRS2I:hPa	A_TPRS1I
+#C ***** Label 270 Bits ****************
+#C ***** Channel A **********
+A_PT1BDI:	ON
+A_ADR1BDI:	ON
+A_ALTR1BDI:	ON
+A_ALTL1BDI:	ON
+A_TATHT1I:	ON
+#C ***** Channel B **********
+B_PT2BDI:	A_PT1BDI
+B_ADR2BDI:	A_ADR1BDI
+B_ALTR2BDI:	A_ALTR1BDI
+B_ALTL2BDI:	A_ALTL1BDI
+B_TATHT2I:	A_TATHT1I
+#C ***** EIU Descrete Parameters ***********
+#C ***** Engine Interface Unit (EIU) *******
+#C ***** Label 002 Bits ****************
+EIU_ICUPwrSwAON:	OFF
+EIU_ICUPwrSwBON:	OFF
+EIU_DCVPwrSwAON:	OFF
+EIU_DCVPwrSwBON:	OFF
+EIU_WdnP2Tol:		OFF
+#C EIU_LoPwrStabTst_1:	OFF See SetReducedIdleRate_ATP.ph
+#C EIU_LoPwrStabTst_2:	OFF See SetReducedIdleRate_ATP.ph
+#C EIU_LoPwrStabTst_3:	OFF See SetReducedIdleRate_ATP.ph
+EIU_VibTesting:		OverRideLPCBld_F
+#C ***** Label 010 Bits ****************
+#C ***** NEEDFIX - label 010 Used on PW1500 Only...
+#C ***** Label 015 Bits ****************
+EIU_ReqMTS:		OFF
+EIU_DualMTS:		OFF
+EIU_ReqFullStart:	OFF
+#C ***** Label 031 Bits ****************
+#C Minimum/Approach Idle Ref. Table 9 step 2 page 16,
+#C PW1100G-C-71-00-03-03A-320A-B.
+EIU_IGNStart:		(ECM_ModeSel_RB = 2.0)
+EIU_NORM:		(ECM_ModeSel_RB = 0.0)
+EIU_CRANK:		(ECM_ModeSel_RB = 1.0)
+EIU_MstrLvrON:		ECM_FuelCtrl_TB
+EIU_MstrLvrOFF:		~ECM_FuelCtrl_TB
+EIU_ManStart:		ECM_ManStart_TB
+EIU_MLDGLComp:		~ECM_IdleCtrl_TB
+EIU_MLDGRComp:		~ECM_IdleCtrl_TB
+EIU_SlatFlapStod:	~ECM_IdleCtrl_TB
+EIU_MinIdleReq:		~ECM_IdleCtrl_TB
+EIU_FailSafe:		OFF
+EIU_FuelRTTinhib:	OFF
+EIU_BumpHardwird:	OFF
+EIU_BumpSelOFF:		ON
+EIU_BumpSelON:		OFF
+EIU_SEL_AC_Gnd:		~ECM_IdleCtrl_TB
+EIU_FADEC28VDC_OFF:	OFF
+EIU_NLDGComp:		~ECM_IdleCtrl_TB
+EIU_WAISel_OFF:		OFF
+#C ***** Label 032 Bits ****************
+EIU_EngLoc1:		ON
+EIU_EngLoc2:		OFF
+#C ***** EIU BNR Data ******************
+EIU_Eng1SAVP:PSIG	SAP
+EIU_Eng2SAVP:PSIG	SAP
+#C ***** END EIU Bits ******************
+$END-GROUP

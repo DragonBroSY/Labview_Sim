@@ -1,0 +1,6 @@
+# Rig file for T49 Overtemperature on Auxiliary display.
+#
+echo "***NOTE:  If using this rig file for Auxiliary"
+echo "          display Run limits must be on. Run"
+echo "          rig_runlimits." 
+rig sig EGTHarnessDegC 300 780 2.0

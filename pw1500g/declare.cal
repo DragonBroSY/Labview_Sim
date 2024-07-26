@@ -1,0 +1,237 @@
+$GROUP declaration
+#C *******************************************************
+#C * Load Parameters...
+#C *******************************************************
+#C ****************************
+#C Observed Data...
+#C ****************************
+FNS_A:Lbs	BandA..FNS
+FNS_B:Lbs	BandB..FNS
+FNS_C:Lbs	BandC..FNS
+FNS_D:Lbs	BandD..FNS
+#C ****************************
+EEC_N1_A:RPM	BandA..EEC_N1
+EEC_N1_B:RPM	BandB..EEC_N1
+EEC_N1_C:RPM	BandC..EEC_N1
+EEC_N1_D:RPM	BandD..EEC_N1
+#C ****************************
+EEC_N2_A:RPM	BandA..EEC_N2
+EEC_N2_B:RPM	BandB..EEC_N2
+EEC_N2_C:RPM	BandC..EEC_N2
+EEC_N2_D:RPM	BandD..EEC_N2
+#C ****************************
+WFS_A:PPH	BandA..WFS
+WFS_B:PPH	BandB..WFS
+WFS_C:PPH	BandC..WFS
+WFS_D:PPH	BandD..WFS
+#C ****************************
+EEC_ITT_A:DegC	BandA..EEC_ITT
+EEC_ITT_B:DegC	BandB..EEC_ITT
+EEC_ITT_C:DegC	BandC..EEC_ITT
+EEC_ITT_D:DegC	BandD..EEC_ITT
+#C ****************************
+EEC_T3_A:DegC	BandA..EEC_T3
+EEC_T3_B:DegC	BandB..EEC_T3
+EEC_T3_C:DegC	BandC..EEC_T3
+EEC_T3_D:DegC	BandD..EEC_T3
+#C ****************************
+EEC_T25_A:DegC	BandA..EEC_T25
+EEC_T25_B:DegC	BandB..EEC_T25
+EEC_T25_C:DegC	BandC..EEC_T25
+EEC_T25_D:DegC	BandD..EEC_T25
+#C ****************************
+EEC_P25_A:psia	BandA..EEC_P25
+EEC_P25_B:psia	BandB..EEC_P25
+EEC_P25_C:psia	BandC..EEC_P25
+EEC_P25_D:psia	BandD..EEC_P25
+#C ****************************
+EEC_PB_A:psia	BandA..EEC_PB
+EEC_PB_B:psia	BandB..EEC_PB
+EEC_PB_C:psia	BandC..EEC_PB
+EEC_PB_D:psia	BandD..EEC_PB
+#C ****************************
+#C EEC_P45_A:psia	BandA..EEC_P45
+#C EEC_P45_B:psia	BandB..EEC_P45
+#C EEC_P45_C:psia	BandC..EEC_P45
+#C EEC_P45_D:psia	BandD..EEC_P45
+#C ****************************
+#C EEC_P5_A:psia	BandA..EEC_P5
+#C EEC_P5_B:psia	BandB..EEC_P5
+#C EEC_P5_C:psia	BandC..EEC_P5
+#C EEC_P5_D:psia	BandD..EEC_P5
+#C ****************************
+#C Corrected Data...
+#C ****************************
+FNTR2_A:Lbs	BandA..FNTR2
+FNTR2_B:Lbs	BandB..FNTR2
+FNTR2_C:Lbs	BandC..FNTR2
+FNTR2_D:Lbs	BandD..FNTR2
+FNTR2_MI:Lbs	MIdle..FNTR2
+FNTR2_AI:Lbs	AIdle..FNTR2
+#C ****************************
+T45OP45_A:DegF	BandA..T45OP45
+T45OP45_B:DegF	BandB..T45OP45
+T45OP45_C:DegF	BandC..T45OP45
+T45OP45_D:DegF	BandD..T45OP45
+T45OP45C_A:DegC	BandA..T45OP45C 
+T45OP45C_B:DegC	BandB..T45OP45C
+T45OP45C_C:DegC	BandC..T45OP45C
+T45OP45C_D:DegC	BandD..T45OP45C
+#C ****************************
+T49OP49_A:DegF	BandA..T49OP49
+T49OP49_B:DegF	BandB..T49OP49
+T49OP49_C:DegF	BandC..T49OP49
+T49OP49_D:DegF	BandD..T49OP49
+T49OP49C_A:DegC	BandA..T49OP49C
+T49OP49C_B:DegC	BandB..T49OP49C
+T49OP49C_C:DegC	BandC..T49OP49C
+T49OP49C_D:DegC	BandD..T49OP49C
+#C ****************************
+T25OP25_A:DegF	BandA..T25OP25
+T25OP25_B:DegF	BandB..T25OP25
+T25OP25_C:DegF	BandC..T25OP25
+T25OP25_D:DegF	BandD..T25OP25
+T25OP25C_A:DegC	BandA..T25OP25C
+T25OP25C_B:DegC	BandB..T25OP25C
+T25OP25C_C:DegC	BandC..T25OP25C
+T25OP25C_D:DegC	BandD..T25OP25C
+#C ****************************
+T3OP3_A:DegF	BandA..T3OP3
+T3OP3_B:DegF	BandB..T3OP3
+T3OP3_C:DegF	BandC..T3OP3
+T3OP3_D:DegF	BandD..T3OP3
+T3OP3C_A:DegC	BandA..T3OP3C
+T3OP3C_B:DegC	BandB..T3OP3C
+T3OP3C_C:DegC	BandC..T3OP3C
+T3OP3C_D:DegC	BandD..T3OP3C
+#C ****************************
+PS3Q2_A:	BandA..PS3Q2
+PS3Q2_B:	BandB..PS3Q2
+PS3Q2_C:	BandC..PS3Q2
+PS3Q2_D:	BandD..PS3Q2
+#C ****************************
+P25Q2_A:	BandA..P25Q2
+P25Q2_B:	BandB..P25Q2
+P25Q2_C:	BandC..P25Q2
+P25Q2_D:	BandD..P25Q2
+#C ****************************
+PS3Q25_A:	BandA..PS3Q25
+PS3Q25_B:	BandB..PS3Q25
+PS3Q25_C:	BandC..PS3Q25
+PS3Q25_D:	BandD..PS3Q25
+#C ****************************
+N1C20_A:RPM	BandA..N1C20
+N1C20_B:RPM	BandB..N1C20
+N1C20_C:RPM	BandC..N1C20
+N1C20_D:RPM	BandD..N1C20
+#C ****************************
+N1C2D_A:RPM	BandA..N1C2D
+N1C2D_B:RPM	BandB..N1C2D
+N1C2D_C:RPM	BandC..N1C2D
+N1C2D_D:RPM	BandD..N1C2D
+#C ****************************
+N2C2D_A:RPM	BandA..N2C2D
+N2C2D_B:RPM	BandB..N2C2D
+N2C2D_C:RPM	BandC..N2C2D
+N2C2D_D:RPM	BandD..N2C2D
+#C ****************************
+WFPLHCR2_A:PPH	BandA..WFPLHCR2
+WFPLHCR2_B:PPH	BandB..WFPLHCR2
+WFPLHCR2_C:PPH	BandC..WFPLHCR2
+WFPLHCR2_D:PPH	BandD..WFPLHCR2
+#C ****************************
+TSFCPLHC_A:	BandA..TSFCPLHC
+TSFCPLHC_B:	BandB..TSFCPLHC
+TSFCPLHC_C:	BandC..TSFCPLHC
+TSFCPLHC_D:	BandD..TSFCPLHC
+#C ****************************
+FNTR2GMrg_A:Lbf	(FNTR2_A - FNTR2GRat_A)
+FNTR2GMrg_B:Lbf	(FNTR2_B - FNTR2GRat_B)
+FNTR2GMrg_C:Lbf	(FNTR2_C - FNTR2GRat_C)
+FNTR2GMrg_D:Lbf	(FNTR2_D - FNTR2GRat_D)
+#C ****************************
+FNTR2_MIMrg:Lbf	(FNTR2Mx_MI - FNTR2_MI)
+FNTR2_AIMrg:Lbf	(FNTR2Mx_AI - FNTR2_AI)
+#C ****************************
+#C Normalize Data No Classing...
+#C ****************************
+N1C20Norm_A:RPM		curveeval (FNTR2vsN1C20_CRV FNTR2GRat_A)
+N1C20Norm_B:RPM		curveeval (FNTR2vsN1C20_CRV FNTR2GRat_B)
+N1C20Norm_C:RPM		curveeval (FNTR2vsN1C20_CRV FNTR2GRat_C)
+N1C20Norm_D:RPM		curveeval (FNTR2vsN1C20_CRV FNTR2GRat_D)
+#C ******* N2C2D Normalized to FNTR2G Rated *******
+#C ******* Used in curve N1C2IvsN2C2D_CRV below ***
+N2C20Norm_A:RPM		curveeval (FNTR2vsN2C2D_CRV FNTR2GRat_A)
+N2C20Norm_B:RPM		curveeval (FNTR2vsN2C2D_CRV FNTR2GRat_B)
+N2C20Norm_C:RPM		curveeval (FNTR2vsN2C2D_CRV FNTR2GRat_C)
+N2C20Norm_D:RPM		curveeval (FNTR2vsN2C2D_CRV FNTR2GRat_D)
+#C ******* T450P45 Normalized to FNTR2G Rated *******
+#C ******* Used in curve N1C2IvsITTK_CRV below ***
+T45OP45ONorm_A:DegF	curveeval (FNTR2vsT45OP45_CRV FNTR2GRat_A)
+T45OP45ONorm_B:DegF	curveeval (FNTR2vsT45OP45_CRV FNTR2GRat_B)
+T45OP45ONorm_C:DegF	curveeval (FNTR2vsT45OP45_CRV FNTR2GRat_C)
+T45OP45ONorm_D:DegF	curveeval (FNTR2vsT45OP45_CRV FNTR2GRat_D)
+#C Round N1C20 Data for classing...
+N1C20NormRnd_A:RPM		roundup (N1C20Norm_A,0)
+N1C20NormRnd_B:RPM		roundup (N1C20Norm_B,0)
+N1C20NormRnd_C:RPM		roundup (N1C20Norm_C,0)
+N1C20NormRnd_D:RPM		roundup (N1C20Norm_D,0)
+#C N1C2 Guaranteed Thrust Margins...
+#C *********************************
+N1C20GMrg_A:RPM		(N1C2IGMax_A - N1C20NormRnd_A)
+N1C20GMrg_B:RPM		(N1C2IGMax_B - N1C20NormRnd_B)
+N1C20GMrg_C:RPM		(N1C2IGMax_C - N1C20NormRnd_C)
+N1C20GMrg_D:RPM		(N1C2IGMax_D - N1C20NormRnd_D)
+#C NOTE: PW1100G N1ClasX are numbered backwards from PW1500G...
+#C PW1100G Band A = N1CLAS4...
+#C PW1500G Band A = N1CLAS1...
+#C Changed N1Clas like PW1100G, (DJR 11/29/21)...
+DeltaN1C2:RPM		N1C20GMrg_A
+N1CLAS4:		lookup (N1Class_T)
+DeltaN1C2:RPM		N1C20GMrg_B
+N1CLAS3:		lookup (N1Class_T)
+DeltaN1C2:RPM		N1C20GMrg_C
+N1CLAS2:		lookup (N1Class_T)
+DeltaN1C2:RPM		N1C20GMrg_D
+N1CLAS1:		lookup (N1Class_T)
+#C ****************************
+#C ****** 2.Q.(1)(b)4)c) ******
+#C ***** Figure 1, Sheet 3, Equation 23.
+N1C2I_A:RPM		(N1C20NormRnd_A + N1CLAS4)
+N1C2I_B:RPM		(N1C20NormRnd_B + N1CLAS3)
+N1C2I_C:RPM		(N1C20NormRnd_C + N1CLAS2)
+N1C2I_D:RPM		(N1C20NormRnd_D + N1CLAS1)
+BandA..N1C2I:RPM	N1C2I_A
+BandB..N1C2I:RPM	N1C2I_B
+BandC..N1C2I:RPM	N1C2I_C
+BandD..N1C2I:RPM	N1C2I_D
+#C ****************************
+N1C2INorm_A:RPM		curveeval (FNTR2vsN1C2I_CRV FNTR2GRat_A)
+N1C2INorm_B:RPM		curveeval (FNTR2vsN1C2I_CRV FNTR2GRat_B)
+N1C2INorm_C:RPM		curveeval (FNTR2vsN1C2I_CRV FNTR2GRat_C)
+N1C2INorm_D:RPM		curveeval (FNTR2vsN1C2I_CRV FNTR2GRat_D)
+#C ****************************
+N1C2IGMrg_A:RPM		(N1C2INorm_A - N1C2IGMax_A)
+N1C2IGMrg_B:RPM		(N1C2INorm_B - N1C2IGMax_B)
+N1C2IGMrg_C:RPM		(N1C2INorm_C - N1C2IGMax_C)
+N1C2IGMrg_D:RPM		(N1C2INorm_D - N1C2IGMax_D)
+#C ************************************************
+#C * Performance Normalized T45/N2C2 Margins...
+#C ************************************************
+T45OP45Norm_A:DegF	curveeval (N1C2IvsITTK_CRV N1C2I_T45Ref)
+T45OP45Mrg:DegF		(T45OP45Max - T45OP45Norm_A)
+T45_ALLRFBMrg:DegF	(T45_ALLRFBMx - T45OP45Norm_A)
+T45_ALLNRFBMrg:DegF	(T45_ALLNRFBMx - T45OP45Norm_A)
+N2C2DNorm_A:RPM		curveeval (N1C2IvsN2C2D_CRV N1C2I_N2Ref)
+N2C2DMrg:RPM		(N2C2DMax - N2C2DNorm_A)
+N2C2DMrgPct:%		(((N2C2DMax - N2C2DNorm_A) / N2C2DMax) * 100.0)
+#C ****************************
+TSFCNorm_A:		curveeval (FNTR2vsTSFCPLHC_CRV TSFCFnA)
+TSFCNorm_B:		curveeval (FNTR2vsTSFCPLHC_CRV TSFCFnB)
+TSFCNorm_C:		curveeval (FNTR2vsTSFCPLHC_CRV TSFCFnC)
+TSFCMrg_A:		(TSFCMaxA - TSFCNorm_A)
+TSFCMrg_B:		(TSFCMaxB - TSFCNorm_B)
+TSFCMrg_C:		(TSFCMaxC - TSFCNorm_C)
+TSFCWF:			((TSFCNorm_A * TSFCWFacA) + (TSFCNorm_B * TSFCWFacB) + (TSFCNorm_C * TSFCWFacC))
+TSFCWFMrg:		(TSFCWFMax - TSFCWF)
+$END-GROUP

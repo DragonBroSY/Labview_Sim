@@ -1,0 +1,29 @@
+$PHASE DACCalib_ATP length=34       level=0 controlrelay=None common=0
+#if EngineRunning
++0 MESSAGE "Can't Calibrate with Engine Running..."
++0 EXIT
+#endif
+0 MESSAGE "Starting DAC Calibrate"
+0 SUSPEND "Place Power Lever at input of 2.5 volts" "Continue" "Cancel"
+#if (~OpResponse)
++0 EXIT
+#endif
+1 SET DAC_PLA_Voltage PLA_Handle
+4 SET AutoPLEnable_O ON
+5 RAMP DAC_PLA_Voltage -0.5 2
+8 RAMP DAC_PLA_Voltage -1.5 2
+11 SET PLA1 PLA_Handle
+14 RAMP DAC_PLA_Voltage -3.5 2
+17 SET PLA3 PLA_Handle
+20 RAMP DAC_PLA_Voltage -4.5 2
+23 RAMP DAC_PLA_Voltage -3.5 2
+26 SET PLA4 PLA_Handle
+29 RAMP DAC_PLA_Voltage -1.5 2
+32 SET PLA2 PLA_Handle
+33 SET AutoPLEnable_O OFF
+33 SET CalibratingDAC ON
+34 SET DAC_PLA_Voltage 0.0
+END MESSAGE "DAC Calibrate Complete"
+$END-PHASE
+**********
+

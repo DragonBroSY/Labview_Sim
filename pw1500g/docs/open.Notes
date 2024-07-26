@@ -1,0 +1,28 @@
+************************ open.cfg Notes file ***********************************
+================================================================================
+(DJR 06/21/06) - Add open question QECFPTransInst_L to all engines except CFM's.
+Some engines do not have the QEC Fuel Pressure Transmitter option installed.
+this will prevent *****'s on the display will now be 0.0 + open question will
+indicate no QEC FP Trans installed...
+See mapsignals.Notes for more on this...
+================================================================================
+(DJR 9/20/07)
+	Added open Question parameter [HPCRubstrips] "Were all the HPC Rub Strips Replaced?"
+	used to determin in HotRefurb is True/False (EGTK Limits Testing-09 Table 1318)
+	Configini.cal contains the logic for HotRefurb now.
+	If an Engine must be reopened that was opened prior to these new open questions
+	then you will have to answer the new questions approprately to get the same results.
+================================================================================
+(DJR 9/19/08)
+	Changed the order of the last 6 open questions to match the JIC Deck Questions.
+================================================================================
+(DJR 10/9/09)
+        Trouble: Workscope Open questions to long for the window, AMT must scroll sidways
+	to answer the questions.
+
+	Solution: Shortened the workscope questions to match the JIC Deck and so all
+	of the question and answer box will be on the display without having
+	to scroll sideways to answer the question.
+================================================================================
+
+

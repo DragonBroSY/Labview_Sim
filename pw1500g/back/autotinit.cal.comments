@@ -1,0 +1,65 @@
+$GROUP autotinit
+EPRGroundIdle:	1.1                <- Engine parameter from EEC
+EPRRedline:	1.5                <- Engine parameter form EEC
+N1GroundIdle:%	25.0               <- Engine parameter form EEC
+N1Redline:%	104.0              <- Engine parameter form EEC
+EPR_Target:	0.0                <- Auto throttle target
+N1_Target:%	0.0                <- Auto throttle target
+TLA_Target:Degrees      0.0        <- Target from control mode lookup
+EPRControlMode:	1                  <- Control mode indicators
+N1ControlMode:	2                  <- Control mode indicators
+PLAControlMode:	3                  <- Control mode indicators
+ControlMode:	3                  <- Default control mode is N1 now...
+LastControlMode:	3          <- Last for reversion detection
+LastAUTOPLReq:		0          <- Last Auto T. for request detection
+EPRControl_TB:		OFF
+N1Control_TB:		OFF
+PLAControl_TB:		ON
+AutoThrottle_F:		OFF        <- Indicates auto throttle is active
+AutoThrottleEngaged:	OFF        <- Indicates auto throttle is requested
+TLA_Diff_Limit:		5.0        <- Limit of TLA diff to start Auto T.
+TLA_Override:		15.0       <- TLA Diff so override detection
+TLA_Diff_Msg:		OFF        <- Error flag
+OperatorOverride:	OFF        <- Error flag
+BadTLAMsg:		OFF        <- Error flag
+BadControlMode:		OFF        <- Error flag
+BadOperatingPoint:	OFF        <- Error flag
+EidleStillSet:		OFF        <- Error flag
+PLA_DAC_Tmr:		0.0        <- Timer to time DAC delay
+PLA_DAC_Tmr_F:		OFF        <- Timer flag
+RampTmr:		0.0        <- Timer to plot Ramp
+rampTmr_F:		OFF        <- Timer flag
+AutoTSET:		OFF        <- Flag for auto T restart
+RestartAuto:		OFF        <- Flag to indicate a restart is requested
+AutoT_Request:		OFF        <- Flag to indicate a auto T from autotest
+TrimPlus_t:		0.0
+TrimMinus_t:		0.0
+Trim_Value:%		0.0
+Trim_Increment:%	0.5
+DACSlope:	1.0                <- Slope of DAC->PL voltage equation
+DACOffset:      0.0                <- Offset of DAC-PL voltage equation
+PLA1            0.0                <- DAC->PL equation temporary vars.
+PLA2            0.0                <- DAC->PL equation temporary vars.
+PLA3            0.0                <- DAC->PL equation temporary vars.
+PLA4            0.0                <- DAC->PL equation temporary vars.
+PLAHigh         0.0                <- DAC->PL equation temporary vars.
+PLALow          0.0                <- DAC->PL equation temporary vars.
+CalibratingDAC	OFF                <- Flag indicating dac calibration
+*
+* The following lookups the min and max TLA value and sends them to the
+*  arinc system at startup.
+*
+MaxTLATgt:      maxlookup(PLAControl_T)
+#if      (MaxTLATgt > 360.0)
+MaxTLATgt:      360.0
+#endif
+MinTLATgt:      minlookup(PLAControl_T)
+#if      (MinTLATgt > 360.0)
+MinTLATgt:      -360.0
+#endif
+dum1:      setvxivalue("TLA_Unique_MAX", MaxTLATgt, "SHMEM_arinc")
+dum2:      setvxivalue("TLA_Unique_MIN", MinTLATgt, "SHMEM_arinc")
+PLCh1_O:      1
+PLCurL1_O:      1
+$END-GROUP
+

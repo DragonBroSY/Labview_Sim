@@ -1,0 +1,105 @@
+$GROUP "hwcfgdata" 
+#C ---------------------------------------
+#C --------- ISO5_L200 Logic -------------
+#C --- Logic found in BA-CSFRD v2.11.8 ---
+#C ------- page 481, 10.2.2.6 ------------
+#C ---------------------------------------
+#if	((ECM_EECGndTstPwr_TB | EngineRunning) & ~ISO5_L200Ready_F & (ISO5_L200Chr3 = 2))
+ISO5_L200Ready_F:	ON
+#elseif	(~ECM_EECGndTstPwr_TB & ~EngineRunning & ISO5_L200Ready_F)
+ISO5_L200Ready_F:	OFF
+#endif
+#C ---------------------------------------
+#C *** Hardware Configuration Logic ******
+#C -------- ISO5_L200 Code ---------------
+#C ---------------------------------------
+#C *** Pacing logic for Label 200 New Data...
+#C ---------------------------------------
+#if	(~(ISO5_L200Data = Last_L200Data))
+#C ***** New Data... *****
+Data_L200WCnt:	(Data_L200WCnt + 1)
+Data_L200New_F:	ON
+Data_L200Delay_F:	OFF
+Last_L200Data:	ISO5_L200Data
+Data_L200Scans:	0
+#else
+Data_L200Scans:	(Data_L200Scans + 1)
+#endif
+Max_L200Scans:	max (Data_L200Scans Max_L200Scans)
+Max_L200WCnt:	max (Data_L200WCnt Max_L200WCnt)
+#C ---------------------------------------
+#C ******* Check for Command Data ********
+#C ---------------------------------------
+#if	((ISO5_L200Chr3 = 2) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** Start of TeXt (STX) ***********
+Data_L200RWC:	ISO5_L200RWC
+Data_L200Seq:	ISO5_L200SEQ
+Data_L200STX_F:	ON
+Data_L200EOT_F:	OFF
+Data_L200WCnt:	1
+Data_L200New_F:	OFF
+ISO5_CfgInfo:	1
+Data_CfgInfo1:	concat ("" "")
+#elseif	((ISO5_L200Chr3 = 4) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** End Of Transmission (EOT) *****
+Data_L200EOT_F:	ON
+Data_L200STX_F:	OFF
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+dummy2:		startautotest (ISO5_AlphaCode2_ATP)
+dummy:		startautotest (ISO5_BuildStrings_ATP)
+dummy:		startautotest (ISO5_DisplayStrings_ATP)
+#elseif	(Data_L200STX_F & (Data_L200WCnt = 4) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** ATA Code Chapter and first Section *****
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+dummy2:		startautotest (ISO5_AlphaCode2_ATP)
+dummy3:		startautotest (ISO5_AlphaCode3_ATP)
+ATACodeL200:	concat ("" ISO5ACode1)
+ATACodeL200:	concat (ATACodeL200 ISO5ACode2)
+ATACodeL200:	concat (ATACodeL200 "-")
+ATACodeL200:	concat (ATACodeL200 ISO5ACode3)
+#elseif	(Data_L200STX_F & (Data_L200WCnt = 5) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** ATA Code Section and Subject *****
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+dummy2:		startautotest (ISO5_AlphaCode2_ATP)
+dummy3:		startautotest (ISO5_AlphaCode3_ATP)
+ATACodeL200:	concat (ATACodeL200 ISO5ACode1)
+ATACodeL200:	concat (ATACodeL200 "-")
+ATACodeL200:	concat (ATACodeL200 ISO5ACode2)
+ATACodeL200:	concat (ATACodeL200 ISO5ACode3)
+#elseif	(Data_L200STX_F & (Data_L200WCnt = 5) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** Equipment Code word *****
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+dummy2:		startautotest (ISO5_AlphaCode2_ATP)
+dummy3:		startautotest (ISO5_AlphaCode3_ATP)
+EQUCodeL200:	concat ("" ISO5ACode1)
+EQUCodeL200:	concat (EQUCodeL200 ISO5ACode2)
+EQUCodeL200:	concat (EQUCodeL200 ISO5ACode3)
+#elseif	((ISO5_L200Chr3 = 126) & (ISO5_L200Chr2 = 22) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** Start Of free text (7E hex or Dec 126) (SYN) SDI Code *****
+#C ***** Data_L200WCnt:	= 6
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+SDICodeL200:	concat ("" ISO5ACode1)
+#elseif	(Data_L200STX_F & (Data_L200WCnt > 6) & Data_L200New_F & ISO5_L200Ready_F)
+#C ***** Put the ISO5 Data into parameters *****
+Data_L200New_F:	OFF
+dummy1:		startautotest (ISO5_AlphaCode1_ATP)
+dummy2:		startautotest (ISO5_AlphaCode2_ATP)
+dummy3:		startautotest (ISO5_AlphaCode3_ATP)
+dummy:		startautotest (ISO5_BuildStrings_ATP)
+#endif
+#C *** Reset if WCnt > RWC (Record Word Count).
+#if	(Data_L200WCnt > Data_L200RWC)
+Data_L200STX_F:	OFF
+Data_L200EOT_F:	OFF
+Data_L200WCnt:	1
+Data_L200New_F:	OFF
+#endif
+#C ---------------------------------------
+#C --- End ISO5_L200 Data -----------------
+#C ---------------------------------------
+kEND-GROUP

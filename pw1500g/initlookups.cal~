@@ -1,0 +1,208 @@
+$GROUP "initlookups"  when=4
+#C ------------------------------------
+#C --- Resolver Coefficients
+#C **** Idle 73.0 TO 18.7 (DJR 12/03/21).
+#C TRA_Cor_Coeff1:	-0.8104
+#C TRA_Cor_Coeff2:	45.85
+#C TRA_Act_Coeff1:	-1.2005
+#C TRA_Act_Coeff2:	56.574
+#C **** Idle 73.0 TO 18.0
+TRA_Cor_Coeff1:	-0.8209
+TRA_Cor_Coeff2:	45.5
+TRA_Act_Coeff1:	-1.2182
+#if	(CellNum = 3)
+TRA_Act_Coeff2:	55.427
+#else
+TRA_Act_Coeff2:	54.98
+#endif
+#C ------------------------------------
+ABellMouth:	lookup (ABellMouth_T)
+ACondiNoz:	lookup (ACondiNoz_T)
+AExhNoz:	lookup (AExhNoz_T)
+BellMouthSN:	lookup (BellMouthSN_T)
+CondiNozSN:	lookup (CondiNozSN_T)
+ExhNozSN:	lookup (ExhNozSN_T)
+#C ------------------------------------
+FireLoopCont:ohms	100.0
+FireLoopGnd:ohms	100000.0
+FireLoopError:	999999.0
+FanLoopFire:ohms	lookup (FanLoopFire_T)
+FanLoopFault:ohms	lookup (FanLoopFault_T)
+FireLoopFire:ohms	lookup (FireLoopFire_T)
+FireLoopFault:ohms	lookup (FireLoopFault_T)
+OvHtLoopFire:ohms	lookup (OvHtLoopFire_T)
+OvHtLoopFault:ohms	lookup (OvHtLoopFault_T)
+#C --- UnderCowl Temp Limits ----------
+TNFDLFWDLim:DegC	426.7
+TNFDLMIDLim:DegC	426.7
+TNFDLAFTLim:DegC	426.7
+TNFDLFWDYLim:DegC	406.0
+TNFDLMIDYLim:DegC	406.0
+TNFDLAFTYLim:DegC	406.0
+TNFDLFWDYPct:%		value2pct (TNFDLFWDYLim TNFDLFWDLim)
+TNFDLMIDYPct:%		value2pct (TNFDLMIDYLim TNFDLMIDLim)
+TNFDLAFTYPct:%		value2pct (TNFDLAFTYLim TNFDLAFTLim)
+#C ------------------------------------
+N1Red:RPM	lookup (N1R_T)
+N2Red:RPM	lookup (N2R_T)
+NF100:RPM	lookup (NF100_T)
+N1100:RPM	lookup (N1100_T)
+N2100:RPM	lookup (N2100_T)
+NSA100:RPM	lookup (NSA100_T)
+N1RPct:%	value2pct (N1Red N1100)
+N2RPct:%	value2pct (N2Red N2100)
+#C ------------------------------------
+WFPLHCR2_MI_Mx:PPH	555.0
+PBLim:PSIA	612.5
+StarterCutOut:	lookup (StarterCutOut_T)
+FuelOnToLOMx:	lookup (FuelOnToLOMx_T)
+StrtOnToIdleMx:	lookup (StrtOnToIdleMx_T)
+StartFuelFlow:PPH	lookup (StartFuelFlow_T)
+IdleFuelFlow:PPH	lookup (IdleFuelFlow_T)
+WfLtOffMn:PPH	(StartFuelFlow - 50.0)
+WfLtOffMx:PPH	(StartFuelFlow + 50.0)
+OilConsMn:Gal/hr	lookup (OilConsMn_T)
+OilConsMx:Gal/hr	lookup (OilConsMx_T)
+OilFiltDiffMx:PSID	lookup (OILFILTDIFFMX_T)
+MOPMx:PSIG	lookup (MOPMx_T)
+MOPSafeMx:PSIG	lookup (MOPSafeMx_T)
+MOTMn:DegC      lookup (MOTMn_T)
+MOTMxSS:DegC    lookup (MOTMx_T)
+MOTMxTrans:DegC lookup (MOTMxTrans_T)
+MOTWarmTH:DegC	lookup (MOTWarmTH_T)
+FIPMn:PSIG	lookup (FIPMN_T)
+FIPMx:PSIG	lookup (FIPMX_T)
+PAIRsMn:PSIG	lookup (PAIRsMn_T)
+PAIRsMx:PSIG	lookup (PAIRsMx_T)
+PAIRsLim:PSIG	((PAIRsMn + PAIRsMx) / 2.0)
+PAIRsN2Mn:RPM	lookup (PAIRsN2Mn_T)
+PAIRsN2Mx:RPM	lookup (PAIRsN2Mx_T)
+PAIRsN2Lim:RPM	((PAIRsN2Mn + PAIRsN2Mx) / 2.0)
+#C PAIRsN2LimPct:%	(0.00816 * PAIRsN2Lim)
+#C PAIRsN2LimPct:%	(0.0074 * PAIRsN2Lim)
+PAIRsN2LimPct:%	(11.1)
+SAPMn:PSIG	lookup (SAPMn_T)
+SAPMx:PSIG	lookup (SAPMx_T)
+SAPTarg:PSIG	((SAPMn + SAPMx) / 2.0)
+#C SAPTarg:PSIG	lookup (SAPTarg_T)
+#C SAPTargPct:%	(1.8182 * SAPTarg)
+#C **** Assuming SAP is 0-100 psig. ****
+#C SAP_CmdPct:% of 83.0% = ~31.7 psig (31.7 + 51.3 = 83%)...
+SAPTargPct:%	(SAPTarg + SAPTargOffSet)
+SAPTargInitPct:%	SAPTargPct
+StarterDutyCycle:Min	lookup (StarterDutyCycle_T)
+#C ------------------------------------
+#C ** Vibration Limits ****************
+VibFBBMx:IPS	lookup (VibFBBMx_T)
+VibRBBMx:IPS	lookup (VibRBBMx_T)
+VibFNFMx:IPS	lookup (VibFNFMX_T)
+VibRNFMx:IPS	lookup (VibRNFMX_T)
+VibFN1Mx:IPS	lookup (VibFN1MX_T)
+VibRN1Mx:IPS	lookup (VibRN1MX_T)
+VibFN2Mx:IPS	lookup (VIBFN2MX_T)
+VibRN2Mx:IPS	lookup (VibRN2MX_T)
+VibFBBRMx:IPS	lookup (VibFBBRMx_T)
+VibRBBRMx:IPS	lookup (VibRBBRMx_T)
+VibFNFRMx:IPS	lookup (VibFNFRMX_T)
+VibRNFRMx:IPS	lookup (VibRNFRMX_T)
+VibFN1RMx:IPS	lookup (VibFN1RMX_T)
+VibRN1RMx:IPS	lookup (VibRN1RMX_T)
+VibFN2RMx:IPS	lookup (VIBFN2RMX_T)
+VibRN2RMx:IPS	lookup (VibRN2RMX_T)
+#C ------------------------------------------
+#C ** Performance Acceptance Limits *********
+#C ** O.(1) Max Thrust Limit (Minimum and Approach Idle)
+FNTR2Mx_MI:Lbs    lookup (FNTR2Mx_MI_T)
+FNTR2Mx_AI:Lbs    lookup (FNTR2Mx_AI_T)
+#C ** O.(2) Reference N1C2-I ****************
+N1C2I_T45Ref:RPM	lookup (N1C2I_T45Ref_T)
+N1C2I_N2Ref:RPM		lookup (N1C2I_N2Ref_T)
+#C ** O.(2) Max T45OP45 (ITT) @ Ref N1C2-I **
+T45OP45Max:DegF		lookup (T45OP45Max_T)
+T45_ALLRFBMx:DegF	lookup (T45_ALLRFBMx_T)
+T45_ALLNRFBMx:DegF	lookup (T45_ALLNRFBMx_T)
+#C ** O.(3) Max N2C2 @ Ref N1C2-I ***********
+N2C2DMax:RPM	lookup (N2C2DMax_T)
+#C ** N1/N2 Time Base ***********************
+NFTimeBase:	lookup (NFTimeBase_T)
+N1TimeBase:	lookup (N1TimeBase_T)
+N2TimeBase:	lookup (N2TimeBase_T)
+#C ** Theta Exponent Constants **************
+WFEXP:  	lookup (WFEXP_T)
+T25EXP:		lookup (T25EXP_T)
+T3EXP:		lookup (T3EXP_T)
+T45EXP:		lookup (T45EXP_T)
+T49EXP:		lookup (T49EXP_T)
+#C ------------------------------------
+#C ** Guaranteed Thrust Rating ********
+FnTR2GRat_A:Lbs	lookup (FNTR2GRat_A_T)
+FnTR2GRat_B:Lbs	lookup (FNTR2GRat_B_T)
+FnTR2GRat_C:Lbs	lookup (FNTR2GRat_C_T)
+FnTR2GRat_D:Lbs	lookup (FNTR2GRat_D_T)
+#C ** Max N1C2-I @ Guaranteed Thrust **
+N1C2IGMax_A:RPM	lookup (N1C2IGMax_A_T)
+N1C2IGMax_B:RPM	lookup (N1C2IGMax_B_T)
+N1C2IGMax_C:RPM	lookup (N1C2IGMax_C_T)
+N1C2IGMax_D:RPM	lookup (N1C2IGMax_D_T)
+#C ------------------------------------
+#C ** Thrust bands (C and D) Constant *
+FnCMax:Lbs	lookup (FNCMX_T)
+FnCMin:Lbs	lookup (FNCMN_T)
+FnCNom:Lbs      ((FnCMax + FnCMin) / 2.0)
+FnDMax:Lbs	lookup (FNDMX_T)
+FnDMin:Lbs	lookup (FNDMN_T)
+FnDNom:Lbs      ((FnDMax + FnDMin) / 2.0)
+GTBandBTmrLim:Sec	420
+#C ------------------------------------
+#C ** Thrust bands for (TSFC) Constant *
+TSFCFnA:Lbs	lookup (TSFCFnA_T)
+TSFCFnB:Lbs	lookup (TSFCFnB_T)
+TSFCFnC:Lbs	lookup (TSFCFnC_T)
+TSFCMaxA:	lookup (TSFCMaxA_T)
+TSFCMaxB:	lookup (TSFCMaxB_T)
+TSFCMaxC:	lookup (TSFCMaxC_T)
+TSFCWFMax:	lookup (TSFCWFMax_T)
+TSFCWFacA:	lookup (TSFCWFacA_T)
+TSFCWFacB:	lookup (TSFCWFacB_T)
+TSFCWFacC:	lookup (TSFCWFacC_T)
+#C ------------------------------------
+#C Accel / Decel Time Limit values
+AccelTmMx:Sec	lookup (AccelTmMx_T)
+DecelTmMx:Sec   lookup (DecelTmMx_T)
+AccelFNTR2:%	lookup (AccelFNTR2_T)
+DecelFNTR2:%	lookup (DecelFNTR2_T)
+#C ------------------------------------
+DN1C2DTOL:	1.0
+#C KNLC:		0.000275
+KNCL:		0.0
+Kuntwist:	1.0
+KWFC:		0.00055
+TRISE:DegF	0.0
+#C ------------------------------------
+N1TargBand:RPM	75.0
+N1C2TargBand:RPM	75.0
+TRATargBand:Deg	0.5
+TRAGIdleTarg:	-13.5
+FNTR2TargBand:Lbs	5.0
+#C RunInHPC_N2Lim:RPM	21350.0
+RunInT2_DiffLim:DegF	5.0
+N1AIdleMn:RPM	2858.0
+N1AIdleMx:RPM	3056.0
+#C RunInAI:RPM	2925.0
+#C RunInAIMx:RPM	(RunInAI + 200.0)
+#C RunInAIMn:RPM	(RunInAI - 200.0)
+#C RunInGI:RPM	2900.0
+#C RunInGIMx:RPM	2900.0
+#C RunInGIMn:RPM	(RunInGI - 200.0)
+#C ------------------------------------
+#C ITT OverTemp limits......
+ITTStrtTrigTmr_F:	OFF
+ITTStrtTrigTmr:Sec	0.0
+ITTStrtMxRLim:DegC	lookup (ITTStrtMxRLim_T)
+ITTStrtMxYLim:DegC	lookup (ITTStrtMxYLim_T)
+ITTRunTrigTmr_F:	OFF
+ITTRunTrigTmr:Sec	0.0
+ITTRunTrig:DegC		lookup (ITTRunTrig_T)
+ITTRunMxTm:Sec		lookup (ITTRunMxTm_T)
+LHV:BTU			lookup (LHV_T)
+$END-GROUP

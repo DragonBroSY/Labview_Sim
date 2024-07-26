@@ -1,0 +1,149 @@
+$GROUP "initlookups"  when=4
+#C ------------------------------------
+FireLoopCont:ohms	100.0
+FireLoopGnd:ohms	100000.0
+FireLoopError:	999999.0
+FireLoopFire:ohms	lookup (FireLoopFire_T)
+FireLoopFault:ohms	lookup (FireLoopFault_T)
+OvHtLoopFire:ohms	lookup (OvHtLoopFire_T)
+OvHtLoopFault:ohms	lookup (OvHtLoopFault_T)
+#C --- UnderCowl Temp Limits ----------
+TNFDLFWDLim:DegC	205.0
+TNFDLAFTLim:DegC	280.0
+TNFDLFWDYLim:DegC	205.0
+TNFDLAFTYLim:DegC	260.0
+#C ------------------------------------
+N1Red:RPM	lookup (N1R_T)
+N2Red:RPM	lookup (N2R_T)
+NF100:RPM	lookup (NF100_T)
+N1100:RPM	lookup (N1100_T)
+N2100:RPM	lookup (N2100_T)
+N1RPct:%	value2pct (N1Red N1100)
+N2RPct:%	value2pct (N2Red N2100)
+#C ------------------------------------
+StarterCutOut:	lookup (StarterCutOut_T)
+FuelOnToLOMx:	lookup (FuelOnToLOMx_T)
+StrtOnToIdleMx:	lookup (StrtOnToIdleMx_T)
+StartFuelFlow:PPH	lookup (StartFuelFlow_T)
+IdleFuelFlow:PPH	lookup (IdleFuelFlow_T)
+WfLtOffMn:PPH	(StartFuelFlow - 50.0)
+WfLtOffMx:PPH	(StartFuelFlow + 50.0)
+OilConsMx:Gals	lookup (OilConsMx_T)
+OilFiltDiffMx:PSID	lookup (OILFILTDIFFMX_T)
+MOPMx:PSIG	lookup (MOPMx_T)
+FIPMn:PSIG	lookup (FIPMN_T)
+FIPMx:PSIG	lookup (FIPMX_T)
+StartAirMn:PSIG	lookup (StartAirMn_T)
+StartAirMx:PSIG	lookup (StartAirMx_T)
+StarterDutyCycle:Min	lookup (StarterDutyCycle_T)
+#C ------------------------------------
+#C ** Vibration Limits ****************
+VibFBBMx:IPS	lookup (VibFBBMx_T)
+VibTBBMx:IPS	lookup (VibTBBMx_T)
+VibFNFMx:IPS	lookup (VibFNFMX_T)
+VibTNFMx:IPS	lookup (VibTNFMX_T)
+VibFN1Mx:IPS	lookup (VibFN1MX_T)
+VibTN1Mx:IPS	lookup (VibTN1MX_T)
+VibFN2Mx:IPS	lookup (VIBFN2MX_T)
+VibTN2Mx:IPS	lookup (VIBTN2MX_T)
+VibFBBRMx:IPS	lookup (VibFBBRMx_T)
+VibTBBRMx:IPS	lookup (VibTBBRMx_T)
+VibFNFRMx:IPS	lookup (VibFNFRMX_T)
+VibTNFRMx:IPS	lookup (VibTNFRMX_T)
+VibFN1RMx:IPS	lookup (VibFN1RMX_T)
+VibTN1RMx:IPS	lookup (VibTN1RMX_T)
+VibFN2RMx:IPS	lookup (VIBFN2RMX_T)
+VibTN2RMx:IPS	lookup (VIBTN2RMX_T)
+#C ------------------------------------------
+#C ** Performance Acceptance Limits *********
+#C ** O.(1) Max Thrust Limit (Minimum and Approach Idle)
+FNTR2Mx_MI:Lbs    lookup (FNTR2Mx_MI_T)
+FNTR2Mx_AI:Lbs    lookup (FNTR2Mx_AI_T)
+#C ** O.(2) Reference N1C2-I ****************
+N1C2I_T45Ref:RPM	lookup (N1C2I_T45Ref_T)
+N1C2I_N2Ref:RPM		lookup (N1C2I_N2Ref_T)
+#C ** O.(2) Max T45OP45 (ITT) @ Ref N1C2-I **
+T45OP45Max:DegF	lookup (T45OP45Max_T)
+#C T45OP45MaxRefb:DegF	lookup (T45OP45MaxRefb_T)
+#C T45OP45MaxNRefb:DegF	lookup (T45OP45MaxNRefb_T)
+#C ** O.(3) Max N2C2 @ Ref N1C2-I ***********
+N2C2Max:RPM	lookup (N2C2Max_T)
+#C ** N1/N2 Time Base ***********************
+NFTimeBase:	lookup (NFTimeBase_T)
+N1TimeBase:	lookup (N1TimeBase_T)
+N2TimeBase:	lookup (N2TimeBase_T)
+#C ** Theta Exponent Constants **************
+N1EXP:		lookup (N1EXP_T)
+N2EXP:		lookup (N2EXP_T)
+T25EXP:		lookup (T25EXP_T)
+T3EXP:		lookup (T3EXP_T)
+T45EXP:		lookup (T45EXP_T)
+#C ------------------------------------
+#C ** Guaranteed Thrust Rating ********
+FnTR2GRat_A:Lbs	lookup (FNTR2GRat_A_T)
+FnTR2GRat_B:Lbs	lookup (FNTR2GRat_B_T)
+FnTR2GRat_C:Lbs	lookup (FNTR2GRat_C_T)
+FnTR2GRat_D:Lbs	lookup (FNTR2GRat_D_T)
+#C ** Max N1C2-I @ Guaranteed Thrust **
+N1C2GMax_A:RPM	lookup (N1C2GMax_A_T)
+N1C2GMax_B:RPM	lookup (N1C2GMax_B_T)
+N1C2GMax_C:RPM	lookup (N1C2GMax_C_T)
+N1C2GMax_D:RPM	lookup (N1C2GMax_D_T)
+#C ------------------------------------
+#C ** Thrust bands (C and D) **********
+FnCMax:Lbs	lookup (FNCMX_T)
+FnCMin:Lbs	lookup (FNCMN_T)
+FnCNom:Lbs      ((FnCMax + FnCMin) / 2.0)
+FnDMax:Lbs	lookup (FNDMX_T)
+FnDMin:Lbs	lookup (FNDMN_T)
+FnDNom:Lbs      ((FnDMax + FnDMin) / 2.0)
+#C ------------------------------------
+DN1C2DTOL:	1.0
+KNLC:		0.000275
+KNCL:		0.0
+Kuntwist:	1.0
+KWFC:		0.00055
+#C ------------------------------------
+N1TargBand:RPM	75.0
+N1C2TargBand:RPM	25.0
+RunInTO:RPM	9625.0
+RunIn9000:RPM	9000.0
+RunIn8500:RPM	8500.0
+RunIn8000:RPM	8000.0
+RunIn7000:RPM	7000.0
+RunIn6000:RPM	6000.0
+RunIn5000:RPM	5000.0
+RunIn4000:RPM	4000.0
+RunInAI:RPM	2925.0
+RunInGI:RPM	2045.0
+RunIn9000Mx:RPM	(RunIn9000 + N1TargBand)
+RunIn9000Mn:RPM	(RunIn9000 - N1TargBand)
+RunIn8500Mx:RPM	(RunIn8500 + N1TargBand)
+RunIn8500Mn:RPM	(RunIn8500 - N1TargBand)
+RunIn8000Mx:RPM	(RunIn8000 + N1TargBand)
+RunIn8000Mn:RPM	(RunIn8000 - N1TargBand)
+RunIn7000Mx:RPM	(RunIn7000 + N1TargBand)
+RunIn7000Mn:RPM	(RunIn7000 - N1TargBand)
+RunIn6000Mx:RPM	(RunIn6000 + N1TargBand)
+RunIn6000Mn:RPM	(RunIn6000 - N1TargBand)
+RunIn5000Mx:RPM	(RunIn5000 + N1TargBand)
+RunIn5000Mn:RPM	(RunIn5000 - N1TargBand)
+RunIn4000Mx:RPM	(RunIn4000 + N1TargBand)
+RunIn4000Mn:RPM	(RunIn4000 - N1TargBand)
+RunInAIMx:RPM	(RunInAI + 200.0)
+RunInAIMn:RPM	(RunInAI - 200.0)
+RunInGIMx:RPM	2250.0
+RunInGIMn:RPM	(RunInGI - 200.0)
+#C ------------------------------------
+#C ITT OverTemp limits......
+ITTStartTrigTmr_F:	OFF
+ITTRunTrigTmr_F:	OFF
+ITTStartTrigTmr:Sec	0.0
+ITTRunTrigTmr:Sec	0.0
+ITTStartTrig:	lookup (ITTStartTrig_T)
+ITTRunTrig:	lookup (ITTRunTrig_T)
+ITTRunMxATm:Sec	lookup (ITTRunMxATm_T)
+ITTRunMxBTm:Sec	lookup (ITTRunMxBTm_T)
+ITTRunMxDTm:Sec	lookup (ITTRunMxDTm_T)
+LHV:BTU	lookup (LHV_T)
+$END-GROUP

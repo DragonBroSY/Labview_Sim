@@ -1,0 +1,499 @@
+$GROUP "initsaveparams"  when=0
+#C Emissions Data...
+TotalCO:Lbs	0.0
+TotalNOx:Lbs	0.0
+TotalPM:Lbs	0.0
+TotalSO2:Lbs	0.0
+TotalVOC:Lbs	0.0
+TotalTHC:Lbs	0.0
+SHEA_ID:	concat ("" "No Data")
+#C __________________________
+TotalTestTime:Sec	0.0
+ElapsedTmTmr:Sec	0.0
+strAccelTm:Sec		0.0
+strDecelTm:Sec		0.0
+strFNTR2_DEC:Lbs	0.0
+strFNTR2_ACC:Lbs	0.0
+#C __________________________
+PeakITT:DegC	0.0
+PBSVibs_F:	ON
+#C *** Final Accel **********
+StrVibPeaks_F:		OFF
+StrVibFBBPk:IPS		0.0
+StrVibFBBPkNF:RPM	0.0
+StrVibFBBPkN1:RPM	0.0
+StrVibFBBPkN2:RPM	0.0
+StrVibFNFPk:IPS		0.0
+StrVibFNFPkNF:RPM	0.0
+StrVibFNFPkN1:RPM	0.0
+StrVibFNFPkN2:RPM	0.0
+StrVibFN1Pk:IPS		0.0
+StrVibFN1PkNF:RPM	0.0
+StrVibFN1PkN1:RPM	0.0
+StrVibFN1PkN2:RPM	0.0
+StrVibFN2Pk:IPS		0.0
+StrVibFN2PkNF:RPM	0.0
+StrVibFN2PkN1:RPM	0.0
+StrVibFN2PkN2:RPM	0.0
+StrVibRBBPk:IPS		0.0
+StrVibRBBPkNF:RPM	0.0
+StrVibRBBPkN1:RPM	0.0
+StrVibRBBPkN2:RPM	0.0
+StrVibRNFPk:IPS		0.0
+StrVibRNFPkNF:RPM	0.0
+StrVibRNFPkN1:RPM	0.0
+StrVibRNFPkN2:RPM	0.0
+StrVibRN1Pk:IPS		0.0
+StrVibRN1PkNF:RPM	0.0
+StrVibRN1PkN1:RPM	0.0
+StrVibRN1PkN2:RPM	0.0
+StrVibRN2Pk:IPS		0.0
+StrVibRN2PkNF:RPM	0.0
+StrVibRN2PkN1:RPM	0.0
+StrVibRN2PkN2:RPM	0.0
+#C *** Final Decel **********
+StrDVibFBBPk:IPS	0.0
+StrDVibFBBPkNF:RPM	0.0
+StrDVibFBBPkN1:RPM	0.0
+StrDVibFBBPkN2:RPM	0.0
+StrDVibFNFPk:IPS	0.0
+StrDVibFNFPkNF:RPM	0.0
+StrDVibFNFPkN1:RPM	0.0
+StrDVibFNFPkN2:RPM	0.0
+StrDVibFN1Pk:IPS	0.0
+StrDVibFN1PkNF:RPM	0.0
+StrDVibFN1PkN1:RPM	0.0
+StrDVibFN1PkN2:RPM	0.0
+StrDVibFN2Pk:IPS	0.0
+StrDVibFN2PkNF:RPM	0.0
+StrDVibFN2PkN1:RPM	0.0
+StrDVibFN2PkN2:RPM	0.0
+StrDVibRBBPk:IPS	0.0
+StrDVibRBBPkNF:RPM	0.0
+StrDVibRBBPkN1:RPM	0.0
+StrDVibRBBPkN2:RPM	0.0
+StrDVibRNFPk:IPS	0.0
+StrDVibRNFPkNF:RPM	0.0
+StrDVibRNFPkN1:RPM	0.0
+StrDVibRNFPkN2:RPM	0.0
+StrDVibRN1Pk:IPS	0.0
+StrDVibRN1PkNF:RPM	0.0
+StrDVibRN1PkN1:RPM	0.0
+StrDVibRN1PkN2:RPM	0.0
+StrDVibRN2Pk:IPS	0.0
+StrDVibRN2PkNF:RPM	0.0
+StrDVibRN2PkN1:RPM	0.0
+StrDVibRN2PkN2:RPM	0.0
+StrVibPeakDate:	concat ("" "No Data")
+StrVibPeakTime:	concat ("" "No Data")
+#C *** As Received Accel ****
+StrARVibPeaks_F:	OFF
+StrARVibFBBPk:IPS	0.0
+StrARVibFBBPkNF:RPM	0.0
+StrARVibFBBPkN1:RPM	0.0
+StrARVibFBBPkN2:RPM	0.0
+StrARVibFNFPk:IPS	0.0
+StrARVibFNFPkNF:RPM	0.0
+StrARVibFNFPkN1:RPM	0.0
+StrARVibFNFPkN2:RPM	0.0
+StrARVibFN1Pk:IPS	0.0
+StrARVibFN1PkNF:RPM	0.0
+StrARVibFN1PkN1:RPM	0.0
+StrARVibFN1PkN2:RPM	0.0
+StrARVibFN2Pk:IPS	0.0
+StrARVibFN2PkNF:RPM	0.0
+StrARVibFN2PkN1:RPM	0.0
+StrARVibFN2PkN2:RPM	0.0
+StrARVibRBBPk:IPS	0.0
+StrARVibRBBPkNF:RPM	0.0
+StrARVibRBBPkN1:RPM	0.0
+StrARVibRBBPkN2:RPM	0.0
+StrARVibRNFPk:IPS	0.0
+StrARVibRNFPkNF:RPM	0.0
+StrARVibRNFPkN1:RPM	0.0
+StrARVibRNFPkN2:RPM	0.0
+StrARVibRN1Pk:IPS	0.0
+StrARVibRN1PkNF:RPM	0.0
+StrARVibRN1PkN1:RPM	0.0
+StrARVibRN1PkN2:RPM	0.0
+StrARVibRN2Pk:IPS	0.0
+StrARVibRN2PkNF:RPM	0.0
+StrARVibRN2PkN1:RPM	0.0
+StrARVibRN2PkN2:RPM	0.0
+#C *** As Received Decel ****
+StrARDVibFBBPk:IPS	0.0
+StrARDVibFBBPkNF:RPM	0.0
+StrARDVibFBBPkN1:RPM	0.0
+StrARDVibFBBPkN2:RPM	0.0
+StrARDVibFNFPk:IPS	0.0
+StrARDVibFNFPkNF:RPM	0.0
+StrARDVibFNFPkN1:RPM	0.0
+StrARDVibFNFPkN2:RPM	0.0
+StrARDVibFN1Pk:IPS	0.0
+StrARDVibFN1PkNF:RPM	0.0
+StrARDVibFN1PkN1:RPM	0.0
+StrARDVibFN1PkN2:RPM	0.0
+StrARDVibFN2Pk:IPS	0.0
+StrARDVibFN2PkNF:RPM	0.0
+StrARDVibFN2PkN1:RPM	0.0
+StrARDVibFN2PkN2:RPM	0.0
+StrARDVibRBBPk:IPS	0.0
+StrARDVibRBBPkNF:RPM	0.0
+StrARDVibRBBPkN1:RPM	0.0
+StrARDVibRBBPkN2:RPM	0.0
+StrARDVibRNFPk:IPS	0.0
+StrARDVibRNFPkNF:RPM	0.0
+StrARDVibRNFPkN1:RPM	0.0
+StrARDVibRNFPkN2:RPM	0.0
+StrARDVibRN1Pk:IPS	0.0
+StrARDVibRN1PkNF:RPM	0.0
+StrARDVibRN1PkN1:RPM	0.0
+StrARDVibRN1PkN2:RPM	0.0
+StrARDVibRN2Pk:IPS	0.0
+StrARDVibRN2PkNF:RPM	0.0
+StrARDVibRN2PkN1:RPM	0.0
+StrARDVibRN2PkN2:RPM	0.0
+StrARVibPeakDate:	concat ("" "No Data")
+StrARVibPeakTime:	concat ("" "No Data")
+#C __________________________
+FuelUsedInTest:Gal	0.0
+TotalFuelUsed:Gal	0.0
+TotalFuelUsedV:Gal	0.0
+#C __________________________
+#C Engine Start Data...
+StartAborted_F:		OFF
+#C Initial Oil Service Data.....
+InitOilService_F:	OFF
+EM_StageTxt:		concat ("" "Engine Motor No Data")
+EM_Stage:		0
+EngMotorAttempts:	0
+TimeAtMotor:		concat ("" "No Data")
+DateAtMotor:		concat ("" "No Data")
+PAIRsNFPk:RPM		0.0
+PAIRsN1Pk:RPM		0.0
+PAIRsN2Pk:RPM		0.0
+PAIRsNSAPk:RPM		0.0
+#C __________________________
+#C Start Stop Data.....
+StoreStartData:	0
+StoreStartPrev:	0
+StoreStopData:	0
+StoreStopPrev:	0
+StrStartData0:	concat (" " "")
+StrStartData1:	concat (" " "")
+StrStartData2:	concat (" " "")
+StrStartData3:	concat (" " "")
+StrStartData4:	concat (" " "")
+StrStartData5:	concat (" " "")
+StrStartData6:	concat (" " "")
+StrStartData7:	concat (" " "")
+StrStartData8:	concat (" " "")
+StrStartData9:	concat (" " "")
+StrStartData10:	concat (" " "")
+StrStartData11:	concat (" " "")
+StrStartData12:	concat (" " "")
+StrStartData13:	concat (" " "")
+StrStartData14:	concat (" " "")
+StrStartData15:	concat (" " "")
+StrStartData16:	concat (" " "")
+StrStartData17:	concat (" " "")
+StrStartData18:	concat (" " "")
+StrStartData19:	concat (" " "")
+StrStartData20:	concat (" " "")
+StrStartData21:	concat (" " "")
+StrStartData22:	concat (" " "")
+StrStartData23:	concat (" " "")
+StrStartData24:	concat (" " "")
+StrStartData25:	concat (" " "")
+StrStopData0:	concat (" " "")
+StrStopData1:	concat (" " "")
+StrStopData2:	concat (" " "")
+StrStopData3:	concat (" " "")
+StrStopData4:	concat (" " "")
+StrStopData5:	concat (" " "")
+StrStopData6:	concat (" " "")
+StrStopData7:	concat (" " "")
+StrStopData8:	concat (" " "")
+StrStopData9:	concat (" " "")
+StrStopData10:	concat (" " "")
+StrStopData11:	concat (" " "")
+StrStopData12:	concat (" " "")
+StrStopData13:	concat (" " "")
+StrStopData14:	concat (" " "")
+StrStopData15:	concat (" " "")
+StrStopData16:	concat (" " "")
+StrStopData17:	concat (" " "")
+StrStopData18:	concat (" " "")
+StrStopData19:	concat (" " "")
+StrStopData20:	concat (" " "")
+StrStopData21:	concat (" " "")
+StrStopData22:	concat (" " "")
+StrStopData23:	concat (" " "")
+StrStopData24:	concat (" " "")
+StrStopData25:	concat (" " "")
+#C ___________________________
+FanWeight1:	concat("" "NONE")
+FanWeight2:	concat("" "NONE")
+FanWeight3:	concat("" "NONE")
+FanWeight4:	concat("" "NONE")
+FanWeight5:	concat("" "NONE")
+FanWeight6:	concat("" "NONE")
+FanWeight7:	concat("" "NONE")
+FanWeight8:	concat("" "NONE")
+FanWeight9:	concat("" "NONE")
+FanWeight10:	concat("" "NONE")
+FanWeightLoc1:	0
+FanWeightLoc2:	0
+FanWeightLoc3:	0
+FanWeightLoc4:	0
+FanWeightLoc5:	0
+FanWeightLoc6:	0
+FanWeightLoc7:	0
+FanWeightLoc8:	0
+FanWeightLoc9:	0
+FanWeightLoc10:	0
+TurbineWeightsUsed:	concat("" "0")
+TurbineWeightsInst:	concat("" "0")
+TurbineWeightsLoc:	concat("" "0")
+#C __________________________
+#C *** Snap Accel/Decel Params.
+SnapStage1:	0
+TRASnap_F:	OFF
+#C *** Run-In Parameters ***
+RunInStage:     0
+RunInStage1:    0
+RunInStageTxt:  concat ("" "Run-In, NO Data")
+RunInState:     3
+RunInStep:	0
+#C RunInNibble:	0
+#C RunInHPC_N2:RPM	0.0
+RunInT2_Start:DegF	0.0
+RunInT2_Diff:DegF	0.0
+#C *** Break-In Parameters ***
+#C BrkInStage:     0
+#C BrkInStage1:    0
+#C BrkInStageTxt:  concat ("" "Break-In, NO Data")
+#C BrkInState:     3
+#C BrkInStep:	0
+#C BrkInNibble:	0
+#C *** Shaped Accel Parameters ***
+ShapedStage:	0
+ShapedStage1:	0
+ShapedStageTxt:	concat ("" "Shaped Accel, NO Data")
+ShapedStep:	0
+#C *** MOP Test Parameters ***
+MOPTstStage:	0
+MOPTstStageTxt:	concat ("" "MOP Test, NO Data")
+MOPTstPause_F:	OFF
+MOPTstState:	0
+#C ** Acceptance parameters ***
+AcceptStep:	0
+AcceptStage:	0
+AcceptStage1:	0
+AcceptStageTxt:	concat ("" "Acceptance Test, NO Data")
+AcceptEventDur:	0.0
+AcceptTRA:Deg	0.0
+CAIOp_Stat:	0
+CAICl_Stat:	0
+#C ** Correlation parameters ***
+CorrStep:	0
+CorrStage:	0
+CorrStage1:	0
+CorrStageTxt:	concat ("" "Correlation Test, NO Data")
+#C CorrFNTR2:Lbf	0.0
+CorrEventDur:	0.0
+CorrTRA:Deg	0.0
+CorrN1C2D:RPM	0.0
+#C *** Accel/Decel Parameters ***
+ArmAccel_F:	OFF
+ArmDecel_F:	OFF
+ArmAccelDecel_F:	OFF
+AccelStage:	0
+AccelStep:	0
+AccelStageTxt:	concat ("" "Accel/Decel Test, NO Data")
+#C *** Vibration Survey Parameters ***
+VibSvyStage:	0
+VibSvyStage1:	0
+VibSvyStageTxt:	concat ("" "Vibration Survey, NO Data")
+VibSvyStep:	0
+#C *** HPC Stability Test Parameters ***
+#C StableStage:	0
+#C StableStage1:	0
+#C StableStageTxt:	concat ("" "Stability Test, No Data")
+#C StableStep:	0
+channelmask:    12
+datapoint:      0
+#C *** Cool Down Parameter ***
+CoolDnStage:	0
+CoolDnStageTxt:	concat ("" "Cool Down Procedure, No Data")
+#C *** Warm UP Parameter ***
+WarmUpStage:	0
+WarmUpStageTxt:	concat ("" "Warm Up Procedure, No Data")
+#C *** Push Button Parameter ***
+PB_Stage:	0
+PB_StageTxt:	concat ("" "Push Button Procedures, No Data")
+PB_HeaderTxt:	concat ("" "Push Button Header, No Data")
+PB_StartCrank_F:	OFF
+PB_AutoStart_TB:	OFF
+PB_ManStart_TB:		OFF
+PB_DryCrank_TB:		OFF
+PB_WetCrank_TB:		OFF
+#C *** Fan Trimbalance Parameters ***
+FANWGT_A:OZ-IN	0.0
+FANANG_A:Deg	0.0
+FANWGT_B:OZ-IN	0.0
+FANANG_B:Deg	0.0
+FANWGT_C:OZ-IN	0.0
+FANANG_C:Deg	0.0
+FANWGT_D:OZ-IN	0.0
+FANANG_D:Deg	0.0
+FANWGT_O:OZ-IN	0.0
+FANANG_O:Deg	0.0
+#C *** LPT TrimBalance Parameters ***
+LPTWGT_A:OZ-IN	0.0
+LPTANG_A:Deg	0.0
+LPTWGT_B:OZ-IN	0.0
+LPTANG_B:Deg	0.0
+LPTWGT_C:OZ-IN	0.0
+LPTANG_C:Deg	0.0
+LPTWGT_D:OZ-IN	0.0
+LPTANG_D:Deg	0.0
+LPTWGT_O:OZ-IN	0.0
+LPTANG_O:Deg	0.0
+#C __________________________
+N1CLASS:	0
+#C __________________________
+InstPOilCLASS:	0
+InstPOilClass_RB:	50
+InstPOilDiam:In	(InstPOilClass_RB / 1000)
+POilTrim:In	0.0
+POilTrimN:In	0.0
+POilTrimP:In	0.0
+POilTrimM:In	0.0
+POilTrimClass:	0
+POilTrimDiam:In	0.0
+POilTrimDiamChg:In	0.0
+POilTemp:DegC	0.0
+POilN1:%	0.0
+POilN2:%	0.0
+POilCor:PSIG	0.0
+POilMxLim:PSIG	0.0
+POilMnLim:PSIG	0.0
+POilNomLim:PSIG	0.0
+POilNomRng:PSIG	0.0
+POilDiff:PSIG	0.0
+POilDiffSign:	0
+#C __________________________
+#C *** L253 Shutdown Timer params.
+#C L253_SDTmr_F:	OFF
+#C L253_SDTmr:sec	0.0
+#C L253_SDTime:Min	180
+#C EIU_L253B28:	ON
+#C L253_SDTClose:	systime
+#C __________________________
+#C *** MapNet Data **********
+#C *** See ../common/commoninit.cal for strMonth calc...
+EECDate:        setecudate(1)
+Year1:  decodebits(EECDate 15 4)
+Year2:  decodebits(EECDate 11 4)
+Month1: decodebits(EECDate 23 1)
+Month2: decodebits(EECDate 19 4)
+#if	 (Month1 = 1)
+EECMonth:	(10 + Month2)
+#else
+EECMonth:	Month2
+#endif
+strMonth:	concat ("" EECMonth)
+dummy:		startautotest (strMonth_ATP)
+Day1:		decodebits(EECDate 28 2)
+Day2:		decodebits(EECDate 24 4)
+MapNetDate:	concat(Day1 Day2)
+MapNetDate:	concat(MapNetDate " ")
+MapNetDate:	concat(MapNetDate strMonth)
+MapNetDate:	concat(MapNetDate " 20")
+MapNetDate:	concat(MapNetDate Year1)
+MapNetDate:	concat(MapNetDate Year2)
+#C MapNetOpenDate:	concat("" SYSDATE)
+MapNetOpenDate:	concat(Month1 Month2)
+MapNetOpenDate:	concat(MapNetOpenDate "/")
+MapNetOpenDate:	concat(MapNetOpenDate Day1)
+MapNetOpenDate:	concat(MapNetOpenDate Day2)
+MapNetOpenDate:	concat(MapNetOpenDate "/20")
+MapNetOpenDate:	concat(MapNetOpenDate Year1)
+MapNetOpenDate:	concat(MapNetOpenDate Year2)
+#C __________________________
+#C **** Mapnet Workscope Parameters ****
+WSLookupStr:    concat ("" "")
+MapnetFDICM:    concat ("" " ")
+MapnetFRG:      concat ("" " ")
+MapnetFDBG:     concat ("" " ")
+MapnetFDGG:     concat ("" " ")
+MapnetFICG:     concat ("" " ")
+Mapnet2BG:      concat ("" " ")
+MapnetFCM:      concat ("" " ")
+MapnetFCG:      concat ("" " ")
+MapnetLCM:      concat ("" " ")
+MapnetLCSG:     concat ("" " ")
+MapnetLCRG:     concat ("" " ")
+Mapnet25BLG:    concat ("" " ")
+MapnetCICM:     concat ("" " ")
+MapnetCICG:     concat ("" " ")
+Mapnet3BG:      concat ("" " ")
+MapnetHCM:      concat ("" " ")
+MapnetHCRSG:    concat ("" " ")
+MapnetHCFCG:    concat ("" " ")
+MapnetHCRG:     concat ("" " ")
+MapnetDCM:      concat ("" " ")
+MapnetDCG:      concat ("" " ")
+MapnetCTNG:     concat ("" " ")
+MapnetHTCM:     concat ("" " ")
+MapnetHTSG:     concat ("" " ")
+MapnetHTRG:     concat ("" " ")
+MapnetTICG:     concat ("" " ")
+MapnetLTM:      concat ("" " ")
+MapnetLTSG:     concat ("" " ")
+MapnetLTRG:     concat ("" " ")
+MapnetTECM:     concat ("" " ")
+MapnetTECG:     concat ("" " ")
+MapnetMGBM:     concat ("" " ")
+MapnetMGBG:     concat ("" " ")
+MapnetAGBM:     concat ("" " ")
+MapnetAGBG:     concat ("" " ")
+#C ******************************
+WSLookupVal:    0.0
+MapnetVFDICM:   0.0
+MapnetVFRG:     0.0
+MapnetVFDBG:    0.0
+MapnetVFDGG:    0.0
+MapnetVFICG:    0.0
+MapnetV2BG:     0.0
+MapnetVFCM:     0.0
+MapnetVFCG:     0.0
+MapnetVLCM:     0.0
+MapnetVLCSG:    0.0
+MapnetVLCRG:    0.0
+MapnetV25BLG:   0.0
+MapnetVCICM:    0.0
+MapnetVCICG:    0.0
+MapnetV3BG:     0.0
+MapnetVHCM:     0.0
+MapnetVHCRSG:   0.0
+MapnetVHCFCG:   0.0
+MapnetVHCRG:    0.0
+MapnetVDCM:     0.0
+MapnetVDCG:     0.0
+MapnetVCTNG:    0.0
+MapnetVHTCM:    0.0
+MapnetVHTSG:    0.0
+MapnetVHTRG:    0.0
+MapnetVTICG:    0.0
+MapnetVLTM:     0.0
+MapnetVLTSG:    0.0
+MapnetVLTRG:    0.0
+MapnetVTECM:    0.0
+MapnetVTECG:    0.0
+MapnetVMGBM:    0.0
+MapnetVMGBG:    0.0
+MapnetVAGBM:    0.0
+MapnetVAGBG:    0.0
+$END-GROUP

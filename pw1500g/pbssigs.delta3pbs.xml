@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<PBSSignals>
+  <N1speed param="PBS_N1" calibmode="2"/>
+  <N2speed param="PBS_N2" calibmode="2"/>
+  <N3speed param="PBS_NF" calibmode="2"/>
+  <VibInput1 name="E_Flange" units="IPS">
+    <BBAmp param="VibFBB_PBS" calibmode="2"/>
+    <N1Amp param="VibFN1_PBS" calibmode="2"/>
+    <N1Phase param="VibFPhs_PBS" calibmode="2"/>
+    <N2Amp param="VibFN2_PBS" calibmode="2"/>
+    <N3Amp param="VibFNF_PBS" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput1>
+  <VibInput2 name="P_Flange" units="IPS">
+    <BBAmp param="VibRBB_PBS" calibmode="2"/>
+    <N1Amp param="VibRN1_PBS" calibmode="2"/>
+    <N1Phase param="VibRPhs_PBS" calibmode="2"/>
+    <N2Amp param="VibRN2_PBS" calibmode="2"/>
+    <N3Amp param="VibRNF_PBS" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput2>
+  <VibInput3 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput3>
+  <VibInput4 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput4>
+  <VibInput5 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput5>
+  <VibInput6 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput6>
+  <VibInput7 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput7>
+  <VibInput8 name="" units="">
+    <BBAmp param="" calibmode="2"/>
+    <N1Amp param="" calibmode="2"/>
+    <N1Phase param="" calibmode="2"/>
+    <N2Amp param="" calibmode="2"/>
+    <N3Amp param="" calibmode="2"/>
+    <Aux1 param="" calibmode="2"/>
+    <Aux2 param="" calibmode="2"/>
+    <Aux3 param="" calibmode="2"/>
+    <Aux4 param="" calibmode="2"/>
+  </VibInput8>
+</PBSSignals>
