@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Weather Monitor - LabVIEW RESTful Web Services</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <h3>LabVIEW Web Services</h3>
+    <h1>Weather Station Monitor Example</h1>
+    <h2>Running the Example</h2>
+    <ol>
+        <li>Under <b>My Computer » Build Specifications</b>, right-click <b>Weather Simulator
+            (Server)</b> and select <b>Build</b>. Then right-click <b>Weather Simulator
+            (Server)</b> and select <b>Run</b>.</li>
+        <li>Repeat the previous steps to build and run <b>Weather Monitor (Client)</b>.</li>
+        <li>On Weather Monitor, change data visualization in <b>Display Format</b>. Click <b>Start</b> to view the simulated
+            weather data in the format you specify.</li>
+        <li>Optionally, you can open a browser and navigate to <a href="http://127.0.0.1:80/WeatherMonitor/Get_Data">
+            http://127.0.0.1:80/WeatherMonitor/Get_Data</a>. The weather data can be returned
+            as a PNG image or text in JSON or XML, depending on the <b>Accept HTTP</b> header of the browser.
+            Navigate to <a href="http://127.0.0.1:80/WeatherMonitor/Get_Data?format=image/png">http://127.0.0.1:80/WeatherMonitor/Get_Data?format=<i>{value}</i></a> and replace <i>{value}</i> with <i>image/png</i>, <i>text/xml</i>, or <i>application/json</i> to view the data in different formats.</li>
+        <li>Close the monitor and simulator applications.</li>
+    </ol>
+    <h2>Project Details</h2>
+    <p>The project has two parts: the Server Application and the Client Application.</p>
+    <h3>Server Application</h3>
+    <p><b>Weather Simulator.vi</b> serves as the startup VI for the <b>Weather Simulator</b>. In a loop, it simulates weather data and places the data into the <b>Data Store.vi</b> in <b>Weather Data.lvlib</b>.</p>
+    <h4>Data and Settings Store VIs</h4>
+    <p><b>Data Store.vi</b> uses uninitialized shift registers to store weather data and
+        includes an <b>action</b> input terminal to tell the VI which operation to perform on
+        the data. Because this VI is initialized in the application startup VI (<b>Weather
+        Simulator.vi</b>), the data exists as long as the application runs. This allows
+        other VIs, such as the web service VIs, to perform actions on the same set of data.
+        Similarly, <b>Web Service Settings Store.vi</b> is designed in the same manner to
+        store settings for web service responses using <b>Apply Web Service Settings.vi</b>.</p>
+    <h4>WeatherMonitor Web Service</h4>
+    <p>Weather Simulator includes this web service. As long as the application runs, this web service is packaged and deployed along with the built stand-alone application file. The build specification of the stand-alone application determines which port to make available for the web service. This example uses port 80.</p>
+    <p>The <b>Web Resources</b> folder contains all of the web service <b>HTTP Method
+        VIs</b>, which are VIs that run in response to an HTTP request. All of the web service
+        methods are configured to use the default standard URL, which contains the name
+        of the VI. To view all of the web service URLs, right-click the web
+        service and select <b>Properties</b>. Then choose the <b>Site Map</b> page on
+        the left. The <b>Private Content</b> folder contains any files that are always deployed
+        with the web service. VIs in this folder are treated as top-level VIs. The front panels are not removed.</p>
+    <p>In the Web Service subVIs folder, the <b>Accept</b> folder contains VIs for parsing the
+        HTTP <b>Accept</b> header. Browsers use the <b>Accept</b> header to tell servers in which format to return data. The client VIs use the <b>Accept</b> header to select among
+        a PNG image, JSON text, and XML text.
+        In RESTful design, this is known as content-type negotiation. The client only
+        understands certain formats. The server can only produce certain formats. <b>Match
+            Accept Header.vi</b> takes these two lists and determines the best match.</p>
+    <h3>Client Application</h3>
+    <p>The client application uses a <b>Queued Message Handler</b> architecture to provide
+        a responsive UI while also calling the web service to get the latest data. The architecture is divided
+        into multiple loops. The <b>View Message Loop</b> controls how the data is retrieved
+        and how to display the data in the UI. The <b>Request Message Loop</b> uses <b>HTTP Client</b> to retrieve
+        data from the web service and passes that data to the
+        view. The <b>Wait Message Loop</b> controls how often to refresh the data.</p>
+    <p><b>Weather Monitor.vi</b>, which serves as the startup VI for the application,
+        manages these loops and activates one of several views based on user input. The
+        <b>Graph View</b> requests that the web service return the data as a PNG image and
+        draws the image in a 2D picture control. The <b>Table View</b> requests the data
+        as an array of clusters flattened into JSON. It unflattens the data and formats
+        it into a table. Finally, the <b>Raw Values View</b> allows the user to choose which
+        data format to retrieve and displays the unparsed response from the server.</p>
+    <h3>Cross-Origin Resource Sharing (CORS)</h3>
+    <p><b><font color="blue">(Application Web Server)</font></b>&nbsp;&nbsp;The Weather Simulator application's front panel provides an option to enable or disables
+        CORS for the WeatherMonitor web service. When enabled, clients that support CORS, such
+        as browsers, are allowed to request weather data from the web service on behalf of a
+        different website. These requests are called cross-origin requests and are normally
+        blocked by the client unless the web service responds with appropriate headers. This
+        example does not fully implement CORS and only provides the option to demonstrate
+        how a web service might expose a basic implementation. Enabling the option is required
+        when using JavaScript hosted from a different web server to request weather data.</p>
+    <p><b>Note</b>&nbsp;&nbsp;The CORS setting on the front panel only applies to the Application Web Server. The default NI Web Server offers dedicated CORS configuration settings. Refer to <a href="http://www.ni.com/r/configws" target="_blank">Choosing a Remote Setting</a> in the <i>NI Web Server Manual</i> for information on configuring CORS settings when using the NI Web Server to host the Weather Simulator Server.</p>
+    <h3>Debugging</h3>
+    <p>You can use in-project debugging to run the VIs for a web within the project. You can set breakpoints at any time. To debug a web
+        service that is included with a built application, such as the WeatherMonitor,
+        open and run all of the application startup VIs in the project (in this case just
+        Weather Simulator.vi). Then right-click the web service and select <b>Start</b>.
+        This reserves all of the web service VIs for running.</p>
+    <p>Run Weather Monitor.vi. When the client application makes web
+        service calls, you can now use standard debugging techniques, such as probes, breakpoints, and execution highlighting, to follow the execution of the HTTP Method VIs.</p>
+    <p>When you finish debugging, stop the client VI. Right-click the web service and select
+        <b>Stop</b>. Then stop the server VI.</p>
+    <h3>Build Specifications</h3>
+    <h4>Weather Monitor (Client)</h4>
+    <p>This application build specification includes all of the VIs needed to run the client.
+        It includes Weather Monitor.vi as a startup VI.</p>
+    <h4>Weather Simulator (Server)</h4>
+    <p>This application includes all VIs needed to run the server.
+        It also includes the WeatherMonitor web service to enable remote access to the weather
+        data. This application includes the Weather Simulator.vi as a startup VI. On the <b>Web Services</b>
+        page of the <b>Properties</b> dialog box for the application, the WeatherMonitor Web service is checked
+        and the server is configured to use HTTP to accept requests on port 80.</p>
+    <h4>Weather Simulator Package</h4>
+    <p>The build specification for this package includes the build specification for the Weather Simulator (Server). You can use this package to install the Weather Simulator (Server) application on another computer. Because once the build specification for the package is included, all output files are also included. The output files include the Weather Simulator (Server) stand-alone application and the web service files for the WeatherMonitor stand-alone application. By default, LabVIEW selects the LabVIEW Runtime on the <b>Dependencies</b> page of the Properties dialog box.  Therefore, you do not need to install any NI software before running the Weather Simulator application. After installing the package using the NI Package Manager, LabVIEW places a shortcut on the start menu for the Weather Simulator application.</p>
+    <h3>Running on Real-Time Targets</h3>
+    <p>To run this example on a real-time target, load the <b>Web Services - Weather Monitor (RT)</b> example
+        installed with the <b>LabVIEW Real-Time Module</b>.</p>
+</body>
+</html>

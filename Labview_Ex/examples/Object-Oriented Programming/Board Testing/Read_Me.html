@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+
+  
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Benefits of Object-Oriented Design in Test and Measurement</title></head>
+
+<body>
+
+
+
+
+<h1>Benefits of Object-Oriented Design in Test and Measurement</h1>
+
+
+
+This example demonstrates the benefits of LabVIEW object-oriented
+programming for a company that writes and maintains test and measurement
+programs.<br>
+
+
+
+
+
+<h3><span style="font-weight: bold;">Table of Contents</span></h3>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li><a href="#The_Goal">The Testing Goal</a></li>
+
+
+
+
+  <li><a href="#Task-Oriented_Solution">Task-Based Solution</a></li>
+
+
+
+
+  <li><a href="#Object-Oriented_Solution">Object-Oriented Solution</a></li>
+
+
+
+  <li><a href="#Benefits">Costs and Benefits of Object-Oriented Design</a></li>
+
+
+
+  <li><a href="#Conclusion">Conclusion</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+<h3><a name="The_Goal"></a>The Testing Goal</h3>
+
+
+
+A&nbsp;company produces computer plug-in boards. The company has three products:<br>
+
+
+
+
+
+<ol style="list-style-type: upper-alpha;">
+
+
+
+
+
+  <li>Basic DAQ Board</li>
+
+
+
+
+  <li>Elite DAQ Board</li>
+
+
+
+
+  <li>GPIB Board</li>
+
+
+
+
+</ol>
+
+The company wants to inspect each board as it comes off the assembly
+line to make sure the pieces soldered to the boards are placed
+correctly. A camera over each of the three assembly lines sends images to a single machine. The machine analyzes the
+images and determines if the board is assembled correctly.<br>
+
+
+
+
+
+<img src="Conveyor%20Belt.png" alt=""><br>
+
+
+
+
+
+<br>
+
+
+
+
+
+The boards follow a standard form factor and are made up of common components: resistors, capacitors, and chips. <br>
+
+
+
+
+
+<table style="text-align: left; width: 633px; height: 192px;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+  <tbody>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">A) Basic DAQ Board</span><br>
+
+
+
+
+
+      <img src="Board%20A.png" alt=""></td>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">B) Elite DAQ Board</span> <span style="font-style: italic;">(same as Basic DAQ but with the addition of the on-board filter)</span><br>
+
+
+
+
+
+      <img src="Board%20B.png" alt=""></td>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">C) GPIB Board</span><br>
+
+
+
+
+
+      <img src="Board%20C.png" alt="" style="width: 188px; height: 120px;"></td>
+
+
+
+
+    </tr>
+
+
+
+
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+<br>
+
+
+
+
+
+The company needs a LabVIEW program that receives images from the
+cameras, analyzes them and determines if each board is
+assembled correctly.<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<h3><a name="Task-Oriented_Solution"></a>Task-Based Solution</h3>
+
+
+
+In the <span style="font-weight: bold;">Board Testing</span> project, open&nbsp;<span style="font-weight: bold;">Test Boards_TASK.vi</span> in the <span style="font-weight: bold;">Task-Oriented Solution</span> folder.<br>
+
+
+
+
+<br>
+
+
+
+
+This VI demonstrates a task-based approach to the&nbsp;problem posed in the previous section.<br>
+
+
+
+<br>
+
+
+
+Display and examine the block diagram. First, <span style="font-weight: bold;">Generate Test Images.vi</span>
+simulates the acquisition of the images and places them in a queue.
+Then, a While Loop retrieves one image at a time from the queue and
+processes it.<br>
+
+
+
+<br>
+
+
+
+A value is paired with each image to designate the type of board it
+represents. A Case structure switches on the board type and runs the
+test for that board.<br>
+
+
+
+<br>
+
+
+
+The test results include a unique test identification string, the board type, and a pass/fail Boolean.<br>
+
+
+
+<br>
+
+
+
+Review the subVIs that perform the tests for the boards. They verify
+the presence of blocks of certain colors at certain positions on the
+board. Using shared subVIs, they reuse code for common blocks.<br>
+
+
+
+&nbsp;&nbsp;&nbsp; <br>
+
+
+
+Overall, this is a good solution that fulfills the requested task.<br>
+
+
+
+
+
+<h3><a name="Object-Oriented_Solution"></a>Object-Oriented Solution</h3>
+
+
+
+In the <span style="font-weight: bold;">Board Testing</span> project, open&nbsp;<span style="font-weight: bold;">Test Boards_OBJECT.vi</span> in the <span style="font-weight: bold;">Object-Oriented Solution</span> folder.<br>
+
+
+
+<br>
+
+
+
+This VI demonstrates an object-oriented approach to the problem posed in the first section.<br>
+
+
+
+<br>
+
+
+
+Display and examine the block diagram. The generation of simulated images and the
+test results output are the same as in the task-based solution. This
+demonstrates that you can rewrite a section of an application to use
+LabVIEW classes without&nbsp;rewriting the entire application.<br>
+
+
+
+<br>
+
+
+
+The Case structure to switch off the board type is now in the <span style="font-weight: bold;">Enum to Board Design.vi</span> subVI that produces an object of the appropriate type.<br>
+
+
+
+<br>
+
+
+
+With the object-oriented approach, it is easier to see that the VI
+performs the same operations (checking the image and creating a test
+name) on each board.<br>
+
+
+
+<br>
+
+
+
+Open <span style="font-weight: bold;">Check Image Matches Design.vi</span> from the block diagram of <span style="font-weight: bold;">Test Boards_OBJECT.vi</span> and display its block diagram. Note that it has a very different structure than the tests in the task-based approach.<br>
+
+
+
+<br>
+
+
+
+Instead of a set of checks for blocks of certain colors at certain positions, this VI gets a list of <span style="font-weight: bold;">component</span> objects from the board and calls the <span style="font-weight: bold;">Self Test</span> method on each component. <br>
+
+
+
+<br>
+
+
+
+The object-oriented approach encourages the developer to decompose the
+problem differently than the task-based approach. The next section
+reviews some of the benefits of the object-oriented approach.<br>
+
+
+
+<h3><a name="Benefits"></a>Costs and Benefits of Object-Oriented Design</h3>
+
+
+
+
+
+Open the <span style="font-weight: bold;">Classes</span> folder in the <span style="font-weight: bold;">Object-Oriented Solution</span> folder. The object-oriented approach uses many more subVIs than the task-based approach.<br>
+
+
+
+<br>
+
+
+
+Each VI in the object-oriented system does a very specific task. The
+VIs are therefore smaller, and more numerous, than the VIs in the
+task-based approach. This approach produces code that is easier to
+read, especially for developers who are new to the project and unfamiliar
+with the existing VIs.<br>
+
+
+
+<br>
+
+
+
+But the other advantages of object-oriented programming are not necessarily seen when you first write the
+code. Consider a case where you have to modify your application.<br>
+
+
+
+
+<h4>Scenario: A Vendor Changes a Part</h4>
+
+
+
+Notice that all three boards have three blue squares in a column on the
+left side and a purple bar on the top row. In the task-based solution,
+the the test for these four blocks is in a subVI that is common to all
+three board tests. Shared code in common subVIs is good programming
+practice. But what the
+picture does not display is this:<br>
+
+
+
+
+<br>
+
+
+
+
+1 == Analog to Digital Converter<br>
+
+
+
+
+2 == Digital to Analog Converter<br>
+
+
+
+
+
+
+<table style="text-align: left; width: 633px; height: 192px;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">A) Basic DAQ Board</span><br>
+
+
+
+
+
+      <img src="Labeled%20Board%20A.png" alt=""><br>
+
+
+
+
+      </td>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">B) Elite DAQ Board</span> <span style="font-style: italic;"></span><br>
+
+
+
+
+
+      <img src="Labeled%20Board%20B.png" alt=""><br>
+
+
+
+
+      </td>
+
+
+
+
+      <td style="width: 213px; vertical-align: bottom; text-align: center;"><span style="font-weight: bold;">C) GPIB Board</span><br>
+
+
+
+
+
+      <img src="Labeled%20Board%20C.png" alt=""><br>
+
+
+
+
+      </td>
+
+
+
+
+    </tr>
+
+
+
+
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+<br>
+
+
+
+In this particular situation, the A/D converters and D/A converters
+happen to have identical appearances. However, the GPIB board is actually
+different from the two DAQ boards, even though they look the same. <br>
+
+
+
+
+<br>
+
+
+
+Suppose a parts vendor changes the color of the A/D converters to
+red. Contrast the steps required to modify the task-based and object-oriented test applications:<br>
+
+
+
+<h5>Task-based VIs</h5>
+
+
+
+
+<ul>
+
+
+
+
+  <li>Duplicate <span style="font-weight: bold;">Test_Common To All Boards.vi</span>, which is currently
+shared by the DAQ board test and the GPIB board. Modify one copy of <span style="font-weight: bold;">Test_Common To All Boards.vi</span> to account for the new color.</li>
+
+
+
+
+  <li>Find every place in all subVIs where blue is used and determine
+if it should change to red or if it should stay blue. (Some of these
+are for A/D converters, some are for D/A converters).<br>
+
+
+
+
+  </li>
+
+
+
+
+</ul>
+
+
+
+
+<span style="font-weight: bold;"></span>
+<h5>Object-oriented VIs</h5>
+
+
+
+
+<ul>
+
+
+
+
+  <li>Change the color constant in&nbsp;<span style="font-weight: bold;">AD Converter.lvclass::Self Test.vi </span>to red.</li>
+
+
+
+
+</ul>
+
+
+
+
+<span style="font-weight: bold;"></span>The modification to the object-oriented VIs is faster and provides less opportunity to introduce errors.<br>
+
+
+
+<h3><a name="Conclusion"></a>Conclusion</h3>
+
+
+
+The task-oriented solution shares code in places where the problem
+looks the same from a task perspective. The object-oriented solution
+shares code where the objects underlying the task are the same. This
+decomposition into components makes it very easy to update code when a
+component changes. The behavior of that component is isolated from
+the rest of the system. <br>
+
+
+
+
+<br>
+
+
+
+Consider these scenarios:<br>
+
+
+
+
+<ul>
+
+
+
+
+  <li>If the company makes a new board, how difficult is it to add that board to
+the test system for the task-based solution vs. the object-oriented
+solution? <br>
+
+
+
+
+  </li>
+
+
+
+
+  <li>If the company changes a board design to rotate one of the
+components, which of the two implementations would have
+fewer changes? (Note that the object-oriented system, because it
+handles components as objects, already supports rotation of a
+component).</li>
+
+
+
+
+</ul>
+
+
+
+In summary, the
+value of object-oriented design is not always apparent in
+the first version of an application (although code readability and organization are
+certainly valuable). But the benefits of easier and more robust code modification become clear with each revision.<br>
+
+
+
+
+<br>
+
+
+
+
+
+</body></html>

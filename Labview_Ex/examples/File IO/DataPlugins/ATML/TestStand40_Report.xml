@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?> <?xml-stylesheet type="text/xsl" href="C:\Program Files\National Instruments\TestStand 4.0\Components\NI\Models\TestStandModels\ATML\StyleSheets\trml.xsl"?>
+<trc:TestResultsCollection xmlns:trc="urn:IEEE-1636.1:2011:01:TestResultsCollection" xmlns:tr="urn:IEEE-1636.1:2011:01:TestResults" xmlns:c="urn:IEEE-1671:2010:Common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ts="www.ni.com/TestStand/ATMLTestResults/2.0">
+<trc:TestResults xmlns:trc="urn:IEEE-1636.1:2011:01:TestResultsCollection" xmlns:tr="urn:IEEE-1636.1:2011:01:TestResults" xmlns:c="urn:IEEE-1671:2010:Common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  uuid="3376f8e9-49cc-40c7-9470-599c13def0e7">
+ 	<tr:Personnel>
+		 <tr:SystemOperator ID = "administrator" name = "administrator"/>
+	</tr:Personnel>
+	 <tr:ResultSet ID="15" name = "C:\Documents and Settings\tesims\Desktop\Sequence File 1_Report[NO_UUT_SERIAL_NUM0][4 13 34 PM][6 15 2007].XML" startDateTime = "2007-06-15T16:13:34" endDateTime = "2007-06-15T16:13:37">
+		<tr:Outcome value="Failed" />
+ 		<tr:TestGroup name="C:\Documents and Settings\tesims\Desktop\Sequence File 1.seq#MainSequence" ID="15" startDateTime = "2007-06-15T16:13:34"  endDateTime = "2007-06-15T16:13:37" >
+			<tr:Outcome value="Failed" />
+ 				<tr:Test ID = "16" name = "Numeric Limit Test" startDateTime = "2007-06-15T16:13:34"  endDateTime = "2007-06-15T16:13:34" >
+					<tr:Outcome value = "Failed" />
+					<tr:TestResult ID = "Numeric">
+						<tr:TestData>
+							<c:Datum value = "0" xsi:type="c:double"/>
+						</tr:TestData>
+						<tr:TestLimits>
+							<tr:Limits>
+								<c:LimitPair operator = "AND">
+									<c:Limit comparator = "GE">
+										<c:Datum value = "9" xsi:type="c:double"/>
+									</c:Limit>
+									<c:Limit comparator = "LE">
+										<c:Datum value = "11" xsi:type="c:double"/>
+									</c:Limit>
+								</c:LimitPair>
+							</tr:Limits>
+						</tr:TestLimits>
+					</tr:TestResult>
+				</tr:Test>
+ 				<tr:Test ID = "17" name = "Numeric Limit Test" startDateTime = "2007-06-15T16:13:35"  endDateTime = "2007-06-15T16:13:35" >
+					<tr:Outcome value = "Failed" />
+					<tr:TestResult ID = "Numeric">
+						<tr:TestData>
+							<c:Datum value = "0" xsi:type="c:double"/>
+						</tr:TestData>
+						<tr:TestLimits>
+							<tr:Limits>
+								<c:LimitPair operator = "AND">
+									<c:Limit comparator = "GE">
+										<c:Datum value = "9" xsi:type="c:double"/>
+									</c:Limit>
+									<c:Limit comparator = "LE">
+										<c:Datum value = "11" xsi:type="c:double"/>
+									</c:Limit>
+								</c:LimitPair>
+							</tr:Limits>
+						</tr:TestLimits>
+					</tr:TestResult>
+				</tr:Test>
+ 				<tr:Test ID = "18" name = "Numeric Limit Test" startDateTime = "2007-06-15T16:13:35"  endDateTime = "2007-06-15T16:13:35" >
+					<tr:Outcome value = "Failed" />
+					<tr:TestResult ID = "Numeric">
+						<tr:TestData>
+							<c:Datum value = "0" xsi:type="c:double"/>
+						</tr:TestData>
+						<tr:TestLimits>
+							<tr:Limits>
+								<c:LimitPair operator = "AND">
+									<c:Limit comparator = "GE">
+										<c:Datum value = "9" xsi:type="c:double"/>
+									</c:Limit>
+									<c:Limit comparator = "LE">
+										<c:Datum value = "11" xsi:type="c:double"/>
+									</c:Limit>
+								</c:LimitPair>
+							</tr:Limits>
+						</tr:TestLimits>
+					</tr:TestResult>
+				</tr:Test>
+ 				<tr:Test ID = "19" name = "Numeric Limit Test" startDateTime = "2007-06-15T16:13:36"  endDateTime = "2007-06-15T16:13:36" >
+					<tr:Outcome value = "Failed" />
+					<tr:TestResult ID = "Numeric">
+						<tr:TestData>
+							<c:Datum value = "0" xsi:type="c:double"/>
+						</tr:TestData>
+						<tr:TestLimits>
+							<tr:Limits>
+								<c:LimitPair operator = "AND">
+									<c:Limit comparator = "GE">
+										<c:Datum value = "9" xsi:type="c:double"/>
+									</c:Limit>
+									<c:Limit comparator = "LE">
+										<c:Datum value = "11" xsi:type="c:double"/>
+									</c:Limit>
+								</c:LimitPair>
+							</tr:Limits>
+						</tr:TestLimits>
+					</tr:TestResult>
+				</tr:Test>
+		</tr:TestGroup>
+	</tr:ResultSet>
+ 	<tr:TestStation>
+		<c:SerialNumber>
+			AE-SIMS
+		</c:SerialNumber>
+	</tr:TestStation>
+	 <tr:UUT>
+		<c:SerialNumber>
+			NONE
+		</c:SerialNumber>
+	</tr:UUT>
+</trc:TestResults>
+</trc:TestResultsCollection>

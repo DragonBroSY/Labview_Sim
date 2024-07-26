@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<XControl LVVersion="23008000">
+	<Property Name="" Type="Bool">true</Property>
+	<Property Name="NI.Lib.HelpPath" Type="Str"></Property>
+	<Property Name="NI.Lib.Icon" Type="Bin">)Q#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!+/!!!*Q(D;T:42&lt;2J"%):`IEDR7U1(%:1Q&amp;6CC"1L)S\4![`H&amp;/=N3\HF;Y-5&amp;U-*1!CX1QO7\:3(%W*S3W%JW'?&lt;Y&gt;W@GO^VFJ&gt;*OJ)`KR^LS;POD]&lt;/UZ?&amp;9Z_3@R@@T_&lt;TY\8:&lt;ZZW.^Z@D9`'`D0^_`()E@PH?]90;^^@Y_`I3L\X`W8D`3PZXY.&gt;)P$13,V7_`FL]W2[_70^C`U@/X]8Z@:&lt;`J10_.`_0.RU@;3RJU``D*EUU8%299I%Z:BK'_E20^%20^%20^%!0^%!0^%!0&gt;%&gt;X&gt;%&gt;X&gt;%&gt;X&gt;%-X&gt;%-X&gt;%-X^.,2B3ZUI&lt;-K3@'E5*)U3:"-"E8*6]+4]#1]#1]`F@!E0!F0QJ0Q-%5*4]+4]#1]#1^B3HA3HI1HY5FY3&amp;6)MH2U?")?UCPA#8A#HI!HY+'E!JY!)#A7*![3A+&amp;A-(A)?!+?A)&gt;("4Q"4]!4]!1]$#PA#8A#HI!HY#'EL%I5GK'DQU-;/4Q/D]0D]$A]J*&lt;$Y`!Y0![0QU-Z/4Q/DQ0B&amp;(33AS!HS*HA`("Y("[=("[(R_&amp;R?"Q?BMI/?6G:A7&lt;I[0!90!;0Q70Q'$SEE-&amp;D]"A]"I`"1VI:0!;0Q70Q'$S5EM&amp;D]"A]"IB2F0)SEBG"RC2$-(DYF..C::?CE&amp;DJQUV6$K`KI61^&lt;+K(306QK'[[[G;K&lt;J,KYKMOKOJCK3[#[MOJ1KP#K":2$2YG;M`X$NNA;[T&amp;6NA37W!T&lt;$K%PP(%`8[PX7[HT7;D^8KNNGWV7KX%R;4&amp;9K(:&lt;+&lt;J&gt;+JD_U)`N-HR8GJY0NDH3&gt;?VW0@*5`&amp;N^1W_/@0X8Z_[B^M/?_LO&lt;U`[)`Y"XX\$NX@&gt;YS'_U=V&gt;IU_4HX5/^P`=D@KAAT_NU1^AK;2(!!!!!!</Property>
+	<Property Name="NI.Lib.SourceVersion" Type="Int">587235328</Property>
+	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
+	<Property Name="NI.LV.All.SourceOnly" Type="Bool">true</Property>
+	<Property Name="NI.SortType" Type="Int">3</Property>
+	<Property Name="NI.XClass.Flags" Type="Int">0</Property>
+	<Property Name="NI.XItem.DeclaredLeakProof" Type="Bool">false</Property>
+	<Property Name="NI.XItem.Express" Type="Bool">false</Property>
+	<Property Name="NI.XItem.Name" Type="Str">XControl 1</Property>
+	<Property Name="NI.XItem.SupportsFatalErrorOut" Type="Bool">false</Property>
+	<Item Name="Properties" Type="Folder">
+		<Item Name="Fahrenheit Mode?" Type="Property Folder">
+			<Property Name="NI.LibItem.Prop.Identifier" Type="Str">Fahrenheit Mode?</Property>
+			<Property Name="NI.LibItem.Prop.Localized.LongName" Type="Str">Fahrenheit Mode?</Property>
+			<Item Name="[Property] Fahrenheit Mode Read.vi" Type="Property VI" URL="../[Property] Fahrenheit Mode Read.vi"/>
+			<Item Name="[Property] Fahrenheit Mode Write.vi" Type="Property VI" URL="../[Property] Fahrenheit Mode Write.vi"/>
+		</Item>
+	</Item>
+	<Item Name="Methods" Type="Folder">
+		<Item Name="Convert C to F.vi" Type="Method VI" URL="../Convert C to F.vi"/>
+	</Item>
+	<Item Name="VIs" Type="Folder">
+		<Item Name="C to F.vi" Type="VI" URL="../C to F.vi"/>
+		<Item Name="F to C.vi" Type="VI" URL="../F to C.vi"/>
+	</Item>
+	<Item Name="Simple Dual Mode Thermometer Data.ctl" Type="Ability VI" URL="../Simple Dual Mode Thermometer Data.ctl">
+		<Property Name="NI.XItem.Name" Type="Str">Data</Property>
+	</Item>
+	<Item Name="Simple Dual Mode Thermometer State.ctl" Type="Ability VI" URL="../Simple Dual Mode Thermometer State.ctl">
+		<Property Name="NI.XItem.Name" Type="Str">State</Property>
+	</Item>
+	<Item Name="Simple Dual Mode Thermometer Facade.vi" Type="Ability VI" URL="../Simple Dual Mode Thermometer Facade.vi">
+		<Property Name="NI.XItem.Name" Type="Str">Facade</Property>
+	</Item>
+	<Item Name="Simple Dual Mode Thermometer Init.vi" Type="Ability VI" URL="../Simple Dual Mode Thermometer Init.vi">
+		<Property Name="NI.XItem.Name" Type="Str">Init</Property>
+	</Item>
+</XControl>

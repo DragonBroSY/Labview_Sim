@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<TestConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:noNamespaceSchemaLocation='TestConfiguration.xsd'>
+	<Building>1</Building>
+	<Lab>2</Lab>
+	<TestSetting>
+		<Channel>1</Channel>
+		<Measurements>20</Measurements>
+	</TestSetting>
+	<TestSetting>
+		<Channel>2</Channel>
+		<Measurements>20</Measurements>
+	</TestSetting>
+	<TestSetting>
+		<Channel>2</Channel>
+		<Measurements>20</Measurements>
+	</TestSetting>
+</TestConfiguration>
